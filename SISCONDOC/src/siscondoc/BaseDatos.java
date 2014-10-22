@@ -10,5 +10,5 @@ package siscondoc;
  * @author daniel
  */
 public class BaseDatos {
-    
+    private String direccion;
 }
