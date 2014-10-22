@@ -13,7 +13,15 @@ public class SISCONDOC {
     /**
      * @param args the command line arguments
      */
+    
+    SISCONDOC(){
+         
+    }
     public static void main(String[] args) {
         // TODO code application logic here
+      
+     
+      
+        
     }
 }
