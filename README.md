@@ -1,7 +1,7 @@
 SISCONDOC
 =========
 
-Sistema de Convocatoria Docente , aquí se almacenara la implementación , diseño y documentación del pro
+Sistema de Convocatoria Docente , aquí se almacenara la implementación , diseño y documentación del proyecto
 
 Desarrollado por : 
 
