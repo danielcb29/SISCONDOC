@@ -4,6 +4,8 @@
  */
 package almacenamiento;
 
+import java.sql.Connection;
+
 
 
 /**
@@ -12,9 +14,9 @@ package almacenamiento;
  */
 public class DAOAdmin {
     private  BaseDatos db;
-    DAOAdmin(){
+    public DAOAdmin(){
         db=new BaseDatos();
-        
+        Connection conn = db.getConnetion();
     }
     
 }

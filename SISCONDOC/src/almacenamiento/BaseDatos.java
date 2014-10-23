@@ -25,7 +25,8 @@ public class BaseDatos {
             System.out.println("Entro metodo");
             try {
             // Se carga el driver
-            Class.forName("org.postgresql.Driver");
+            //Class.forName("org.postgresql.Driver");postgresql-9.0-801.jdbc3.jar
+            Class.forName("/home/daniel/Documents/Work/GitProjects/SISCONDOC/postgresql-9.0-801.jdbc3.jar");
             System.out.println( "Driver Cargado" );
             } catch( Exception e ) {
                 System.out.println( "No se pudo cargar el driver." );
