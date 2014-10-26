@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author daniel
@@ -14,7 +16,9 @@ public class VistaLogin extends javax.swing.JFrame {
      * Creates new form VistaLogin
      */
     public VistaLogin() {
+        
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -27,30 +31,148 @@ public class VistaLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         Logo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tfUserName = new javax.swing.JTextField();
+        btSignIn = new javax.swing.JButton();
+        lbForget = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Logo.png"))); // NOI18N
+
+        jLabel1.setText("Nombre de Usuario:");
+
+        jLabel2.setText("Contraseña: ");
+
+        tfUserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfUserNameActionPerformed(evt);
+            }
+        });
+
+        btSignIn.setText("Ingresar");
+        btSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSignInActionPerformed(evt);
+            }
+        });
+
+        lbForget.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        lbForget.setForeground(new java.awt.Color(0, 13, 255));
+        lbForget.setText("Olvido la contraseña?");
+        lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbForgetMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel3.setText("Sistema de Convocatoria Docente ");
+
+        jLabel4.setText("Copyright @ 2014 SISCONDOC Developtment Group");
+
+        jLabel5.setText("Universidad del Valle");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addComponent(Logo)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(239, 239, 239)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(pfPassword))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(lbForget))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(238, 238, 238)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(jLabel4)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(279, 279, 279))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(31, 31, 31)
                 .addComponent(Logo)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(12, 12, 12)
+                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btSignIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbForget)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tfUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfUserNameActionPerformed
+
+    private void lbForgetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbForgetMouseClicked
+        
+        //AQUI VA LO DE LA CONTRASE;A 
+        //"" nada , null cancelar
+        String userNameForget = JOptionPane.showInputDialog(this,"Ingrese su nombre de usuario","Recuperacion de contraseña",JOptionPane.INFORMATION_MESSAGE);
+        System.out.println("CLick password "+userNameForget);
+        if (userNameForget.equals("")){
+            JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_lbForgetMouseClicked
+
+    private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
+        // TODO add your handling code here:
+        //Aqui va lo de ingresar
+        System.out.println("CLick aqui");
+    }//GEN-LAST:event_btSignInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,5 +217,15 @@ public class VistaLogin extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton btSignIn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbForget;
+    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTextField tfUserName;
     // End of variables declaration//GEN-END:variables
 }
