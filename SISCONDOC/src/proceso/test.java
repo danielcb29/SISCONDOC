@@ -10,5 +10,5 @@ package proceso;
  * @author fernando
  */
 public class test {
-    
+    int a;
 }
