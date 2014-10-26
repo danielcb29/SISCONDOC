@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package siscondoc;
-import almacenamiento.*;
+//import almacenamiento.*;
 /**
  *
  * @author daniel
@@ -13,16 +13,16 @@ public class SISCONDOC {
     /**
      * @param args the command line arguments
      */
-    static DAOAdmin ad; 
+    //static DAOAdmin ad; 
     public SISCONDOC(){
         
     }
     public static void test(){
-         ad = new DAOAdmin();
+         //ad = new DAOAdmin();
     }
     public static void main(String[] args) {
         // TODO code application logic here
-        test();
+        //test();
      
       
         
