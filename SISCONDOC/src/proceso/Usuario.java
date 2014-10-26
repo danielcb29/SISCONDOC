@@ -17,17 +17,19 @@ public class Usuario {
     private String lastName;
     private String userName;
     private String password;
+    private String email;
     
     /*
      * One user has one "Convocatoria" 
      */
     //private Convocatoria convocatoria;
     
-    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser){
+    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser, String mailUser){
         name = nameUser;
         lastName = lastNameUser;
         this.userName = userName;
         password=passwordUser;
+        email = mailUser;
     }
     public String getName(){
         return name;
