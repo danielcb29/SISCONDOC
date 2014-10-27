@@ -20,7 +20,7 @@ public class VistaLogin extends javax.swing.JFrame {
     private UserController controlerU;
     
     public VistaLogin() {
-        
+        controlerU = new UserController();
         initComponents();
         this.setResizable(false);
     }
@@ -184,12 +184,13 @@ public class VistaLogin extends javax.swing.JFrame {
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
-            if(user.getPassword()==null){
+            if(user.getPassword()==null || user.getPassword() != password){
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
                 String profile = user.getProfile();
                 if (profile.equals("Digitador")){
                     //Clase nelsini
+                    System.out.println("Iniciamo sesion : "+ user.getName());
                 }else{
                     if(profile.equals("Coordinador")){
                         
