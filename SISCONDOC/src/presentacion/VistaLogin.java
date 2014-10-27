@@ -5,6 +5,8 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+import almacenamiento.controlador.*;
+import proceso.*;
 
 /**
  *
@@ -15,6 +17,8 @@ public class VistaLogin extends javax.swing.JFrame {
     /**
      * Creates new form VistaLogin
      */
+    private UserController controlerU;
+    
     public VistaLogin() {
         
         initComponents();
@@ -166,12 +170,37 @@ public class VistaLogin extends javax.swing.JFrame {
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_lbForgetMouseClicked
 
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
         // TODO add your handling code here:
         //Aqui va lo de ingresar
         System.out.println("CLick aqui");
+        String userName = tfUserName.getText();
+        String password = pfPassword.getText();
+        Usuario user = controlerU.consultUser(userName, password);
+        if (user==null){ 
+            JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else {
+            if(user.getPassword()==null){
+                JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                String profile = user.getProfile();
+                if (profile.equals("Digitador")){
+                    //Clase nelsini
+                }else{
+                    if(profile.equals("Coordinador")){
+                        
+                    }else{
+                        if(profile.equals("Administrador")){
+                            
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btSignInActionPerformed
 
     /**
