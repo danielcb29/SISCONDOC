@@ -18,11 +18,14 @@ public class VistaLogin extends javax.swing.JFrame {
      * Creates new form VistaLogin
      */
     private UserController controlerU;
+    private VistaAdmin vAdmin;
     
     public VistaLogin() {
         controlerU = new UserController();
+        vAdmin = new VistaAdmin();
         initComponents();
         this.setResizable(false);
+        System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
     /**
@@ -48,7 +51,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Logo.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         jLabel1.setText("Nombre de Usuario:");
 
@@ -92,11 +95,7 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel2))
@@ -105,7 +104,12 @@ public class VistaLogin extends javax.swing.JFrame {
                                 .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(pfPassword))))
+                                .addComponent(pfPassword))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Logo)
+                                    .addComponent(jLabel1)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(lbForget))
@@ -151,7 +155,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,6 +176,7 @@ public class VistaLogin extends javax.swing.JFrame {
         }
         
         
+        
     }//GEN-LAST:event_lbForgetMouseClicked
 
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
@@ -181,6 +186,7 @@ public class VistaLogin extends javax.swing.JFrame {
         String userName = tfUserName.getText();
         String password = pfPassword.getText();
         Usuario user = controlerU.consultUser(userName, password);
+        vAdmin.show();
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
@@ -189,13 +195,16 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 String profile = user.getProfile();
                 if (profile.equals("Digitador")){
-                    //Clase nelsini
-                    System.out.println("Iniciamo sesion : "+ user.getName());
+                    
                 }else{
                     if(profile.equals("Coordinador")){
                         
                     }else{
                         if(profile.equals("Administrador")){
+                            //Clase nelsini
+                            System.out.println("Iniciamo sesion : "+ user.getName());
+                            this.dispose();
+                            vAdmin.show();
                             
                         }
                     }
