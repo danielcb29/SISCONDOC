@@ -65,6 +65,9 @@ public class Usuario {
     public void setName(String newName){
         name = newName;
     }
+    public void setLastName(String newLastName){
+        lastName = newLastName;
+    }
     public void setProfile(String newProfile){
         profile = newProfile;
     }
