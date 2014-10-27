@@ -15,14 +15,14 @@ import almacenamiento.*;
 public class UserController {
     
 
-    //DaoUser daoUser;
+    DAOUser daoUser;
 
     
     /**
      * constructor
      * **/
     public UserController(){
-        //daoUser=new DaoUser();
+        daoUser=new DAOUser();
     }
     
     /**
@@ -39,18 +39,22 @@ public class UserController {
         Usuario U = new Usuario(id,name,username,password,email,perfil);        
         
         //Se llama al dao para guardar
-        //int result =daoUser.guardarUser(U);
-        int result = 0;
+        int result =daoUser.createUser(U);
         return result;
 
     }
 
-    public Usuario   consultUser (String username, String password ){
+    public String   consultUser (String username, String password ){
         Usuario U = new Usuario ();
+        String profile = "";
+        U= daoUser.readUser(username);
+        String pass = U.getPassword();
+        if (pass.equals(password))
+        {
+            profile = U.getProfile();
+        }
         
-        //U= daoUser.consultUser(username, password);
-        
-        return U;
+        return profile;
 
     }
    
