@@ -9,6 +9,6 @@ package presentacion;
  *
  * @author fernando
  */
-public class vista {
+public class a {
     
 }
