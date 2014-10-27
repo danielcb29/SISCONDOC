@@ -79,6 +79,7 @@ public class DAOUser {
         return null;
     }//fin readUser
 
+    
     public void updateUser(String campoAModificar, String modificacion, String cedula){
 		String sql_save;
 		sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
@@ -97,10 +98,10 @@ public class DAOUser {
         }
     }
     
-    public Usuario[] listUsers(){
+   public Usuario[] listUsers(){
         
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.nombre, usuario.nombre_usuario, usuario.password, usuario.email ,  perfil.nombre FROM  usuario, perfil WHERE usuario.id_perfil=perfil.id_perfil";
+        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -123,13 +124,16 @@ public class DAOUser {
                
                 us[j].setName(table.getString(2));
                 
-                us[j].setUserName(table.getString(3));               
+                us[j].setLastName(table.getString(3));
+                
+                us[j].setUserName(table.getString(4));               
 
-                us[j].setPassword(table.getString(4));
+                us[j].setPassword(table.getString(5));
+
+                us[j].setMail(table.getString(6));
  
-		us[j].setMail(table.getString(5));
- 
-                us[j].setProfile(table.getString(6));
+                us[j].setProfile(table.getString(7));
+
 
               j++;
               System.out.println("ok");
