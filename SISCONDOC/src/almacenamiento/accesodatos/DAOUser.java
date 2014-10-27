@@ -47,7 +47,7 @@ public class DAOUser {
 	public Usuario readUser(String username){
         Usuario us= new Usuario();
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.nombre, usuario.nombre_usuario, usuario.password, usuario.email ,  perfil.nombre FROM  usuario, perfil WHERE usuario.id_perfil=perfil.id_perfil AND nombre_usuario='" + username +  "'";
+        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -59,13 +59,15 @@ public class DAOUser {
                
                 us.setName(table.getString(2));
                 
-                us.setUserName(table.getString(3));               
+                us.setLastName(table.getString(3));
+                
+                us.setUserName(table.getString(4));               
 
-                us.setPassword(table.getString(4));
+                us.setPassword(table.getString(5));
 
-                us.setMail(table.getString(5));
+                us.setMail(table.getString(6));
  
-                us.setProfile(table.getString(6));
+                us.setProfile(table.getString(7));
               
                 System.out.println("ok");
             }
