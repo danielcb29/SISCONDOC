@@ -44,18 +44,11 @@ public class UserController {
 
     }
 
-    public String   consultUser (String username, String password ){
+    public Usuario   consultUser (String username, String password ){
         Usuario U = new Usuario ();
-        String profile = "";
-        U= daoUser.readUser(username);
-        String pass = U.getPassword();
-        if (pass.equals(password))
-        {
-            profile = U.getProfile();
-        }
         
-        return profile;
-
+        U= daoUser.readUser(username);
+        return  U;
     }
    
 
