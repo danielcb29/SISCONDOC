@@ -8,7 +8,7 @@ import java.sql.*;
 /**
  *
  * @author daniel
- * Nombre de la base de datos : clinicaDB
+ * Nombre de la base de datos : SISCONDOC
  */
 public class BaseDatos {
      private String url, usuario, password;
@@ -16,7 +16,7 @@ public class BaseDatos {
      private Statement instruccion;
      private ResultSet tabla; 
      BaseDatos(){
-      url = "jdbc:postgresql://localhost:5432/SISCONDOC";
+      url = "jdbc:postgresql://localhost/SISCONDOC";
       usuario="danielcb";
       password="1144067772";
       
@@ -25,8 +25,9 @@ public class BaseDatos {
             System.out.println("Entro metodo");
             try {
             // Se carga el driver
-            //Class.forName("org.postgresql.Driver");postgresql-9.0-801.jdbc3.jar
-            Class.forName("/home/daniel/Documents/Work/GitProjects/SISCONDOC/postgresql-9.0-801.jdbc3.jar");
+              //Class.forName("PostgreSQL");
+            Class.forName("org.postgresql.Driver");
+            //Class.forName("/home/daniel/Documents/Work/GitProjects/SISCONDOC/postgresql-9.0-801.jdbc3.jar");
             System.out.println( "Driver Cargado" );
             } catch( Exception e ) {
                 System.out.println( "No se pudo cargar el driver." );
