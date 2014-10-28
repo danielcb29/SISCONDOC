@@ -70,7 +70,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
 
-        lbForget.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        lbForget.setFont(new java.awt.Font("Cantarell", 3, 15)); // NOI18N
         lbForget.setForeground(new java.awt.Color(0, 13, 255));
         lbForget.setText("Olvido la contraseña?");
         lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,6 +173,19 @@ public class VistaLogin extends javax.swing.JFrame {
         System.out.println("CLick password "+userNameForget);
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
+        }else{
+            Usuario user = controlerU.consultUser(userNameForget);
+            if (user==null){
+                JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                if(user.getPassword() == null){
+                   JOptionPane.showMessageDialog(this, "Nombre de usuario no existe, vuelve a intentarlo", "Error!", JOptionPane.ERROR_MESSAGE); 
+                }else{
+                    //Enviar correo electronico
+                    System.out.println("Llegamos al envio de correo");
+                      
+                }
+            }
         }
         
         
@@ -185,7 +198,7 @@ public class VistaLogin extends javax.swing.JFrame {
         
         String userName = tfUserName.getText();
         String password = pfPassword.getText();
-        Usuario user = controlerU.consultUser(userName, password);
+        Usuario user = controlerU.consultUser(userName);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
