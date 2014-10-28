@@ -19,11 +19,13 @@ public class VistaLogin extends javax.swing.JFrame {
      */
     private UserController controlerU;
     private VistaAdmin vAdmin;
-    
+    private String userName;
+    private String password;
     public VistaLogin() {
-        controlerU = new UserController();
-        vAdmin = new VistaAdmin();
         initComponents();
+        controlerU = new UserController();
+        
+        
         this.setResizable(false);
         System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
@@ -196,14 +198,14 @@ public class VistaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Aqui va lo de ingresar
         
-        String userName = tfUserName.getText();
-        String password = pfPassword.getText();
+        userName = tfUserName.getText();
+        password = pfPassword.getText();
         Usuario user = controlerU.consultUser(userName);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
-            
+            System.out.println("local:"+password);
             if(user.getPassword()==null || !(user.getPassword() .equals(password))){
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
@@ -218,6 +220,7 @@ public class VistaLogin extends javax.swing.JFrame {
                             //Clase nelsini
                             System.out.println("Iniciamo sesion : "+ user.getName());
                             this.dispose();
+                            vAdmin = new VistaAdmin(userName);
                             vAdmin.show();
                             
                         }
