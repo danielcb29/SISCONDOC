@@ -6,8 +6,18 @@ package presentacion;
 
 import javax.swing.JOptionPane;
 import almacenamiento.controlador.*;
+import java.io.UnsupportedEncodingException;
 import proceso.*;
-
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 /**
  *
  * @author daniel
@@ -185,7 +195,38 @@ public class VistaLogin extends javax.swing.JFrame {
                 }else{
                     //Enviar correo electronico
                     System.out.println("Llegamos al envio de correo");
-                      
+                    String host = "correounivalle.edu.co";
+                    Properties props =  new Properties();
+                    //props.setProperty("mail.smtp.correounivalle.edu.co", "correounivalle.edu.co");
+                    props.setProperty("mail.smtp.gmail.com", "gmail.com");
+                    Session session = Session.getDefaultInstance(props);
+
+                    String msgBody = "Datos de recuperacion de cuenta SISCONDOC \nNombre Completo: "+user.getName()+" "+user.getLastName()+" \nNombre de Usuario: "+user.getUserName()+" \nContraseña: "+user.getPassword()+" \nPerfil: "+user.getProfile()  ;
+
+                    try {
+                        //System.out.println("Antes del msg");
+                        Message msg = new MimeMessage(session);
+                        
+                        msg.setFrom(new InternetAddress("daniel.correa@correounivalle.edu.co", "Correounivalle.edu.co Daniel Correa"));
+                        
+                        msg.addRecipient(Message.RecipientType.TO,
+                                        new InternetAddress(user.getMail(), user.getName()));
+                        msg.setSubject("Datos de recuperacion cuenta SISCONDOC");
+                        msg.setText(msgBody);
+                        
+                        Transport.send(msg);
+                        System.out.println("despues del msg");
+
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (AddressException e) {
+                        // ...
+                        System.out.println("Error con su correo electronico , contacte al admin");
+                    } catch (MessagingException e) {
+                        // ...
+                        System.out.println("Error enviando el mensaje , fallas de conexion a internet? x(");
+                        e.printStackTrace();
+                    }  
                 }
             }
         }
@@ -221,7 +262,8 @@ public class VistaLogin extends javax.swing.JFrame {
                             System.out.println("Iniciamo sesion : "+ user.getName());
                             this.dispose();
                             vAdmin = new VistaAdmin(userName);
-                            vAdmin.show();
+                            vAdmin.setVisible(true);
+                            //vAdmin.show();
                             
                         }
                     }
