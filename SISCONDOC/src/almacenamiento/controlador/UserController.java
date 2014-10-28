@@ -21,19 +21,23 @@ public class UserController {
     /**
      * constructor
      * **/
-    public UserController(){
-        daoUser=new DAOUser();
+    public UserController()
+    {
+      daoUser=new DAOUser();
     }
     
     /**
-     *  @param id: cedula del empleado
+     * metodo encargado de pasar el usuario a ingresar a la base de
+     * satos al DAOusuario. 
+     * @param id: cedula del empleado
      * @param name: nombre del empleado
+     * @param lastname : apellido del usuario
      * @param username: nombre de usuario del empleado 
      * @param password: contraseña de usuario del empleado
      * @param email: email del empleado
-     * @param perfil: perfil que se le va a otorgar al empleado 
+     * @param perfil: id del perfil que se le va a otorgar al empleado 
      * @return result: 0 si no fue posible crear el usuario.
-     * @return result: 1 si se creo satisfactoriamente el usario.
+     * @return result: 1 si se creo satisfactoriamente el usuario.
      * **/
     public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil ){
         Usuario U = new Usuario(name,lastname,username,password,email,perfil,id);        
@@ -43,14 +47,30 @@ public class UserController {
         return result;
 
     }
-
+    /**
+     * metodo encargado de pasar el username a Dao para que consulte si el 
+     * usuario existe
+     * @param username : nombre de usuario del empleado
+     * @return Usuario : objeto con los atributos del empleado
+     * es objeto es nulo en caso de no existir el usuario.
+     */
     public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
-        
+        //llamado para consultar el usuario  al DAOUsuaurio
         U= daoUser.readUser(username);
         return  U;
     }
+    
+    /**
+     * metodo que llama al Dao para consultar cuantos usuarios existen
+     * @return cantidad de usuarios existentes en la base de datos
+     */
+    public int countUsers ()  
+    {
+        Usuario [] users = new Usuario [5];
+        int size =  users.length;
+        return size;
+                
+    }
    
-
 }//fin clase
-
