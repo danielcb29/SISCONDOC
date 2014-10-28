@@ -45,7 +45,7 @@ public class UserController {
 
     }
 
-    public Usuario   consultUser (String username, String password ){
+    public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
         
         U= daoUser.readUser(username);
