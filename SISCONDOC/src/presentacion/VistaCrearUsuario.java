@@ -241,7 +241,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         //Si no existe, se capturan los demas datos de la interfaz,
         //se envian al controlador para guardarlos y se informa al
         //usuario
-        if(objUsuario==null){
+        if(objUsuario.getPassword()==null){
             String nombres=txtNombres.getText();
             String apellidos=txtApellidos.getText();
             String contrasena=txtContrasena.getText();
