@@ -16,7 +16,7 @@ public class VistaAdmin extends javax.swing.JFrame {
      */
 
     String nombre="User Default";
-    //public VistaCrearUsuario objVistaCrearUsuario;
+    public VistaCrearUsuario objVistaCrearUsuario;
     public VistaAdmin(String username){
         initComponents();
         nombre=username;
@@ -214,8 +214,8 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        //objVistaCrearUsuario = new VistaCrearUsuario();
-        //objVistaCrearUsuario.setVisible(true);
+        objVistaCrearUsuario = new VistaCrearUsuario();
+        objVistaCrearUsuario.setVisible(true);
     }//GEN-LAST:event_btCrearUsuarioActionPerformed
 
     private void btCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarSesionActionPerformed
