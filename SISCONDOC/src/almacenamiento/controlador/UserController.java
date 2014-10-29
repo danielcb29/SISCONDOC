@@ -70,6 +70,12 @@ public class UserController {
         return size;
                 
     }
+    /*
+     * Cerrar conexion base de datos
+     */
+    public void cerrarConexionBD(){
+        daoUser.closeConectionDB();
+    }
 
 }//fin clase
 
