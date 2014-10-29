@@ -30,7 +30,7 @@ public class DAOUser {
     /**
     * crear o agregar un usuario a la tabla.
     * @param us el objeto usuario a agregar.
-    * @return devuelve el número de tuplas que se agregaron a la tabla.
+    * @return devuelve el número de tuplas que se agregaron a la tabla (que debe ser 1), en caso tal de presentarse un error de conexión retorna -1.
     */
     public int createUser(Usuario us){
         String sql_save;
@@ -39,16 +39,17 @@ public class DAOUser {
         sql_save="INSERT INTO usuario VALUES ('" +
                 us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            numRows = sentencia.executeUpdate(sql_save);            
+            numRows = statement.executeUpdate(sql_save);            
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
         }
         catch(SQLException e){
             System.out.println(e); 
-            }
+            return -2;
+        }
         catch(Exception e){ 
             System.out.println(e);
         }
@@ -65,8 +66,8 @@ public class DAOUser {
             sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
             try{
                 System.out.println("consultando en la bd");
-                Statement sentence = conn.createStatement();
-                ResultSet table = sentence.executeQuery(sql_select);
+                Statement statement = conn.createStatement();
+                ResultSet table = statement.executeQuery(sql_select);
                 
             while(table.next()){
                 
@@ -105,9 +106,9 @@ public class DAOUser {
 	sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
 
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
+            statement.executeUpdate(sql_save);            
             
         }
         catch(SQLException e){
@@ -117,6 +118,15 @@ public class DAOUser {
             System.out.println(e);
         }
     }//fin updateUser
+    
+    /**
+     * retornar numero de usuarios
+     * @return numero de usuarios
+     */
+    public int numUsers(){
+        return 0;
+    }
+    
     /**
      * listar todas las tuplas de los usuarios existentes.
      * @return los objetos tipo Usuario enlistados en un arreglo.
@@ -125,10 +135,10 @@ public class DAOUser {
         
         String sql_select;
         sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";
-         try{
+        try{
             System.out.println("consultando en la bd");
-            Statement sentence = conn.createStatement();
-            ResultSet table = sentence.executeQuery(sql_select);
+            Statement statement = conn.createStatement();
+            ResultSet table = statement.executeQuery(sql_select);
             ResultSet table2= table;
             int numRows=0;
             while(table.next()){
@@ -163,9 +173,9 @@ public class DAOUser {
             }
            
             return us;
-         }
-         catch(SQLException e){ System.out.println(e); }
-         catch(Exception e){ System.out.println(e); }
+        }
+        catch(SQLException e){ System.out.println(e); }
+        catch(Exception e){ System.out.println(e); }
         return null;
     }//fin listUser
    
@@ -178,9 +188,9 @@ public class DAOUser {
 
         sql_save="DELETE FROM usuario WHERE cedula='" + cedula + "'";
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
+            statement.executeUpdate(sql_save);            
             
         }
         catch(SQLException e){
