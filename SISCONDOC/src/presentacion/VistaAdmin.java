@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+import almacenamiento.controlador.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USUARIO
@@ -15,12 +16,15 @@ public class VistaAdmin extends javax.swing.JFrame {
      * Creates new form VistaAdmin
      */
 
-    String nombre="User Default";
+    String name="User Default";
     public VistaCrearUsuario objVistaCrearUsuario;
+    public UserController objUserController;
+    public VistaAdmin(){}
     public VistaAdmin(String username){
         initComponents();
-        nombre=username;
-        lbWelcome.setText("Bienvenido "+nombre+"!");
+        name=username;
+        lbWelcome.setText("Bienvenido "+name+"!");
+        objUserController= new UserController();
     }
     
     /**
@@ -64,7 +68,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         setFocusTraversalPolicyProvider(true);
         setResizable(false);
 
-        label2.setAlignment(1);
+        label2.setAlignment(java.awt.Label.CENTER);
         label2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         label2.setText("Aqui encontrara el menu de administracion de la aplicacion");
 
@@ -87,12 +91,22 @@ public class VistaAdmin extends javax.swing.JFrame {
         btEditarUsuario.setMaximumSize(new java.awt.Dimension(151, 25));
         btEditarUsuario.setMinimumSize(new java.awt.Dimension(151, 25));
         btEditarUsuario.setPreferredSize(new java.awt.Dimension(151, 25));
+        btEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarUsuarioActionPerformed(evt);
+            }
+        });
 
         btEliminarUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btEliminarUsuario.setText("Eliminar Usuario");
         btEliminarUsuario.setMaximumSize(new java.awt.Dimension(151, 25));
         btEliminarUsuario.setMinimumSize(new java.awt.Dimension(151, 25));
         btEliminarUsuario.setPreferredSize(new java.awt.Dimension(151, 25));
+        btEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarUsuarioActionPerformed(evt);
+            }
+        });
 
         label6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         label6.setText("Gestion de Convocatorias:");
@@ -121,10 +135,10 @@ public class VistaAdmin extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         lbWelcome.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lbWelcome.setText("Bienvenido Usuario");
+        lbWelcome.setText("Bienvenido");
 
-        btCerrarSesion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/logout.png"))); // NOI18N
+        btCerrarSesion.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btCerrarSesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\SISCONDOC\\src\\presentacion\\logout.png")); // NOI18N
         btCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCerrarSesionActionPerformed(evt);
@@ -138,7 +152,12 @@ public class VistaAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(btCerrarSesion)
+                        .addContainerGap(131, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -149,25 +168,21 @@ public class VistaAdmin extends javax.swing.JFrame {
                                 .addGap(47, 47, 47)
                                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbWelcome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btCrearConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btEditarConvocatoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(btEliminarConvocatoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(65, 65, 65)
-                                    .addComponent(jLabel5)
-                                    .addGap(28, 28, 28)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                        .addComponent(btCerrarSesion)
-                        .addGap(134, 134, 134))))
+                                .addContainerGap(106, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btCrearConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btEditarConvocatoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(btEliminarConvocatoria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(jLabel5)))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,14 +191,11 @@ public class VistaAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(lbWelcome))
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btCerrarSesion)))
-                .addGap(46, 46, 46)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCerrarSesion))
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,7 +206,7 @@ public class VistaAdmin extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCrearConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btCrearConvocatoria))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -206,7 +218,7 @@ public class VistaAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btEliminarConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,15 +235,35 @@ public class VistaAdmin extends javax.swing.JFrame {
         System.exit(0); 
     }//GEN-LAST:event_btCerrarSesionActionPerformed
 
+    private void btEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarUsuarioActionPerformed
+        // TODO add your handling code here:
+        if(objUserController.countUsers()== 0){
+          JOptionPane.showMessageDialog(null, "No hay Usuarios para editar","", JOptionPane.INFORMATION_MESSAGE);  
+        }
+        else{
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btEditarUsuarioActionPerformed
+
+    private void btEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarUsuarioActionPerformed
+        // TODO add your handling code here:
+        if(objUserController.countUsers()== 0){
+          JOptionPane.showMessageDialog(null, "No hay Usuarios para eliminar","", JOptionPane.INFORMATION_MESSAGE);  
+        }
+        else{
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btEliminarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    /*public static void main(String args[]) {
-        // Set the Nimbus look and feel 
+    public static void main(String args[]) {
+        //Set the Nimbus look and feel 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */ /*
+         */ 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -253,11 +285,11 @@ public class VistaAdmin extends javax.swing.JFrame {
         // Create and display the form 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaAdmin().setVisible(true);
+                new VistaAdmin("Nelson").setVisible(true);
             }
         });
-    }*/
-
+    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCerrarSesion;
     private javax.swing.JButton btCrearConvocatoria;
