@@ -20,9 +20,10 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     /**
      * Constructor de la clase
      */
-    public VistaCrearUsuario() {
+    
+    public VistaCrearUsuario(UserController controler) {
         initComponents();
-        objControl=new UserController();
+        objControl=controler;
     }
 
     /**
@@ -251,16 +252,27 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             String cedula=txtCedula.getText();
             int numPerfil=comboPerfil.getSelectedIndex()+1;
             String perfil=Integer.toString(numPerfil);
-            objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil);
-            //Se imprime el mensaje para informar el exito de la operacion
-            JOptionPane.showMessageDialog(null, "El usuario "+ username+" se ha creado con exito");
-            //Se limpian los campos de la interfaz
-            txtNombres.setText("");
-            txtApellidos.setText("");
-            txtContrasena.setText("");
-            txtMail.setText("");
-            txtCedula.setText("");
-            txtNomUsuario.setText("");
+            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil);
+            
+            if(result == -1 && result == -1){
+                JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
+            }else{
+                //Se imprime el mensaje para informar el exito de la operacion
+                JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
+                //Se limpian los campos de la interfaz
+                 /* txtNombres.setText("");
+                txtApellidos.setText("");
+                txtContrasena.setText("");
+                txtMail.setText("");
+                txtCedula.setText("");
+                txtNomUsuario.setText("");*/
+                //Cerrar la base de datos 
+                //Cerramos la ventana
+                this.dispose();
+            }
+                    
+            
+            
             
         }else{
             //Si ya existe el nombre de usuario en la base de datos se informa al
@@ -272,12 +284,12 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         *//*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -296,13 +308,13 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the form *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VistaCrearUsuario().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
