@@ -32,13 +32,11 @@ public class DAOUser {
         * @param us el objeto usuario a agregar.
         * @return devuelve el número de tuplas que se agregaron a la tabla.
         */
-	public int createUser(Usuario us){
+    public int createUser(Usuario us){
         String sql_save;
         int numRows=0;
 
-        sql_save="INSERT INTO usuario VALUES ('" +
-                us.getCedula() + "' , '" + us.getName() + "', '" + us.getUserName() +  "', '" +
-                us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
+        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
         try{
             Statement sentencia = conn.createStatement();
 
