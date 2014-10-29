@@ -72,5 +72,9 @@ public class UserController {
         return size;
                 
     }
+    
+      public void cerrarConexionBD(){
+        daoUser.closeConectionDB();
+    }
    
 }//fin clase
