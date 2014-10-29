@@ -252,10 +252,12 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 String profile = user.getProfile();
                 if (profile.equals("Digitador")){
-                    
+                    System.out.println("No se ha implementado aun :)");
+                    System.exit(0);
                 }else{
                     if(profile.equals("Coordinador")){
-                        
+                        System.out.println("No se ha implementado aun :)");
+                        System.exit(0);
                     }else{
                         if(profile.equals("Administrador")){
                             //Clase nelsini
