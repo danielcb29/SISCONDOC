@@ -37,7 +37,8 @@ public class DAOUser {
         int numRows=0;
 
         sql_save="INSERT INTO usuario VALUES ('" +
-                us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
+                us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" +
+                us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
         try{
             Statement sentencia = conn.createStatement();
 
@@ -101,8 +102,8 @@ public class DAOUser {
      * @param cedula la cedula del usuario que se quiere actualizar.
      */
     public void updateUser(String campoAModificar, String modificacion, String cedula){
-        String sql_save;
-	sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
+		String sql_save;
+		sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
 
         try{
             Statement sentencia = conn.createStatement();
@@ -121,7 +122,7 @@ public class DAOUser {
      * listar todas las tuplas de los usuarios existentes.
      * @return los objetos tipo Usuario enlistados en un arreglo.
      */
-    public Usuario[] listUsers(){
+   public Usuario[] listUsers(){
         
         String sql_select;
         sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";

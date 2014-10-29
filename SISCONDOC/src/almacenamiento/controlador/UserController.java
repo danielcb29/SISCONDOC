@@ -5,7 +5,7 @@
  */
 package almacenamiento.controlador;
 import proceso.*;
-import almacenamiento.*;
+import almacenamiento.accesodatos.*;
 
 /**
  *
@@ -15,14 +15,14 @@ import almacenamiento.*;
 public class UserController {
     
 
-    //DaoUser daoUser;
+    DAOUser daoUser;
 
     
     /**
      * constructor
      * **/
     public UserController(){
-        //daoUser=new DaoUser();
+        daoUser=new DAOUser();
     }
     
     /**
@@ -35,20 +35,20 @@ public class UserController {
      * @return result: 0 si no fue posible crear el usuario.
      * @return result: 1 si se creo satisfactoriamente el usario.
      * **/
-    public int   createUser (String id, String  name ,String username, String password, String email, String perfil ){
-        Usuario U = new Usuario(id,name,username,password,email,perfil);        
+    public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil ){
+        Usuario U = new Usuario(name,lastname,username,password,email,perfil,id);        
         
         //Se llama al dao para guardar
-        //int result =daoUser.guardarUser(U);
-        int result = 0;
+        int result =daoUser.createUser(U);
+        //int result = 0;
         return result;
 
     }
 
-    public Usuario   consultUser (String username, String password ){
+    public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
         
-        //U= daoUser.consultUser(username, password);
+        U= daoUser.readUser(username);
         
         return U;
 

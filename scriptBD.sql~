@@ -1,6 +1,14 @@
 --Script para la creacion de las tablas de la base de datos de SISCONDOC
 
 --Creacion de tabla perfiles (Ejem:digitador, administrador, etc) 
+DROP TABLE IF EXISTS Perfiles;
+CREATE TABLE Perfiles(
+	id_perfil VARCHAR(30) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(20) NOT NULL
+);
+
+--Creacion de tabla usuario (Ejem: admin1, digitador1, etc)
+DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Perfiles(
 	id_perfil VARCHAR(30) NOT NULL PRIMARY KEY,
 	nombre VARCHAR(20) NOT NULL

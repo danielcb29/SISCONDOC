@@ -7,6 +7,7 @@ CREATE TABLE Perfiles(
 	nombre VARCHAR(20) NOT NULL
 );
 
+
 --Creacion de tabla usuario (Ejem: admin1, digitador1, etc)
 DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario(
