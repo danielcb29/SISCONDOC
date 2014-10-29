@@ -46,9 +46,12 @@ public class DAOUser {
             
         }
         catch(SQLException e){
+            
             System.out.println(e); 
-            }
+            return -2;
+        }
         catch(Exception e){ 
+            
             System.out.println(e);
         }
         return -1;
