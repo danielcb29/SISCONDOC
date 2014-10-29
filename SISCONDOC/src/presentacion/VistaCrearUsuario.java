@@ -16,11 +16,13 @@ import almacenamiento.controlador.*;
  */
 public class VistaCrearUsuario extends javax.swing.JFrame {
 
+    UserController objControl;
     /**
      * Constructor de la clase
      */
     public VistaCrearUsuario() {
         initComponents();
+        objControl=new UserController();
     }
 
     /**
@@ -233,7 +235,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         String username=txtNomUsuario.getText();
         
         //Se instancia la clase controlador para hacer uso de ella
-        UserController objControl=new UserController();
+       
         
         //Se consulta si el nombre de usuario ya existe en la base de datos
         objUsuario=objControl.consultUser(username);
