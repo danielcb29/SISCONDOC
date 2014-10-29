@@ -23,7 +23,8 @@ public class UserController {
      * **/
     public UserController()
     {
-      daoUser=new DAOUser();
+      daoUser=new DAOUser() ;
+      
     }
     
     /**
@@ -35,9 +36,10 @@ public class UserController {
      * @param username: nombre de usuario del empleado 
      * @param password: contraseña de usuario del empleado
      * @param email: email del empleado
-     * @param perfil: id del perfil que se le va a otorgar al empleado 
-     * @return result: 0 si no fue posible crear el usuario.
-     * @return result: 1 si se creo satisfactoriamente el usuario.
+     * @param perfil: id del perfil que se le va a otorgar al empleado.
+     * @return 1 si se creo satisfactoriamente el usuario.
+     *         -2 si se ingresa una cedula que ya se encuentra en la BD
+     *         -1 si ocurre un error.
      * **/
     public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil ){
         Usuario U = new Usuario(name,lastname,username,password,email,perfil,id);        
