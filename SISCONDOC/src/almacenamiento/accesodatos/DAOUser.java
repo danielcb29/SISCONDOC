@@ -13,46 +13,62 @@ import java.sql.*;
  * @author family
  */
 public class DAOUser {
+    /**
+     * @param db objeto encargado de la conexión a la base de datos.
+     * @param conn objeto para ejecutar las sentencias de SQL
+     * 
+     */
     private  BaseDatos db;
     Connection conn ;
+    /**
+     * constructor, inicializa los atributos.
+     */
     public DAOUser(){
         db=new BaseDatos();
         conn = db.getConnetion();
     }//fin constructor
-
-	public int createUser(Usuario us){
+    /**
+    * crear o agregar un usuario a la tabla.
+    * @param us el objeto usuario a agregar.
+    * @return devuelve el número de tuplas que se agregaron a la tabla (que debe ser 1), en caso tal de presentarse un error de conexión retorna -1.
+    */
+    public int createUser(Usuario us){
         String sql_save;
         int numRows=0;
 
         sql_save="INSERT INTO usuario VALUES ('" +
-                us.getCedula() + "' , '" + us.getName() + "', '" + us.getUserName() +  "', '" +
-                us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
+                us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            numRows = sentencia.executeUpdate(sql_save);            
+            numRows = statement.executeUpdate(sql_save);            
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
         }
         catch(SQLException e){
             System.out.println(e); 
-            }
+            return -2;
+        }
         catch(Exception e){ 
             System.out.println(e);
         }
         return -1;
     }//fin saveUser
-
+    /**
+    * consultar el usuario que tiene como username el parametro.
+    * @param username el username del usuario que se quiere consultar.
+    * @return null si hay error en la consulta a la base de datos. Objeto tipo Usuario si el objeto del usuario que se consulto. Devuelve 
+    */
 	public Usuario readUser(String username){
-        Usuario us= new Usuario();
-        String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
-         try{
-            System.out.println("consultando en la bd");
-            Statement sentence = conn.createStatement();
-            ResultSet table = sentence.executeQuery(sql_select);
-            
+            Usuario us= new Usuario();
+            String sql_select;
+            sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
+            try{
+                System.out.println("consultando en la bd");
+                Statement statement = conn.createStatement();
+                ResultSet table = statement.executeQuery(sql_select);
+                
             while(table.next()){
                 
                 us.setCedula(table.getString(1));
@@ -79,15 +95,20 @@ public class DAOUser {
         return null;
     }//fin readUser
 
-    
+    /**
+     * actualizar la informacion de un usuario, con la cedula que entra por parametro.
+     * @param campoAModificar nombre igual que en la base de datos del campo que se quiere actualizar.
+     * @param modificacion como se quiere que quede el campo modificado.
+     * @param cedula la cedula del usuario que se quiere actualizar.
+     */
     public void updateUser(String campoAModificar, String modificacion, String cedula){
-		String sql_save;
-		sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
+        String sql_save;
+	sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
 
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
+            statement.executeUpdate(sql_save);            
             
         }
         catch(SQLException e){
@@ -96,16 +117,28 @@ public class DAOUser {
         catch(Exception e){ 
             System.out.println(e);
         }
+    }//fin updateUser
+    
+    /**
+     * retornar numero de usuarios
+     * @return numero de usuarios
+     */
+    public int numUsers(){
+        return 0;
     }
     
-   public Usuario[] listUsers(){
+    /**
+     * listar todas las tuplas de los usuarios existentes.
+     * @return los objetos tipo Usuario enlistados en un arreglo.
+     */
+    public Usuario[] listUsers(){
         
         String sql_select;
         sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";
-         try{
+        try{
             System.out.println("consultando en la bd");
-            Statement sentence = conn.createStatement();
-            ResultSet table = sentence.executeQuery(sql_select);
+            Statement statement = conn.createStatement();
+            ResultSet table = statement.executeQuery(sql_select);
             ResultSet table2= table;
             int numRows=0;
             while(table.next()){
@@ -140,19 +173,24 @@ public class DAOUser {
             }
            
             return us;
-         }
-         catch(SQLException e){ System.out.println(e); }
-         catch(Exception e){ System.out.println(e); }
+        }
+        catch(SQLException e){ System.out.println(e); }
+        catch(Exception e){ System.out.println(e); }
         return null;
-    }
+    }//fin listUser
+   
+   /**
+    * borrar un usuario de la tabla.
+    * @param cedula la cedula del usuario que se quiere borrar.
+    */
     public void deleteUser(String cedula){	
 		String sql_save;
 
         sql_save="DELETE FROM usuario WHERE cedula='" + cedula + "'";
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
+            statement.executeUpdate(sql_save);            
             
         }
         catch(SQLException e){
@@ -161,11 +199,13 @@ public class DAOUser {
         catch(Exception e){ 
             System.out.println(e);
         }
-    }
-    
+    }//fin deleteUser
+    /**
+     * cerrar la conexion con la base de datos.
+     */
     public void closeConectionDB(){
         db.closeConection(db.getConnetion());
-    }
+    }//fin closeConectionDB
 
 
 }
