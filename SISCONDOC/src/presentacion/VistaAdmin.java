@@ -65,11 +65,12 @@ public class VistaAdmin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ADMINISTRADOR");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setFocusTraversalPolicyProvider(true);
         setResizable(false);
 
-        label2.setAlignment(1);
+        label2.setAlignment(java.awt.Label.CENTER);
         label2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         label2.setText("Aqui encontrara el menu de administracion de la aplicacion");
 
