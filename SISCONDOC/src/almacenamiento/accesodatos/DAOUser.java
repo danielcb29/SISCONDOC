@@ -86,7 +86,7 @@ public class DAOUser {
  
                 us.setProfile(table.getString(7));
               
-                System.out.println("ok");
+                //System.out.println("ok");
             }
            
             return us;

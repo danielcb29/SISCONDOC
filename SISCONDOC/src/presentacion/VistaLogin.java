@@ -36,7 +36,7 @@ public class VistaLogin extends javax.swing.JFrame {
         controlerU = new UserController();
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
-        System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+        //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
     /**
@@ -245,7 +245,7 @@ public class VistaLogin extends javax.swing.JFrame {
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
-            System.out.println("local:"+password);
+            //System.out.println("local:"+password);
             if(user.getPassword()==null || !(user.getPassword() .equals(password))){
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
