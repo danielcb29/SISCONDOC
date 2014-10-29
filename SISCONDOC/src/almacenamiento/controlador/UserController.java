@@ -44,7 +44,13 @@ public class UserController {
         return result;
 
     }
-
+    /**
+     * metodo encargado de pasar el username a Dao para que consulte si el 
+     * usuario existe
+     * @param username : nombre de usuario del empleado
+     * @return Usuario : objeto con los atributos del empleado
+     * es objeto es nulo en caso de no existir el usuario.
+     */
     public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
         
@@ -53,7 +59,17 @@ public class UserController {
         return U;
 
     }
-   
+   /**
+     * metodo que llama al Dao para consultar cuantos usuarios existen
+     * @return cantidad de usuarios existentes en la base de datos
+     */
+    public int countUsers ()  
+    {
+        Usuario [] users = new Usuario [5];
+        int size =  users.length;
+        return size;
+                
+    }
 
 }//fin clase
 
