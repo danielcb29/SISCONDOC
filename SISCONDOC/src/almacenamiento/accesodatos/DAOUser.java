@@ -13,13 +13,25 @@ import java.sql.*;
  * @author family
  */
 public class DAOUser {
+     /**
+     * @param db objeto encargado de la conexión a la base de datos.
+     * @param conn objeto para ejecutar las sentencias de SQL
+     * 
+     */
     private  BaseDatos db;
     Connection conn ;
+    /**
+     * constructor, inicializa los atributos.
+     */
     public DAOUser(){
         db=new BaseDatos();
         conn = db.getConnetion();
     }//fin constructor
-
+        /**
+        * crear o agregar un usuario a la tabla.
+        * @param us el objeto usuario a agregar.
+        * @return devuelve el número de tuplas que se agregaron a la tabla.
+        */
 	public int createUser(Usuario us){
         String sql_save;
         int numRows=0;
@@ -43,7 +55,11 @@ public class DAOUser {
         }
         return -1;
     }//fin saveUser
-
+        /**
+        * consultar el usuario que tiene como username el parametro.
+        * @param username el username del usuario que se quiere consultar.
+        * @return null si hay error en la consulta a la base de datos. Objeto tipo Usuario si el objeto del usuario que se consulto. Devuelve 
+        */
 	public Usuario readUser(String username){
         Usuario us= new Usuario();
         String sql_select;
@@ -79,7 +95,12 @@ public class DAOUser {
         return null;
     }//fin readUser
 
-    
+    /**
+     * actualizar la informacion de un usuario, con la cedula que entra por parametro.
+     * @param campoAModificar nombre igual que en la base de datos del campo que se quiere actualizar.
+     * @param modificacion como se quiere que quede el campo modificado.
+     * @param cedula la cedula del usuario que se quiere actualizar.
+     */
     public void updateUser(String campoAModificar, String modificacion, String cedula){
 		String sql_save;
 		sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
@@ -97,7 +118,10 @@ public class DAOUser {
             System.out.println(e);
         }
     }
-    
+   /**
+     * listar todas las tuplas de los usuarios existentes.
+     * @return los objetos tipo Usuario enlistados en un arreglo.
+     */ 
    public Usuario[] listUsers(){
         
         String sql_select;
@@ -145,6 +169,10 @@ public class DAOUser {
          catch(Exception e){ System.out.println(e); }
         return null;
     }
+   /**
+    * borrar un usuario de la tabla.
+    * @param cedula la cedula del usuario que se quiere borrar.
+    */
     public void deleteUser(String cedula){	
 		String sql_save;
 
@@ -162,7 +190,9 @@ public class DAOUser {
             System.out.println(e);
         }
     }
-    
+    /**
+     * cerrar la conexion con la base de datos.
+     */
     public void closeConectionDB(){
         db.closeConection(db.getConnetion());
     }
