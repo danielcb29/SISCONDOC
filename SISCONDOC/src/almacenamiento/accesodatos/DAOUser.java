@@ -30,7 +30,7 @@ public class DAOUser {
     /**
     * crear o agregar un usuario a la tabla.
     * @param us el objeto usuario a agregar.
-    * @return devuelve el número de tuplas que se agregaron a la tabla (que debe ser 1), en caso tal de presentarse un error de conexión retorna -1.
+    * @return devuelve el número de tuplas que se agregaron a la tabla (que debe ser 1), en caso tal de presentarse un error de sentencia de SQL retorna -2; en cualquier otro caso, -1.
     */
     public int createUser(Usuario us){
         String sql_save;
