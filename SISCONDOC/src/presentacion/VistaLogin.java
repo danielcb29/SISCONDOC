@@ -34,8 +34,7 @@ public class VistaLogin extends javax.swing.JFrame {
     public VistaLogin() {
         initComponents();
         controlerU = new UserController();
-        
-        
+        this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
         System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
@@ -252,16 +251,18 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 String profile = user.getProfile();
                 if (profile.equals("Digitador")){
-                    
+                    System.out.println("No se ha implementado aun :)");
+                    System.exit(0);
                 }else{
                     if(profile.equals("Coordinador")){
-                        
+                        System.out.println("No se ha implementado aun :)");
+                        System.exit(0);
                     }else{
                         if(profile.equals("Administrador")){
                             //Clase nelsini
                             System.out.println("Iniciamo sesion : "+ user.getName());
                             this.dispose();
-                            vAdmin = new VistaAdmin(userName);
+                            vAdmin = new VistaAdmin(userName,controlerU);
                             vAdmin.setVisible(true);
                             //vAdmin.show();
                             
