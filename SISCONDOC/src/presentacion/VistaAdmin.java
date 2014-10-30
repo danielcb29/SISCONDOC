@@ -16,9 +16,11 @@ public class VistaAdmin extends javax.swing.JFrame {
      * Creates new form VistaAdmin
      */
 
-    String name="User Default";
-    public VistaCrearUsuario objVistaCrearUsuario;
-    public UserController objUserController;
+    private String name="User Default";
+    private VistaCrearUsuario objVistaCrearUsuario;
+    private UserController objUserController;
+    private VistaCrearConvocatoria vistaConvo;
+    
     public VistaAdmin(){}
     public VistaAdmin(String username,UserController controler){
         initComponents();
@@ -115,6 +117,11 @@ public class VistaAdmin extends javax.swing.JFrame {
 
         btCrearConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btCrearConvocatoria.setText("Crear Convocatoria");
+        btCrearConvocatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCrearConvocatoriaActionPerformed(evt);
+            }
+        });
 
         btEditarConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btEditarConvocatoria.setText("Editar Convocatoria");
@@ -262,6 +269,13 @@ public class VistaAdmin extends javax.swing.JFrame {
             System.out.println("Por ahora no se ha implementado :)");
         }
     }//GEN-LAST:event_btEliminarUsuarioActionPerformed
+
+    private void btCrearConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearConvocatoriaActionPerformed
+        // TODO add your handling code here:
+        vistaConvo = new VistaCrearConvocatoria(objUserController);
+        vistaConvo.setVisible(true);
+        
+    }//GEN-LAST:event_btCrearConvocatoriaActionPerformed
 
     /**
      * @param args the command line arguments
