@@ -4,6 +4,9 @@
  */
 package presentacion;
 import almacenamiento.controlador.*;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 /**
  *
  * @author daniel
@@ -13,10 +16,16 @@ public class VistaCrearConvocatoria extends javax.swing.JFrame {
     /**
      * Creates new form VistaCrearConvocatoria
      */
-    private UserController controller;
-    public VistaCrearConvocatoria(UserController controllerParam) {
+    private ConvocatoriaController controller;
+    public VistaCrearConvocatoria(ConvocatoriaController controllerParam) {
         initComponents();
         controller = controllerParam;
+        UtilDateModel model = new UtilDateModel();
+        //JDatePanelImpl datePanel = new JDatePanelImpl(model);
+        
+        //JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+ 
+        //this.add(datePicker);
     }
 
     /**
