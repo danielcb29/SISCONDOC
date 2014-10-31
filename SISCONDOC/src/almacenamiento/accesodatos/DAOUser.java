@@ -25,8 +25,14 @@ public class DAOUser {
      */
     public DAOUser(){
         db=new BaseDatos();
-        conn = db.getConnetion();
+        
     }//fin constructor
+    /**
+     * Metodo que permite realizar la conexion a la base de datos
+     */
+    public void connectDB(){
+        conn = db.getConnetion();
+    }
         /**
         * crear o agregar un usuario a la tabla.
         * @param us el objeto usuario a agregar.
