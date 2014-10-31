@@ -13,10 +13,10 @@ import proceso.Convocatoria;
  */
 public class DAOConvocatoria {
     private BaseDatos db;
-    private Connection conn ;
+    //private Connection conn ;
     public DAOConvocatoria(){
         db = new BaseDatos();
-        conn = db.getConnetion();
+        //conn = db.getConnetion();
     }
     /**
      * Metodo que permite crear una convocatoria en la base de datos
