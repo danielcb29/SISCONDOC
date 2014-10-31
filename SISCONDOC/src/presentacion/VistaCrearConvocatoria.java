@@ -55,7 +55,7 @@ public class VistaCrearConvocatoria extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jSplitPane1 = new javax.swing.JSplitPane();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrador: Crear Convocatoria");
@@ -102,8 +102,13 @@ public class VistaCrearConvocatoria extends javax.swing.JFrame {
         jButton1.setText("Crear");
         jSplitPane1.setLeftComponent(jButton1);
 
-        jButton2.setText("Cancelar");
-        jSplitPane1.setRightComponent(jButton2);
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
+        jSplitPane1.setRightComponent(btCancelar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +212,11 @@ public class VistaCrearConvocatoria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNombreActionPerformed
 
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -249,8 +259,8 @@ public class VistaCrearConvocatoria extends javax.swing.JFrame {
         });
     }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancelar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
