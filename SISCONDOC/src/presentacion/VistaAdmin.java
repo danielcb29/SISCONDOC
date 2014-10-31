@@ -20,7 +20,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private String name="User Default";
     private VistaCrearUsuario objVistaCrearUsuario;
     private UserController objUserController;
-    private VistaCrearConvocatoria vistaConvo;
+    private VistaConvocatoria vistaConvo;
     private ConvocatoriaController objConvController;
     
     public VistaAdmin(){}
@@ -285,7 +285,7 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearConvocatoriaActionPerformed
         // TODO add your handling code here:
-        vistaConvo = new VistaCrearConvocatoria(objConvController);
+        vistaConvo = new VistaConvocatoria(objConvController,1);
         vistaConvo.setVisible(true);
         
     }//GEN-LAST:event_btCrearConvocatoriaActionPerformed
@@ -297,7 +297,9 @@ public class VistaAdmin extends javax.swing.JFrame {
         if (sizeArray == 0){
             JOptionPane.showMessageDialog(this, "Por el momento no hay convocatorias en el sistema, prueba creando una!","Ups!",JOptionPane.WARNING_MESSAGE);
         }else{
-            System.out.println("No se ha implementado aun :)");
+            //System.out.println("No se ha implementado aun :)");
+            vistaConvo = new VistaConvocatoria(objConvController,2);
+            vistaConvo.setVisible(true);
         }
     }//GEN-LAST:event_btEditarConvocatoriaActionPerformed
 
@@ -308,7 +310,9 @@ public class VistaAdmin extends javax.swing.JFrame {
         if (sizeArray == 0){
             JOptionPane.showMessageDialog(this, "Por el momento no hay convocatorias en el sistema, prueba creando una!","Ups!",JOptionPane.WARNING_MESSAGE);
         }else{
-            System.out.println("No se ha implementado aun :)");
+            //System.out.println("No se ha implementado aun :)");
+            vistaConvo = new VistaConvocatoria(objConvController,3);
+            vistaConvo.setVisible(true);
         }
     }//GEN-LAST:event_btEliminarConvocatoriaActionPerformed
 
