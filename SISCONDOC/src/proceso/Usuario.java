@@ -20,7 +20,7 @@ public class Usuario {
     private String email;
     private String profile;
     private String cedula;
-    
+    private String state;
     /*
      * One user has one "Convocatoria" 
      */
@@ -34,6 +34,7 @@ public class Usuario {
         email = mailUser;
         profile = profileUser;
         cedula = cedulaUser;
+        state = "Activo";
     }
     public Usuario(){
         
@@ -59,6 +60,9 @@ public class Usuario {
     public String getCedula(){
         return cedula;
     }
+    public String getState(){
+        return state;
+    }
     public void setCedula(String newCedula){
         cedula = newCedula;
     }
@@ -79,6 +83,9 @@ public class Usuario {
     }
     public void setMail(String newMail){
         email = newMail;
+    }
+    public void setState(String newState){
+        state=newState;
     }
      /*
      * One user can be on multiple "Convocatoria" in a time frame
