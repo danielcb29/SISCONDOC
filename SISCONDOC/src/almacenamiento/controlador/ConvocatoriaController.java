@@ -29,4 +29,13 @@ public class ConvocatoriaController {
         Convocatoria[] list = daoConv.listConv();
         return list;
     }
+    /**
+     * 
+     * @param name: nombre de la convocatoria a buscar
+     * @return Convocatoria en la base de datos , null si hay error o name null si no existe 
+     */
+    public Convocatoria readConv(String name){
+        Convocatoria conv = daoConv.readConv(name);
+        return conv;
+    }
 }
