@@ -36,6 +36,7 @@ public class VistaLogin extends javax.swing.JFrame {
         controlerU = new UserController();
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
+        controlerU.connectDB();
         //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
