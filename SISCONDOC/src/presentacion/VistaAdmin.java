@@ -6,6 +6,7 @@
 package presentacion;
 import almacenamiento.controlador.*;
 import javax.swing.JOptionPane;
+import proceso.Convocatoria;
 /**
  *
  * @author USUARIO
@@ -20,6 +21,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private VistaCrearUsuario objVistaCrearUsuario;
     private UserController objUserController;
     private VistaCrearConvocatoria vistaConvo;
+    private ConvocatoriaController objConvController;
     
     public VistaAdmin(){}
     public VistaAdmin(String username,UserController controler){
@@ -28,6 +30,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         name=username;
         lbWelcome.setText("Bienvenido "+name+"!");
         objUserController= controler;
+        objConvController = new ConvocatoriaController();
     }
     
     /**
@@ -128,12 +131,22 @@ public class VistaAdmin extends javax.swing.JFrame {
         btEditarConvocatoria.setMaximumSize(new java.awt.Dimension(151, 25));
         btEditarConvocatoria.setMinimumSize(new java.awt.Dimension(151, 25));
         btEditarConvocatoria.setPreferredSize(new java.awt.Dimension(151, 25));
+        btEditarConvocatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarConvocatoriaActionPerformed(evt);
+            }
+        });
 
         btEliminarConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btEliminarConvocatoria.setText("Eliminar Convocatoria");
         btEliminarConvocatoria.setMaximumSize(new java.awt.Dimension(151, 25));
         btEliminarConvocatoria.setMinimumSize(new java.awt.Dimension(151, 25));
         btEliminarConvocatoria.setPreferredSize(new java.awt.Dimension(151, 25));
+        btEliminarConvocatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarConvocatoriaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("<html><i>\nRecuerde que para crear Usuarios\ndebe haber creado como minimo\nuna convocatoria</i></html>");
@@ -272,10 +285,32 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearConvocatoriaActionPerformed
         // TODO add your handling code here:
-        vistaConvo = new VistaCrearConvocatoria(objUserController);
+        vistaConvo = new VistaCrearConvocatoria(objConvController);
         vistaConvo.setVisible(true);
         
     }//GEN-LAST:event_btCrearConvocatoriaActionPerformed
+
+    private void btEditarConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarConvocatoriaActionPerformed
+        // TODO add your handling code here:
+        Convocatoria[] convArray = objConvController.listConv();
+        int sizeArray = convArray.length;
+        if (sizeArray == 0){
+            JOptionPane.showMessageDialog(this, "Por el momento no hay convocatorias en el sistema, prueba creando una!","Ups!",JOptionPane.WARNING_MESSAGE);
+        }else{
+            System.out.println("No se ha implementado aun :)");
+        }
+    }//GEN-LAST:event_btEditarConvocatoriaActionPerformed
+
+    private void btEliminarConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarConvocatoriaActionPerformed
+        // TODO add your handling code here
+        Convocatoria[] convArray = objConvController.listConv();
+        int sizeArray = convArray.length;
+        if (sizeArray == 0){
+            JOptionPane.showMessageDialog(this, "Por el momento no hay convocatorias en el sistema, prueba creando una!","Ups!",JOptionPane.WARNING_MESSAGE);
+        }else{
+            System.out.println("No se ha implementado aun :)");
+        }
+    }//GEN-LAST:event_btEliminarConvocatoriaActionPerformed
 
     /**
      * @param args the command line arguments
