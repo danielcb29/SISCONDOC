@@ -24,7 +24,9 @@ public class UserController {
     public UserController(){
         daoUser=new DAOUser();
     }
-    
+    public void connectDB(){
+        daoUser.connectDB();
+    }
     /**
      *  @param id: cedula del empleado
      * @param name: nombre del empleado
