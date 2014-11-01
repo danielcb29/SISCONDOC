@@ -11,6 +11,7 @@ import proceso.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import javax.*;
 /**
 import javax.mail.Message;
@@ -21,6 +22,15 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 * ***/
+=======
+/*import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;*/
+>>>>>>> origin/daniel
 /**
  *
  * @author daniel
@@ -39,7 +49,12 @@ public class VistaLogin extends javax.swing.JFrame {
         controlerU = new UserController();
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
+<<<<<<< HEAD
         System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+=======
+        controlerU.connectDB();
+        //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+>>>>>>> origin/daniel
     }
 
     /**
@@ -194,6 +209,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 if(user.getPassword() == null){
                    JOptionPane.showMessageDialog(this, "Nombre de usuario no existe, vuelve a intentarlo", "Error!", JOptionPane.ERROR_MESSAGE); 
+<<<<<<< HEAD
                 }
                 /**
                 else{
@@ -232,6 +248,44 @@ public class VistaLogin extends javax.swing.JFrame {
                         e.printStackTrace();
                     }  
                 }**/
+=======
+                }else{
+                    //Enviar correo electronico
+                    System.out.println("Llegamos al envio de correo");
+                    /*String host = "correounivalle.edu.co";
+                    Properties props =  new Properties();
+                    //props.setProperty("mail.smtp.correounivalle.edu.co", "correounivalle.edu.co");
+                    props.setProperty("mail.smtp.gmail.com", "gmail.com");
+                    Session session = Session.getDefaultInstance(props);
+
+                    String msgBody = "Datos de recuperacion de cuenta SISCONDOC \nNombre Completo: "+user.getName()+" "+user.getLastName()+" \nNombre de Usuario: "+user.getUserName()+" \nContraseña: "+user.getPassword()+" \nPerfil: "+user.getProfile()  ;
+
+                    try {
+                        //System.out.println("Antes del msg");
+                        Message msg = new MimeMessage(session);
+                        
+                        msg.setFrom(new InternetAddress("daniel.correa@correounivalle.edu.co", "Correounivalle.edu.co Daniel Correa"));
+                        
+                        msg.addRecipient(Message.RecipientType.TO,
+                                        new InternetAddress(user.getMail(), user.getName()));
+                        msg.setSubject("Datos de recuperacion cuenta SISCONDOC");
+                        msg.setText(msgBody);
+                        
+                        Transport.send(msg);
+                        System.out.println("despues del msg");
+
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (AddressException e) {
+                        // ...
+                        System.out.println("Error con su correo electronico , contacte al admin");
+                    } catch (MessagingException e) {
+                        // ...
+                        System.out.println("Error enviando el mensaje , fallas de conexion a internet? x(");
+                        e.printStackTrace();
+                    }*/  
+                }
+>>>>>>> origin/daniel
             }
         }
         
@@ -242,6 +296,7 @@ public class VistaLogin extends javax.swing.JFrame {
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
         // TODO add your handling code here:
         //Aqui va lo de ingresar
+<<<<<<< HEAD
         System.out.println("init");
         
         
@@ -277,6 +332,46 @@ public class VistaLogin extends javax.swing.JFrame {
                             
                         }
                     }
+=======
+        
+        userName = tfUserName.getText();
+        password = pfPassword.getText();
+        Usuario user = controlerU.consultUser(userName);
+        
+        if (user==null){ 
+            JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else {
+            //System.out.println("local:"+password);
+            if(user.getPassword()==null || !(user.getPassword() .equals(password))){
+                JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                boolean state = user.getState();
+                System.out.println("estado: "+state);
+                if(state){
+                    String profile = user.getProfile();
+                    if (profile.equals("Digitador")){
+                        System.out.println("No se ha implementado aun :)");
+                        System.exit(0);
+                    }else{
+                        if(profile.equals("Coordinador")){
+                            System.out.println("No se ha implementado aun :)");
+                            System.exit(0);
+                        }else{
+                            if(profile.equals("Administrador")){
+                                //Clase nelsini
+                                System.out.println("Iniciamo sesion : "+ user.getName());
+                                this.dispose();
+                                vAdmin = new VistaAdmin(userName,controlerU);
+                                vAdmin.setVisible(true);
+                                //vAdmin.show();
+                            }
+
+                            
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
+>>>>>>> origin/daniel
                 }
             }
         }
