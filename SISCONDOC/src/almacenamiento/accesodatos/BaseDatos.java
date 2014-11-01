@@ -15,19 +15,15 @@ public class BaseDatos {
      private Connection conexion =null;
      private Statement instruccion;
      private ResultSet tabla; 
-<<<<<<< HEAD
-    public BaseDatos(){
+
+    public BaseDatos()
+    {
       url = "jdbc:postgresql://localhost:5432/SISCONDOC";
       usuario="fernando";
       password="fernando1128";
-=======
-     BaseDatos(){
-      url = "jdbc:postgresql://localhost/SISCONDOC";
-      usuario="danielcb";
-      password="1144067772";
->>>>>>> origin/daniel
-      
     }
+      
+    
     public Connection conectar(){
             //System.out.println("Entro metodo");
             try {

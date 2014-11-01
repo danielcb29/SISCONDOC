@@ -6,10 +6,9 @@
 package almacenamiento.controlador;
 import proceso.*;
 import almacenamiento.accesodatos.*;
-<<<<<<< HEAD
-=======
+
 import java.sql.Connection;
->>>>>>> origin/daniel
+
 
 /**
  *
@@ -25,19 +24,19 @@ public class UserController {
     /**
      * constructor
      * **/
-<<<<<<< HEAD
+
     public UserController()
     {
       daoUser=new DAOUser();
-=======
-    public UserController(){
-        daoUser=new DAOUser();
->>>>>>> origin/daniel
     }
+    
+    
     public void connectDB(){
         daoUser.connectDB();
     }
-    public Connection getConn(){
+    
+    public Connection getConn()
+    {
         return daoUser.getConn();
     }
     /**
@@ -58,10 +57,7 @@ public class UserController {
         
         //Se llama al dao para guardar
         int result =daoUser.createUser(U);
-<<<<<<< HEAD
-=======
         //int result = 0;
->>>>>>> origin/daniel
         return result;
 
     }
@@ -74,38 +70,12 @@ public class UserController {
      */
     public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
-<<<<<<< HEAD
         //llamado para consultar el usuario  al DAOUsuaurio
         U= daoUser.readUser(username);
         return  U;
     }
     
-    /**
-     * metodo que llama al Dao para consultar cuantos usuarios existen
-     * @return cantidad de usuarios existentes en la base de datos
-     */
-    public int countUsers ()  
-    {
-        Usuario [] users = new Usuario [5];
-        int size =  users.length;
-        return size;
-                
-    }
-    
-      public void cerrarConexionBD(){
-        daoUser.closeConectionDB();
-=======
-        
-        U= daoUser.readUser(username);
-        
-        return U;
-
->>>>>>> origin/daniel
-    }
-<<<<<<< HEAD
-   
-}//fin clase
-=======
+      
    /**
      * metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
@@ -120,10 +90,11 @@ public class UserController {
     /*
      * Cerrar conexion base de datos
      */
-    public void cerrarConexionBD(){
+    public void cerrarConexionBD()
+    {
         daoUser.closeConectionDB();
     }
 
 }//fin clase
 
->>>>>>> origin/daniel
+
