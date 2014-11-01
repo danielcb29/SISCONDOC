@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import proceso.Convocatoria;
+import proceso.Usuario;
 
 
 /**
@@ -35,8 +36,16 @@ public class DAOConvocatoria {
     public int crateConv(Convocatoria conv){
         String sql_save;
         int numRows=0;
-        String dateOne = conv.getDateIn().toString();
-        String dateTwo = conv.getDateEnd().toString();
+        Date dOne = conv.getDateIn();
+        Date dTwo = conv.getDateEnd();
+        SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+        format.format(dOne);
+        format.format(dTwo);
+        String dateOne = dOne.toString();
+        String dateTwo = dTwo.toString();
+        
+        System.out.println("date one :"+dateOne);
+        System.out.println("date two :"+dateTwo);
 
         sql_save="INSERT INTO convocatoria VALUES ( NEXTVAL('convo_seq')  , '" + dateOne +  "', '" + dateTwo + "', '" + conv.getName() + "' , "  +conv.getState() + ", '" + conv.getDescription() + "');";
         try{
@@ -66,12 +75,12 @@ public class DAOConvocatoria {
     public Convocatoria readConv(String name){
         Convocatoria conv = new Convocatoria();
         String sql_select;
-        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true AND nombre = "+name+";";
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true AND nombre = '"+name+"';";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
             ResultSet table = sentence.executeQuery(sql_select);
-            SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd HH:mm");
             while(table.next()){
                 
                 conv.setName(table.getString(1));
@@ -97,14 +106,76 @@ public class DAOConvocatoria {
          catch(Exception e){ System.out.println(e); }
         return null;
     }
-    public void updateConv(){
-        
+    public void updateConv(String exCon, Convocatoria conv){
+        String sql_save1,sql2,sql3,sql4;
+	sql_save1="UPDATE convocatoria SET nombre='"+conv.getName()+"' WHERE nombre='" + exCon + "';";
+        sql2 = "UPDATE convocatoria SET fecha_Ini='"+conv.getDateIn().toString()+"' WHERE nombre='" + exCon + "';";;
+        sql3 = "UPDATE convocatoria SET fecha_Fin='"+conv.getDateEnd().toString()+"' WHERE nombre='" + exCon + "';";
+        sql4 = "UPDATE convocatoria SET descripcion='"+conv.getDescription()+"' WHERE nombre='" + exCon + "';";
+        try{
+            Statement sentencia = conn.createStatement();
+
+            sentencia.executeUpdate(sql2);
+            sentencia.executeUpdate(sql3);
+            sentencia.executeUpdate(sql4);
+            sentencia.executeUpdate(sql_save1);
+            
+            
+        }
+        catch(SQLException e){
+            System.out.println(e); 
+            }
+        catch(Exception e){ 
+            System.out.println(e);
+        }
     }
     /**
      * Metodo que permite listar las convocatorias activas en la base de datos 
      * @return: Arreglo con las convocatorias existentes en la base de datos, null en caso de error
      */
     public Convocatoria[] listConv(){
+        String sql_select;
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true ;";
+         try{
+            System.out.println("consultando en la bd");
+            Statement sentence = conn.createStatement();
+            ResultSet table = sentence.executeQuery(sql_select);
+            ResultSet table2= table;
+            int numRows=0;
+            while(table.next()){
+               numRows++;
+            }
+            System.out.println(numRows);
+            Convocatoria conv[]= new Convocatoria[numRows];
+            for(int i=0; i<numRows; i++){
+                conv[i]=new Convocatoria();
+            }
+            
+            int j=0;
+            SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+            while(table2.next()){
+               
+                conv[j].setName(table.getString(1));
+                Date datIn;
+                datIn = format.parse(table.getString(2));
+                conv[j].setDateIn(datIn);
+                Date datEnd;
+                datEnd = format.parse(table.getString(3));
+                conv[j].setDateEnd(datEnd);
+                
+                conv[j].setState(table.getBoolean(4));               
+
+                conv[j].setDescription(table.getString(5));
+
+
+              j++;
+              System.out.println("ok");
+            }
+           
+            return conv;
+         }
+         catch(SQLException e){ System.out.println(e); }
+         catch(Exception e){ System.out.println(e); }
         return null;
     }
     /**
@@ -112,7 +183,20 @@ public class DAOConvocatoria {
      * @param name 
      */
     public void deletConv(String name){
-        
+        String sql_save;
+	sql_save="UPDATE convocatoria SET estado=false WHERE nombre='" + name + "'";
+        try{
+            Statement sentencia = conn.createStatement();
+
+            sentencia.executeUpdate(sql_save);            
+            
+        }
+        catch(SQLException e){
+            System.out.println(e); 
+            }
+        catch(Exception e){ 
+            System.out.println(e);
+        }
     }
     /**
      * cerrar la conexion con la base de datos.
