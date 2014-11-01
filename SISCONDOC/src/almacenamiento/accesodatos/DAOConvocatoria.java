@@ -5,6 +5,8 @@
 package almacenamiento.accesodatos;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import proceso.Convocatoria;
 
 /**
@@ -13,9 +15,11 @@ import proceso.Convocatoria;
  */
 public class DAOConvocatoria {
     private BaseDatos db;
+    private Connection conn;
     //private Connection conn ;
-    public DAOConvocatoria(){
+    public DAOConvocatoria(Connection conect){
         db = new BaseDatos();
+        conn = conect; 
         //conn = db.getConnetion();
     }
     /**
@@ -25,6 +29,27 @@ public class DAOConvocatoria {
      */
     
     public int crateConv(Convocatoria conv){
+        String sql_save;
+        int numRows=0;
+
+        /*sql_save="INSERT INTO convocatoria VALUES ('" + conv.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
+        try{
+            Statement sentencia = conn.createStatement();
+
+            numRows = sentencia.executeUpdate(sql_save);            
+            System.out.println("numRowsDAO: " + numRows);
+            return numRows;
+            
+        }
+        catch(SQLException e){
+            
+            System.out.println(e); 
+            return -2;
+        }
+        catch(Exception e){ 
+            
+            System.out.println(e);
+        }*/
         return -1;
     } 
     /**
