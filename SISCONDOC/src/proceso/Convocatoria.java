@@ -23,6 +23,9 @@ public class Convocatoria {
         dateInitial = paramDateIn;
         dateEnd = paramDateEnd;
     }
+    public Convocatoria(){
+        
+    }
     public String getName(){
         return name;
     }

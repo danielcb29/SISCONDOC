@@ -2,8 +2,17 @@
 
 
 --Creacion de tabla perfiles (Ejem:digitador, administrador, etc) 
+DROP TABLE IF EXISTS convoUsuario;
 DROP TABLE IF EXISTS Usuario;
 DROP TABLE IF EXISTS Perfiles;
+
+DROP TABLE IF EXISTS Formacion;
+DROP TABLE IF EXISTS FormacionTic;
+DROP TABLE IF EXISTS Idioma;
+DROP TABLE IF EXISTS conocimientosEspecificos;
+DROP TABLE IF EXISTS formadorTic;
+DROP TABLE IF EXISTS Aspirante;
+DROP TABLE IF EXISTS Convocatoria;
 CREATE TABLE Perfiles(
 	id_perfil VARCHAR(30) NOT NULL PRIMARY KEY,
 	nombre VARCHAR(20) NOT NULL
@@ -24,15 +33,18 @@ CREATE TABLE Usuario(
 );
 
 --Creacion de la tabla convocatoria 
+CREATE SEQUENCE convo_seq;
+
+
 CREATE TABLE Convocatoria(
 	codigo INT NOT NULL PRIMARY KEY, 
 	fecha_Ini DATE NOT NULL, 
 	fecha_Fin DATE NOT NULL, 	
- 	nombre VARCHAR(40) NOT NULL, 
+ 	nombre TEXT NOT NULL UNIQUE, 
 	estado BOOL NOT NULL, 
 	descripcion TEXT NOT NULL
 );
-
+ALTER TABLE Convocatoria ALTER codigo SET DEFAULT nextval('convo_seq');
 --Creacion de la tabla aspirante relacionada con convocatoria
 CREATE TABLE Aspirante(
 	cedula VARCHAR(30) NOT NULL PRIMARY KEY,

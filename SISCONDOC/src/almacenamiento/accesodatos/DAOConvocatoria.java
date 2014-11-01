@@ -5,9 +5,13 @@
 package almacenamiento.accesodatos;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import proceso.Convocatoria;
+
 
 /**
  *
@@ -31,8 +35,10 @@ public class DAOConvocatoria {
     public int crateConv(Convocatoria conv){
         String sql_save;
         int numRows=0;
+        String dateOne = conv.getDateIn().toString();
+        String dateTwo = conv.getDateEnd().toString();
 
-        /*sql_save="INSERT INTO convocatoria VALUES ('" + conv.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
+        sql_save="INSERT INTO convocatoria VALUES ( NEXTVAL('convo_seq')  , '" + dateOne +  "', '" + dateTwo + "', '" + conv.getName() + "' , "  +conv.getState() + ", '" + conv.getDescription() + "');";
         try{
             Statement sentencia = conn.createStatement();
 
@@ -49,7 +55,7 @@ public class DAOConvocatoria {
         catch(Exception e){ 
             
             System.out.println(e);
-        }*/
+        }
         return -1;
     } 
     /**
@@ -58,6 +64,37 @@ public class DAOConvocatoria {
      * @return: la convocatora encontrada , con atributos null si no existe o null en caso de error
      */
     public Convocatoria readConv(String name){
+        Convocatoria conv = new Convocatoria();
+        String sql_select;
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true AND nombre = "+name+";";
+         try{
+            System.out.println("consultando en la bd");
+            Statement sentence = conn.createStatement();
+            ResultSet table = sentence.executeQuery(sql_select);
+            SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+            while(table.next()){
+                
+                conv.setName(table.getString(1));
+                Date datIn;
+                datIn = format.parse(table.getString(2));
+                conv.setDateIn(datIn);
+                Date datEnd;
+                datEnd = format.parse(table.getString(3));
+                conv.setDateEnd(datEnd);
+                
+                conv.setState(table.getBoolean(4));               
+
+                conv.setDescription(table.getString(5));
+
+                
+              
+                //System.out.println("ok");
+            }
+           
+            return conv;
+         }
+         catch(SQLException e){ System.out.println(e); }
+         catch(Exception e){ System.out.println(e); }
         return null;
     }
     public void updateConv(){

@@ -365,11 +365,15 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     taDescription.setText("null");
                     JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
                 }else{
+                    
+                    SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+                    String datIn[] = format.format(convEdit.getDateIn()).split(" ");
+                    String datEnd[] = format.format(convEdit.getDateEnd()).split(" ");
                     tfNombre.setText(convEdit.getName());
-                    tfDateIn.setText("null");
-                    tfTimeIn.setText("null");
-                    tfDateEnd.setText("null");
-                    tfTimeEnd.setText("null");
+                    tfDateIn.setText(datIn[0]);
+                    tfTimeIn.setText(datIn[1]);
+                    tfDateEnd.setText(datEnd[0]);
+                    tfTimeEnd.setText(datEnd[1]);
                     taDescription.setText(convEdit.getDescription());
                 }
             }
@@ -419,6 +423,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                      //VALIDAMOS INTEGRIDAD DE ENTIDAD
                      if((result != -1) && (result != -2)){
                          JOptionPane.showMessageDialog(this,"Convocatoria creada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                         this.dispose();
                      }else{
                          JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe","Ups!",JOptionPane.ERROR_MESSAGE);
                      }
