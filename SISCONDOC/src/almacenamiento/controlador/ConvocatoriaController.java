@@ -4,6 +4,7 @@
  */
 package almacenamiento.controlador;
 import almacenamiento.accesodatos.*;
+import java.sql.Connection;
 import proceso.Convocatoria;
 /**
  *
@@ -18,8 +19,17 @@ public class ConvocatoriaController {
     /**
      * Constructor de la clase
      */
-    public ConvocatoriaController(){
-        daoConv = new DAOConvocatoria();
+    public ConvocatoriaController(Connection conn){
+        daoConv = new DAOConvocatoria(conn);
+    }
+    /**
+     * Metodo que permite crear una convocatoria
+     * @param conv: convocatoria a crear
+     * @return 
+     */
+    public int createConv(Convocatoria conv){
+        int result = daoConv.crateConv(conv);
+        return result;
     }
     /**
      * Metodo que permite obtener la lista de convocatorias 
@@ -37,5 +47,16 @@ public class ConvocatoriaController {
     public Convocatoria readConv(String name){
         Convocatoria conv = daoConv.readConv(name);
         return conv;
+    }
+    /**
+     * Metodo que permite eliminar una convocatoria
+     * @param conv : nombre de la convocatoria a eliminar
+     */
+    public void deleteConv(Convocatoria conv){
+        String name = conv.getName();
+        daoConv.deletConv(name);
+    }
+    public void updateConv(Convocatoria conv){
+        
     }
 }
