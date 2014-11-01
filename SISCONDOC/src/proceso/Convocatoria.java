@@ -4,6 +4,8 @@
  */
 package proceso;
 
+import java.util.Date;
+
 /**
  *
  * @author daniel
@@ -12,10 +14,14 @@ public class Convocatoria {
     private String name;
     private String description;
     private boolean state;
-    public Convocatoria(String paramName , String paramDescrip){
+    private Date dateInitial;
+    private Date dateEnd;
+    public Convocatoria(String paramName , String paramDescrip, Date paramDateIn, Date paramDateEnd){
         name = paramName;
         description = paramDescrip; 
         state = true;
+        dateInitial = paramDateIn;
+        dateEnd = paramDateEnd;
     }
     public String getName(){
         return name;
@@ -26,6 +32,12 @@ public class Convocatoria {
     public boolean getState(){
         return state;
     }
+    public Date getDateIn(){
+        return dateInitial;
+    }
+    public Date getDateEnd(){
+        return dateEnd;
+    }
     public void setName(String newName){
         name = newName;
     }
@@ -34,5 +46,11 @@ public class Convocatoria {
     }
     public void setState(boolean newState){
         state = newState;
+    }
+    public void setDateIn(Date newDateIn){
+        dateInitial = newDateIn;
+    }
+    public void setDateEnd(Date newDateEnd){
+        dateEnd = newDateEnd;
     }
 }
