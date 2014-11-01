@@ -12,9 +12,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 import proceso.Convocatoria;
 /**
  *
@@ -31,7 +29,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     public VistaConvocatoria(ConvocatoriaController controllerParam, int type) {
         initComponents();
         controller = controllerParam;
-        UtilDateModel model = new UtilDateModel();
+        
         this.type = type;
     
         if (type == 1){
