@@ -4,6 +4,13 @@
  */
 package presentacion;
 import almacenamiento.controlador.*;
+import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -20,11 +27,13 @@ public class VistaConvocatoria extends javax.swing.JFrame {
      */
     private ConvocatoriaController controller;
     private int type;
+    
     public VistaConvocatoria(ConvocatoriaController controllerParam, int type) {
         initComponents();
         controller = controllerParam;
         UtilDateModel model = new UtilDateModel();
         this.type = type;
+    
         if (type == 1){
             //Crean conv 
             lbSearch.setVisible(false);
@@ -44,6 +53,12 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 lbTitle.setText("Eliminar Convocatoria");
                 lbInfo.setText("Busque la convocatoria que desea eliminar, revise los parametros necesarios y borre");
                 btAction.setText("Borrar");
+                tfNombre.setEditable(false);
+                taDescription.setEditable(false);
+                tfDateIn.setEditable(false);
+                tfTimeIn.setEditable(false);
+                tfDateEnd.setEditable(false);
+                tfTimeEnd.setEditable(false);
             }
         }
         //JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -51,10 +66,11 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         //JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
  
         //this.add(datePicker);
-    }/*
-    public VistaCrearConvocatoria(){
+    }
+    public VistaConvocatoria(){
         initComponents();
-    }*/
+        type=1;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +106,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         tfSearch = new javax.swing.JTextField();
         lbSearch = new javax.swing.JLabel();
         btSearch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrador: Crear Convocatoria");
@@ -149,13 +167,11 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         });
         jSplitPane1.setRightComponent(btCancelar);
 
-        tfDateIn.setText("dd/mm/aaa");
-
-        tfTimeIn.setText("12:00 AM");
-
-        tfDateEnd.setText("dd/mm/aaa");
-
-        tfTimeEnd.setText("12:01 PM");
+        tfDateIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDateInActionPerformed(evt);
+            }
+        });
 
         tfSearch.setText("Busqueda por nombre de convocatoria");
         tfSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +183,11 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         lbSearch.setText("Buscar:");
 
         btSearch.setText("Buscar");
+
+        jLabel1.setFont(new java.awt.Font("Cantarell", 2, 15)); // NOI18N
+        jLabel1.setText("aaa/mm/dd");
+
+        jLabel13.setText("ej: 13:00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,52 +207,62 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(36, 36, 36)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel9)
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGap(12, 12, 12)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(jLabel10)
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(tfDateEnd))
-                                                        .addGroup(layout.createSequentialGroup()
-                                                            .addComponent(jLabel7)
-                                                            .addGap(18, 18, 18)
-                                                            .addComponent(tfDateIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addGap(26, 26, 26)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jLabel8)
-                                                        .addComponent(jLabel11))))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(tfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(155, 155, 155)
-                                            .addComponent(jLabel5)))
-                                    .addGap(51, 51, 51))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(25, 25, 25)
-                                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(188, 188, 188)
-                                    .addComponent(jLabel4))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(173, 173, 173)
-                                    .addComponent(lbSearch)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(tfSearch)
                                 .addGap(18, 18, 18)
                                 .addComponent(btSearch)
-                                .addGap(29, 29, 29)))
+                                .addGap(29, 29, 29))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(155, 155, 155)
+                                                        .addComponent(jLabel5))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGap(12, 12, 12)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel10)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(tfDateEnd))
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel7)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(tfDateIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGap(26, 26, 26)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel8)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jLabel11)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(tfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                    .addComponent(jLabel9))
+                                                .addGap(51, 51, 51))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addGap(47, 47, 47)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel13)
+                                                .addGap(67, 67, 67))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(188, 188, 188)
+                                        .addComponent(jLabel4))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(173, 173, 173)
+                                        .addComponent(lbSearch)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(121, 121, 121)
@@ -268,8 +299,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                         .addGap(9, 9, 9)
                         .addComponent(jScrollPane1)
                         .addGap(18, 18, 18)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbSearch)
@@ -284,7 +314,10 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel13))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
@@ -299,7 +332,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                             .addComponent(tfDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(tfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31))))
+                        .addGap(19, 19, 19)))
+                .addContainerGap())
         );
 
         pack();
@@ -317,48 +351,111 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
         String name = tfSearch.getText();
-        Convocatoria convEdit = controller.readConv(name);
-        if(convEdit==null){
-            JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
-        }else{
-            if(convEdit.getName() == null){
-                tfNombre.setText("null");
-                tfDateIn.setText("null");
-                tfTimeIn.setText("null");
-                tfDateEnd.setText("null");
-                tfTimeEnd.setText("null");
-                taDescription.setText("null");
-                JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
+        if(name.length() != 0){
+            Convocatoria convEdit = controller.readConv(name);
+            if(convEdit==null){
+                JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
             }else{
-                tfNombre.setText(convEdit.getName());
-                tfDateIn.setText("null");
-                tfTimeIn.setText("null");
-                tfDateEnd.setText("null");
-                tfTimeEnd.setText("null");
-                taDescription.setText(convEdit.getDescription());
-            }
-        }
-    }//GEN-LAST:event_tfSearchActionPerformed
-
-    private void btActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActionActionPerformed
-        // TODO add your handling code here:
-        if(type==1){
-            
-        }else{
-            if(type==2){
-                
-            }else{
-                if(type==3){
-                    
+                if(convEdit.getName() == null){
+                    tfNombre.setText("null");
+                    tfDateIn.setText("null");
+                    tfTimeIn.setText("null");
+                    tfDateEnd.setText("null");
+                    tfTimeEnd.setText("null");
+                    taDescription.setText("null");
+                    JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    tfNombre.setText(convEdit.getName());
+                    tfDateIn.setText("null");
+                    tfTimeIn.setText("null");
+                    tfDateEnd.setText("null");
+                    tfTimeEnd.setText("null");
+                    taDescription.setText(convEdit.getDescription());
                 }
             }
+        }else{
+            JOptionPane.showMessageDialog(this,"No puedes buscar una convocatoria con nombre vacio","Error en la busqueda",JOptionPane.ERROR_MESSAGE);
         }
+            
+    }//GEN-LAST:event_tfSearchActionPerformed
+    private boolean validateInformation(String firstDa, String firstTime, String secondDa, String secondTime, String name, String description) {
+        //if ((((((firstDa.length() == 0) || (firstTime.length() == 0)) || (secondDa.length() == 0)) || (secondTime.length() == 0)) || (name.length() == 0)) || (description.length()==0)){
+        if ((firstDa.length() == 0) || (firstTime.length() == 0) || (secondDa.length() == 0) || (secondTime.length() == 0) || (name.length() == 0) || (description.length()==0)){    
+            return false;
+        }else{
+            return true;
+        }
+    }
+    private void btActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActionActionPerformed
+        // TODO add your handling code here:
+        
+        SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+        String firstDa = tfDateIn.getText();
+        String firstTime = tfTimeIn.getText();
+        String secondDa = tfDateEnd.getText();
+        String secondTime = tfTimeEnd.getText();
+        String name = tfNombre.getText();
+        String description = taDescription.getText();
+        //VALIDAMOS CAMPOS VACIOS
+        boolean empty = validateInformation(firstDa,firstTime,secondDa,secondTime,name,description);
+        if(empty){
+            Date d1 = new Date();
+            Date d2 = new Date();
+            try {
+                    d1 = format.parse(firstDa+" "+firstTime);
+                    d2 = format.parse(secondDa+" "+secondTime);
+            } catch (ParseException ex) {
+                    Logger.getLogger(VistaConvocatoria.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this,"Has ingresado una fecha invalida o con el formato incorrecto, vuelve a intentarlo","Error en las fechas",JOptionPane.ERROR_MESSAGE);
+            }
+            //VALIDAMOS FECHAS INGRESADAS (SEA LOGICO)
+            if(d1.after(d2)){
+                    JOptionPane.showMessageDialog(this,"La fecha de iniciacion no puede ser despues que la fecha de finalizacion","Error en las fechas",JOptionPane.ERROR_MESSAGE);
+            }else{
+                 Convocatoria newConv = new Convocatoria(name,description,d1,d2);   
+                 if(type==1){
+                     //crear convocatoria
+                     int result = controller.createConv(newConv);
+                     //VALIDAMOS INTEGRIDAD DE ENTIDAD
+                     if((result != -1) && (result != -2)){
+                         JOptionPane.showMessageDialog(this,"Convocatoria creada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                     }else{
+                         JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe","Ups!",JOptionPane.ERROR_MESSAGE);
+                     }
+                }else{
+                    if(type==2){
+                        //editar
+                        
+                    }else{
+                        if(type==3){
+                            //eliminar
+                            // no -> 1 , si -> 0
+                            int r = JOptionPane.showConfirmDialog(this,"En realidad desea eliminar esta convocatoria?","Advertencia",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                            if(r == 0){
+                                controller.deleteConv(newConv);
+                                JOptionPane.showMessageDialog(this,"Convocatoria eliminada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            
+
+                        }
+                    }
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"No puedes realizar acciones con campos vacios","Termina de llenar los campos",JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btActionActionPerformed
+
+    private void tfDateInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDateInActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDateInActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    /*public static void main(String args[]) {
+    public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
          */
@@ -367,7 +464,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         *//*
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -376,33 +473,35 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaCrearConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaCrearConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaCrearConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaCrearConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VistaConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /*
          * Create and display the form
-         *//*
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new VistaCrearConvocatoria().setVisible(true);
+                new VistaConvocatoria().setVisible(true);
             }
         });
-    }*/
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAction;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSearch;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -424,4 +523,6 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private javax.swing.JTextField tfTimeEnd;
     private javax.swing.JTextField tfTimeIn;
     // End of variables declaration//GEN-END:variables
+
+    
 }
