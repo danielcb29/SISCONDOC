@@ -33,6 +33,9 @@ public class DAOUser {
     public void connectDB(){
         conn = db.getConnetion();
     }
+    public Connection getConn(){
+        return conn;
+    }
         /**
         * crear o agregar un usuario a la tabla.
         * @param us el objeto usuario a agregar.
@@ -42,7 +45,7 @@ public class DAOUser {
         String sql_save;
         int numRows=0;
 
-        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "')";
+        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
         try{
             Statement sentencia = conn.createStatement();
 
@@ -70,7 +73,7 @@ public class DAOUser {
 	public Usuario readUser(String username){
         Usuario us= new Usuario();
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
+        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -91,6 +94,8 @@ public class DAOUser {
                 us.setMail(table.getString(6));
  
                 us.setProfile(table.getString(7));
+                
+                us.setState(table.getBoolean(8));
               
                 //System.out.println("ok");
             }
