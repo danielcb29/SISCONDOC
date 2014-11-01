@@ -56,7 +56,12 @@ public class ConvocatoriaController {
         String name = conv.getName();
         daoConv.deletConv(name);
     }
-    public void updateConv(Convocatoria conv){
-        
+    /**
+     * Metodo que permite actualizar los datos de una convocatoria 
+     * @param exConv: nombre de la convocatoria a actualizar 
+     * @param conv: nuevos datos de convocatoria
+     */
+    public void updateConv(String exConv, Convocatoria conv){
+        daoConv.updateConv(exConv, conv);
     }
 }
