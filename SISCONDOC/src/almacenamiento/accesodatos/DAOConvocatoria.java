@@ -35,7 +35,6 @@ public class DAOConvocatoria {
         /*sql_save="INSERT INTO convocatoria VALUES ('" + conv.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
         try{
             Statement sentencia = conn.createStatement();
-
             numRows = sentencia.executeUpdate(sql_save);            
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
