@@ -5,6 +5,7 @@
  */
 package presentacion;
 import almacenamiento.controlador.*;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import proceso.Convocatoria;
 /**
@@ -22,6 +23,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private UserController objUserController;
     private VistaConvocatoria vistaConvo;
     private ConvocatoriaController objConvController;
+    private Connection conn;
     
     public VistaAdmin(){}
     public VistaAdmin(String username,UserController controler){
@@ -30,7 +32,9 @@ public class VistaAdmin extends javax.swing.JFrame {
         name=username;
         lbWelcome.setText("Bienvenido "+name+"!");
         objUserController= controler;
-        objConvController = new ConvocatoriaController();
+        conn = objUserController.getConn();
+        objConvController = new ConvocatoriaController(conn);
+        
     }
     
     /**
@@ -285,6 +289,7 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearConvocatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearConvocatoriaActionPerformed
         // TODO add your handling code here:
+       
         vistaConvo = new VistaConvocatoria(objConvController,1);
         vistaConvo.setVisible(true);
         
