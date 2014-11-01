@@ -34,10 +34,10 @@ public class VistaLogin extends javax.swing.JFrame {
     public VistaLogin() {
         initComponents();
         controlerU = new UserController();
-        
-        
+        this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
-        System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+        controlerU.connectDB();
+        //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
     /**
@@ -246,27 +246,36 @@ public class VistaLogin extends javax.swing.JFrame {
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
-            System.out.println("local:"+password);
+            //System.out.println("local:"+password);
             if(user.getPassword()==null || !(user.getPassword() .equals(password))){
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
-                String profile = user.getProfile();
-                if (profile.equals("Digitador")){
-                    
-                }else{
-                    if(profile.equals("Coordinador")){
-                        
+                boolean state = user.getState();
+                System.out.println("estado: "+state);
+                if(state){
+                    String profile = user.getProfile();
+                    if (profile.equals("Digitador")){
+                        System.out.println("No se ha implementado aun :)");
+                        System.exit(0);
                     }else{
-                        if(profile.equals("Administrador")){
-                            //Clase nelsini
-                            System.out.println("Iniciamo sesion : "+ user.getName());
-                            this.dispose();
-                            vAdmin = new VistaAdmin(userName);
-                            vAdmin.setVisible(true);
-                            //vAdmin.show();
+                        if(profile.equals("Coordinador")){
+                            System.out.println("No se ha implementado aun :)");
+                            System.exit(0);
+                        }else{
+                            if(profile.equals("Administrador")){
+                                //Clase nelsini
+                                System.out.println("Iniciamo sesion : "+ user.getName());
+                                this.dispose();
+                                vAdmin = new VistaAdmin(userName,controlerU);
+                                vAdmin.setVisible(true);
+                                //vAdmin.show();
+                            }
+
                             
                         }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
