@@ -6,9 +6,7 @@
 package almacenamiento.controlador;
 import proceso.*;
 import almacenamiento.accesodatos.*;
-
 import java.sql.Connection;
-
 
 /**
  *
@@ -24,19 +22,13 @@ public class UserController {
     /**
      * constructor
      * **/
-
-    public UserController()
-    {
-      daoUser=new DAOUser();
+    public UserController(){
+        daoUser=new DAOUser();
     }
-    
-    
     public void connectDB(){
         daoUser.connectDB();
     }
-    
-    public Connection getConn()
-    {
+    public Connection getConn(){
         return daoUser.getConn();
     }
     /**
@@ -70,12 +62,12 @@ public class UserController {
      */
     public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
-        //llamado para consultar el usuario  al DAOUsuaurio
+        
         U= daoUser.readUser(username);
-        return  U;
+        
+        return U;
+
     }
-    
-      
    /**
      * metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
@@ -90,8 +82,7 @@ public class UserController {
     /*
      * Cerrar conexion base de datos
      */
-    public void cerrarConexionBD()
-    {
+    public void cerrarConexionBD(){
         daoUser.closeConectionDB();
     }
 
