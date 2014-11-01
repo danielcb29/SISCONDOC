@@ -16,9 +16,9 @@ public class BaseDatos {
      private Statement instruccion;
      private ResultSet tabla; 
     public BaseDatos(){
-      url = "jdbc:postgresql://localhost/SISCONDOC";
-      usuario="danielcb";
-      password="1144067772";
+      url = "jdbc:postgresql://localhost:5432/SISCONDOC";
+      usuario="fernando";
+      password="fernando1128";
       
     }
     public Connection conectar(){

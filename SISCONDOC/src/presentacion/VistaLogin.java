@@ -11,6 +11,8 @@ import proceso.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.*;
+/**
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -18,6 +20,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+* ***/
 /**
  *
  * @author daniel
@@ -191,7 +194,9 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 if(user.getPassword() == null){
                    JOptionPane.showMessageDialog(this, "Nombre de usuario no existe, vuelve a intentarlo", "Error!", JOptionPane.ERROR_MESSAGE); 
-                }else{
+                }
+                /**
+                else{
                     //Enviar correo electronico
                     System.out.println("Llegamos al envio de correo");
                     String host = "correounivalle.edu.co";
@@ -226,7 +231,7 @@ public class VistaLogin extends javax.swing.JFrame {
                         System.out.println("Error enviando el mensaje , fallas de conexion a internet? x(");
                         e.printStackTrace();
                     }  
-                }
+                }**/
             }
         }
         
@@ -237,6 +242,8 @@ public class VistaLogin extends javax.swing.JFrame {
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
         // TODO add your handling code here:
         //Aqui va lo de ingresar
+        System.out.println("init");
+        
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
@@ -250,6 +257,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
                 String profile = user.getProfile();
+                System.out.println("profile " + profile );
                 if (profile.equals("Digitador")){
                     System.out.println("No se ha implementado aun :)");
                     System.exit(0);
@@ -258,7 +266,8 @@ public class VistaLogin extends javax.swing.JFrame {
                         System.out.println("No se ha implementado aun :)");
                         System.exit(0);
                     }else{
-                        if(profile.equals("Administrador")){
+                        if(profile.equals("Adiministrador")){
+                            System.out.println("paso");
                             //Clase nelsini
                             System.out.println("Iniciamo sesion : "+ user.getName());
                             this.dispose();
