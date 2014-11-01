@@ -38,8 +38,8 @@ CREATE SEQUENCE convo_seq;
 
 CREATE TABLE Convocatoria(
 	codigo INT NOT NULL PRIMARY KEY, 
-	fecha_Ini DATE NOT NULL, 
-	fecha_Fin DATE NOT NULL, 	
+	fecha_Ini timestamp NOT NULL, 
+	fecha_Fin timestamp NOT NULL, 	
  	nombre TEXT NOT NULL UNIQUE, 
 	estado BOOL NOT NULL, 
 	descripcion TEXT NOT NULL
