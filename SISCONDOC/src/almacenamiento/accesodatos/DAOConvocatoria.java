@@ -75,7 +75,7 @@ public class DAOConvocatoria {
     public Convocatoria readConv(String name){
         Convocatoria conv = new Convocatoria();
         String sql_select;
-        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true AND nombre = '"+name+"';";
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion, codigo FROM Convocatoria WHERE estado=true AND nombre = '"+name+"';";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -94,6 +94,7 @@ public class DAOConvocatoria {
                 conv.setState(table.getBoolean(4));               
 
                 conv.setDescription(table.getString(5));
+                conv.setCode(table.getInt(6));
 
                 
               
