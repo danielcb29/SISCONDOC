@@ -147,6 +147,8 @@ public class DAOUser {
         sql_save4="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save5="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save6="UPDATE usuario SET id_perfil='"+us.getProfile()+"' WHERE cedula='" + us.getCedula() + "'";
+        
+        
 
         try{
             Statement statement = conn.createStatement();
@@ -156,7 +158,37 @@ public class DAOUser {
             statement.executeUpdate(sql_save3);
             statement.executeUpdate(sql_save4);
             statement.executeUpdate(sql_save5);
-            statement.executeUpdate(sql_save6);            
+            statement.executeUpdate(sql_save6);
+            
+            if(!us.getProfile().equals("Administrador")){
+                String sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"' AND estado=true";
+                ResultSet table= statement.executeQuery(sql_save);
+                String cod="";
+                while(table.next()){
+                    cod = table.getString(1);
+                }
+                String usCod=Integer.toString(us.getConvocatoria().getCode());
+                if(!usCod.equals(cod)){
+                    sql_save="UPDATE convoUsuario SET estado=false WHERE codigo= "+cod+" AND cedula = '"+us.getCedula()+"'";
+                    statement.executeUpdate(sql_save);
+                    sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"'";
+                    table= statement.executeQuery(sql_save);
+                    boolean flag=false;
+                    while(table.next()){
+                        cod = table.getString(1);
+                        if(usCod.equals(cod)){
+                            sql_save="UPDATE convoUsuario SET estado=true WHERE codigo= "+usCod+" AND cedula = '"+us.getCedula()+"'";
+                            statement.executeUpdate(sql_save);
+                            flag=true;
+                            break;
+                        }
+                    }
+                    if(!flag){
+                        sql_save = "INSERT INTO convoUsuario VALUES('"+us.getCedula() +"', "+ usCod +", true )";
+                        statement.executeUpdate(sql_save);
+                    }
+                }
+            }
         }
         catch(SQLException e){
             System.out.println(e); 
