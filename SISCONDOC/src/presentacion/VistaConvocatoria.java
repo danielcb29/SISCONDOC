@@ -45,6 +45,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 lbTitle.setText("Editar Convocatoria");
                 lbInfo.setText("Busque la convocatoria que desea editar, cambie los parametros necesarios y guarde");
                 btAction.setText("Guardar");
+                this.setTitle("Panel Administrador: Editar Convoatoria");
             }else{
                 //ELiminar conv
                 //lbAdd.setVisible(false);
@@ -57,6 +58,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 tfTimeIn.setEditable(false);
                 tfDateEnd.setEditable(false);
                 tfTimeEnd.setEditable(false);
+                this.setTitle("Panel Administrador: Eliminar Convocatoria");
             }
         }
         //JDatePanelImpl datePanel = new JDatePanelImpl(model);
