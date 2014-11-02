@@ -56,7 +56,7 @@ public class AspirantController
      * Metodo que permite eliminar una aspirante de una convocatoria
      * @param aspirante : identificacion del aspirante a eliminar.
      */
-    public void deleteAspirant(Aspirant aspirant){
+    public void deleteAspirant(String document){
         String name = aspirant.getName();
         daoAspirant.deletConv(name);
     }

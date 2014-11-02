@@ -27,8 +27,6 @@ public class DAOConvocatoria {
         conn = conect; 
         //conn = db.getConnetion();
     }
-
-  
     /**
      * Metodo que permite crear una convocatoria en la base de datos
      * @param conv la convocatoria a ser almacenada

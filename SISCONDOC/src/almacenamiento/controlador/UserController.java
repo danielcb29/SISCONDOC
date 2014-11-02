@@ -72,6 +72,11 @@ public class UserController {
         return U;
 
     }
+    
+    public void deleteUser (String document)
+    {
+        daoUser.deleteUser(document);
+    }
    /**
      * metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
