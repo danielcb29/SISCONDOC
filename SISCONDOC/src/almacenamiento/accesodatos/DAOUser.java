@@ -39,19 +39,30 @@ public class DAOUser {
         /**
         * crear o agregar un usuario a la tabla.
         * @param us el objeto usuario a agregar.
-        * @return devuelve el número de tuplas que se agregaron a la tabla.
+        * @return devuelve el número de tuplas que se agregaron a la tabla, -3 en caso de que el perfil del usuario este malo, -2 en caso de un error de integridad referencial o de entidad, y -1 en cualquier otro caso0.
         */
     public int createUser(Usuario us){
         String sql_save,sql_convo;
         int numRows=0;
+        String prof=us.getProfile();
+        switch(prof){
+            case "Digitador":   sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '1', " + us.getState()+ ")";
+                                break;
+            case "Coordinador": sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '2', " + us.getState()+ ")";
+                                break;
+            case "Administrador":   sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '3', " + us.getState()+ ")";
+                                    break;
+            default: return -3;
+        }
         
-        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
-        sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"', true)";
         try{
             Statement statement = conn.createStatement();
 
             numRows = statement.executeUpdate(sql_save);
-            if(!(us.getProfile().equals("3"))) statement.executeUpdate(sql_convo); //el registro de convoUsuario se crea solo si el usuario es digitador o coordinador.
+            if(!(us.getProfile().equals("Administrador"))){
+                sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"', true)";
+                statement.executeUpdate(sql_convo);
+            } //el registro de convoUsuario se crea solo si el usuario es digitador o coordinador.
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
