@@ -44,13 +44,14 @@ public class DAOUser {
     public int createUser(Usuario us){
         String sql_save,sql_convo;
         int numRows=0;
-
+        
         sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
-        sql_convo = "INSERT INTO convocatoria_suario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"')";
+        sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"', true)";
         try{
             Statement statement = conn.createStatement();
 
-            numRows = statement.executeUpdate(sql_save);            
+            numRows = statement.executeUpdate(sql_save);
+            if(!(us.getProfile().equals("3"))) statement.executeUpdate(sql_convo); //el registro de convoUsuario se crea solo si el usuario es digitador o coordinador.
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
