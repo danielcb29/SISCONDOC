@@ -12,9 +12,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
 import proceso.Convocatoria;
 /**
  *
@@ -31,7 +29,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     public VistaConvocatoria(ConvocatoriaController controllerParam, int type) {
         initComponents();
         controller = controllerParam;
-        UtilDateModel model = new UtilDateModel();
+        
         this.type = type;
     
         if (type == 1){
@@ -183,6 +181,11 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         lbSearch.setText("Buscar:");
 
         btSearch.setText("Buscar");
+        btSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSearchActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 2, 15)); // NOI18N
         jLabel1.setText("aaa/mm/dd");
@@ -276,7 +279,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,32 +353,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
-        String name = tfSearch.getText();
-        if(name.length() != 0){
-            Convocatoria convEdit = controller.readConv(name);
-            if(convEdit==null){
-                JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
-            }else{
-                if(convEdit.getName() == null){
-                    tfNombre.setText("null");
-                    tfDateIn.setText("null");
-                    tfTimeIn.setText("null");
-                    tfDateEnd.setText("null");
-                    tfTimeEnd.setText("null");
-                    taDescription.setText("null");
-                    JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
-                }else{
-                    tfNombre.setText(convEdit.getName());
-                    tfDateIn.setText("null");
-                    tfTimeIn.setText("null");
-                    tfDateEnd.setText("null");
-                    tfTimeEnd.setText("null");
-                    taDescription.setText(convEdit.getDescription());
-                }
-            }
-        }else{
-            JOptionPane.showMessageDialog(this,"No puedes buscar una convocatoria con nombre vacio","Error en la busqueda",JOptionPane.ERROR_MESSAGE);
-        }
+        
             
     }//GEN-LAST:event_tfSearchActionPerformed
     private boolean validateInformation(String firstDa, String firstTime, String secondDa, String secondTime, String name, String description) {
@@ -419,13 +397,16 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                      //VALIDAMOS INTEGRIDAD DE ENTIDAD
                      if((result != -1) && (result != -2)){
                          JOptionPane.showMessageDialog(this,"Convocatoria creada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                         this.dispose();
                      }else{
                          JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe","Ups!",JOptionPane.ERROR_MESSAGE);
                      }
                 }else{
                     if(type==2){
                         //editar
-                        
+                        controller.updateConv(tfSearch.getText(), newConv);
+                        JOptionPane.showMessageDialog(this,"Convocatoria actualizada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
                     }else{
                         if(type==3){
                             //eliminar
@@ -434,6 +415,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                             if(r == 0){
                                 controller.deleteConv(newConv);
                                 JOptionPane.showMessageDialog(this,"Convocatoria eliminada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
+                                this.dispose();
                             }
                             
 
@@ -452,9 +434,44 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfDateInActionPerformed
 
+    private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
+        // TODO add your handling code here:
+        String name = tfSearch.getText();
+        if(name.length() != 0){
+            Convocatoria convEdit = controller.readConv(name);
+            System.out.println("primera fase");
+            if(convEdit==null){
+                JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
+            }else{
+                if(convEdit.getName() == null){
+                    tfNombre.setText("null");
+                    tfDateIn.setText("null");
+                    tfTimeIn.setText("null");
+                    tfDateEnd.setText("null");
+                    tfTimeEnd.setText("null");
+                    taDescription.setText("null");
+                    JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    System.out.println("segunda fase");
+                    SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+                    String datIn[] = format.format(convEdit.getDateIn()).split(" ");
+                    String datEnd[] = format.format(convEdit.getDateEnd()).split(" ");
+                    tfNombre.setText(convEdit.getName());
+                    tfDateIn.setText(datIn[0]);
+                    tfTimeIn.setText(datIn[1]);
+                    tfDateEnd.setText(datEnd[0]);
+                    tfTimeEnd.setText(datEnd[1]);
+                    taDescription.setText(convEdit.getDescription());
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(this,"No puedes buscar una convocatoria con nombre vacio","Error en la busqueda",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btSearchActionPerformed
+
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
@@ -464,7 +481,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
          * If Nimbus (introduced in Java SE 6) is not available, stay with the
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+         *//*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -485,14 +502,14 @@ public class VistaConvocatoria extends javax.swing.JFrame {
 
         /*
          * Create and display the form
-         */
+         *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
                 new VistaConvocatoria().setVisible(true);
             }
         });
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAction;
     private javax.swing.JButton btCancelar;
