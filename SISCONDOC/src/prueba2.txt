@@ -1,0 +1,5 @@
+Inicio->Ejecutar->services.msc
+
+Buscar "Audio de Windows" y hacer doble click
+
+Click en detener, y luego en iniciar
