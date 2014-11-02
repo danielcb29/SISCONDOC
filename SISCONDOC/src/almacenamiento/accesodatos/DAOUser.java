@@ -114,7 +114,7 @@ public class DAOUser {
                 //System.out.println("ok");
             }
             if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula() +"' AND estado=true";
+                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
                 table = statement.executeQuery(sql_conv);
                 String cod="";
                 while(table.next()){
@@ -180,7 +180,7 @@ public class DAOUser {
             ResultSet table2= table;
             int numRows=0;
             while(table.next()){
-               numRows++;
+                numRows++;
             }
             System.out.println(numRows);
             Usuario us[]= new Usuario[numRows];
@@ -208,7 +208,7 @@ public class DAOUser {
                 us[j].setState(table.getBoolean(8));
                 
                 if(!us[j].getProfile().equals("Administrador")){
-                    sql_conv= "SELECT codigo FROM convoUsuario WHERE cedula='"+us[j].getCedula() +"' AND estado=true";
+                    sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us[j].getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
                     ResultSet table3= statement.executeQuery(sql_conv);
                     String cod="";
                     while(table3.next()){
