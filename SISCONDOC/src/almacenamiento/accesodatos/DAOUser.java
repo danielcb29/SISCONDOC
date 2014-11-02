@@ -181,7 +181,7 @@ public class DAOUser {
                             break;
                         }
                     }
-                    if(flag){
+                    if(!flag){
                         sql_save = "INSERT INTO convoUsuario VALUES('"+us.getCedula() +"', "+ usCod +", true )";
                         statement.executeUpdate(sql_save);
                     }
