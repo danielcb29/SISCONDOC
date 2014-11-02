@@ -44,10 +44,6 @@ public class DAOUser {
     public int createUser(Usuario us){
         String sql_save,sql_convo;
         int numRows=0;
-<<<<<<< HEAD
-
-        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
-=======
         String prof=us.getProfile();
         switch(prof){
             case "Digitador":   sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '1', " + us.getState()+ ")";
@@ -59,7 +55,6 @@ public class DAOUser {
             default: return -3;
         }    
         
->>>>>>> origin/daniel
         try{
             Statement sentencia = conn.createStatement();
 
@@ -92,11 +87,7 @@ public class DAOUser {
         Usuario us= new Usuario();
         String sql_select;
         sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
-<<<<<<< HEAD
-         try{
-=======
         try{
->>>>>>> origin/daniel
             System.out.println("consultando en la bd");
             Statement statement = conn.createStatement();
             ResultSet table = statement.executeQuery(sql_select);

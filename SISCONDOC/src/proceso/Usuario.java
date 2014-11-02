@@ -35,10 +35,7 @@ public class Usuario {
         profile = profileUser;
         cedula = cedulaUser;
         state = true;
-<<<<<<< HEAD
-=======
         this.convocatoria = convocatoria;
->>>>>>> origin/daniel
     }
     public Usuario(){
         
@@ -91,8 +88,6 @@ public class Usuario {
     public void setState(boolean newState){
         state=newState;
     }
-<<<<<<< HEAD
-=======
     /**
      * @return the convocatoria
      */
@@ -106,7 +101,6 @@ public class Usuario {
     public void setConvocatoria(Convocatoria convocatoria) {
         this.convocatoria = convocatoria;
     }
->>>>>>> origin/daniel
      /*
      * One user can be on multiple "Convocatoria" in a time frame
      * 
