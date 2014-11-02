@@ -87,6 +87,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         label1.setText("Gestion de Usuarios:");
 
         btCrearUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btCrearUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/add-user-icon.png"))); // NOI18N
         btCrearUsuario.setText("Crear Usuario");
         btCrearUsuario.setMaximumSize(new java.awt.Dimension(151, 25));
         btCrearUsuario.setMinimumSize(new java.awt.Dimension(151, 25));
@@ -98,6 +99,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         btEditarUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btEditarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/edit-user-icon.png"))); // NOI18N
         btEditarUsuario.setText("Editar Usuario");
         btEditarUsuario.setMaximumSize(new java.awt.Dimension(151, 25));
         btEditarUsuario.setMinimumSize(new java.awt.Dimension(151, 25));
@@ -109,6 +111,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         btEliminarUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btEliminarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/delete-user-icon.png"))); // NOI18N
         btEliminarUsuario.setText("Eliminar Usuario");
         btEliminarUsuario.setMaximumSize(new java.awt.Dimension(151, 25));
         btEliminarUsuario.setMinimumSize(new java.awt.Dimension(151, 25));
@@ -123,6 +126,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         label6.setText("Gestion de Convocatorias:");
 
         btCrearConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btCrearConvocatoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-convo-icon.png"))); // NOI18N
         btCrearConvocatoria.setText("Crear Convocatoria");
         btCrearConvocatoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +135,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         btEditarConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btEditarConvocatoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/edit-convo-icon.png"))); // NOI18N
         btEditarConvocatoria.setText("Editar Convocatoria");
         btEditarConvocatoria.setMaximumSize(new java.awt.Dimension(151, 25));
         btEditarConvocatoria.setMinimumSize(new java.awt.Dimension(151, 25));
@@ -142,6 +147,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         });
 
         btEliminarConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btEliminarConvocatoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/delete-convo-icon.png"))); // NOI18N
         btEliminarConvocatoria.setText("Eliminar Convocatoria");
         btEliminarConvocatoria.setMaximumSize(new java.awt.Dimension(151, 25));
         btEliminarConvocatoria.setMinimumSize(new java.awt.Dimension(151, 25));
@@ -164,7 +170,7 @@ public class VistaAdmin extends javax.swing.JFrame {
         lbWelcome.setText("Bienvenido");
 
         btCerrarSesion.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        btCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/logout.png"))); // NOI18N
+        btCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
         btCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCerrarSesionActionPerformed(evt);
@@ -248,17 +254,11 @@ public class VistaAdmin extends javax.swing.JFrame {
                         .addComponent(btEditarConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
                         .addComponent(btEliminarConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed
-        // TODO add your handling code here:
-        objVistaCrearUsuario = new VistaCrearUsuario(objUserController);
-        objVistaCrearUsuario.setVisible(true);
-    }//GEN-LAST:event_btCrearUsuarioActionPerformed
 
     private void btCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarSesionActionPerformed
         // TODO add your handling code here:
@@ -320,6 +320,12 @@ public class VistaAdmin extends javax.swing.JFrame {
             vistaConvo.setVisible(true);
         }
     }//GEN-LAST:event_btEliminarConvocatoriaActionPerformed
+
+    private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed
+        // TODO add your handling code here:
+        objVistaCrearUsuario = new VistaCrearUsuario(objUserController);
+        objVistaCrearUsuario.setVisible(true);
+    }//GEN-LAST:event_btCrearUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
