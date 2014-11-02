@@ -165,21 +165,23 @@ public class DAOUser {
                 ResultSet table= statement.executeQuery(sql_save);
                 String cod="";
                 while(table.next()){
-                
                     cod = table.getString(1);
-              
                 }
                 String usCod=Integer.toString(us.getConvocatoria().getCode());
                 if(!usCod.equals(cod)){
                     sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"'";
                     table= statement.executeQuery(sql_save);
+                    boolean flag=false;
                     while(table.next()){
                         cod = table.getString(1);
+                        if(usCod.equals(cod)){
+                            sql_save="UPDATE convoUsuario SET estado=true WHERE codigo= "+usCod+" AND cedula = '"+us.getCedula()+"'";
+                            statement.executeUpdate(sql_save);
+                            flag=true;
+                            break;
+                        }
                     }
-                    if(usCod.equals(cod)){
-                        sql_save="UPDATE convoUsuario SET estado=true WHERE codigo= "+usCod+" AND cedula = '"+us.getCedula()+"'";
-                        statement.executeUpdate(sql_save);
-                    }else{
+                    if(flag){
                         sql_save = "INSERT INTO convoUsuario VALUES('"+us.getCedula() +"', "+ usCod +", true )";
                         statement.executeUpdate(sql_save);
                     }
