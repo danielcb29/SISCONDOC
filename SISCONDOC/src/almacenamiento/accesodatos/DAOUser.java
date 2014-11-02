@@ -181,6 +181,7 @@ public class DAOUser {
                         statement.executeUpdate(sql_save);
                     }else{
                         sql_save = "INSERT INTO convoUsuario VALUES('"+us.getCedula() +"', "+ usCod +", true )";
+                        statement.executeUpdate(sql_save);
                     }
                 }
             }
