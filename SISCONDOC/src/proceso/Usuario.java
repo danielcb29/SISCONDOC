@@ -21,12 +21,15 @@ public class Usuario {
     private String profile;
     private String cedula;
     private boolean state;
+    private Convocatoria convocatoria;
     /*
      * One user has one "Convocatoria" 
      */
     //private Convocatoria convocatoria;
     
-    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser, String mailUser, String profileUser, String cedulaUser){
+    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser,
+            String mailUser, String profileUser, String cedulaUser, Convocatoria convocatoria )
+    {
         name = nameUser;
         lastName = lastNameUser;
         this.userName = userName;
@@ -35,6 +38,7 @@ public class Usuario {
         profile = profileUser;
         cedula = cedulaUser;
         state = true;
+        this.convocatoria = convocatoria;
     }
     public Usuario(){
         
