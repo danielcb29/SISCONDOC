@@ -5,7 +5,8 @@
  */
 package almacenamiento.controlador;
 import proceso.*;
-import almacenamiento.*;
+import almacenamiento.accesodatos.*;
+import java.sql.Connection;
 
 /**
  *
@@ -15,16 +16,21 @@ import almacenamiento.*;
 public class UserController {
     
 
-    //DaoUser daoUser;
+    DAOUser daoUser;
 
     
     /**
      * constructor
      * **/
     public UserController(){
-        //daoUser=new DaoUser();
+        daoUser=new DAOUser();
     }
-    
+    public void connectDB(){
+        daoUser.connectDB();
+    }
+    public Connection getConn(){
+        return daoUser.getConn();
+    }
     /**
      *  @param id: cedula del empleado
      * @param name: nombre del empleado
@@ -35,25 +41,47 @@ public class UserController {
      * @return result: 0 si no fue posible crear el usuario.
      * @return result: 1 si se creo satisfactoriamente el usario.
      * **/
-    public int   createUser (String id, String  name ,String username, String password, String email, String perfil ){
-        Usuario U = new Usuario(id,name,username,password,email,perfil);        
+    public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil ){
+        Usuario U = new Usuario(name,lastname,username,password,email,perfil,id);        
         
         //Se llama al dao para guardar
-        //int result =daoUser.guardarUser(U);
-        int result = 0;
+        int result =daoUser.createUser(U);
+        //int result = 0;
         return result;
 
     }
-
-    public Usuario   consultUser (String username, String password ){
+    /**
+     * metodo encargado de pasar el username a Dao para que consulte si el 
+     * usuario existe
+     * @param username : nombre de usuario del empleado
+     * @return Usuario : objeto con los atributos del empleado
+     * es objeto es nulo en caso de no existir el usuario.
+     */
+    public Usuario   consultUser (String username){
         Usuario U = new Usuario ();
         
-        //U= daoUser.consultUser(username, password);
+        U= daoUser.readUser(username);
         
         return U;
 
     }
-   
+   /**
+     * metodo que llama al Dao para consultar cuantos usuarios existen
+     * @return cantidad de usuarios existentes en la base de datos
+     */
+    public int countUsers ()  
+    {
+        Usuario [] users = new Usuario [5];
+        int size =  users.length;
+        return size;
+                
+    }
+    /*
+     * Cerrar conexion base de datos
+     */
+    public void cerrarConexionBD(){
+        daoUser.closeConectionDB();
+    }
 
 }//fin clase
 
