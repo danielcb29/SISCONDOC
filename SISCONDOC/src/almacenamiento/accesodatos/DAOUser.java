@@ -116,15 +116,15 @@ public class DAOUser {
             if(!us.getProfile().equals("Administrador")){
                 String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
                 table = statement.executeQuery(sql_conv);
-                String cod="";
+                String nom="";
                 while(table.next()){
                 
-                    cod = table.getString(1);
+                    nom = table.getString(1);
               
                 //System.out.println("ok");
                 }
                 DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                Convocatoria conv = daoc.readConv(cod);
+                Convocatoria conv = daoc.readConv(nom);
                 us.setConvocatoria(conv);
             }
             return us;
@@ -147,6 +147,8 @@ public class DAOUser {
         sql_save4="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save5="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save6="UPDATE usuario SET id_perfil='"+us.getProfile()+"' WHERE cedula='" + us.getCedula() + "'";
+        
+        
 
         try{
             Statement statement = conn.createStatement();
@@ -156,7 +158,32 @@ public class DAOUser {
             statement.executeUpdate(sql_save3);
             statement.executeUpdate(sql_save4);
             statement.executeUpdate(sql_save5);
-            statement.executeUpdate(sql_save6);            
+            statement.executeUpdate(sql_save6);
+            
+            if(us.getProfile().equals("Administrador")){
+                String sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"' AND estado=true";
+                ResultSet table= statement.executeQuery(sql_save);
+                String cod="";
+                while(table.next()){
+                
+                    cod = table.getString(1);
+              
+                }
+                String usCod=Integer.toString(us.getConvocatoria().getCode());
+                if(!usCod.equals(cod)){
+                    sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"'";
+                    table= statement.executeQuery(sql_save);
+                    while(table.next()){
+                        cod = table.getString(1);
+                    }
+                    if(usCod.equals(cod)){
+                        sql_save="UPDATE convoUsuario SET estado=true WHERE codigo= "+usCod+" AND cedula = '"+us.getCedula()+"'";
+                        statement.executeUpdate(sql_save);
+                    }else{
+                        sql_save = "INSERT INTO convoUsuario VALUES('"+us.getCedula() +"', "+ usCod +", true )";
+                    }
+                }
+            }
         }
         catch(SQLException e){
             System.out.println(e); 
@@ -210,15 +237,15 @@ public class DAOUser {
                 if(!us[j].getProfile().equals("Administrador")){
                     sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us[j].getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
                     ResultSet table3= statement.executeQuery(sql_conv);
-                    String cod="";
+                    String nom="";
                     while(table3.next()){
                 
-                        cod = table3.getString(1);
+                        nom = table3.getString(1);
               
                         //System.out.println("ok");
                     }
                     DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                    Convocatoria conv = daoc.readConv(cod);
+                    Convocatoria conv = daoc.readConv(nom);
                     us[j].setConvocatoria(conv);
                 }
 
