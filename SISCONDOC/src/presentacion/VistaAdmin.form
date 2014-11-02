@@ -260,6 +260,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Crear Convocatoria"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCrearConvocatoriaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btEditarConvocatoria">
       <Properties>
@@ -280,6 +283,9 @@
           <Dimension value="[151, 25]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditarConvocatoriaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btEliminarConvocatoria">
       <Properties>
@@ -300,6 +306,9 @@
           <Dimension value="[151, 25]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminarConvocatoriaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

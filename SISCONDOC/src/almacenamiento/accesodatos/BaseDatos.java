@@ -22,7 +22,7 @@ public class BaseDatos {
       
     }
     public Connection conectar(){
-            System.out.println("Entro metodo");
+            //System.out.println("Entro metodo");
             try {
             // Se carga el driver
               //Class.forName("PostgreSQL");

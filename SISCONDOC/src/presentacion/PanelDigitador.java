@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package presentacion;
-
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,10 +16,17 @@ public class PanelDigitador extends javax.swing.JFrame {
     /**
      * Creates new form PanelDigitador
      */
-    String name="User Default";
-    String convocatoria="Convacatoria Default";
+    String name,convocatoria;
+   
+    String nombres="Default";
+    String apellidos="Default";
+    String cedula="Default";
+    String genero="Default";
+    String municipio="Default";
+    String jornada="Default";
+    String fecha_nac="Default";
+    String dia,mes,anno;
     public PanelDigitador() {
-        
     }
     public PanelDigitador(String username, String convoca){
         initComponents();
@@ -70,9 +77,9 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextApellidos = new javax.swing.JTextField();
         jTextCedula = new javax.swing.JTextField();
         jComboBoxGenero = new javax.swing.JComboBox();
-        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jComboBoxJornada = new javax.swing.JComboBox();
         jComboBoxMunicipio = new javax.swing.JComboBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -194,7 +201,6 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Digitador");
-        setPreferredSize(new java.awt.Dimension(785, 543));
         setResizable(false);
 
         jTabbedDigitador.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -232,6 +238,8 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jComboBoxMunicipio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cali", "Alcalá", "Andalucía", "Ansermanuevo", "Argelia", "Bolívar", "Buenaventura", "Buga", "Bugalagrande", "Caicedonia", "Candelaria", "Cartago", "Dagua", "Calima - El Darién", "El Águila", "El Cairo", "El Cerrito", "El Dovio", "Florida", "Ginebra", "Guacarí", "Jamundí", "La Cumbre", "La Unión", "La Victoria", "Obando", "Palmira", "Pradera", "Restrepo", "Riofrío", "Roldanillo", "San Pedro", "Sevilla", "Toro", "Trujillo", "Tuluá", "Ulloa", "Versalles", "Vijes", "Yotoco", "Yumbo", "Zarzal", " ", " " }));
 
+        jDateChooser1.setDateFormatString("dd-MM-yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -254,11 +262,11 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBoxJornada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBoxGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
-                            .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(471, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -282,8 +290,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jComboBoxGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxJornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +300,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Datos Personales", jPanel1);
@@ -570,7 +578,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
+                .addContainerGap(74, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonEspeTic1)
@@ -685,7 +693,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -959,7 +967,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButton8_1)
                         .addComponent(jRadioButton8_2)
                         .addComponent(jRadioButton8_3)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Conocimientos Especificos", jPanel4);
@@ -1136,7 +1144,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jRadioButtonHabla2)
                     .addComponent(jRadioButtonHabla3)
                     .addComponent(jLabel39))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Idiomas", jPanel5);
@@ -1207,7 +1215,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Experiencia", jPanel6);
@@ -1252,7 +1260,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addComponent(jButtonRegistrar)
                 .addGap(30, 30, 30)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("REGISTRAR", jPanel7);
@@ -1270,6 +1278,11 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1370,7 +1383,25 @@ public class PanelDigitador extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(null, "NOMbre: "+jRadioButton1_1.getName());
+        nombres=jTextNombres.getText();
+        apellidos=jTextApellidos.getText();
+        cedula=jTextCedula.getText();
+        genero=jComboBoxGenero.getSelectedItem().toString();
+        dia=Integer.toString(jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH));
+        mes=Integer.toString(jDateChooser1.getCalendar().get(Calendar.MONTH));
+        anno=Integer.toString(jDateChooser1.getCalendar().get(Calendar.YEAR));
+        fecha_nac=dia+"-"+mes+"-"+anno;
+        jornada=jComboBoxJornada.getSelectedItem().toString();
+        municipio=jComboBoxMunicipio.getSelectedItem().toString();
+        System.out.println("DATOS PERSONALES: \nNombres:"
+                +nombres+
+                "\nApellidos: "+apellidos+
+                "\nCedula: "+cedula+
+                "\nGenero :"+genero+
+                "\nfecha: "+fecha_nac+
+                "\njornada: "+jornada+
+                "\nmunicipio: "+municipio
+                );
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -1448,6 +1479,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextDocTicUrl.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonDocTic2ActionPerformed
 
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:
+        System.exit(0); 
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1516,7 +1552,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxHorasCurso;
     private javax.swing.JComboBox jComboBoxJornada;
     private javax.swing.JComboBox jComboBoxMunicipio;
-    private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

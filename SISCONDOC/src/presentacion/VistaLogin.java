@@ -36,7 +36,8 @@ public class VistaLogin extends javax.swing.JFrame {
         controlerU = new UserController();
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
-        System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+        controlerU.connectDB();
+        //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
     /**
@@ -84,7 +85,6 @@ public class VistaLogin extends javax.swing.JFrame {
         lbForget.setFont(new java.awt.Font("Cantarell", 3, 15)); // NOI18N
         lbForget.setForeground(new java.awt.Color(0, 13, 255));
         lbForget.setText("Olvido la contraseña?");
-        lbForget.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbForgetMouseClicked(evt);
@@ -131,7 +131,7 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
                         .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +195,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 }else{
                     //Enviar correo electronico
                     System.out.println("Llegamos al envio de correo");
-                   /* String host = "correounivalle.edu.co";
+                    /*String host = "correounivalle.edu.co";
                     Properties props =  new Properties();
                     //props.setProperty("mail.smtp.correounivalle.edu.co", "correounivalle.edu.co");
                     props.setProperty("mail.smtp.gmail.com", "gmail.com");
@@ -226,7 +226,7 @@ public class VistaLogin extends javax.swing.JFrame {
                         // ...
                         System.out.println("Error enviando el mensaje , fallas de conexion a internet? x(");
                         e.printStackTrace();
-                    }  */
+                    }*/  
                 }
             }
         }
@@ -246,29 +246,36 @@ public class VistaLogin extends javax.swing.JFrame {
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
         }else {
-            System.out.println("local:"+password);
+            //System.out.println("local:"+password);
             if(user.getPassword()==null || !(user.getPassword() .equals(password))){
                 JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
-                String profile = user.getProfile();
-                if (profile.equals("Digitador")){
-                    System.out.println("No se ha implementado aun :)");
-                    System.exit(0);
-                }else{
-                    if(profile.equals("Coordinador")){
+                boolean state = user.getState();
+                System.out.println("estado: "+state);
+                if(state){
+                    String profile = user.getProfile();
+                    if (profile.equals("Digitador")){
                         System.out.println("No se ha implementado aun :)");
                         System.exit(0);
                     }else{
-                        if(profile.equals("Administrador")){
-                            //Clase nelsini
-                            System.out.println("Iniciamo sesion : "+ user.getName());
-                            //this.dispose();
-                            vAdmin = new VistaAdmin(userName,controlerU);
-                            vAdmin.setVisible(true);
-                            //vAdmin.show();
+                        if(profile.equals("Coordinador")){
+                            System.out.println("No se ha implementado aun :)");
+                            System.exit(0);
+                        }else{
+                            if(profile.equals("Administrador")){
+                                //Clase nelsini
+                                System.out.println("Iniciamo sesion : "+ user.getName());
+                                this.dispose();
+                                vAdmin = new VistaAdmin(userName,controlerU);
+                                vAdmin.setVisible(true);
+                                //vAdmin.show();
+                            }
+
                             
                         }
                     }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

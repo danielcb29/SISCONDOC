@@ -6,6 +6,7 @@
 package almacenamiento.controlador;
 import proceso.*;
 import almacenamiento.accesodatos.*;
+import java.sql.Connection;
 
 /**
  *
@@ -24,7 +25,12 @@ public class UserController {
     public UserController(){
         daoUser=new DAOUser();
     }
-    
+    public void connectDB(){
+        daoUser.connectDB();
+    }
+    public Connection getConn(){
+        return daoUser.getConn();
+    }
     /**
      *  @param id: cedula del empleado
      * @param name: nombre del empleado
