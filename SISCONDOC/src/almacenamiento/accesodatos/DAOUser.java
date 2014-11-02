@@ -42,10 +42,11 @@ public class DAOUser {
         * @return devuelve el número de tuplas que se agregaron a la tabla.
         */
     public int createUser(Usuario us){
-        String sql_save;
+        String sql_save,sql_convo;
         int numRows=0;
 
         sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
+        sql_convo = "INSERT INTO convocatoria_suario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getID()+"')";
         try{
             Statement sentencia = conn.createStatement();
 
@@ -70,11 +71,11 @@ public class DAOUser {
         * @param username el username del usuario que se quiere consultar.
         * @return null si hay error en la consulta a la base de datos. Objeto tipo Usuario si el objeto del usuario que se consulto. Devuelve 
         */
-	public Usuario readUser(String username){
+    public Usuario readUser(String username){
         Usuario us= new Usuario();
         String sql_select;
         sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
-         try{
+        try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
             ResultSet table = sentence.executeQuery(sql_select);
@@ -114,8 +115,8 @@ public class DAOUser {
      * @param cedula la cedula del usuario que se quiere actualizar.
      */
     public void updateUser(String campoAModificar, String modificacion, String cedula){
-		String sql_save;
-		sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
+	String sql_save;
+	sql_save="UPDATE usuario SET "+campoAModificar+"='"+modificacion+" WHERE cedula='" + cedula + "'";
 
         try{
             Statement sentencia = conn.createStatement();
@@ -137,8 +138,8 @@ public class DAOUser {
    public Usuario[] listUsers(){
         
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";
-         try{
+        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre, usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil";
+        try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
             ResultSet table = sentence.executeQuery(sql_select);
@@ -171,8 +172,8 @@ public class DAOUser {
                 us[j].setProfile(table.getString(7));
 
 
-              j++;
-              System.out.println("ok");
+                j++;
+                System.out.println("ok");
             }
            
             return us;
@@ -186,9 +187,10 @@ public class DAOUser {
     * @param cedula la cedula del usuario que se quiere borrar.
     */
     public void deleteUser(String cedula){	
-		String sql_save;
+        String sql_save;
 
-        sql_save="DELETE FROM usuario WHERE cedula='" + cedula + "'";
+        sql_save="UPDATE usuario SET estado='inactivo' WHERE cedula='" + cedula + "'";
+        
         try{
             Statement sentencia = conn.createStatement();
 

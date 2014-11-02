@@ -25,7 +25,7 @@ public class UserController {
      * **/
     public UserController(){
         daoUser=new DAOUser();
-        convocatoriaController = new ConvocatoriaController();
+        convocatoriaController = new ConvocatoriaController(daoUser.getConn());
         
     }
     public void connectDB(){

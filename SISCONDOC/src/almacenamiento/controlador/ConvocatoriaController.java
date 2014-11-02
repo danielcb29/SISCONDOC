@@ -23,9 +23,6 @@ public class ConvocatoriaController {
         daoConv = new DAOConvocatoria(conn);
     }
 
-    ConvocatoriaController() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     /**
      * Metodo que permite crear una convocatoria
      * @param conv: convocatoria a crear

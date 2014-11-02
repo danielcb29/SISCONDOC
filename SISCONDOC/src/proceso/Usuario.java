@@ -98,6 +98,20 @@ public class Usuario {
      *      convocatoria = newConvocatoria;
      * }
      */
+
+    /**
+     * @return the convocatoria
+     */
+    public Convocatoria getConvocatoria() {
+        return convocatoria;
+    }
+
+    /**
+     * @param convocatoria the convocatoria to set
+     */
+    public void setConvocatoria(Convocatoria convocatoria) {
+        this.convocatoria = convocatoria;
+    }
     
             
             
