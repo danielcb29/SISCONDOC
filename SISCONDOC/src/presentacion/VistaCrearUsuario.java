@@ -5,7 +5,6 @@
  */
 
 package presentacion;
-<<<<<<< HEAD
 import javax.swing.JOptionPane;
 import proceso.*;
 import almacenamiento.controlador.*;
@@ -25,20 +24,6 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     public VistaCrearUsuario(UserController controler) {
         initComponents();
         objControl=controler;
-=======
-//COMENTARIO DE PRUEBA
-/**
- *
- * @author JuanD
- */
-public class VistaCrearUsuario extends javax.swing.JFrame {
-
-    /**
-     * Creates new form VistaCrearUsuario
-     */
-    public VistaCrearUsuario() {
-        initComponents();
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
     }
 
     /**
@@ -50,7 +35,6 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-<<<<<<< HEAD
         lblTitulo = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -122,20 +106,12 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-=======
-        jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Titulo");
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -187,16 +163,10 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(btnCancelar)
                 .addGap(36, 36, 36))
-=======
-                .addGap(170, 170, 170)
-                .addComponent(jLabel1)
-                .addContainerGap(204, Short.MAX_VALUE))
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -241,16 +211,10 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
-=======
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
-                .addContainerGap(251, Short.MAX_VALUE))
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-<<<<<<< HEAD
     
     /**
      * Metodo que se ejecuta si se presiona el boton cancelar
@@ -317,26 +281,16 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El nombre de usuario "+username+" ya existe");
         }
     }//GEN-LAST:event_btnCrearActionPerformed
-=======
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
 
     /**
      * @param args the command line arguments
      */
-<<<<<<< HEAD
     /*public static void main(String args[]) {
-=======
-    public static void main(String args[]) {
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-<<<<<<< HEAD
          *//*
-=======
-         */
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -355,17 +309,12 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-<<<<<<< HEAD
         /* Create and display the form *//*
-=======
-        /* Create and display the form */
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VistaCrearUsuario().setVisible(true);
             }
         });
-<<<<<<< HEAD
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -389,11 +338,5 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtNomUsuario;
     private javax.swing.JTextField txtNombres;
-=======
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
->>>>>>> 369c56be444d9dddfcffb741d6e83b73a7a428d0
     // End of variables declaration//GEN-END:variables
 }
