@@ -92,6 +92,7 @@ public class DAOUser {
             Statement statement = conn.createStatement();
             ResultSet table = statement.executeQuery(sql_select);
             
+            
             while(table.next()){
                 
                 us.setCedula(table.getString(1));
@@ -112,7 +113,20 @@ public class DAOUser {
               
                 //System.out.println("ok");
             }
-           
+            if(!us.getProfile().equals("Administrador")){
+                String sql_conv= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula() +"' AND estado=true";
+                table = statement.executeQuery(sql_conv);
+                String cod="";
+                while(table.next()){
+                
+                    cod = table.getString(1);
+              
+                //System.out.println("ok");
+                }
+                DAOConvocatoria daoc=new DAOConvocatoria(conn);
+                Convocatoria conv = daoc.readConv(cod);
+                us.setConvocatoria(conv);
+            }
             return us;
          }
          catch(SQLException e){ System.out.println(e); }
