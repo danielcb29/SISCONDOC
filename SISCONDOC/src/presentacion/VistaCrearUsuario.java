@@ -253,11 +253,11 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             String cedula=txtCedula.getText();
             int numPerfil=comboPerfil.getSelectedIndex()+1;
             String perfil=Integer.toString(numPerfil);
-            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil);
+            //int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil);
             
-            if(result == -1 || result == -2){
+            //if(result == -1 || result == -2){
                 JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
-            }else{
+            //}else{
                 //Se imprime el mensaje para informar el exito de la operacion
                 JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
                 //Se limpian los campos de la interfaz
@@ -270,7 +270,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                 //Cerrar la base de datos 
                 //Cerramos la ventana
                 this.dispose();
-            }
+            //}
                     
             
             
