@@ -46,7 +46,7 @@ public class DAOUser {
         int numRows=0;
 
         sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
-        sql_convo = "INSERT INTO convocatoria_suario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getID()+"')";
+        sql_convo = "INSERT INTO convocatoria_suario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"')";
         try{
             Statement sentencia = conn.createStatement();
 

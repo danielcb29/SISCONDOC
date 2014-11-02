@@ -5,9 +5,10 @@
  */
 package almacenamiento.controlador;
 
-import almacenamiento.accesodatos.DAOAspirant;
+import almacenamiento.accesodatos.*;
 import java.sql.Connection;
 import proceso.Aspirant;
+
 
 /**
  *
@@ -31,7 +32,7 @@ public class AspirantController
      * @param aspirant: aspirante a crear
      * @return 
      */
-    public int createConv(Aspirant aspirant){
+    public int createAspirant(Aspirant aspirant){
         int result = daoAspirant.crateAspirant(aspirant);
         return result;
     }
@@ -40,7 +41,7 @@ public class AspirantController
      * @return: la lista con los aspirantes 
      */
     public Aspirant[] listConv(){
-        Aspirant[] list = daoAspirant.listConv();
+        Aspirant[] list = daoAspirant.listAspirants();
         return list;
     }
     /**
@@ -49,7 +50,7 @@ public class AspirantController
      * @return aspirante en la base de datos , null si hay error o name null si no existe 
      */
     public Aspirant readAspirant(String document){
-        Aspirant aspirant = daoAspirant.readConv(document);
+        Aspirant aspirant = daoAspirant.readAspirant(document);
         return aspirant;
     }
     /**
@@ -57,16 +58,15 @@ public class AspirantController
      * @param aspirante : identificacion del aspirante a eliminar.
      */
     public void deleteAspirant(String document){
-        String name = aspirant.getName();
-        daoAspirant.deletConv(name);
+        daoAspirant.deletConv(document);
     }
     /**
      * Metodo que permite actualizar los datos de una aspirantocatoria 
      * @param exConv: nombre del aspirante a actualizar. 
      * @param aspirant: nuevos datos del aspirante
      */
-    public void updateConv(String exAspirant, Aspirant aspirant){
-        daoAspirant.updateConv(exAspirant, aspirant);
+    public void updateAspirant(Aspirant aspirant){
+        daoAspirant.updateAspirant(aspirant);
     }
 }
 

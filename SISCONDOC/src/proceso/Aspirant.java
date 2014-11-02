@@ -20,18 +20,18 @@ public class Aspirant {
     private String lastname;
     private String city;
     private int puntuaction;
-    private int cod_call;
+    private Convocatoria call;
     
     
-    public Aspirant () {}
-    public Aspirant (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, int aspirantCod_call)
+    public Aspirant () {} 
+    public Aspirant (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, Convocatoria call)
     {
         aspirantDocument = document;
         aspirantName = name;
         aspirantLastname = lastname;
         aspirantCity = city;
         aspirantPunctuaction = puntuaction;
-        aspirantCod_call  = cod_call;
+        this.call =call;
                 
     }
 
@@ -108,15 +108,15 @@ public class Aspirant {
     /**
      * @return the cod_call
      */
-    public int getCod_call() {
-        return cod_call;
+    public Convocatoria getConvocatoria() {
+        return this.call;
     }
 
     /**
      * @param cod_call the cod_call to set
      */
-    public void setCod_call(int cod_call) {
-        this.cod_call = cod_call;
+    public void setConvocatoria(Convocatoria call) {
+        this.call = call;
     }
     
         
