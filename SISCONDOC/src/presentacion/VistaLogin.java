@@ -255,21 +255,24 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 boolean state = user.getState();
                 System.out.println("estado: "+state);
+                //Validacion de estado de usuario , activo o eliminado
                 if(state){
                     String profile = user.getProfile();
                     if (profile.equals("Digitador")){
                         //System.out.println("No se ha implementado aun :)");
                         Convocatoria conv = user.getConvocatoria();
+                        //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
                         if(conv.getState()){
                             Date finConv = conv.getDateEnd();
                             Date now = new Date();
+                            //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
                             if(finConv.after(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
                                 digPanel.setVisible(false);
                             }
 
-                            
+                         //CASO ELIMINADA   
                         }else{
                             JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
@@ -291,6 +294,7 @@ public class VistaLogin extends javax.swing.JFrame {
                             
                         }
                     }
+                 //Caso usuario eliminado   
                 }else{
                     JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
                 }
