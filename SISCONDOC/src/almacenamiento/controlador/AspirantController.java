@@ -7,7 +7,7 @@ package almacenamiento.controlador;
 
 import almacenamiento.accesodatos.*;
 import java.sql.Connection;
-import proceso.Aspirant;
+import proceso.*;
 
 
 /**
@@ -21,18 +21,23 @@ public class AspirantController
      * daoAspirant: DAO del aspirante  para realizar las consultas
      */
     private DAOAspirant daoAspirant;
+    private ConvocatoriaController control;
     /**
      * Constructor de la clase
      */
     public AspirantController(Connection conn){
         daoAspirant = new DAOAspirant(conn);
+        control = new ConvocatoriaController(conn);
     }
     /**
      * Metodo que permite registrar los datos personales de un aspirante
      * @param aspirant: aspirante a crear
      * @return 
      */
-    public int createAspirant(Aspirant aspirant){
+    public int createAspirant(String document, String name, String lastName, String city,int puntuaction,int code){
+        Convocatoria convocatoria = new Convocatoria();
+        convocatoria.setCode(code);
+        Aspirant aspirant = new Aspirant (document, name, lastName, city, puntuaction,convocatoria);
         int result = daoAspirant.crateAspirant(aspirant);
         return result;
     }
@@ -40,8 +45,8 @@ public class AspirantController
      * Metodo que permite obtener la lista de aspirantes
      * @return: la lista con los aspirantes 
      */
-    public Aspirant[] listConv(){
-        Aspirant[] list = daoAspirant.listAspirants();
+    public Aspirant[] listAspirants(String callName){
+        Aspirant[] list = daoAspirant.listAspirants(callName);
         return list;
     }
     /**
@@ -53,13 +58,8 @@ public class AspirantController
         Aspirant aspirant = daoAspirant.readAspirant(document);
         return aspirant;
     }
-    /**
-     * Metodo que permite eliminar una aspirante de una convocatoria
-     * @param aspirante : identificacion del aspirante a eliminar.
-     */
-    public void deleteAspirant(String document){
-        daoAspirant.deletConv(document);
-    }
+    
+    
     /**
      * Metodo que permite actualizar los datos de una aspirantocatoria 
      * @param exConv: nombre del aspirante a actualizar. 
