@@ -169,6 +169,8 @@ public class DAOUser {
                 }
                 String usCod=Integer.toString(us.getConvocatoria().getCode());
                 if(!usCod.equals(cod)){
+                    sql_save="UPDATE convoUsuario SET estado=false WHERE codigo= "+cod+" AND cedula = '"+us.getCedula()+"'";
+                    statement.executeUpdate(sql_save);
                     sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"'";
                     table= statement.executeQuery(sql_save);
                     boolean flag=false;
