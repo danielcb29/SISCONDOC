@@ -24,9 +24,9 @@ public class Usuario {
     /*
      * One user has one "Convocatoria" 
      */
-    //private Convocatoria convocatoria;
+    private Convocatoria convocatoria;
     
-    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser, String mailUser, String profileUser, String cedulaUser){
+    public Usuario(String nameUser , String lastNameUser , String userName , String passwordUser, String mailUser, String profileUser, String cedulaUser, Convocatoria convocatoria){
         name = nameUser;
         lastName = lastNameUser;
         this.userName = userName;
@@ -35,6 +35,10 @@ public class Usuario {
         profile = profileUser;
         cedula = cedulaUser;
         state = true;
+<<<<<<< HEAD
+=======
+        this.convocatoria = convocatoria;
+>>>>>>> origin/daniel
     }
     public Usuario(){
         
@@ -87,6 +91,22 @@ public class Usuario {
     public void setState(boolean newState){
         state=newState;
     }
+<<<<<<< HEAD
+=======
+    /**
+     * @return the convocatoria
+     */
+    public Convocatoria getConvocatoria() {
+        return convocatoria;
+    }
+
+    /**
+     * @param convocatoria the convocatoria to set
+     */
+    public void setConvocatoria(Convocatoria convocatoria) {
+        this.convocatoria = convocatoria;
+    }
+>>>>>>> origin/daniel
      /*
      * One user can be on multiple "Convocatoria" in a time frame
      * 
