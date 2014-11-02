@@ -118,11 +118,9 @@ public class DAOUser {
 	sql_save1="UPDATE usuario SET name='"+us.getName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save2="UPDATE usuario SET lastname='"+us.getLastName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save3="UPDATE usuario SET userName='"+us.getUserName()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save4="UPDATE usuario SET cedula='"+us.getCedula()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save5="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save6="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save7="UPDATE usuario SET id_perfil='"+us.getProfile()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save8="UPDATE usuario SET estado='"+us.getState()+"' WHERE cedula='" + us.getCedula() + "'";
+        sql_save4="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
+        sql_save5="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
+        sql_save6="UPDATE usuario SET id_perfil='"+us.getProfile()+"' WHERE cedula='" + us.getCedula() + "'";
 
         try{
             Statement statement = conn.createStatement();
@@ -132,10 +130,7 @@ public class DAOUser {
             statement.executeUpdate(sql_save3);
             statement.executeUpdate(sql_save4);
             statement.executeUpdate(sql_save5);
-            statement.executeUpdate(sql_save6);
-            statement.executeUpdate(sql_save7);
-            statement.executeUpdate(sql_save8);
-            
+            statement.executeUpdate(sql_save6);            
         }
         catch(SQLException e){
             System.out.println(e); 
