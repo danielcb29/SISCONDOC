@@ -84,6 +84,7 @@ public class VistaLogin extends javax.swing.JFrame {
         lbForget.setFont(new java.awt.Font("Cantarell", 3, 15)); // NOI18N
         lbForget.setForeground(new java.awt.Color(0, 13, 255));
         lbForget.setText("Olvido la contraseña?");
+        lbForget.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbForgetMouseClicked(evt);
@@ -130,7 +131,7 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
                         .addComponent(jLabel4)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +262,7 @@ public class VistaLogin extends javax.swing.JFrame {
                         if(profile.equals("Administrador")){
                             //Clase nelsini
                             System.out.println("Iniciamo sesion : "+ user.getName());
-                            this.dispose();
+                            //this.dispose();
                             vAdmin = new VistaAdmin(userName,controlerU);
                             vAdmin.setVisible(true);
                             //vAdmin.show();
