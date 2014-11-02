@@ -160,7 +160,7 @@ public class DAOUser {
             statement.executeUpdate(sql_save5);
             statement.executeUpdate(sql_save6);
             
-            if(us.getProfile().equals("Administrador")){
+            if(!us.getProfile().equals("Administrador")){
                 String sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"' AND estado=true";
                 ResultSet table= statement.executeQuery(sql_save);
                 String cod="";
