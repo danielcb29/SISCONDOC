@@ -21,13 +21,12 @@ public class AspirantController
      * daoAspirant: DAO del aspirante  para realizar las consultas
      */
     private DAOAspirant daoAspirant;
-    private ConvocatoriaController control;
     /**
      * Constructor de la clase
      */
     public AspirantController(Connection conn){
         daoAspirant = new DAOAspirant(conn);
-        control = new ConvocatoriaController(conn);
+        
     }
     /**
      * Metodo que permite registrar los datos personales de un aspirante
