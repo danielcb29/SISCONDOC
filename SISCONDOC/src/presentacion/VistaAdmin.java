@@ -256,7 +256,7 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        objVistaCrearUsuario = new VistaCrearUsuario(objUserController);
+        objVistaCrearUsuario = new VistaCrearUsuario(objUserController,objConvController);
         objVistaCrearUsuario.setVisible(true);
     }//GEN-LAST:event_btCrearUsuarioActionPerformed
 
