@@ -17,13 +17,22 @@ import almacenamiento.controlador.*;
 public class VistaCrearUsuario extends javax.swing.JFrame {
 
     UserController objControl;
+    ConvocatoriaController objConvocatoria;
+    boolean hayConvocatorias;
+    String[] nomConvocatorias;
+    
+    
     /**
      * Constructor de la clase
+     * @param controler Se le introduce un objeto de la clase UserController
      */
-    
     public VistaCrearUsuario(UserController controler) {
         initComponents();
+        comboPerfil.setSelectedIndex(2);
         objControl=controler;
+        objConvocatoria=new ConvocatoriaController(objControl.getConn());
+        consultaConvocatorias();
+        muestraConvocatorias();
     }
 
     /**
@@ -55,6 +64,9 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         comboPerfil = new javax.swing.JComboBox();
         btnCrear = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        comboConvocatoria = new javax.swing.JComboBox();
+        lblAdvertencia = new javax.swing.JLabel();
+        lblConvocatoria = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrador: Crear Usuario");
@@ -90,6 +102,11 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         lblPerfil.setText("Perfil:");
 
         comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Digitador", "Coordinador", "Administrador" }));
+        comboPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboPerfilActionPerformed(evt);
+            }
+        });
 
         btnCrear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnCrear.setText("Crear");
@@ -107,6 +124,13 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             }
         });
 
+        lblAdvertencia.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        lblAdvertencia.setForeground(new java.awt.Color(255, 0, 0));
+        lblAdvertencia.setText("*No existen convocatorias, por lo tanto no se pueden crear digitadores o coordinadores");
+
+        lblConvocatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblConvocatoria.setText("Convocatoria:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,47 +146,57 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                         .addComponent(lblLogo)
                         .addGap(102, 102, 102))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblContrasena)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNomUsuario)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblMail)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblApellidos)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblNombres)
-                                    .addGap(162, 162, 162)
-                                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCrear)
+                                .addGap(42, 42, 42)
+                                .addComponent(btnCancelar)
+                                .addGap(36, 36, 36))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblContrasena)
+                                            .addGap(142, 142, 142)
+                                            .addComponent(txtContrasena))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblNomUsuario)
+                                            .addGap(89, 89, 89)
+                                            .addComponent(txtNomUsuario))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblMail)
+                                            .addGap(181, 181, 181)
+                                            .addComponent(txtMail))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(lblApellidos)
+                                                    .addGap(160, 160, 160))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(lblNombres)
+                                                    .addGap(159, 159, 159)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(3, 3, 3))
+                                                .addComponent(txtApellidos))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblCedula)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(lblPerfil)
-                                            .addGap(189, 189, 189)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 62, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCrear)
-                .addGap(42, 42, 42)
-                .addComponent(btnCancelar)
-                .addGap(36, 36, 36))
+                                            .addComponent(lblConvocatoria)
+                                            .addComponent(lblPerfil))
+                                        .addGap(95, 95, 95)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(290, 290, 290))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,38 +212,44 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                         .addComponent(lblLogo)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombres)
                     .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellidos)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMail)
                     .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNomUsuario)
                     .addComponent(txtNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
                     .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPerfil)
                     .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(btnCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblConvocatoria)
+                    .addComponent(comboConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAdvertencia)))
                 .addGap(20, 20, 20))
         );
 
@@ -282,6 +322,50 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
+    private void comboPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPerfilActionPerformed
+        // TODO add your handling code here:
+        int seleccion=comboPerfil.getSelectedIndex()+1;
+        if(seleccion==2){
+            lblConvocatoria.setVisible(false);
+            comboConvocatoria.setVisible(false);
+            lblAdvertencia.setVisible(false);
+            btnCrear.setEnabled(true);
+        }else{
+            if(hayConvocatorias==false){
+                lblConvocatoria.setVisible(false);
+                comboConvocatoria.setVisible(false);
+                lblAdvertencia.setVisible(true);
+                btnCrear.setEnabled(false);
+            }else{
+                btnCrear.setEnabled(true);
+                lblAdvertencia.setVisible(false);
+                lblConvocatoria.setVisible(true);
+                comboConvocatoria.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_comboPerfilActionPerformed
+
+    private void consultaConvocatorias(){
+        Convocatoria[] listaConvocatorias;
+        listaConvocatorias=objConvocatoria.listConv();
+        int longitud=listaConvocatorias.length;
+        hayConvocatorias=false;
+        if(longitud>=1){
+            hayConvocatorias=true;
+        }
+    }
+    
+    private void muestraConvocatorias(){
+        Convocatoria[] listaConvocatorias;
+        listaConvocatorias=objConvocatoria.listConv();
+        int longitud=listaConvocatorias.length;
+        nomConvocatorias=new String[longitud];
+        for(int i=0; i<longitud; i++){
+            nomConvocatorias[i]=listaConvocatorias[i].getName();
+        }
+        comboPerfil.setModel(new javax.swing.DefaultComboBoxModel(nomConvocatorias));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -320,11 +404,14 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrear;
+    private javax.swing.JComboBox comboConvocatoria;
     private javax.swing.JComboBox comboPerfil;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblAdvertencia;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblContrasena;
+    private javax.swing.JLabel lblConvocatoria;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblMail;
