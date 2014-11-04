@@ -13,24 +13,24 @@ package proceso;
 
 
 
-public class Aspirant {
+public class Aspirante {
     
     private String document;
     private String name;
     private String lastname;
     private String city;
-    private int puntuaction;
+    private int puntaje;
     private Convocatoria call;
     
     
-    public Aspirant () {} 
-    public Aspirant (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, Convocatoria call)
+    public Aspirante () {} 
+    public Aspirante (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, Convocatoria call)
     {
         aspirantDocument = document;
         aspirantName = name;
         aspirantLastname = lastname;
         aspirantCity = city;
-        aspirantPunctuaction = puntuaction;
+        aspirantPunctuaction = puntaje;
         this.call =call;
                 
     }
@@ -92,17 +92,17 @@ public class Aspirant {
     }
 
     /**
-     * @return the puntuaction
+     * @return the puntaje
      */
-    public int getPuntuaction() {
-        return puntuaction;
+    public int getPuntaje() {
+        return puntaje;
     }
 
     /**
-     * @param puntuaction the puntuaction to set
+     * @param puntajet puntaje set
      */
-    public void setPuntuaction(int puntuaction) {
-        this.puntuaction = puntuaction;
+    public void setPuntaje(int puntaje) {
+        this.puntaje= puntaje;
     }
 
     /**
