@@ -24,13 +24,13 @@ public class Aspirante {
     
     
     public Aspirante () {} 
-    public Aspirante (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, Convocatoria call)
+    public Aspirante (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int puntajeAspirante, Convocatoria call)
     {
         aspirantDocument = document;
         aspirantName = name;
         aspirantLastname = lastname;
         aspirantCity = city;
-        aspirantPunctuaction = puntaje;
+        puntajeAspirante = puntaje;
         this.call =call;
                 
     }
