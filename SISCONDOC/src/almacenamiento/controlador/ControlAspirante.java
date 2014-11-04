@@ -33,9 +33,7 @@ public class ControlAspirante
      * @param aspirante: aspirante a crear
      * @return 
      */
-    public int createAspirante(String document, String name, String lastName, String city,int puntaje,int code){
-        Convocatoria convocatoria = new Convocatoria();
-        convocatoria.setCode(code);
+    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria){
         Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria);
         int result = daoAspirante.crateAspirante(aspirante);
         return result;
@@ -64,8 +62,8 @@ public class ControlAspirante
      * @param exConv: nombre del aspirante a actualizar. 
      * @param aspirante: nuevos datos del aspirante
      */
-    public void updateAspirante(Aspirante aspirante){
-        daoAspirante.updateAspirante(aspirante);
+    public void updateAspirante(String documento, Aspirante aspirante){
+        daoAspirante.updateAspirante(documento, aspirante);
     }
 }
 

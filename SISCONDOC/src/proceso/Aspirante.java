@@ -99,7 +99,7 @@ public class Aspirante {
     }
 
     /**
-     * @param puntajet puntaje set
+     * @param puntaje puntaje set
      */
     public void setPuntaje(int puntaje) {
         this.puntaje= puntaje;
