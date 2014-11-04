@@ -63,16 +63,18 @@ public class UserController {
      * @return Usuario : objeto con los atributos del empleado
      * es objeto es nulo en caso de no existir el usuario.
      */
-    public Usuario   consultUser (String username){
+    public Usuario   consultUser (String username, int tipoCon){
         Usuario U = new Usuario ();
         
-        U= daoUser.readUser(username);
+        U= daoUser.readUser(username, tipoCon);
         
         return U;
 
     }
-   /**
-     * metodo que llama al Dao para consultar cuantos usuarios existen
+    
+ 
+     
+    /** metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
      */
     public int countUsers ()  
@@ -87,6 +89,15 @@ public class UserController {
      */
     public void cerrarConexionBD(){
         daoUser.closeConectionDB();
+    }
+
+    public int editUser(String cedula, String name, String lastName, String userName, String password, String email, String perfil, Convocatoria convo) {
+        int result;
+        result = 0;
+        Usuario user = new Usuario(name,lastName,userName,password,email,perfil,cedula,convo);       
+        result = daoUser.updateUser(user, cedula);
+
+        return result;
     }
 
 }//fin clase

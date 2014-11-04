@@ -24,6 +24,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private VistaConvocatoria vistaConvo;
     private ConvocatoriaController objConvController;
     private Connection conn;
+    private VistaEditarUsuario objVistaEditarUsuario;
     
     public VistaAdmin(){}
     public VistaAdmin(String username,UserController controler){
@@ -273,7 +274,8 @@ public class VistaAdmin extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "No hay Usuarios para editar","", JOptionPane.INFORMATION_MESSAGE);  
         }
         else{
-            System.out.println("Por ahora no se ha implementado :)");
+            objVistaEditarUsuario = new VistaEditarUsuario(objUserController, objConvController);
+            objVistaEditarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_btEditarUsuarioActionPerformed
 

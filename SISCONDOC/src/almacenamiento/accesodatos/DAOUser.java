@@ -83,11 +83,14 @@ public class DAOUser {
         * @param username el username del usuario que se quiere consultar.
         * @return null si hay error en la consulta a la base de datos. Objeto tipo Usuario si el objeto del usuario que se consulto. Devuelve 
         */
-    public Usuario readUser(String username){
+    public Usuario readUser(String req, int tipoCon){
         Usuario us= new Usuario();
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
-        try{
+        if(tipoCon==1){
+            sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + req +  "'";        
+        }else{
+            sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND cedula='" + req +  "'";        
+        }try{
             System.out.println("consultando en la bd");
             Statement statement = conn.createStatement();
             ResultSet table = statement.executeQuery(sql_select);
@@ -139,7 +142,7 @@ public class DAOUser {
      * @param us objeto de Usuario con los atributos a modificar en la base de datos.
      * @param cedula la cedula del usuario que se quiere actualizar.
      */
-    public void updateUser(Usuario us, String cedula){
+    public int updateUser(Usuario us, String cedula){
 	String sql_save1,  sql_save2,  sql_save3, sql_save4,  sql_save5,  sql_save6,  sql_save7,  sql_save8;
 	sql_save1="UPDATE usuario SET name='"+us.getName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save2="UPDATE usuario SET lastname='"+us.getLastName()+"' WHERE cedula='" + us.getCedula() + "'";
@@ -189,14 +192,17 @@ public class DAOUser {
                     }
                 }
             }
+            
         }
         catch(SQLException e){
-            System.out.println(e); 
+            return -1; 
             }
         catch(Exception e){ 
-            System.out.println(e);
+            return -2;
         }
+        return 1;
     }
+
    /**
      * listar todas las tuplas de los usuarios existentes.
      * @return los objetos tipo Usuario enlistados en un arreglo.

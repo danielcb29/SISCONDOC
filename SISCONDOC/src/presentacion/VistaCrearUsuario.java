@@ -240,7 +240,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
        
         
         //Se consulta si el nombre de usuario ya existe en la base de datos
-        objUsuario=objControl.consultUser(username);
+        objUsuario=objControl.consultUser(username, 1);
         
         //Si no existe, se capturan los demas datos de la interfaz,
         //se envian al controlador para guardarlos y se informa al

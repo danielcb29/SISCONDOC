@@ -189,7 +189,7 @@ public class VistaLogin extends javax.swing.JFrame {
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
         }else{
-            Usuario user = controlerU.consultUser(userNameForget);
+            Usuario user = controlerU.consultUser(userNameForget, 1);
             if (user==null){
                 JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
@@ -244,7 +244,7 @@ public class VistaLogin extends javax.swing.JFrame {
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
-        Usuario user = controlerU.consultUser(userName);
+        Usuario user = controlerU.consultUser(userName, 1);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -269,7 +269,7 @@ public class VistaLogin extends javax.swing.JFrame {
                             if(finConv.after(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
-                                digPanel.setVisible(false);
+                                digPanel.setVisible(true);
                             }
 
                          //CASO ELIMINADA   

@@ -140,11 +140,12 @@ public class DAOConvocatoria {
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
             ResultSet table = sentence.executeQuery(sql_select);
-            ResultSet table2= table;
             int numRows=0;
             while(table.next()){
                numRows++;
             }
+            ResultSet table2= sentence.executeQuery(sql_select);
+            
             System.out.println(numRows);
             Convocatoria conv[]= new Convocatoria[numRows];
             for(int i=0; i<numRows; i++){
@@ -152,22 +153,23 @@ public class DAOConvocatoria {
             }
             
             int j=0;
-            SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+            SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+         
             while(table2.next()){
                
-                conv[j].setName(table.getString(1));
+                conv[j].setName(table2.getString(1));
                 Date datIn;
-                datIn = format.parse(table.getString(2));
+                datIn = format.parse(table2.getString(2));
                 conv[j].setDateIn(datIn);
                 Date datEnd;
-                datEnd = format.parse(table.getString(3));
+                datEnd = format.parse(table2.getString(3));
                 conv[j].setDateEnd(datEnd);
                 
-                conv[j].setState(table.getBoolean(4));               
+                conv[j].setState(table2.getBoolean(4));               
 
-                conv[j].setDescription(table.getString(5));
+                conv[j].setDescription(table2.getString(5));
                 
-                conv[j].setCode(table.getInt(6));
+                conv[j].setCode(table2.getInt(6));
 
 
               j++;
