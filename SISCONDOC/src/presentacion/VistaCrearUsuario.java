@@ -318,9 +318,16 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             
             
         }else{
-            //Si ya existe el nombre de usuario en la base de datos se informa al
-            //usuario del error
-            JOptionPane.showMessageDialog(null, "El nombre de usuario "+username+" ya existe");
+            if(objUsuario.getState()==false){
+                //Si ya existe el nombre de usuario en la base de datos se informa al
+                //usuario del error
+                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" se encuentra\ninactivo, para reactivarlo visite la seccion\neditar usuario del panel administrador");
+            }else{
+                //Si ya existe el nombre de usuario en la base de datos se informa al
+                //usuario del error
+                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" ya existe");
+            }
+            
         }
     }//GEN-LAST:event_btnCrearActionPerformed
 
