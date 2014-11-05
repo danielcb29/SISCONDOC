@@ -114,7 +114,7 @@ public class DAOUser {
                 //System.out.println("ok");
             }
             if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
+                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE usuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
                 table = statement.executeQuery(sql_conv);
                 String nom="";
                 while(table.next()){
