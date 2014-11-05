@@ -65,7 +65,7 @@ public class UserController {
      */
     public Usuario   consultUser (String username, int tipoCon){
         Usuario U = new Usuario ();
-        
+        System.out.println("entramos al control");
         U= daoUser.readUser(username, tipoCon);
         
         return U;
@@ -98,6 +98,10 @@ public class UserController {
         result = daoUser.updateUser(user, cedula);
 
         return result;
+    }
+
+    public int deleteUser(String text) {
+        return daoUser.deleteUser(text);
     }
 
 }//fin clase

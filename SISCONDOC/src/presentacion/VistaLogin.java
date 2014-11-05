@@ -266,11 +266,12 @@ public class VistaLogin extends javax.swing.JFrame {
                             Date finConv = conv.getDateEnd();
                             Date now = new Date();
                             //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
-                            if(finConv.after(now)){
+                            if(finConv.before(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
-                                digPanel = new PanelDigitador(userName,conv);
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
                                 digPanel.setVisible(true);
+                                this.dispose();
                             }
 
                          //CASO ELIMINADA   
@@ -287,9 +288,13 @@ public class VistaLogin extends javax.swing.JFrame {
                                 //Clase nelsini
                                 System.out.println("Iniciamo sesion : "+ user.getName());
                                 this.dispose();
+                                //COMENTADO PARA PRUEBA
                                 vAdmin = new VistaAdmin(userName,controlerU);
                                 vAdmin.setVisible(true);
-                                //vAdmin.show();
+                                //PRUEBA BORRAR
+                                //Convocatoria conv = user.getConvocatoria();
+                                //digPanel = new PanelDigitador(userName,conv,controlerU);
+                                //digPanel.setVisible(true);
                             }
 
                             

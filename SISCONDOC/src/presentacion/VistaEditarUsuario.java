@@ -19,12 +19,15 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
     private UserController objUserController;
     private ConvocatoriaController objConvoController;
     private Convocatoria list [];
+    private int tipo;
     /**
      * Creates new form VistaEditarUsuario
      */
-    public VistaEditarUsuario(UserController objUserController, ConvocatoriaController objConvoController) {
+    public VistaEditarUsuario(UserController objUserController, ConvocatoriaController objConvoController, int tipo) {
+       
        this.objUserController = objUserController;
        this.objConvoController = objConvoController;
+       this.tipo = tipo;
        list = objConvoController.listConv();
        initComponents();
        
@@ -32,6 +35,20 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
            System.out.println("numero convo"+list[i].toString());
            comboConvo.addItem(list[i]);
        }
+       comboConvo.disable();
+        if (tipo == 2) {
+            this.setTitle("Eliminar usuario");
+            lbTitle.setText("Eliminar Usuarios");
+            lbInfo.setText("Busque el usuario a eliminar. Verifique los datos antes de eliminarlo");
+            txtApellidos.disable();
+            txtContrasena.disable();
+            txtMail.disable();
+            txtNomUsuario.disable();
+            txtNombres.disable();
+            comboPerfil.disable();    
+            bModificar.setText("Eliminar");
+        }
+       
     }
 
     /**
@@ -65,9 +82,13 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
         bModificar = new javax.swing.JButton();
         lblNombres1 = new javax.swing.JLabel();
         comboConvo = new javax.swing.JComboBox();
+        lblEstado = new javax.swing.JLabel();
+        txtEstado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(781, 480));
+        setTitle("Editar Usuario");
+        setPreferredSize(new java.awt.Dimension(820, 520));
+        setResizable(false);
 
         lbTitle.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         lbTitle.setText("Editar Usuario");
@@ -144,10 +165,23 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
             }
         });
 
+        lblEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblEstado.setText("Estado:");
+
+        txtEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(lbSearch)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,19 +189,16 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfSearchCedula)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNombres1)
+                                .addComponent(lblEstado)
+                                .addGap(97, 97, 97)
+                                .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btSearch)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(comboConvo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(96, 96, 96)
+                                .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(bModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -176,33 +207,36 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNomUsuario)
+                                    .addComponent(lblMail)
+                                    .addComponent(lblContrasena))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtMail)
+                                        .addComponent(txtNomUsuario)
+                                        .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblNombres1))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblApellidos)
+                            .addComponent(lblPerfil)
+                            .addComponent(lblConvocatoria))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboConvo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 76, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(lbTitle))
                             .addComponent(lbInfo))
                         .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(lbSearch)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNomUsuario)
-                    .addComponent(lblContrasena)
-                    .addComponent(lblMail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtMail, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                        .addComponent(txtNomUsuario)
-                        .addComponent(txtContrasena)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblApellidos)
-                    .addComponent(lblPerfil)
-                    .addComponent(lblConvocatoria))
-                .addGap(271, 271, 271))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,10 +256,10 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSearchCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSearch))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(69, 69, 69)
                         .addComponent(lblMail)
                         .addGap(32, 32, 32)
                         .addComponent(lblNomUsuario))
@@ -248,9 +282,13 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblContrasena)
-                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCancelar))
+                    .addComponent(btCancelar)
+                    .addComponent(lblEstado)
+                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
 
@@ -264,6 +302,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         
+        
         Usuario user;
         user = objUserController.consultUser(tfSearchCedula.getText(), 2);
         if(user==null){
@@ -274,9 +313,23 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
             txtContrasena.setText(user.getPassword());
             txtMail.setText(user.getMail());
             txtNomUsuario.setText(user.getUserName());
+            String estado;
+            if(user.getState()){
+                estado="Activo";
+            }else{
+                estado="Inactivo";
+            }
+            txtEstado.setText(estado);
             comboPerfil.setSelectedItem(user.getProfile());
-            comboConvo.setSelectedItem(user.getConvocatoria());
+            if(!user.getProfile().equalsIgnoreCase("Administrador")){
+                comboConvo.enable();
+                comboConvo.setSelectedItem(user.getConvocatoria());
+            }
+            if(tipo==2){
+                comboConvo.disable();
+            }
         }
+        
        
     }//GEN-LAST:event_btSearchActionPerformed
 
@@ -286,12 +339,18 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
         int result;
-        
-        result = objUserController.editUser(tfSearchCedula.getText(), txtNombres.getText(), txtApellidos.getText(),txtNomUsuario.getText(), txtContrasena.getText(), txtMail.getText(), Integer.toString(comboPerfil.getSelectedIndex()+1), list[comboConvo.getSelectedIndex()+1]);
+        String menj;
+        if(tipo==2){
+            menj = "elimino";
+            result = objUserController.deleteUser(tfSearchCedula.getText());
+        }else{
+            menj= "edito";
+            result = objUserController.editUser(tfSearchCedula.getText(), txtNombres.getText(), txtApellidos.getText(),txtNomUsuario.getText(), txtContrasena.getText(), txtMail.getText(), Integer.toString(comboPerfil.getSelectedIndex()+1), list[comboConvo.getSelectedIndex()+1]);
+        }        
         if(result==-1||result==-2){
             JOptionPane.showMessageDialog(this, "Error al modificar los datos. Verifica que no haya otro usuario con el mismo email o nombre de usuario. \n Si el problema persiste contacta al administrador","Error!",JOptionPane.ERROR_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(this, "El usuario "+ txtNomUsuario.getText()+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El usuario "+ txtNomUsuario.getText()+" se ha"+menj, "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bModificarActionPerformed
 
@@ -301,7 +360,16 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
 
     private void comboPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPerfilActionPerformed
         // TODO add your handling code here:
+        if (!comboPerfil.getSelectedItem().toString().equals("Administrador")){
+            comboConvo.enable();
+        }else{
+            comboConvo.disable();
+        }
     }//GEN-LAST:event_comboPerfilActionPerformed
+
+    private void txtEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEstadoActionPerformed
 
   
 
@@ -318,6 +386,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblConvocatoria;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblMail;
     private javax.swing.JLabel lblNomUsuario;
     private javax.swing.JLabel lblNombres1;
@@ -325,6 +394,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField tfSearchCedula;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtContrasena;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtMail;
     private javax.swing.JTextField txtNomUsuario;
     private javax.swing.JTextField txtNombres;

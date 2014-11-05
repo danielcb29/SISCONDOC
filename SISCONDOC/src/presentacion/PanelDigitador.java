@@ -5,8 +5,20 @@
  */
 package presentacion;
 
-import javax.swing.JOptionPane;
+import almacenamiento.controlador.*;
+import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
+import java.sql.Connection;
+import almacenamiento.controlador.UserController;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,16 +30,28 @@ public class PanelDigitador extends javax.swing.JFrame {
      * Creates new form PanelDigitador
      */
     String name="User Default";
-    Convocatoria convocatoria;
+    String nom_convocatoria="Convacatoria Default";
+    int id_convocatoria;
+    String nombres,apellidos,cedula,genero,jornada,municipio,dia,mes,anno,fecha_nac;
+    public Validador objValidador;
+    public ControlAspirante objAspirantController;
+    public Convocatoria objConvocatoria;
+    public Connection Conexion;
     public PanelDigitador() {
         
     }
-    PanelDigitador(String username, Convocatoria convo){
+    public PanelDigitador(String username,Convocatoria convoca, UserController conn){
         initComponents();
         name=username;
-        this.convocatoria=convo;
+        
+        //this.nom_convocatoria=convoca.getName();
+        //id_convocatoria=convoca.getCode();
+        
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
-        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+convocatoria);
+        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
+        objValidador=new Validador();
+        objConvocatoria=convoca;
+        Conexion=conn.getConn();
     }
 
     /**
@@ -221,9 +245,31 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Municipio:");
 
+        jTextNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombresActionPerformed(evt);
+            }
+        });
+        jTextNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextNombresKeyTyped(evt);
+            }
+        });
+
         jTextApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextApellidosActionPerformed(evt);
+            }
+        });
+        jTextApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextApellidosKeyTyped(evt);
+            }
+        });
+
+        jTextCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextCedulaKeyTyped(evt);
             }
         });
 
@@ -260,7 +306,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
                             .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE))))
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addContainerGap(645, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +339,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Datos Personales", jPanel1);
@@ -535,7 +581,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jTextEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextDocUrl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(jTextDocUrl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
                             .addComponent(jTextMaesTicUrl, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextMaesUrl, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextEspeTicUrl)
@@ -669,7 +715,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18)
                         .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(552, Short.MAX_VALUE))
+                .addContainerGap(623, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -884,7 +930,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jRadioButton8_2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButton8_3)))
-                        .addContainerGap(63, Short.MAX_VALUE))
+                        .addContainerGap(237, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1104,7 +1150,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jTextIdioma))))
                     .addComponent(jLabel40)
                     .addComponent(jLabel35))
-                .addContainerGap(472, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1187,7 +1233,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormForm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addContainerGap(560, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1217,7 +1263,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         LabelConfirmacion.setText("Desea Registrar al Aspirante XXX a la Convocatoria XXX ?");
 
         jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
+       // jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
         jButtonRegistrar.setText("REGISTRAR");
         jButtonRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -1227,7 +1273,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
+        //jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
         jButtonCancelar.setText("REGISTRAR OTRO ASPIRANTE");
         jButtonCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -1242,7 +1288,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(502, Short.MAX_VALUE))
+                .addContainerGap(565, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1267,10 +1313,15 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel3.setText("A continuacion se presenta los formularios de registro de aspirantes");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
+        //jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
+        //jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
+        jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1309,7 +1360,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jButtonLogout, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedDigitador, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                .addComponent(jTabbedDigitador)
                 .addContainerGap())
         );
 
@@ -1371,7 +1422,66 @@ public class PanelDigitador extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showConfirmDialog(null, "NOMbre: "+jRadioButton1_1.getName());
+       try{
+        /*Obtenemos los DATOS PERSONALES*/
+        nombres=jTextNombres.getText();
+        apellidos=jTextApellidos.getText();
+        cedula=jTextCedula.getText();
+        genero=jComboBoxGenero.getSelectedItem().toString();
+        dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+        anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
+        fecha_nac=dia+"/"+mes+"/"+anno;
+        
+        jornada=jComboBoxJornada.getSelectedItem().toString();
+        municipio=jComboBoxMunicipio.getSelectedItem().toString();
+        
+        /*VALIDAMOS VACIOS*/
+                if(objValidador.ValidaVacios(nombres)==1 &&
+                   objValidador.ValidaVacios(apellidos)==1 &&
+                   objValidador.ValidaVacios(fecha_nac)==1 )
+                    
+                    {
+                      objAspirantController=new ControlAspirante(Conexion);
+                      objAspirantController.createAspirante(cedula, 
+                                                 nombres, apellidos, 
+                                                municipio,0,
+                                                objConvocatoria,
+                                                genero,
+                                                jornada,
+                                                fecha_nac);
+                      //objAspirantController.readAspirante(cedula);
+                              
+                    }
+                else{
+                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
+                   jTabbedDigitador.requestFocus();
+                }
+            System.out.println("DATOS PERSONALES: \nNombres:"
+                +nombres+
+                "\nApellidos: "+apellidos+
+                "\nCedula: "+cedula+
+                "\nGenero :"+genero+
+                "\nfecha: "+fecha_nac+
+                "\njornada: "+jornada+
+                "\nmunicipio: "+municipio
+                );
+        }
+        /*catch(){
+            System.out.println("Espacios blancos");
+        }*/
+        catch(NumberFormatException nel){
+            System.out.println("Ingresaste una letra en Cedula");
+        }
+        catch(NullPointerException nel){
+            System.out.println("Ingresaste la fecha de forma equivocada");
+            jDateChooserFecha.setDate(null);
+            jDateChooserFecha.setBackground(Color.red);
+        } 
+       /**catch (ParseException ex) {
+            Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+**/
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -1449,15 +1559,78 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextDocTicUrl.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonDocTic2ActionPerformed
 
+    private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
+        // TODO add your handling code here:+
+        System.exit(0);
+    }//GEN-LAST:event_jButtonLogoutActionPerformed
+
+    private void jTextNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombresKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar(); 
+         
+          if((car<'a' || car>'z') && (car<'A' || car>'Z')             
+                    && car !='á' //Minúsculas             
+                    && car !='é'            
+                    && car !='í'            
+                    && car !='ó'           
+                    && car !='ú'   
+                    && car !='Á' //Mayúsculas             
+                    && car !='É'            
+                    && car !='Í'            
+                    && car !='Ó'           
+                    && car !='Ú'             
+                    && (car!=(char)KeyEvent.VK_SPACE)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+              jTextNombres.setToolTipText("Ingresa solo letras!");
+          } 
+    }//GEN-LAST:event_jTextNombresKeyTyped
+
+    private void jTextCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextCedulaKeyTyped
+        // TODO add your handling code here:
+         char c=evt.getKeyChar(); 
+          if(c<'0' || c>'9') { 
+              getToolkit().beep(); 
+              evt.consume(); 
+              jTextCedula.setToolTipText("Ingresa Solo Numeros!");
+          }
+    }//GEN-LAST:event_jTextCedulaKeyTyped
+
+    private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
+        // TODO add your handling code here:
+        char car=evt.getKeyChar(); 
+         
+          if((car<'a' || car>'z') && (car<'A' || car>'Z')             
+                    && car !='á' //Minúsculas             
+                    && car !='é'            
+                    && car !='í'            
+                    && car !='ó'           
+                    && car !='ú'   
+                    && car !='Á' //Mayúsculas             
+                    && car !='É'            
+                    && car !='Í'            
+                    && car !='Ó'           
+                    && car !='Ú'             
+                    && (car!=(char)KeyEvent.VK_SPACE)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+              jTextNombres.setToolTipText("Ingresa solo letras!");
+          } 
+    }//GEN-LAST:event_jTextApellidosKeyTyped
+
+    private void jTextNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombresActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   // public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1477,12 +1650,12 @@ public class PanelDigitador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelDigitador("Nelson", new Convocatoria()).setVisible(true);
+                new PanelDigitador("Nelson", "ConvocatoriaDocente").setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConfirmacion;
