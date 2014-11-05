@@ -261,9 +261,15 @@ public class VistaLogin extends javax.swing.JFrame {
                     if (profile.equals("Digitador")){
                         //System.out.println("No se ha implementado aun :)");
                         Convocatoria conv = new Convocatoria();
-                        conv = user.getConvocatoria();
+                        //conv = user.getConvocatoria();
+                        
+                                conv.setCode(1);
+                                conv.setName("Convo1");
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
+                                this.dispose();
+                                digPanel.setVisible(true);
                         //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
-                        if(conv.getState()){
+                        /*if(conv.getState()){
                             Date finConv = conv.getDateEnd();
                             Date now = new Date();
                             //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
@@ -278,7 +284,7 @@ public class VistaLogin extends javax.swing.JFrame {
                         }else{
                             JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
-                        
+                        */
                     }else{
                         if(profile.equals("Coordinador")){
                             System.out.println("No se ha implementado aun :)");
@@ -289,12 +295,15 @@ public class VistaLogin extends javax.swing.JFrame {
                                 System.out.println("Iniciamo sesion : "+ user.getName());
                                 this.dispose();
                                 //COMENTADO PARA PRUEBA
-                                //vAdmin = new VistaAdmin(userName,controlerU);
-                                //vAdmin.setVisible(true);
+                                vAdmin = new VistaAdmin(userName,controlerU);
+                                vAdmin.setVisible(true);
                                 //PRUEBA BORRAR
-                                Convocatoria conv = user.getConvocatoria();
+                                //Convocatoria conv = user.getConvocatoria();
+                               /* Convocatoria conv = new Convocatoria();
+                                conv.setCode(1);
+                                conv.setName("Convo1");
                                 digPanel = new PanelDigitador(userName,conv,controlerU);
-                                digPanel.setVisible(true);
+                                digPanel.setVisible(true);*/
                             }
 
                             

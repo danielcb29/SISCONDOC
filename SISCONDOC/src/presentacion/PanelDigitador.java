@@ -46,7 +46,8 @@ public class PanelDigitador extends javax.swing.JFrame {
         this.nom_convocatoria=convoca.getName();
         id_convocatoria=convoca.getCode();
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
-        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria AA"+nom_convocatoria);
+        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
+        LabelConfirmacion.setText("Desea Registrar al Aspirante a la Convocatoria"+nom_convocatoria+"?");
         objValidador=new Validador();
         objConvocatoria=convoca;
         Conexion=conn.getConn();
@@ -1429,7 +1430,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
         mes=Integer.toString((jDateChooserFecha.getCalendar().get(Calendar.MONTH))+1);
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
-        fecha_nac=dia+"-"+mes+"-"+anno;
+        fecha_nac=dia+"/"+mes+"/"+anno;
         /*SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
         Date d1 = new Date();
         d1 = format.parse(fecha_nac);
@@ -1453,7 +1454,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 genero,
                                                 jornada,
                                                 fecha_nac);
-                      objAspirantController.readAspirante(cedula);
+                     // objAspirantController.readAspirante(cedula);
                        System.out.println("DATOS PERSONALES: \nNombres:"
                 +nombres+
                 "\nApellidos: "+apellidos+
@@ -1628,12 +1629,12 @@ public class PanelDigitador extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   // public static void main(String args[]) {
         /*Set the Nimbus look and feel */
        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1654,14 +1655,14 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         /* Create and display the form */
        
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                  Convocatoria objconv=new Convocatoria();
                 UserController objuser=new UserController();
                 new PanelDigitador("Nelson", objconv, objuser).setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConfirmacion;
