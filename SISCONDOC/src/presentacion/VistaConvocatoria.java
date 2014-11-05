@@ -392,7 +392,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             if(d1.after(d2)){
                     JOptionPane.showMessageDialog(this,"La fecha de iniciacion no puede ser despues que la fecha de finalizacion","Error en las fechas",JOptionPane.ERROR_MESSAGE);
             }else{
-                 Convocatoria newConv = new Convocatoria(name,description,d1,d2);   
+                 Convocatoria newConv = new Convocatoria(name,description,d1,d2,0);   
                  if(type==1){
                      //crear convocatoria
                      int result = controller.createConv(newConv);

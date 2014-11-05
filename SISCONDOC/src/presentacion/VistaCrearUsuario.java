@@ -282,10 +282,12 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         //Se consulta si el nombre de usuario ya existe en la base de datos
         objUsuario=objControl.consultUser(username);
         
+        
         //Si no existe, se capturan los demas datos de la interfaz,
         //se envian al controlador para guardarlos y se informa al
         //usuario
         if(objUsuario.getPassword()==null){
+            JOptionPane.showMessageDialog(this, "prueba","Error!",JOptionPane.ERROR_MESSAGE);
             String nombres=txtNombres.getText();
             String apellidos=txtApellidos.getText();
             String contrasena=txtContrasena.getText();
@@ -293,7 +295,8 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             String cedula=txtCedula.getText();
             int numPerfil=comboPerfil.getSelectedIndex()+1;
             String perfil=Integer.toString(numPerfil);
-            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil);
+            Convocatoria convocatoria = control.readConv("prueba");
+            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convocatoria);
             
             if(result == -1 || result == -2){
                 JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);

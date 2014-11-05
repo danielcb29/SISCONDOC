@@ -44,13 +44,16 @@ public class DAOUser {
     public int createUser(Usuario us){
         String sql_save,sql_convo;
         int numRows=0;
-
+        System.out.println("paso1");
         sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
-        sql_convo = "INSERT INTO convocatoria_suario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"')";
+        sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', "+us.getConvocatoria().getCode()+",true)";
+        System.out.println(us.getConvocatoria().getCode());
+        System.out.println("paso2");
         try{
             Statement statement = conn.createStatement();
 
-            numRows = statement.executeUpdate(sql_save);            
+            numRows = statement.executeUpdate(sql_save);
+            numRows = statement.executeUpdate(sql_convo);
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
