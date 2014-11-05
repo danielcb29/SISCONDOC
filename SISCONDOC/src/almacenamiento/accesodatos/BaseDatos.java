@@ -18,9 +18,9 @@ public class BaseDatos {
 
     public BaseDatos()
     {
-      url = "jdbc:postgresql://localhost:5432/SISCONDOC";
-      usuario="fernando";
-      password="fernando1128";
+      url = "jdbc:postgresql://localhost:5432/juand";
+      usuario="juand";
+      password="juand";
     }
       
     
@@ -43,7 +43,8 @@ public class BaseDatos {
                      return conexion;
                   //Crear objeto Statement para realizar queries a la base de datos
              } catch( Exception e ) {
-                System.out.println( "No se pudo abrir la bd." );
+                //System.out.println( "No se pudo abrir la bd." );
+                 System.out.println( e.getMessage() );
                 return null;
              }
 
