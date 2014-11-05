@@ -273,6 +273,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
      */
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         //Se declara objeto de la clase usuario
+        
         Usuario objUsuario;
         
         //Se guarda el nombre de usuario ingresado en una cadena de texto
@@ -282,6 +283,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
        
         
         //Se consulta si el nombre de usuario ya existe en la base de datos
+        System.out.println("llegamos antes de la consulta");
         objUsuario=objControl.consultUser(username, 1);
         
         

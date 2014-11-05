@@ -134,7 +134,7 @@ public class DAOUser {
             return us;
          }
          catch(SQLException e){ System.out.println(e); }
-         catch(Exception e){ System.out.println(e); }
+         catch(Exception e){ System.out.println("excepcion del dao"); System.out.println(e); }
         return null;
     }//fin readUser
 

@@ -44,7 +44,6 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         }else{
             if(type == 2){
                 //Editar conv
-                //lbAdd.setVisible(false);
                 lbTitle.setText("Editar Convocatoria");
                 lbInfo.setText("Busque la convocatoria que desea editar, cambie los parametros necesarios y guarde");
                 btAction.setText("Guardar");
