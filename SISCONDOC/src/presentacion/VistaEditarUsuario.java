@@ -181,7 +181,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(lbSearch)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +236,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)
                                 .addComponent(lbTitle))
                             .addComponent(lbInfo))
-                        .addContainerGap())))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,6 +345,7 @@ public class VistaEditarUsuario extends javax.swing.JFrame {
             result = objUserController.deleteUser(tfSearchCedula.getText());
         }else{
             menj= "edito";
+            System.out.println("PERFIL: "+Integer.toString(comboPerfil.getSelectedIndex()+1));
             result = objUserController.editUser(tfSearchCedula.getText(), txtNombres.getText(), txtApellidos.getText(),txtNomUsuario.getText(), txtContrasena.getText(), txtMail.getText(), Integer.toString(comboPerfil.getSelectedIndex()+1), list[comboConvo.getSelectedIndex()+1]);
         }        
         if(result==-1||result==-2){

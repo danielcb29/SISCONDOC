@@ -296,14 +296,17 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             String contrasena=txtContrasena.getText();
             String email=txtMail.getText();
             String cedula=txtCedula.getText();
-            int numPerfil=comboPerfil.getSelectedIndex()+1;
+            String perfil=comboPerfil.getSelectedItem().toString();
             int numConvocatoria=comboConvocatoria.getSelectedIndex();
-            String perfil=Integer.toString(numPerfil);
-            String convo;
-            if(numPerfil==3){
-                convo="null";
+            
+            
+            Convocatoria convo;
+            if(perfil.equals("Administrador")){
+                convo=null;
+                
             }else{
-                convo= nomConvocatorias[numConvocatoria];
+                convo= objConvocatoria.readConv(nomConvocatorias[numConvocatoria]);
+                System.out.println("nombre de la convo:"+convo);
             }
             int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convo);
             

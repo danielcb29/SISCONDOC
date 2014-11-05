@@ -105,7 +105,7 @@ public class DAOConvocatoria {
             return conv;
          }
          catch(SQLException e){ System.out.println(e); }
-         catch(Exception e){ System.out.println(e); }
+         catch(Exception e){ System.out.println("exception dao conv");System.out.println(e); }
         return null;
     }
     public void updateConv(String exCon, Convocatoria conv){
