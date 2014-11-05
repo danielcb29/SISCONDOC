@@ -6,7 +6,6 @@
 
 package almacenamiento.accesodatos;
 import proceso.*;
-
 import java.sql.*;
 
 /**
@@ -229,35 +228,49 @@ public class DAOUser {
             System.out.println("consultando en la bd");
             Statement statement = conn.createStatement();
             ResultSet table = statement.executeQuery(sql_select);
-            ResultSet table2= table;
             int numRows=0;
             while(table.next()){
-                numRows++;
+               numRows++;
             }
             System.out.println(numRows);
+            
+            ResultSet table2= statement.executeQuery(sql_select);
+            
             Usuario us[]= new Usuario[numRows];
             for(int i=0; i<numRows; i++){
                 us[i]=new Usuario();
             }
+            
             String sql_conv="";
             int j=0;
+            
             while(table2.next()){
-                
-                us[j].setCedula(table.getString(1));
+                   
+                us[j].setCedula(table2.getString(1));
                
-                us[j].setName(table.getString(2));
+                us[j].setName(table2.getString(2));
                 
-                us[j].setLastName(table.getString(3));
+                us[j].setLastName(table2.getString(3));
                 
-                us[j].setUserName(table.getString(4));               
+                us[j].setUserName(table2.getString(4));               
+                
+                us[j].setPassword(table2.getString(5));
 
-                us[j].setPassword(table.getString(5));
-
-                us[j].setMail(table.getString(6));
+                us[j].setMail(table2.getString(6));
+                
+                
+                switch(table2.getString(7)){
+                    case "1":   us[j].setProfile("Digitador");
+                                break;
+                    case "2": us[j].setProfile("Coordinador");
+                              break;
+                    case "3": us[j].setProfile("Administrador");
+                              break;
+                }
  
-                us[j].setProfile(table.getString(7));
                 
-                us[j].setState(table.getBoolean(8));
+                
+                us[j].setState(table2.getBoolean(8));
                 
                 if(!us[j].getProfile().equals("Administrador")){
                     sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us[j].getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
