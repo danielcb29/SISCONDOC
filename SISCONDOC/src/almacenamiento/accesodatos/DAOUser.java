@@ -69,7 +69,7 @@ public class DAOUser {
         }
         catch(SQLException e){
             
-            System.out.println(e); 
+            System.out.println(e+"jadlskf"); 
             return -2;
         }
         catch(Exception e){ 
@@ -114,7 +114,7 @@ public class DAOUser {
                 //System.out.println("ok");
             }
             if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE usuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
+                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE convoUsuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
                 table = statement.executeQuery(sql_conv);
                 String nom="";
                 while(table.next()){
@@ -138,7 +138,7 @@ public class DAOUser {
      * actualizar la informacion de un usuario, con la cedula que entra por parametro.
      * @param us objeto de Usuario con los atributos a modificar en la base de datos.
      * @param cedula la cedula del usuario que se quiere actualizar.
-     * @return 1 si el proceso ocurrio bien durante todo el metodo, -2 si hay algun error de sql y -1 si hay cualquier otro error.
+     * @return 1 si el proceso ocurrio bien durante todo el metodo, -3 si el usuario entregado tiene un perfil inexistente, -2 si hay algun error de sql y -1 si hay cualquier otro error.
      */
     public int updateUser(Usuario us, String cedula){
         String sql_save1,  sql_save2,  sql_save3, sql_save4,  sql_save5,  sql_save6,  sql_save7,  sql_save8;
@@ -147,7 +147,16 @@ public class DAOUser {
         sql_save3="UPDATE usuario SET userName='"+us.getUserName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save4="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save5="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
-        sql_save6="UPDATE usuario SET id_perfil='"+us.getProfile()+"' WHERE cedula='" + us.getCedula() + "'";
+        switch(us.getProfile()){
+            case "Digitador":   sql_save6="UPDATE usuario SET id_perfil='1' WHERE cedula='" + us.getCedula() + "'";
+                                break;
+            case "Coordinador": sql_save6="UPDATE usuario SET id_perfil='2' WHERE cedula='" + us.getCedula() + "'";
+                                break;
+            case "Administrador":   sql_save6="UPDATE usuario SET id_perfil='3' WHERE cedula='" + us.getCedula() + "'";
+                                    break;
+            default: return -3;
+        }
+        
         
         
 
