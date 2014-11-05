@@ -39,7 +39,7 @@ public class DAOUser {
         /**
         * crear o agregar un usuario a la tabla.
         * @param us el objeto usuario a agregar.
-        * @return devuelve el número de tuplas que se agregaron a la tabla, -3 en caso de que el perfil del usuario este malo, -2 en caso de un error de integridad referencial o de entidad, y -1 en cualquier otro caso0.
+        * @return 1 en caso que se cumpla todo en su flujo normal, -3 en caso de que el perfil del usuario este malo, -2 en caso de un error de integridad referencial o de entidad, y -1 en cualquier otro caso.
         */
     public int createUser(Usuario us){
         String sql_save,sql_convo;
@@ -58,7 +58,7 @@ public class DAOUser {
         try{
             Statement statement = conn.createStatement();
 
-            numRows = statement.executeUpdate(sql_save);
+            statement.executeUpdate(sql_save);
             if(!(us.getProfile().equals("Administrador"))){
                 sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"', true)";
                 statement.executeUpdate(sql_convo);
@@ -114,7 +114,7 @@ public class DAOUser {
                 //System.out.println("ok");
             }
             if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
+                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
                 table = statement.executeQuery(sql_conv);
                 String nom="";
                 while(table.next()){
@@ -138,9 +138,10 @@ public class DAOUser {
      * actualizar la informacion de un usuario, con la cedula que entra por parametro.
      * @param us objeto de Usuario con los atributos a modificar en la base de datos.
      * @param cedula la cedula del usuario que se quiere actualizar.
+     * @return 1 si el proceso ocurrio bien durante todo el metodo, -2 si hay algun error de sql y -1 si hay cualquier otro error.
      */
-    public void updateUser(Usuario us, String cedula){
-	String sql_save1,  sql_save2,  sql_save3, sql_save4,  sql_save5,  sql_save6,  sql_save7,  sql_save8;
+    public int updateUser(Usuario us, String cedula){
+        String sql_save1,  sql_save2,  sql_save3, sql_save4,  sql_save5,  sql_save6,  sql_save7,  sql_save8;
 	sql_save1="UPDATE usuario SET name='"+us.getName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save2="UPDATE usuario SET lastname='"+us.getLastName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save3="UPDATE usuario SET userName='"+us.getUserName()+"' WHERE cedula='" + us.getCedula() + "'";
@@ -192,10 +193,13 @@ public class DAOUser {
         }
         catch(SQLException e){
             System.out.println(e); 
-            }
+            return -2;
+        }
         catch(Exception e){ 
             System.out.println(e);
+            return -1;
         }
+        return 1;
     }
    /**
      * listar todas las tuplas de los usuarios existentes.
