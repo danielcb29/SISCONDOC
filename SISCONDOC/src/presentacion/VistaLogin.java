@@ -189,7 +189,7 @@ public class VistaLogin extends javax.swing.JFrame {
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
         }else{
-            Usuario user = controlerU.consultUser(userNameForget);
+            Usuario user = controlerU.consultUser(userNameForget, 1);
             if (user==null){
                 JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
@@ -244,7 +244,7 @@ public class VistaLogin extends javax.swing.JFrame {
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
-        Usuario user = controlerU.consultUser(userName);
+        Usuario user = controlerU.consultUser(userName, 1);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -255,21 +255,25 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 boolean state = user.getState();
                 System.out.println("estado: "+state);
+                //Validacion de estado de usuario , activo o eliminado
                 if(state){
                     String profile = user.getProfile();
                     if (profile.equals("Digitador")){
                         //System.out.println("No se ha implementado aun :)");
                         Convocatoria conv = user.getConvocatoria();
+                        //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
                         if(conv.getState()){
                             Date finConv = conv.getDateEnd();
                             Date now = new Date();
+                            //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
                             if(finConv.after(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
-                                digPanel.setVisible(false);
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
+                                digPanel.setVisible(true);
                             }
 
-                            
+                         //CASO ELIMINADA   
                         }else{
                             JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
@@ -283,14 +287,18 @@ public class VistaLogin extends javax.swing.JFrame {
                                 //Clase nelsini
                                 System.out.println("Iniciamo sesion : "+ user.getName());
                                 this.dispose();
-                                vAdmin = new VistaAdmin(userName,controlerU);
-                                vAdmin.setVisible(true);
-                                //vAdmin.show();
+                                //COMENTADO PARA PRUEBA
+                                //vAdmin = new VistaAdmin(userName,controlerU);
+                                //vAdmin.setVisible(true);
+                                //PRUEBA BORRAR
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
+                                digPanel.setVisible(true);
                             }
 
                             
                         }
                     }
+                 //Caso usuario eliminado   
                 }else{
                     JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
                 }
