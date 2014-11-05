@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package almacenamiento.accesodatos;
 import proceso.*;
 
@@ -80,13 +81,18 @@ public class DAOUser {
     }//fin saveUser
         /**
         * consultar el usuario que tiene como username el parametro.
-        * @param username el username del usuario que se quiere consultar.
+        * @param req el username o cedula del usuario que se quiere consultar.
+        * @param tipoCon 1 si req es el username y otro numero (0) si es la cedula
         * @return null si hay error en la consulta a la base de datos. Objeto tipo Usuario si el objeto del usuario que se consulto. Devuelve 
         */
-    public Usuario readUser(String username){
+    public Usuario readUser(String req, int tipoCon){
         Usuario us= new Usuario();
         String sql_select;
-        sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + username +  "'";
+        if(tipoCon==1){
+            sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + req +  "'";        
+        }else{
+            sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND cedula='" + req +  "'";        
+        }
         try{
             System.out.println("consultando en la bd");
             Statement statement = conn.createStatement();
@@ -155,6 +161,7 @@ public class DAOUser {
             case "Administrador":   sql_save6="UPDATE usuario SET id_perfil='3' WHERE cedula='" + us.getCedula() + "'";
                                     break;
             default: return -3;
+                       
         }
         
         
@@ -209,7 +216,7 @@ public class DAOUser {
             return -1;
         }
         return 1;
-    }
+    }//fin updateUser
    /**
      * listar todas las tuplas de los usuarios existentes.
      * @return los objetos tipo Usuario enlistados en un arreglo.
