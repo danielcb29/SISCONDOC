@@ -7,6 +7,7 @@ package presentacion;
 import javax.swing.JOptionPane;
 import almacenamiento.controlador.*;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import proceso.*;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ public class VistaLogin extends javax.swing.JFrame {
      */
     private UserController controlerU;
     private VistaAdmin vAdmin;
+    private PanelDigitador digPanel;
     private String userName;
     private String password;
     public VistaLogin() {
@@ -37,6 +39,7 @@ public class VistaLogin extends javax.swing.JFrame {
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
         controlerU.connectDB();
+        
         //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
@@ -255,8 +258,22 @@ public class VistaLogin extends javax.swing.JFrame {
                 if(state){
                     String profile = user.getProfile();
                     if (profile.equals("Digitador")){
-                        System.out.println("No se ha implementado aun :)");
-                        System.exit(0);
+                        //System.out.println("No se ha implementado aun :)");
+                        Convocatoria conv = user.getConvocatoria();
+                        if(conv.getState()){
+                            Date finConv = conv.getDateEnd();
+                            Date now = new Date();
+                            if(finConv.after(now)){
+                                JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                digPanel.setVisible(false);
+                            }
+
+                            
+                        }else{
+                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
                     }else{
                         if(profile.equals("Coordinador")){
                             System.out.println("No se ha implementado aun :)");

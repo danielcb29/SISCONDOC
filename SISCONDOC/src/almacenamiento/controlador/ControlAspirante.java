@@ -7,6 +7,7 @@ package almacenamiento.controlador;
 
 import almacenamiento.accesodatos.*;
 import java.sql.Connection;
+import java.util.Date;
 import proceso.*;
 
 
@@ -33,8 +34,8 @@ public class ControlAspirante
      * @param aspirante: aspirante a crear
      * @return 
      */
-    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria){
-        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria);
+    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,Date fecha_nac ){
+        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac);
         int result = daoAspirante.crateAspirante(aspirante);
         return result;
     }

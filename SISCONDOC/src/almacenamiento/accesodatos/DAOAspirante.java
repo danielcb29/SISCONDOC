@@ -39,7 +39,8 @@ public class DAOAspirante
         int numRows=0;
         
         sql_save = "INSERT INTO Aspirante VALUES ( '"+ aspirante.getDocument() + "','" + aspirante.getName() + "','" + aspirante.getLastname() + "'," +
-                aspirante.getCity() + "," +  aspirante.getPuntaje() + ","  + aspirante.getConvocatoria().getCode()+ ");";
+                aspirante.getCity() + "," +  aspirante.getPuntaje() + ","  + aspirante.getConvocatoria().getCode()+ ",'" + aspirante.getGenero()+ "','" +
+                aspirante.getJornada() + "','" + aspirante.getFecha_nac() +"');";
         try{
             Statement sentencia = conn.createStatement();
 
@@ -69,7 +70,7 @@ public class DAOAspirante
         Convocatoria convocatoria = new Convocatoria ();
         String sql_select;
         sql_select="SELECT A.cedula,A.nombre,A.apellido,A.municipio,A.puntaje,A.codigo" + 
-                   "C.fecha_ini, C.fecha_fin, C.nombre,C.estado, C.descripcion FROM" +
+                   "C.fecha_ini, C.fecha_fin, C.nombre,C.estado, C.descripcion,A.genero,A.jornada,A.fecha FROM" +
                    "FROM Aspirante as A NATURAL JOIN Convocatoria as C WHERE cedula = '"+document+"';";
          try{
             System.out.println("consultando en la bd");
@@ -95,6 +96,10 @@ public class DAOAspirante
                 convocatoria.setName(table.getString(9));
                 convocatoria.setState(table.getBoolean(10));               
                 convocatoria.setDescription(table.getString(11));
+                //
+                aspirante.setGenero(table.getString(12));
+                aspirante.setJornada(table.getString(13));
+                aspirante.setFecha_nac(table.getDate(14));
                 
                 aspirante.setConvocatoria(convocatoria);            
             }
@@ -107,13 +112,17 @@ public class DAOAspirante
     }
     
     public void updateAspirante(String documento, Aspirante aspirante){
-        String sql1,sql2,sql3,sql4,sql5,sql6;
+        String sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9;
 	sql1="UPDATE convocatoria SET nombre='"+aspirante.getName()+"' WHERE cedula='" + documento + "';";
         sql2 = "UPDATE convocatoria SET apellido ='"+aspirante.getLastname()+"' WHERE cedula='" + documento + "';";
         sql3 = "UPDATE convocatoria SET municipio ='"+aspirante.getCity()+"'WHERE cedula='" + documento + "';";
         sql4 = "UPDATE convocatoria SET puntaje='"+aspirante.getPuntaje()+"' WHERE cedula='" + documento + "';";
         sql5 = "UPDATE convocatoria SET codigo='"+aspirante.getConvocatoria().getCode()+"' WHERE cedula='" + documento + "';";
-        sql6 = "UPDATE convocatoria SET cedula='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
+        sql6 = "UPDATE convocatoria SET genero='"+aspirante.getGenero()+"' WHERE cedula='" + documento + "';";
+        sql7 = "UPDATE convocatoria SET jornada='"+aspirante.getJornada()+"' WHERE cedula='" + documento + "';";
+        sql8 = "UPDATE convocatoria SET fecha_nac='"+aspirante.getFecha_nac()+"' WHERE cedula='" + documento + "';";
+        sql9 = "UPDATE convocatoria SET cedula='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
+        
         
         try{
                 Statement sentencia = conn.createStatement();
@@ -124,6 +133,10 @@ public class DAOAspirante
                 sentencia.executeUpdate(sql4);
                 sentencia.executeUpdate(sql5);
                 sentencia.executeUpdate(sql6);
+                sentencia.executeUpdate(sql7);
+                sentencia.executeUpdate(sql8);
+                sentencia.executeUpdate(sql9);
+
 
             }
         catch(SQLException e){
