@@ -88,6 +88,7 @@ public class DAOUser {
         Usuario us= new Usuario();
         String sql_select;
         if(tipoCon==1){
+            //System.out.println("entramos al caso de username");
             sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND userName='" + req +  "'";        
         }else{
             sql_select="SELECT usuario.cedula, usuario.name, usuario.lastName,usuario.userName, usuario.contrasena, usuario.email ,  perfiles.nombre , usuario.estado FROM  usuario, perfiles WHERE usuario.id_perfil=perfiles.id_perfil AND cedula='" + req +  "'";        
@@ -95,11 +96,12 @@ public class DAOUser {
         try{
             System.out.println("consultando en la bd");
             Statement statement = conn.createStatement();
+            //System.out.println("antes de la ejecucion");
             ResultSet table = statement.executeQuery(sql_select);
-            
+            //System.out.println("despues de la ejecucion");
             
             while(table.next()){
-                
+                //System.out.println("dentro del while");
                 us.setCedula(table.getString(1));
                
                 us.setName(table.getString(2));
@@ -118,24 +120,39 @@ public class DAOUser {
               
                 //System.out.println("ok");
             }
-            if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE convoUsuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
-                table = statement.executeQuery(sql_conv);
-                String nom="";
-                while(table.next()){
-                
-                    nom = table.getString(1);
-              
-                //System.out.println("ok");
-                }
-                DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                Convocatoria conv = daoc.readConv(nom);
+           // System.out.println("despues del while antes del if");
+            //System.out.println("perfil: "+us.getProfile());
+            if(us.getProfile() == null){
+                Convocatoria conv = null;
                 us.setConvocatoria(conv);
+                
+            }else{
+                    if(!us.getProfile().equals("Administrador")){
+                        //System.out.println("entramos al if");
+                        String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE convoUsuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
+                        table = statement.executeQuery(sql_conv);
+                        //System.out.println("despues de la consulta convosa");
+                        String nom="";
+                        while(table.next()){
+
+                            nom = table.getString(1);
+
+                        //System.out.println("ok");
+                        }
+
+                        DAOConvocatoria daoc=new DAOConvocatoria(conn);
+                        //System.out.println("inicializa dao conv");
+                        Convocatoria conv = daoc.readConv(nom);
+                        //System.out.println("se trae conv");
+                        us.setConvocatoria(conv);
+                        //System.out.println("set convo");
+                    }
             }
+            
             return us;
          }
          catch(SQLException e){ System.out.println(e); }
-         catch(Exception e){ System.out.println(e); }
+         catch(Exception e){ System.out.println("excepcion del dao"); System.out.println(e); }
         return null;
     }//fin readUser
 
