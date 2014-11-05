@@ -12,7 +12,12 @@ import java.sql.Connection;
 import almacenamiento.controlador.UserController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -1424,7 +1429,12 @@ public class PanelDigitador extends javax.swing.JFrame {
         dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
         mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
-        fecha_nac=dia+"-"+mes+"-"+anno;
+        fecha_nac=dia+"/"+mes+"/"+anno;
+        SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+        Date d1 = new Date();
+        d1 = format.parse(fecha_nac);
+           System.out.println("fecha" + fecha_nac);
+        
         jornada=jComboBoxJornada.getSelectedItem().toString();
         municipio=jComboBoxMunicipio.getSelectedItem().toString();
         
@@ -1441,7 +1451,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac);
+                                                d1);
                       objAspirantController.readAspirante(cedula);
                               
                     }
@@ -1469,6 +1479,8 @@ public class PanelDigitador extends javax.swing.JFrame {
             System.out.println("Ingresaste la fecha de forma equivocada");
             jDateChooserFecha.setDate(null);
             jDateChooserFecha.setBackground(Color.red);
+        } catch (ParseException ex) {
+            Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
@@ -1585,6 +1597,7 @@ public class PanelDigitador extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_jTextCedulaKeyTyped
 
+    
     private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
         // TODO add your handling code here:
         char car=evt.getKeyChar(); 
