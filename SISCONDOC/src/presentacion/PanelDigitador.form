@@ -156,6 +156,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jComboBoxJornada" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jDateChooserFecha" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jComboBoxGenero" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextCedula" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextApellidos" max="32767" attributes="0"/>
@@ -163,7 +164,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="582" max="32767" attributes="0"/>
+                      <EmptySpace pref="645" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -191,7 +192,10 @@
                           <Component id="jComboBoxGenero" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jDateChooserFecha" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jComboBoxJornada" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -265,13 +269,21 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextNombres">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextNombresActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNombresKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextApellidos">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextApellidosActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextApellidosKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCedula">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCedulaKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxGenero">
               <Properties>
@@ -282,6 +294,8 @@
                   </StringArray>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFecha">
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxJornada">
               <Properties>
@@ -413,7 +427,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextDocUrl" alignment="1" pref="212" max="32767" attributes="0"/>
+                                  <Component id="jTextDocUrl" alignment="1" pref="336" max="32767" attributes="0"/>
                                   <Component id="jTextMaesTicUrl" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jTextMaesUrl" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jTextEspeTicUrl" max="32767" attributes="0"/>
@@ -897,7 +911,7 @@
                               <Component id="jTextCursoUrl" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="552" max="32767" attributes="0"/>
+                      <EmptySpace pref="623" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1052,7 +1066,7 @@
                                       <Component id="jRadioButton8_3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="63" max="32767" attributes="0"/>
+                              <EmptySpace pref="237" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
@@ -1568,7 +1582,7 @@
                           <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="472" max="32767" attributes="0"/>
+                      <EmptySpace pref="583" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1864,7 +1878,7 @@
                           <Component id="jComboBoxFormEst" alignment="0" max="32767" attributes="0"/>
                           <Component id="jComboBoxFormForm" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="451" max="32767" attributes="0"/>
+                      <EmptySpace pref="560" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2006,7 +2020,7 @@
                               <Component id="jButtonCancelar" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="502" max="32767" attributes="0"/>
+                      <EmptySpace pref="565" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2104,6 +2118,9 @@
           <Image iconType="3" name="/presentacion/Login-out-icon.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLogoutActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
