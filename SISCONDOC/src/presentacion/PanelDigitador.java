@@ -6,6 +6,7 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+import proceso.Convocatoria;
 
 /**
  *
@@ -17,14 +18,14 @@ public class PanelDigitador extends javax.swing.JFrame {
      * Creates new form PanelDigitador
      */
     String name="User Default";
-    String convocatoria="Convacatoria Default";
+    Convocatoria convocatoria;
     public PanelDigitador() {
         
     }
-    public PanelDigitador(String username, String convoca){
+    PanelDigitador(String username, Convocatoria convo){
         initComponents();
         name=username;
-        this.convocatoria=convoca;
+        this.convocatoria=convo;
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
         LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+convocatoria);
     }
@@ -1308,7 +1309,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jButtonLogout, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedDigitador)
+                .addComponent(jTabbedDigitador, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1478,7 +1479,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelDigitador("Nelson", "ConvocatoriaDocente").setVisible(true);
+                new PanelDigitador("Nelson", new Convocatoria()).setVisible(true);
             }
         });
     }

@@ -75,7 +75,7 @@ public class DAOConvocatoria {
     public Convocatoria readConv(String name){
         Convocatoria conv = new Convocatoria();
         String sql_select;
-        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion,codigo FROM Convocatoria WHERE estado=true AND nombre = '"+name+"';";
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion,codigo,estado FROM Convocatoria WHERE  nombre = '"+name+"';";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -96,6 +96,8 @@ public class DAOConvocatoria {
                 conv.setDescription(table.getString(5));
 
                 conv.setCode(table.getInt(6));
+                
+                conv.setState(table.getBoolean(7));
               
                 //System.out.println("ok");
             }
@@ -107,17 +109,19 @@ public class DAOConvocatoria {
         return null;
     }
     public void updateConv(String exCon, Convocatoria conv){
-        String sql_save1,sql2,sql3,sql4;
+        String sql_save1,sql2,sql3,sql4,sql5;
 	sql_save1="UPDATE convocatoria SET nombre='"+conv.getName()+"' WHERE nombre='" + exCon + "';";
         sql2 = "UPDATE convocatoria SET fecha_Ini='"+conv.getDateIn().toString()+"' WHERE nombre='" + exCon + "';";;
         sql3 = "UPDATE convocatoria SET fecha_Fin='"+conv.getDateEnd().toString()+"' WHERE nombre='" + exCon + "';";
         sql4 = "UPDATE convocatoria SET descripcion='"+conv.getDescription()+"' WHERE nombre='" + exCon + "';";
+        sql5 = "UPDATE convocatoria SET estado="+conv.getState()+" WHERE nombre='" + exCon + "';";
         try{
             Statement sentencia = conn.createStatement();
 
             sentencia.executeUpdate(sql2);
             sentencia.executeUpdate(sql3);
             sentencia.executeUpdate(sql4);
+            sentencia.executeUpdate(sql5);
             sentencia.executeUpdate(sql_save1);
             
             

@@ -269,6 +269,7 @@ public class VistaLogin extends javax.swing.JFrame {
                             if(finConv.after(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
+                                digPanel = new PanelDigitador(userName,conv);
                                 digPanel.setVisible(true);
                             }
 

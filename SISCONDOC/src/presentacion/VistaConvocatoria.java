@@ -25,7 +25,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
      */
     private ConvocatoriaController controller;
     private int type;
-    
+    //Atributo necesario para conocer el estado de una convocatoria al momento de editar , se obtiene en buscar y se usa en editar
+    private boolean convEditState = true;
     public VistaConvocatoria(ConvocatoriaController controllerParam, int type) {
         initComponents();
         controller = controllerParam;
@@ -37,6 +38,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             lbSearch.setVisible(false);
             tfSearch.setVisible(false);
             btSearch.setVisible(false);
+            lbState.setVisible(false);
+            cbState.setVisible(false);
             //lbAdd.setText("Recuerde que cada convocatoria debe tener un nombre diferente");
         }else{
             if(type == 2){
@@ -46,6 +49,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 lbInfo.setText("Busque la convocatoria que desea editar, cambie los parametros necesarios y guarde");
                 btAction.setText("Guardar");
                 this.setTitle("Panel Administrador: Editar Convoatoria");
+                lbState.setVisible(false);
+                cbState.setVisible(false);
             }else{
                 //ELiminar conv
                 //lbAdd.setVisible(false);
@@ -58,6 +63,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 tfTimeIn.setEditable(false);
                 tfDateEnd.setEditable(false);
                 tfTimeEnd.setEditable(false);
+                lbState.setVisible(false);
+                cbState.setVisible(false);
                 this.setTitle("Panel Administrador: Eliminar Convocatoria");
             }
         }
@@ -108,6 +115,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         btSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lbState = new javax.swing.JLabel();
+        cbState = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrador: Crear Convocatoria");
@@ -194,6 +203,14 @@ public class VistaConvocatoria extends javax.swing.JFrame {
 
         jLabel13.setText("ej: 13:00");
 
+        lbState.setText("Estado:");
+
+        cbState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -276,7 +293,11 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbState)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbState, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
@@ -302,9 +323,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbSearch)
@@ -328,16 +347,22 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(tfDateIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel9)
+                            .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(lbState)
+                            .addComponent(cbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(tfDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(tfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)))
+                        .addGap(19, 19, 19))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -401,11 +426,25 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(this,"Convocatoria creada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
                          this.dispose();
                      }else{
-                         JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe","Ups!",JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe\nNota: si la convocatoria ha sido eliminada puede reactivarla en el panel de edicion de convocatorias ","Ups!",JOptionPane.ERROR_MESSAGE);
                      }
                 }else{
                     if(type==2){
                         //editar
+                        //validar si el usuario estaba eliminado
+                        if(!convEditState){
+                            Object item = cbState.getSelectedItem();
+                            String value = item.toString();
+                            
+                            if(value.equals("Inactivo")){
+                                newConv.setState(false);
+                                
+                            }else{
+                                newConv.setState(true);
+                            }
+                        }else{
+                            newConv.setState(true);
+                        }
                         controller.updateConv(tfSearch.getText(), newConv);
                         JOptionPane.showMessageDialog(this,"Convocatoria actualizada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
@@ -442,9 +481,10 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         if(name.length() != 0){
             Convocatoria convEdit = controller.readConv(name);
             System.out.println("primera fase");
+            //Error
             if(convEdit==null){
                 JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
-            }else{
+            }else{  //Caso que la convo lo existe
                 if(convEdit.getName() == null){
                     tfNombre.setText("null");
                     tfDateIn.setText("null");
@@ -453,7 +493,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     tfTimeEnd.setText("null");
                     taDescription.setText("null");
                     JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
-                }else{
+                }else{//Caso que si exista
                     System.out.println("segunda fase");
                     SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
                     String datIn[] = format.format(convEdit.getDateIn()).split(" ");
@@ -464,12 +504,24 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     tfDateEnd.setText(datEnd[0]);
                     tfTimeEnd.setText(datEnd[1]);
                     taDescription.setText(convEdit.getDescription());
+                    //CASO QUE HAYA SIDO ELIMINADA Y SE QUIERA RE ACTIVAR
+                    convEditState = convEdit.getState(); 
+                    if(!convEditState){
+                        lbState.setVisible(true);
+                        cbState.setVisible(true);
+                        cbState.addItem("Inactivo");
+                        cbState.addItem("Activo");
+                    }
                 }
             }
         }else{
             JOptionPane.showMessageDialog(this,"No puedes buscar una convocatoria con nombre vacio","Error en la busqueda",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btSearchActionPerformed
+
+    private void cbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,6 +568,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private javax.swing.JButton btAction;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSearch;
+    private javax.swing.JComboBox cbState;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -533,6 +586,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lbInfo;
     private javax.swing.JLabel lbSearch;
+    private javax.swing.JLabel lbState;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextArea taDescription;
     private javax.swing.JTextField tfDateEnd;
