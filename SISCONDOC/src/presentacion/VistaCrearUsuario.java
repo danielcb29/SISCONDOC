@@ -24,13 +24,14 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
     
     /**
      * Constructor de la clase
-     * @param controler Se le introduce un objeto de la clase UserController
+     * @param userControler Se le introduce un objeto de la clase UserController
+     * @param convController Se le introduce un objeto de la clase ConvocatoriaController
      */
-    public VistaCrearUsuario(UserController controler) {
+    public VistaCrearUsuario(UserController userControler, ConvocatoriaController convController) {
         initComponents();
         comboPerfil.setSelectedIndex(2);
-        objControl=controler;
-        objConvocatoria=new ConvocatoriaController(objControl.getConn());
+        objControl=userControler;
+        objConvocatoria=convController;
         consultaConvocatorias();
         muestraConvocatorias();
     }
@@ -294,8 +295,14 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             String email=txtMail.getText();
             String cedula=txtCedula.getText();
             int numPerfil=comboPerfil.getSelectedIndex()+1;
+            int numConvocatoria=comboConvocatoria.getSelectedIndex();
             String perfil=Integer.toString(numPerfil);
-            Convocatoria convocatoria = control.readConv("prueba");
+            Convocatoria convocatoria;
+            if(numPerfil==2){
+                convocatoria=null;
+            }else{
+                convocatoria= objConvocatoria.readConv(nomConvocatorias[numConvocatoria]);
+            }
             int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convocatoria);
             
             if(result == -1 || result == -2){
@@ -303,14 +310,6 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
             }else{
                 //Se imprime el mensaje para informar el exito de la operacion
                 JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
-                //Se limpian los campos de la interfaz
-                 /* txtNombres.setText("");
-                txtApellidos.setText("");
-                txtContrasena.setText("");
-                txtMail.setText("");
-                txtCedula.setText("");
-                txtNomUsuario.setText("");*/
-                //Cerrar la base de datos 
                 //Cerramos la ventana
                 this.dispose();
             }
