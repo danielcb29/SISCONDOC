@@ -44,25 +44,16 @@ public class DAOUser {
     public int createUser(Usuario us){
         String sql_save,sql_convo;
         int numRows=0;
-        String prof=us.getProfile();
-        switch(prof){
-            case "Digitador":   sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '1', " + us.getState()+ ")";
-                                break;
-            case "Coordinador": sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '2', " + us.getState()+ ")";
-                                break;
-            case "Administrador":   sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '3', " + us.getState()+ ")";
-                                    break;
-            default: return -3;
-        }    
-        
+        System.out.println("paso1");
+        sql_save="INSERT INTO usuario VALUES ('" + us.getName() + "' , '" + us.getLastName() + "', '" + us.getUserName() +  "', '" + us.getCedula() + "' , '"  +us.getPassword() + "', '" + us.getMail() + "', '" + us.getProfile()+ "', " + us.getState()+ ")";
+        sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', "+us.getConvocatoria().getCode()+",true)";
+        System.out.println(us.getConvocatoria().getCode());
+        System.out.println("paso2");
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            numRows = sentencia.executeUpdate(sql_save);
-             if(!(us.getProfile().equals("Administrador"))){
-                sql_convo = "INSERT INTO convoUsuario VALUES ('"+us.getCedula()+"', '"+us.getConvocatoria().getCode()+"', true)";
-                sentencia.executeUpdate(sql_convo);
-            } //el registro de convoUsuario se crea solo si el usuario es digitador o coordinador.
+            numRows = statement.executeUpdate(sql_save);
+            numRows = statement.executeUpdate(sql_convo);
             System.out.println("numRowsDAO: " + numRows);
             return numRows;
             
@@ -92,7 +83,6 @@ public class DAOUser {
             Statement statement = conn.createStatement();
             ResultSet table = statement.executeQuery(sql_select);
             
-            
             while(table.next()){
                 
                 us.setCedula(table.getString(1));
@@ -113,20 +103,7 @@ public class DAOUser {
               
                 //System.out.println("ok");
             }
-            if(!us.getProfile().equals("Administrador")){
-                String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us.getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
-                table = statement.executeQuery(sql_conv);
-                String cod="";
-                while(table.next()){
-                
-                    cod = table.getString(1);
-              
-                //System.out.println("ok");
-                }
-                DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                Convocatoria conv = daoc.readConv(cod);
-                us.setConvocatoria(conv);
-            }
+           
             return us;
          }
          catch(SQLException e){ System.out.println(e); }
@@ -180,17 +157,17 @@ public class DAOUser {
             ResultSet table2= table;
             int numRows=0;
             while(table.next()){
-                numRows++;
+               numRows++;
             }
             System.out.println(numRows);
             Usuario us[]= new Usuario[numRows];
             for(int i=0; i<numRows; i++){
                 us[i]=new Usuario();
             }
-            String sql_conv="";
+            
             int j=0;
             while(table2.next()){
-                
+               
                 us[j].setCedula(table.getString(1));
                
                 us[j].setName(table.getString(2));
@@ -206,21 +183,6 @@ public class DAOUser {
                 us[j].setProfile(table.getString(7));
                 
                 us[j].setState(table.getBoolean(8));
-                
-                if(!us[j].getProfile().equals("Administrador")){
-                    sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us[j].getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
-                    ResultSet table3= statement.executeQuery(sql_conv);
-                    String cod="";
-                    while(table3.next()){
-                
-                        cod = table3.getString(1);
-              
-                        //System.out.println("ok");
-                    }
-                    DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                    Convocatoria conv = daoc.readConv(cod);
-                    us[j].setConvocatoria(conv);
-                }
 
 
                 j++;
@@ -238,13 +200,14 @@ public class DAOUser {
     * @param cedula la cedula del usuario que se quiere borrar.
     */
     public void deleteUser(String cedula){	
-		String sql_save;
+        String sql_save;
 
-        sql_save="DELETE FROM usuario WHERE cedula='" + cedula + "'";
+        sql_save="UPDATE usuario SET estado=false WHERE cedula='" + cedula + "'";
+        
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
+            statement.executeUpdate(sql_save);            
             
         }
         catch(SQLException e){
@@ -262,4 +225,4 @@ public class DAOUser {
     }
 
 
-}
+}   

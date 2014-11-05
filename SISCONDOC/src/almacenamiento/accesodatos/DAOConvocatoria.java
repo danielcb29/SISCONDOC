@@ -75,14 +75,17 @@ public class DAOConvocatoria {
     public Convocatoria readConv(String name){
         Convocatoria conv = new Convocatoria();
         String sql_select;
-        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion,codigo FROM Convocatoria WHERE estado=true AND nombre = '"+name+"';";
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion, codigo FROM Convocatoria WHERE estado=true AND nombre = 'prueba';";
          try{
-            System.out.println("consultando en la bd");
+            System.out.println("consultando en la bd Conv");
+            System.out.println(sql_select);
             Statement sentence = conn.createStatement();
+            System.out.println("paso del conn");
+            
             ResultSet table = sentence.executeQuery(sql_select);
             SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd HH:mm");
             while(table.next()){
-                
+                System.out.println("dentro de ciclo");
                 conv.setName(table.getString(1));
                 Date datIn;
                 datIn = format.parse(table.getString(2));
@@ -94,8 +97,10 @@ public class DAOConvocatoria {
                 conv.setState(table.getBoolean(4));               
 
                 conv.setDescription(table.getString(5));
-
+                System.out.println("codigo" + table.getInt(6));
                 conv.setCode(table.getInt(6));
+
+                
               
                 //System.out.println("ok");
             }
@@ -135,7 +140,7 @@ public class DAOConvocatoria {
      */
     public Convocatoria[] listConv(){
         String sql_select;
-        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion,codigo FROM Convocatoria WHERE estado=true ;";
+        sql_select="SELECT nombre,fecha_Ini,fecha_Fin,estado,descripcion FROM Convocatoria WHERE estado=true ;";
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -166,8 +171,6 @@ public class DAOConvocatoria {
                 conv[j].setState(table.getBoolean(4));               
 
                 conv[j].setDescription(table.getString(5));
-                
-                conv[j].setCode(table.getInt(6));
 
 
               j++;

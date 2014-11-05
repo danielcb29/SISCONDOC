@@ -5,14 +5,19 @@
  */
 package presentacion;
 
-import almacenamiento.controlador.AspirantController;
+import almacenamiento.controlador.*;
 import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
 import java.sql.Connection;
 import almacenamiento.controlador.UserController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +34,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     int id_convocatoria;
     String nombres,apellidos,cedula,genero,jornada,municipio,dia,mes,anno,fecha_nac;
     public Validador objValidador;
-    public AspirantController objAspirantController;
+    public ControlAspirante objAspirantController;
     public Convocatoria objConvocatoria;
     public Connection Conexion;
     public PanelDigitador() {
@@ -41,7 +46,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         this.nom_convocatoria=convoca.getName();
         id_convocatoria=convoca.getCode();
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
-        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
+        LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria AA"+nom_convocatoria);
         objValidador=new Validador();
         objConvocatoria=convoca;
         Conexion=conn.getConn();
@@ -1422,34 +1427,34 @@ public class PanelDigitador extends javax.swing.JFrame {
         cedula=jTextCedula.getText();
         genero=jComboBoxGenero.getSelectedItem().toString();
         dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+        mes=Integer.toString((jDateChooserFecha.getCalendar().get(Calendar.MONTH))+1);
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
         fecha_nac=dia+"-"+mes+"-"+anno;
+        /*SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
+        Date d1 = new Date();
+        d1 = format.parse(fecha_nac);
+           System.out.println("fecha" + fecha_nac);*/
+        
         jornada=jComboBoxJornada.getSelectedItem().toString();
         municipio=jComboBoxMunicipio.getSelectedItem().toString();
         
         /*VALIDAMOS VACIOS*/
                 if(objValidador.ValidaVacios(nombres)==1 &&
                    objValidador.ValidaVacios(apellidos)==1 &&
-                   objValidador.ValidaVacios(fecha_nac)==1 )
+                   objValidador.ValidaVacios(cedula)==1 &&
+                   objValidador.ValidaVacios(jDateChooserFecha.getDate().toString())==1)
                     
                     {
-                      objAspirantController=new AspirantController(Conexion);
-                      objAspirantController.CreateAspirante(cedula, 
+                      objAspirantController=new ControlAspirante(Conexion);
+                      objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
-                                                municipio,null,
+                                                municipio,0,
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
                                                 fecha_nac);
-                      objAspirantController.readAspirant(cedula);
-                              
-                    }
-                else{
-                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
-                   jTabbedDigitador.requestFocus();
-                }
-            System.out.println("DATOS PERSONALES: \nNombres:"
+                      objAspirantController.readAspirante(cedula);
+                       System.out.println("DATOS PERSONALES: \nNombres:"
                 +nombres+
                 "\nApellidos: "+apellidos+
                 "\nCedula: "+cedula+
@@ -1457,7 +1462,13 @@ public class PanelDigitador extends javax.swing.JFrame {
                 "\nfecha: "+fecha_nac+
                 "\njornada: "+jornada+
                 "\nmunicipio: "+municipio
-                );
+                );        
+                    }
+                else{
+                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
+                   jTabbedDigitador.requestFocus();
+                }
+           
         }
         /*catch(){
             System.out.println("Espacios blancos");
@@ -1466,10 +1477,12 @@ public class PanelDigitador extends javax.swing.JFrame {
             System.out.println("Ingresaste una letra en Cedula");
         }
         catch(NullPointerException nel){
-            System.out.println("Ingresaste la fecha de forma equivocada");
+            /*System.out.println("Ingresaste la fecha de forma equivocada");
             jDateChooserFecha.setDate(null);
             jDateChooserFecha.setBackground(Color.red);
-        }
+            jDateChooserFecha.requestFocus();*/
+            System.out.println("EXCEPCION"+nel.getMessage());
+        } 
 
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
@@ -1585,6 +1598,7 @@ public class PanelDigitador extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_jTextCedulaKeyTyped
 
+    
     private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
         // TODO add your handling code here:
         char car=evt.getKeyChar(); 
@@ -1614,12 +1628,12 @@ public class PanelDigitador extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   // public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    public static void main(String args[]) {
+        /*Set the Nimbus look and feel */
+       // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         
+         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1639,12 +1653,15 @@ public class PanelDigitador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       /* java.awt.EventQueue.invokeLater(new Runnable() {
+       
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelDigitador("Nelson", "ConvocatoriaDocente").setVisible(true);
+                 Convocatoria objconv=new Convocatoria();
+                UserController objuser=new UserController();
+                new PanelDigitador("Nelson", objconv, objuser).setVisible(true);
             }
         });
-    }*/
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConfirmacion;

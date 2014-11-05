@@ -17,15 +17,16 @@ public class UserController {
     
 
     DAOUser daoUser;
-    ConvocatoriaController convocatoriaController;
-
+   
+  
     
     /**
      * constructor
      * **/
-    public UserController(){
+    public UserController()
+    {
         daoUser=new DAOUser();
-        convocatoriaController = new ConvocatoriaController(daoUser.getConn());
+       
     }
     public void connectDB(){
         daoUser.connectDB();
@@ -46,9 +47,10 @@ public class UserController {
      * @return result: 0 si no fue posible crear el usuario.
      * @return result: 1 si se creo satisfactoriamente el usuario.
      * **/
-    public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil,String callName ){
-        Convocatoria convocatoria = convocatoriaController.readConv(callName);
-        Usuario U = new Usuario(name,lastname,username,password,email,perfil,id,convocatoria);        
+    public int   createUser (String id, String  name, String lastname ,String username, String password, String email, String perfil,Convocatoria call)
+    {
+        //System.out.println(convocatoria.getName());
+        Usuario U = new Usuario(name,lastname,username,password,email,perfil,id,call);        
         
         //Se llama al dao para guardar
         int result =daoUser.createUser(U);
@@ -71,6 +73,11 @@ public class UserController {
         return U;
 
     }
+    
+    public void deleteUser (String document)
+    {
+        daoUser.deleteUser(document);
+    }
    /**
      * metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
@@ -90,4 +97,5 @@ public class UserController {
     }
 
 }//fin clase
+
 

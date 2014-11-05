@@ -5,6 +5,8 @@
  */
 package proceso;
 
+import java.util.Date;
+
 /**
  *
  * @author fernando
@@ -13,26 +15,32 @@ package proceso;
 
 
 
-public class Aspirant {
+public class Aspirante {
     
     private String document;
     private String name;
     private String lastname;
     private String city;
-    private int puntuaction;
+    private int puntaje;
     private Convocatoria call;
+    private String genero;
+    private String jornada;
+    private String fecha_nac;
     
     
-    public Aspirant () {} 
-    public Aspirant (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int aspirantPunctuaction, Convocatoria call)
+    public Aspirante () {} 
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento)
     {
-        aspirantDocument = document;
-        aspirantName = name;
-        aspirantLastname = lastname;
-        aspirantCity = city;
-        aspirantPunctuaction = puntuaction;
+        document = aspiranteDocument;
+        name = aspiranteName;
+        lastname = aspiranteLastname;
+        city = aspiranteCity;
+        puntaje = puntajeAspirante;
         this.call =call;
-                
+        genero = gen;
+        jornada = jor;
+        fecha_nac = nacimiento;
+   
     }
 
     /**
@@ -92,17 +100,17 @@ public class Aspirant {
     }
 
     /**
-     * @return the puntuaction
+     * @return the puntaje
      */
-    public int getPuntuaction() {
-        return puntuaction;
+    public int getPuntaje() {
+        return puntaje;
     }
 
     /**
-     * @param puntuaction the puntuaction to set
+     * @param puntaje puntaje set
      */
-    public void setPuntuaction(int puntuaction) {
-        this.puntuaction = puntuaction;
+    public void setPuntaje(int puntaje) {
+        this.puntaje= puntaje;
     }
 
     /**
@@ -117,6 +125,48 @@ public class Aspirant {
      */
     public void setConvocatoria(Convocatoria call) {
         this.call = call;
+    }
+
+    /**
+     * @return the genero
+     */
+    public String getGenero() {
+        return genero;
+    }
+
+    /**
+     * @param genero the genero to set
+     */
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    /**
+     * @return the jornada
+     */
+    public String getJornada() {
+        return jornada;
+    }
+
+    /**
+     * @param jornada the jornada to set
+     */
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
+    }
+
+    /**
+     * @return the fecha_nac
+     */
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+    /**
+     * @param fecha_nac the fecha_nac to set
+     */
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
     }
     
         
