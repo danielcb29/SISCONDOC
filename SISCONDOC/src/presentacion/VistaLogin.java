@@ -189,7 +189,7 @@ public class VistaLogin extends javax.swing.JFrame {
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
         }else{
-            Usuario user = controlerU.consultUser(userNameForget);
+            Usuario user = controlerU.consultUser(userNameForget, 1);
             if (user==null){
                 JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
@@ -244,7 +244,7 @@ public class VistaLogin extends javax.swing.JFrame {
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
-        Usuario user = controlerU.consultUser(userName);
+        Usuario user = controlerU.consultUser(userName, 1);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -260,31 +260,25 @@ public class VistaLogin extends javax.swing.JFrame {
                     String profile = user.getProfile();
                     if (profile.equals("Digitador")){
                         //System.out.println("No se ha implementado aun :)");
-                        Convocatoria conv = new Convocatoria();
-                        //conv = user.getConvocatoria();
-                        
-                                conv.setCode(1);
-                                conv.setName("Convo1");
-                                digPanel = new PanelDigitador(userName,conv,controlerU);
-                                this.dispose();
-                                digPanel.setVisible(true);
+                        Convocatoria conv = user.getConvocatoria();
                         //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
-                        /*if(conv.getState()){
+                        if(conv.getState()){
                             Date finConv = conv.getDateEnd();
                             Date now = new Date();
                             //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
-                            if(finConv.after(now)){
+                            if(finConv.before(now)){
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }else{
                                 digPanel = new PanelDigitador(userName,conv,controlerU);
                                 digPanel.setVisible(true);
+                                this.dispose();
                             }
 
                          //CASO ELIMINADA   
                         }else{
                             JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
-                        */
+                        
                     }else{
                         if(profile.equals("Coordinador")){
                             System.out.println("No se ha implementado aun :)");
@@ -299,11 +293,8 @@ public class VistaLogin extends javax.swing.JFrame {
                                 vAdmin.setVisible(true);
                                 //PRUEBA BORRAR
                                 //Convocatoria conv = user.getConvocatoria();
-                               /* Convocatoria conv = new Convocatoria();
-                                conv.setCode(1);
-                                conv.setName("Convo1");
-                                digPanel = new PanelDigitador(userName,conv,controlerU);
-                                digPanel.setVisible(true);*/
+                                //digPanel = new PanelDigitador(userName,conv,controlerU);
+                                //digPanel.setVisible(true);
                             }
 
                             

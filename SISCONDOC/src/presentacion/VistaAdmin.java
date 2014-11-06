@@ -24,6 +24,7 @@ public class VistaAdmin extends javax.swing.JFrame {
     private VistaConvocatoria vistaConvo;
     private ConvocatoriaController objConvController;
     private Connection conn;
+    private VistaEditarUsuario objVistaEditarUsuario;
     
     public VistaAdmin(){}
     public VistaAdmin(String username,UserController controler){
@@ -273,7 +274,8 @@ public class VistaAdmin extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "No hay Usuarios para editar","", JOptionPane.INFORMATION_MESSAGE);  
         }
         else{
-            System.out.println("Por ahora no se ha implementado :)");
+            objVistaEditarUsuario = new VistaEditarUsuario(objUserController, objConvController,1);
+            objVistaEditarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_btEditarUsuarioActionPerformed
 
@@ -283,7 +285,9 @@ public class VistaAdmin extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(null, "No hay Usuarios para eliminar","", JOptionPane.INFORMATION_MESSAGE);  
         }
         else{
-            System.out.println("Por ahora no se ha implementado :)");
+            //System.out.println("Por ahora no se ha implementado :)");
+            objVistaEditarUsuario = new VistaEditarUsuario(objUserController, objConvController,2);
+            objVistaEditarUsuario.setVisible(true);
         }
     }//GEN-LAST:event_btEliminarUsuarioActionPerformed
 
@@ -323,7 +327,7 @@ public class VistaAdmin extends javax.swing.JFrame {
 
     private void btCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCrearUsuarioActionPerformed
         // TODO add your handling code here:
-        objVistaCrearUsuario = new VistaCrearUsuario(objUserController);
+        objVistaCrearUsuario = new VistaCrearUsuario(objUserController,objConvController);
         objVistaCrearUsuario.setVisible(true);
     }//GEN-LAST:event_btCrearUsuarioActionPerformed
 

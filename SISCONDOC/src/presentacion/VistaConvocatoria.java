@@ -44,7 +44,6 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         }else{
             if(type == 2){
                 //Editar conv
-                //lbAdd.setVisible(false);
                 lbTitle.setText("Editar Convocatoria");
                 lbInfo.setText("Busque la convocatoria que desea editar, cambie los parametros necesarios y guarde");
                 btAction.setText("Guardar");
@@ -302,7 +301,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,10 +552,12 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VistaConvocatoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
         /*
          * Create and display the form
          *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new VistaConvocatoria().setVisible(true);
             }

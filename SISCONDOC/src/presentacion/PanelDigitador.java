@@ -266,6 +266,11 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        jTextCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCedulaActionPerformed(evt);
+            }
+        });
         jTextCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextCedulaKeyTyped(evt);
@@ -1625,6 +1630,10 @@ public class PanelDigitador extends javax.swing.JFrame {
     private void jTextNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombresActionPerformed
+
+    private void jTextCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCedulaActionPerformed
 
     /**
      * @param args the command line arguments
