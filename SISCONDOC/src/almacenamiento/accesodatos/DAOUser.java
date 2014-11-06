@@ -133,7 +133,7 @@ public class DAOUser {
             }else{
                     if(!us.getProfile().equals("Administrador")){
                         //System.out.println("entramos al if");
-                        String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE convoUsuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo";
+                        String sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE convoUsuario.cedula='"+us.getCedula() +"' AND convoUsuario.codigo=convocatoria.codigo AND convoUsuario.estado=true";
                         table = statement.executeQuery(sql_conv);
                         //System.out.println("despues de la consulta convosa");
                         String nom="";
@@ -149,6 +149,7 @@ public class DAOUser {
                         Convocatoria conv = daoc.readConv(nom);
                         //System.out.println("se trae conv");
                         us.setConvocatoria(conv);
+                        System.out.println("en el dao user nombre de la convo:"+conv.getName());
                         //System.out.println("set convo");
                     }
             }
@@ -160,7 +161,7 @@ public class DAOUser {
         return null;
     }//fin readUser
 
-    /**
+   /**
      * actualizar la informacion de un usuario, con la cedula que entra por parametro.
      * @param us objeto de Usuario con los atributos a modificar en la base de datos.
      * @param cedula la cedula del usuario que se quiere actualizar.
@@ -173,6 +174,7 @@ public class DAOUser {
         sql_save3="UPDATE usuario SET userName='"+us.getUserName()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save4="UPDATE usuario SET contrasena='"+us.getPassword()+"' WHERE cedula='" + us.getCedula() + "'";
         sql_save5="UPDATE usuario SET email='"+us.getMail()+"' WHERE cedula='" + us.getCedula() + "'";
+        sql_save7="UPDATE usuario SET estado="+us.getState()+" WHERE cedula='" + us.getCedula() + "'";
         switch(us.getProfile()){
             case "Digitador":   sql_save6="UPDATE usuario SET id_perfil='1' WHERE cedula='" + us.getCedula() + "'";
                                 break;
@@ -196,6 +198,7 @@ public class DAOUser {
             statement.executeUpdate(sql_save4);
             statement.executeUpdate(sql_save5);
             statement.executeUpdate(sql_save6);
+            statement.executeUpdate(sql_save7);
             
             if(!us.getProfile().equals("Administrador")){
                 String sql_save= "SELECT codigo FROM convoUsuario WHERE cedula='"+us.getCedula()+"' AND estado=true";
@@ -283,15 +286,15 @@ public class DAOUser {
                 if(!us[j].getProfile().equals("Administrador")){
                     sql_conv= "SELECT convocatoria.nombre FROM convoUsuario, convocatoria WHERE cedula='"+us[j].getCedula() +"' AND estado=true AND convoUsuario.codigo=convocatoria.codigo";
                     ResultSet table3= statement.executeQuery(sql_conv);
-                    String cod="";
+                    String nom="";
                     while(table3.next()){
                 
-                        cod = table3.getString(1);
+                        nom = table3.getString(1);
               
                         //System.out.println("ok");
                     }
                     DAOConvocatoria daoc=new DAOConvocatoria(conn);
-                    Convocatoria conv = daoc.readConv(cod);
+                    Convocatoria conv = daoc.readConv(nom);
                     us[j].setConvocatoria(conv);
                 }
 
@@ -311,24 +314,26 @@ public class DAOUser {
     * @param cedula la cedula del usuario que se quiere borrar.
     */
     public int deleteUser(String cedula){	
-		String sql_save;
+        String sql_save;
 
-        sql_save="DELETE FROM usuario WHERE cedula='" + cedula + "'";
+        sql_save="UPDATE usuario SET estado=false WHERE cedula='" + cedula + "'";
+        
         try{
-            Statement sentencia = conn.createStatement();
+            Statement statement = conn.createStatement();
 
-            sentencia.executeUpdate(sql_save);            
-            
+            statement.executeUpdate(sql_save);            
+            return 1;
         }
         catch(SQLException e){
-            System.out.println(e); 
+            System.out.println(e);
             return -1;
-            }
+        }
         catch(Exception e){ 
             System.out.println(e);
-            return -2;
+            
         }
-        return 1;
+        return -2;
+        
     }
     /**
      * cerrar la conexion con la base de datos.

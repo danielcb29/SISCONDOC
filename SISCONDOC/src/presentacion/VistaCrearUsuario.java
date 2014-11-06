@@ -266,74 +266,97 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
+    /**
+     * Metodod para validar campos vacios
+     * @param firstDa
+     * @param firstTime
+     * @param secondDa
+     * @param secondTime
+     * @param name
+     * @param description
+     * @return 
+     */
+    private boolean validateInformation(String firstDa, String firstTime, String secondDa, String secondTime, String name, String description) {
+        //if ((((((firstDa.length() == 0) || (firstTime.length() == 0)) || (secondDa.length() == 0)) || (secondTime.length() == 0)) || (name.length() == 0)) || (description.length()==0)){
+        if ((firstDa.length() == 0) || (firstTime.length() == 0) || (secondDa.length() == 0) || (secondTime.length() == 0) || (name.length() == 0) || (description.length()==0)){    
+            return false;
+        }else{
+            return true;
+        }
+    }
     /**
      * Metodo que se ejecuta si se presiona el boton crear
      * @param evt Evento que dispara el metodo
      */
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         //Se declara objeto de la clase usuario
-        
-        Usuario objUsuario;
-        
-        //Se guarda el nombre de usuario ingresado en una cadena de texto
-        String username=txtNomUsuario.getText();
-        
-        //Se instancia la clase controlador para hacer uso de ella
-       
-        
-        //Se consulta si el nombre de usuario ya existe en la base de datos
-        System.out.println("llegamos antes de la consulta");
-        objUsuario=objControl.consultUser(username, 1);
-        
-        
-        //Si no existe, se capturan los demas datos de la interfaz,
-        //se envian al controlador para guardarlos y se informa al
-        //usuario
-        if(objUsuario.getPassword()==null){
-            String nombres=txtNombres.getText();
-            String apellidos=txtApellidos.getText();
-            String contrasena=txtContrasena.getText();
-            String email=txtMail.getText();
-            String cedula=txtCedula.getText();
-            String perfil=comboPerfil.getSelectedItem().toString();
-            int numConvocatoria=comboConvocatoria.getSelectedIndex();
-            
-            
-            Convocatoria convo;
-            if(perfil.equals("Administrador")){
-                convo=null;
-                
+        String nombres=txtNombres.getText();
+        String apellidos=txtApellidos.getText();
+        String contrasena=txtContrasena.getText();
+        String email=txtMail.getText();
+        String cedula=txtCedula.getText();
+        String perfil=comboPerfil.getSelectedItem().toString();
+        boolean empty = validateInformation(nombres, apellidos, contrasena, email, cedula, perfil);
+        if (empty){
+            Usuario objUsuario;
+
+            //Se guarda el nombre de usuario ingresado en una cadena de texto
+            String username=txtNomUsuario.getText();
+
+            //Se instancia la clase controlador para hacer uso de ella
+
+
+            //Se consulta si el nombre de usuario ya existe en la base de datos
+            System.out.println("llegamos antes de la consulta");
+            objUsuario=objControl.consultUser(username, 1);
+
+
+            //Si no existe, se capturan los demas datos de la interfaz,
+            //se envian al controlador para guardarlos y se informa al
+            //usuario
+            if(objUsuario.getPassword()==null){
+
+                int numConvocatoria=comboConvocatoria.getSelectedIndex();
+
+
+                Convocatoria convo;
+                if(perfil.equals("Administrador")){
+                    convo=null;
+
+                }else{
+                    convo= objConvocatoria.readConv(nomConvocatorias[numConvocatoria]);
+                    System.out.println("nombre de la convo:"+convo);
+                }
+                int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convo);
+
+                if(result == -1 || result == -2){
+                    JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    //Se imprime el mensaje para informar el exito de la operacion
+                    JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
+                    //Cerramos la ventana
+                    this.dispose();
+                }
+
+
+
+
             }else{
-                convo= objConvocatoria.readConv(nomConvocatorias[numConvocatoria]);
-                System.out.println("nombre de la convo:"+convo);
+                if(objUsuario.getState()==false){
+                    //Si ya existe el nombre de usuario en la base de datos se informa al
+                    //usuario del error
+                    JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" se encuentra\ninactivo, para reactivarlo visite la seccion\neditar usuario del panel administrador");
+                }else{
+                    //Si ya existe el nombre de usuario en la base de datos se informa al
+                    //usuario del error
+                    JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" ya existe");
+                }
+
             }
-            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convo);
-            
-            if(result == -1 || result == -2){
-                JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
-            }else{
-                //Se imprime el mensaje para informar el exito de la operacion
-                JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
-                //Cerramos la ventana
-                this.dispose();
-            }
-                    
-            
-            
-            
         }else{
-            if(objUsuario.getState()==false){
-                //Si ya existe el nombre de usuario en la base de datos se informa al
-                //usuario del error
-                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" se encuentra\ninactivo, para reactivarlo visite la seccion\neditar usuario del panel administrador");
-            }else{
-                //Si ya existe el nombre de usuario en la base de datos se informa al
-                //usuario del error
-                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" ya existe");
-            }
-            
+            JOptionPane.showMessageDialog(this,"No puedes realizar acciones con campos vacios","Termina de llenar los campos",JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void comboPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPerfilActionPerformed

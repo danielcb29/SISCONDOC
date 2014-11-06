@@ -92,10 +92,11 @@ public class UserController {
         daoUser.closeConectionDB();
     }
 
-    public int editUser(String cedula, String name, String lastName, String userName, String password, String email, String perfil, Convocatoria convo) {
+    public int editUser(String cedula, String name, String lastName, String userName, String password, String email, String perfil, Convocatoria convo,boolean estado) {
         int result;
         result = 0;
-        Usuario user = new Usuario(name,lastName,userName,password,email,perfil,cedula,convo);       
+        Usuario user = new Usuario(name,lastName,userName,password,email,perfil,cedula,convo);
+        user.setState(estado);
         result = daoUser.updateUser(user, cedula);
 
         return result;
