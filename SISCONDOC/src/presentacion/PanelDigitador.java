@@ -43,8 +43,10 @@ public class PanelDigitador extends javax.swing.JFrame {
     public PanelDigitador(String username,Convocatoria convoca, UserController conn){
         initComponents();
         name=username;
-        this.nom_convocatoria=convoca.getName();
-        id_convocatoria=convoca.getCode();
+        
+        //this.nom_convocatoria=convoca.getName();
+        //id_convocatoria=convoca.getCode();
+        
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
         LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
         objValidador=new Validador();
@@ -1261,7 +1263,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         LabelConfirmacion.setText("Desea Registrar al Aspirante XXX a la Convocatoria XXX ?");
 
         jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
+       // jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
         jButtonRegistrar.setText("REGISTRAR");
         jButtonRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -1271,7 +1273,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
+        //jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
         jButtonCancelar.setText("REGISTRAR OTRO ASPIRANTE");
         jButtonCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -1311,10 +1313,10 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel3.setText("A continuacion se presenta los formularios de registro de aspirantes");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
+        //jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
+        //jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogoutActionPerformed(evt);
@@ -1430,10 +1432,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
         fecha_nac=dia+"/"+mes+"/"+anno;
-        SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
-        Date d1 = new Date();
-        d1 = format.parse(fecha_nac);
-           System.out.println("fecha" + fecha_nac);
         
         jornada=jComboBoxJornada.getSelectedItem().toString();
         municipio=jComboBoxMunicipio.getSelectedItem().toString();
@@ -1451,8 +1449,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                d1);
-                      objAspirantController.readAspirante(cedula);
+                                                fecha_nac);
+                      //objAspirantController.readAspirante(cedula);
                               
                     }
                 else{
@@ -1479,10 +1477,11 @@ public class PanelDigitador extends javax.swing.JFrame {
             System.out.println("Ingresaste la fecha de forma equivocada");
             jDateChooserFecha.setDate(null);
             jDateChooserFecha.setBackground(Color.red);
-        } catch (ParseException ex) {
+        } 
+       /**catch (ParseException ex) {
             Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+**/
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -1597,7 +1596,6 @@ public class PanelDigitador extends javax.swing.JFrame {
           }
     }//GEN-LAST:event_jTextCedulaKeyTyped
 
-    
     private void jTextApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextApellidosKeyTyped
         // TODO add your handling code here:
         char car=evt.getKeyChar(); 

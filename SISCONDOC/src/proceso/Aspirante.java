@@ -25,11 +25,11 @@ public class Aspirante {
     private Convocatoria call;
     private String genero;
     private String jornada;
-    private Date fecha_nac;
+    private String fecha_nac;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, Date nacimiento)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -158,14 +158,14 @@ public class Aspirante {
     /**
      * @return the fecha_nac
      */
-    public Date getFecha_nac() {
+    public String getFecha_nac() {
         return fecha_nac;
     }
 
     /**
      * @param fecha_nac the fecha_nac to set
      */
-    public void setFecha_nac(Date fecha_nac) {
+    public void setFecha_nac(String fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
     

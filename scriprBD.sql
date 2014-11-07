@@ -53,6 +53,9 @@ CREATE TABLE Aspirante(
 	municipio VARCHAR(30) NOT NULL,
 	puntuacion INT,
 	codigo INT NOT NULL,
+	genero VARCHAR(12) NOT NULL,
+	jornada VARCHAR(20) NOT NULL,
+	fecha_nac DATE NOT NULL,
 	CONSTRAINT fk_codigo FOREIGN KEY(codigo) REFERENCES Convocatoria(codigo) ON UPDATE CASCADE ON DELETE NO ACTION
 );
 

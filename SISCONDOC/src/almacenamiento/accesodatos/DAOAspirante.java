@@ -38,9 +38,10 @@ public class DAOAspirante
         String sql_save;
         int numRows=0;
         
-        sql_save = "INSERT INTO Aspirante VALUES ( '"+ aspirante.getDocument() + "','" + aspirante.getName() + "','" + aspirante.getLastname() + "'," +
-                aspirante.getCity() + "," +  aspirante.getPuntaje() + ","  + aspirante.getConvocatoria().getCode()+ ",'" + aspirante.getGenero()+ "','" +
+        sql_save = "INSERT INTO Aspirante VALUES ( '"+ aspirante.getDocument() + "','" + aspirante.getName() + "','" + aspirante.getLastname() + "','" +
+                aspirante.getCity() + "'," +  aspirante.getPuntaje() + ","  + aspirante.getConvocatoria().getCode()+ ",'" + aspirante.getGenero()+ "','" +
                 aspirante.getJornada() + "','" + aspirante.getFecha_nac() +"');";
+        System.out.println(sql_save);
         try{
             Statement sentencia = conn.createStatement();
 
@@ -99,7 +100,7 @@ public class DAOAspirante
                 //
                 aspirante.setGenero(table.getString(12));
                 aspirante.setJornada(table.getString(13));
-                aspirante.setFecha_nac(table.getDate(14));
+                aspirante.setFecha_nac(table.getString(14));
                 
                 aspirante.setConvocatoria(convocatoria);            
             }

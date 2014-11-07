@@ -17,16 +17,15 @@ public class UserController {
     
 
     DAOUser daoUser;
-   
-  
+    ConvocatoriaController convocatoriaController;
+
     
     /**
      * constructor
      * **/
-    public UserController()
-    {
+    public UserController(){
         daoUser=new DAOUser();
-       
+        convocatoriaController = new ConvocatoriaController(daoUser.getConn());
     }
     public void connectDB(){
         daoUser.connectDB();
@@ -34,7 +33,7 @@ public class UserController {
     public Connection getConn(){
         return daoUser.getConn();
     }
-    /**
+     /**
      * metodo encargado de pasar el usuario a ingresar a la base de
      * satos al DAOusuario. 
      * @param id: cedula del empleado
@@ -65,21 +64,18 @@ public class UserController {
      * @return Usuario : objeto con los atributos del empleado
      * es objeto es nulo en caso de no existir el usuario.
      */
-    public Usuario   consultUser (String username){
+    public Usuario   consultUser (String username, int tipoCon){
         Usuario U = new Usuario ();
-        
-        U= daoUser.readUser(username);
+        System.out.println("entramos al control");
+        U= daoUser.readUser(username, tipoCon);
         
         return U;
 
     }
     
-    public void deleteUser (String document)
-    {
-        daoUser.deleteUser(document);
-    }
-   /**
-     * metodo que llama al Dao para consultar cuantos usuarios existen
+ 
+     
+    /** metodo que llama al Dao para consultar cuantos usuarios existen
      * @return cantidad de usuarios existentes en la base de datos
      */
     public int countUsers ()  
@@ -94,6 +90,20 @@ public class UserController {
      */
     public void cerrarConexionBD(){
         daoUser.closeConectionDB();
+    }
+
+    public int editUser(String cedula, String name, String lastName, String userName, String password, String email, String perfil, Convocatoria convo,boolean estado) {
+        int result;
+        result = 0;
+        Usuario user = new Usuario(name,lastName,userName,password,email,perfil,cedula,convo);
+        user.setState(estado);
+        result = daoUser.updateUser(user, cedula);
+
+        return result;
+    }
+
+    public int deleteUser(String text) {
+        return daoUser.deleteUser(text);
     }
 
 }//fin clase
