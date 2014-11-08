@@ -102,7 +102,7 @@ public class UserController {
         return result;
     }
 
-    public int deleteUser(String text) {
+    public int  deleteUser(String text) {
         return daoUser.deleteUser(text);
     }
 

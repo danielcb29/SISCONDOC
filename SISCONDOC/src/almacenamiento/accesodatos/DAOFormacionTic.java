@@ -43,8 +43,8 @@ public class DAOFormacionTic
         int resultado =1 ;
         for (int i = 0 ; i< tamano ; i++ )
         {    
-            sql_save = "INSERT INTO Formacion VALUES ( '"+ formaciones[i].getInstitucion()+ "','" + formaciones[i].getTitulo() + "','" + formaciones[i].getHoras() + "','" +
-                    formaciones[i].getUrl_soporte()+ "'," +  cedula + "');";
+            sql_save = "INSERT INTO FormacionTic VALUES ( '"+ formaciones[i].getInstitucion()+ "','" + formaciones[i].getTitulo() + "','" + formaciones[i].getHoras() + "','" +
+                    formaciones[i].getUrl_soporte()+ "','" +  cedula + "'," + formaciones[i].getEstado() +");";
             System.out.println(sql_save);
             try{
                 Statement sentencia = conn.createStatement();
@@ -75,21 +75,29 @@ public class DAOFormacionTic
         FormacionTic [] formaciones;
         
         String sql_select;
-        sql_select="SELECT Institucion, Titulo, horas, pathArchivo, estado" + 
-                   "FROM FormacionTIC Where cedula = '" + cedula + "';";
+        sql_select="SELECT Institucion, Titulo, horas, pathArchivo, estado " + 
+                   "FROM FormacionTic Where cedula = '" + cedula + "';";
+        System.out.println(sql_select);
          try{
             System.out.println("consultando en la bd para formaciones TIC");
-            Statement sentence = conn.createStatement();
+            Statement sentence = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
             ResultSet table = sentence.executeQuery(sql_select);
+            System.out.println("paso");
             table.last();
             int filas = table.getRow();
-            table.first();
+            System.out.println("filas" + filas);
             formaciones  = new FormacionTic [filas];
             int indice =0;
+            table.first();
+            table.previous();
+        
             while(table.next())
             {
+                System.out.println("prueba4");
+                formaciones[indice] = new FormacionTic ();
                 formaciones[indice].setInstitucion(table.getString(1));
                 formaciones[indice].setTitulo(table.getString(2));
+                System.out.println("titulo" + table.getString(2) );
                 formaciones[indice].setHoras(table.getString(3));
                 formaciones[indice].setUrl_soporte(table.getString(4));
                 formaciones[indice].setEstado(table.getBoolean(5));
