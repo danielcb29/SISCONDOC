@@ -1452,6 +1452,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 fecha_nac);
                       //objAspirantController.readAspirante(cedula);
                               
+
                     }
                 else{
                    JOptionPane.showMessageDialog(null, "No has completado los datos personales");

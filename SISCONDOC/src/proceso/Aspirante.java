@@ -5,7 +5,6 @@
  */
 package proceso;
 
-import java.util.Date;
 
 /**
  *
