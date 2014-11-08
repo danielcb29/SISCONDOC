@@ -6,6 +6,7 @@
 package presentacion;
 
 import almacenamiento.controlador.*;
+import proceso.*;
 import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
 import java.sql.Connection;
@@ -35,6 +36,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     String nombres,apellidos,cedula,genero,jornada,municipio,dia,mes,anno,fecha_nac;
     public Validador objValidador;
     public ControlAspirante objAspirantController;
+    public ControlFormacionTic controlFormacionTic;
     public Convocatoria objConvocatoria;
     public Connection Conexion;
     public PanelDigitador() {
@@ -144,6 +146,8 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jTextCursoUrl = new javax.swing.JTextField();
         jComboBoxHorasCurso = new javax.swing.JComboBox();
+        institucion = new javax.swing.JLabel();
+        jTextInstitucion = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -219,7 +223,6 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Digitador");
-        setPreferredSize(new java.awt.Dimension(815, 543));
         setResizable(false);
 
         jTabbedDigitador.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -688,6 +691,12 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Curso:");
 
+        jTextCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCursoActionPerformed(evt);
+            }
+        });
+
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Horas:");
 
@@ -695,6 +704,15 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel24.setText("URL Soporte:");
 
         jComboBoxHorasCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curso TIC minimo 40 horas", "Curso TIC hasta 90 horas", "Curso TIC hasta 140 horas", "Curso TIC mas de 40 horas" }));
+
+        institucion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        institucion.setText("Institucion:");
+
+        jTextInstitucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextInstitucionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -704,6 +722,10 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(institucion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jTextInstitucion))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
                             .addComponent(jLabel23))
@@ -712,15 +734,19 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCurso)
                             .addComponent(jComboBoxHorasCurso, 0, 200, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(623, Short.MAX_VALUE))
+                .addGap(623, 623, 623))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(institucion)
+                    .addComponent(jTextInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jTextCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -732,7 +758,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
                     .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -1263,7 +1289,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         LabelConfirmacion.setText("Desea Registrar al Aspirante XXX a la Convocatoria XXX ?");
 
         jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-       // jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
+        jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
         jButtonRegistrar.setText("REGISTRAR");
         jButtonRegistrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -1273,7 +1299,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         });
 
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        //jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
+        jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
         jButtonCancelar.setText("REGISTRAR OTRO ASPIRANTE");
         jButtonCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -1313,10 +1339,10 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel3.setText("A continuacion se presenta los formularios de registro de aspirantes");
 
-        //jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         jButtonLogout.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        //jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
+        jButtonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
         jButtonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLogoutActionPerformed(evt);
@@ -1422,63 +1448,103 @@ public class PanelDigitador extends javax.swing.JFrame {
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
         // TODO add your handling code here:
-       try{
-        /*Obtenemos los DATOS PERSONALES*/
-        nombres=jTextNombres.getText();
-        apellidos=jTextApellidos.getText();
-        cedula=jTextCedula.getText();
-        genero=jComboBoxGenero.getSelectedItem().toString();
-        dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
-        anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
-        fecha_nac=dia+"/"+mes+"/"+anno;
         
-        jornada=jComboBoxJornada.getSelectedItem().toString();
-        municipio=jComboBoxMunicipio.getSelectedItem().toString();
-        
-        /*VALIDAMOS VACIOS*/
-                if(objValidador.ValidaVacios(nombres)==1 &&
-                   objValidador.ValidaVacios(apellidos)==1 &&
-                   objValidador.ValidaVacios(fecha_nac)==1 )
+        /**
+            String institucion,titulo,horas,url;
+            institucion = jTextInstitucion.getText();
+            titulo = jTextCurso.getText();
+            horas= jComboBoxHorasCurso.getSelectedItem().toString();
+            url = jTextCursoUrl.getText();
+             //validacion de vacios
+            
+             if(objValidador.ValidaVacios(institucion)==1 &&
+                   objValidador.ValidaVacios(titulo)==1 &&
+                   objValidador.ValidaVacios(horas)==1 &&
+                   objValidador.ValidaVacios(url)==1)
                     
-                    {
-                      objAspirantController=new ControlAspirante(Conexion);
-                      objAspirantController.createAspirante(cedula, 
-                                                 nombres, apellidos, 
-                                                municipio,0,
-                                                objConvocatoria,
-                                                genero,
-                                                jornada,
-                                                fecha_nac);
-                      //objAspirantController.readAspirante(cedula);
-                              
-
-                    }
-                else{
-                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
-                   jTabbedDigitador.requestFocus();
-                }
-            System.out.println("DATOS PERSONALES: \nNombres:"
-                +nombres+
-                "\nApellidos: "+apellidos+
-                "\nCedula: "+cedula+
-                "\nGenero :"+genero+
-                "\nfecha: "+fecha_nac+
-                "\njornada: "+jornada+
-                "\nmunicipio: "+municipio
-                );
+             {
+           
+                FormacionTic [] formacionesTic = new FormacionTic[1];
+                formacionesTic [0] = new FormacionTic (institucion,titulo,horas,url,true);
+                controlFormacionTic = new ControlFormacionTic (Conexion);
+                controlFormacionTic.insertarFormacion(formacionesTic, "1143");
+             }
+             else
+             {
+                 JOptionPane.showMessageDialog(null,"ingrese todos los campos");
+             }**/
+        controlFormacionTic = new ControlFormacionTic (Conexion);
+        System.out.println("prueba de lectura");
+        FormacionTic [] formacionesTic =  controlFormacionTic.consultarFomaciones("1143");
+        System.out.println("tamano " + formacionesTic.length + "\n");
+        for (int i =0 ; i<formacionesTic.length ; i++)
+        {
+            System.out.println("objeto "+i + "\n");
+            String nombre =  formacionesTic[i].getTitulo();
+            System.out.println("titulo "+nombre+ "\n");
+            
         }
-        /*catch(){
-            System.out.println("Espacios blancos");
-        }*/
-        catch(NumberFormatException nel){
-            System.out.println("Ingresaste una letra en Cedula");
-        }
-        catch(NullPointerException nel){
-            System.out.println("Ingresaste la fecha de forma equivocada");
-            jDateChooserFecha.setDate(null);
-            jDateChooserFecha.setBackground(Color.red);
-        } 
+        
+        
+            
+        
+       
+//        try{
+//        /*Obtenemos los DATOS PERSONALES*/
+//        nombres=jTextNombres.getText();
+//        apellidos=jTextApellidos.getText();
+//        cedula=jTextCedula.getText();
+//        genero=jComboBoxGenero.getSelectedItem().toString();
+//        dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+//        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+//        anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
+//        fecha_nac=dia+"/"+mes+"/"+anno;
+//        jornada=jComboBoxJornada.getSelectedItem().toString();
+//        municipio=jComboBoxMunicipio.getSelectedItem().toString();
+//        
+//        /*VALIDAMOS VACIOS*/
+//                if(objValidador.ValidaVacios(nombres)==1 &&
+//                   objValidador.ValidaVacios(apellidos)==1 &&
+//                   objValidador.ValidaVacios(fecha_nac)==1 )
+//                    
+//                    {
+//                      objAspirantController=new ControlAspirante(Conexion);
+//                      objAspirantController.createAspirante(cedula, 
+//                                                 nombres, apellidos, 
+//                                                municipio,0,
+//                                                objConvocatoria,
+//                                                genero,
+//                                                jornada,
+//                                                fecha_nac);
+//                      //objAspirantController.readAspirante(cedula);
+//                              
+//
+//                    }
+//                else{
+//                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
+//                   jTabbedDigitador.requestFocus();
+//                }
+//            System.out.println("DATOS PERSONALES: \nNombres:"
+//                +nombres+
+//                "\nApellidos: "+apellidos+
+//                "\nCedula: "+cedula+
+//                "\nGenero :"+genero+
+//                "\nfecha: "+fecha_nac+
+//                "\njornada: "+jornada+
+//                "\nmunicipio: "+municipio
+//                );
+//        }
+//        /*catch(){
+//            System.out.println("Espacios blancos");
+//        }*/
+//        catch(NumberFormatException nel){
+//            System.out.println("Ingresaste una letra en Cedula");
+//        }
+//        catch(NullPointerException nel){
+//            System.out.println("Ingresaste la fecha de forma equivocada");
+//            jDateChooserFecha.setDate(null);
+//            jDateChooserFecha.setBackground(Color.red);
+//        } 
        /**catch (ParseException ex) {
             Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1623,6 +1689,14 @@ public class PanelDigitador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombresActionPerformed
 
+    private void jTextCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCursoActionPerformed
+
+    private void jTextInstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextInstitucionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextInstitucionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1681,6 +1755,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.ButtonGroup buttonGroup9;
+    private javax.swing.JLabel institucion;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonRegistrar;
@@ -1805,6 +1880,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextEspeTicUrl;
     private javax.swing.JTextField jTextEspeUrl;
     private javax.swing.JTextField jTextIdioma;
+    private javax.swing.JTextField jTextInstitucion;
     private javax.swing.JTextField jTextLic;
     private javax.swing.JTextField jTextLicUrl;
     private javax.swing.JTextField jTextMaes;
