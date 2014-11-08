@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import proceso.Formacion;
 
 /**
  *
@@ -37,6 +38,17 @@ public class PanelDigitador extends javax.swing.JFrame {
     public ControlAspirante objAspirantController;
     public Convocatoria objConvocatoria;
     public Connection Conexion;
+    private ControlFormacion formControl;
+    /**
+     * Estados de formacion : DANIEL 
+     * 
+     
+    
+    private boolean estadoLicen = false;
+    private boolean estadoMaster = false;
+    private boolean estadoMasterTIC=false;
+    private boolean estadoDoc=false;
+    private boolean estadoDocTIC=false;*/
     public PanelDigitador() {
         
     }
@@ -1429,7 +1441,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         cedula=jTextCedula.getText();
         genero=jComboBoxGenero.getSelectedItem().toString();
         dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH)+1);
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
         fecha_nac=dia+"/"+mes+"/"+anno;
         
@@ -1478,6 +1490,47 @@ public class PanelDigitador extends javax.swing.JFrame {
             jDateChooserFecha.setDate(null);
             jDateChooserFecha.setBackground(Color.red);
         } 
+       
+       //FORMACION TEST DANIEL
+      /* formControl = new ControlFormacion(Conexion);
+       
+       String licUn = "Universidad del Valle";
+       String licTit = "Ingeniero de Sistemas";
+       String licLev ="Licenciado";
+       String licPath = "/home/daniel/test";
+       
+       String docUn = "Universidad de los Andes";
+       String docTit = "Phd Computer Science on Networks";
+       String docLev ="Doctorado";
+       String docPath = "/home/daniel/doc";
+       
+       
+       
+       Formacion[] formArray = new Formacion[2];
+       
+       Formacion form1 = new Formacion(licUn,licTit,licLev,licPath);
+       Formacion form2 = new Formacion(docUn,docTit,docLev,docPath);
+       
+       formArray[0] = form1;
+       formArray[1] = form2;
+       
+       int result = formControl.createForm(formArray, cedula);
+       
+       //Formacion[] array = formControl.listForm(cedula);
+       //System.out.println(array[0].getUniversity()+ array[0].getTitle()+ array[0].getLevel()+array[0].getPathFile()+array[0].getState());
+       //System.out.println(array[1].getUniversity()+ array[1].getTitle()+ array[1].getLevel()+array[1].getPathFile()+array[1].getState());
+       //result = formControl.deleteForm(cedula, licLev);
+       
+       String newUn = "Universidad Nacional";
+       String newTit = "Phd Computer Science on Algorithms";
+       String newLev ="Doctorado";
+       String newPath = "/home/daniel/newdoc";
+       Formacion form3 = new Formacion(newUn,newTit,newLev,newPath);
+       result = formControl.updateConv(cedula, docLev, form3);
+       
+       System.out.println("Resultado:"+result);*/
+               
+       
        /**catch (ParseException ex) {
             Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
         }
