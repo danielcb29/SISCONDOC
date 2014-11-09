@@ -65,8 +65,14 @@ public class ControlFormacion {
         int result = daoForm.deletForm(cedula, level);
         return result;
     }
-    
-    public int updateConv(String cedula,String level ,Formacion form){
+    /**
+     * Metodo que permite actualizar una formacion en la base de datos 
+     * @param cedula: cedula del aspirante al cual se actulizara el registro
+     * @param level : nivel de formacion a actualizar
+     * @param form : objeto Formacion con toda la informacion actualizada
+     * @return 
+     */
+    public int updateForm(String cedula,String level ,Formacion form){
         int result = daoForm.updateForm(cedula, level, form);
         return result;
     }

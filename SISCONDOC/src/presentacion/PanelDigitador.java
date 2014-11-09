@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proceso.Formacion;
+import proceso.FormadorTIC;
 
 /**
  *
@@ -38,7 +39,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     public ControlAspirante objAspirantController;
     public Convocatoria objConvocatoria;
     public Connection Conexion;
-    private ControlFormacion formControl;
+    private ControlFormadorTIC formTICControl;
     /**
      * Estados de formacion : DANIEL 
      * 
@@ -1529,6 +1530,51 @@ public class PanelDigitador extends javax.swing.JFrame {
        result = formControl.updateConv(cedula, docLev, form3);
        
        System.out.println("Resultado:"+result);*/
+       /*
+       formTICControl = new ControlFormadorTIC(Conexion);
+       
+       String estPeo = "Estudiantes";
+       int estTim = 15;
+       String estPath = "/home/daniel/test";
+       
+       String profPeo = "Profesores";
+       int profTim = 30;
+       String profPath = "/home/daniel/prof";
+       
+       String formPeo = "Formadores";
+       int formTim = 45;
+       String formPath = "/home/daniel/form";
+       
+       FormadorTIC[] formadores = new FormadorTIC[3];
+       
+       FormadorTIC form1 = new FormadorTIC(estPeo,estTim,estPath);
+       FormadorTIC form2 = new FormadorTIC(profPeo,profTim,profPath);
+       FormadorTIC form3 = new FormadorTIC(formPeo,formTim,formPath);
+       
+       formadores[0] = form1;
+       formadores[1] = form2;
+       formadores[2] = form3;
+       
+       int resul = formTICControl.createFormador(formadores, cedula);
+       
+       String formPeo2 = "Formadores";
+       int formTim2 = 65;
+       String formPath2 = "/home/daniel/form2";
+       
+       FormadorTIC form4 = new FormadorTIC(formPeo2,formTim2,formPath2);
+       
+       resul = formTICControl.updateFormador(cedula, "Formadores", form4);
+       
+       //resul = formTICControl.deleteFormador(cedula, "Profesores");
+       
+       FormadorTIC[] array = formTICControl.listFormador(cedula);
+       
+       System.out.println("1 "+array[0].getPeople()+" "+array[0].getTime()+" "+array[0].getPath()+" "+array[0].getState());
+       System.out.println("2 "+array[1].getPeople()+" "+array[1].getTime()+" "+array[1].getPath()+" "+array[1].getState());
+       System.out.println("3 "+array[2].getPeople()+" "+array[2].getTime()+" "+array[2].getPath()+" "+array[2].getState());
+       
+       System.out.println("resul:"+resul);*/
+       
                
        
        /**catch (ParseException ex) {
