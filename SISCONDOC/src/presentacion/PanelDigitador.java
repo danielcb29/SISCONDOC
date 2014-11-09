@@ -1447,83 +1447,82 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextDocTicUrlActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-        // TODO add your handling code here:
         
-        /**
+       
+          try{
+        //Obtenemos los DATOS PERSONALES//
+            
+        nombres=jTextNombres.getText();
+        apellidos=jTextApellidos.getText();
+        cedula=jTextCedula.getText();
+        genero=jComboBoxGenero.getSelectedItem().toString();
+        dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+        anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
+        fecha_nac=dia+"/"+mes+"/"+anno;
+        jornada=jComboBoxJornada.getSelectedItem().toString();
+        municipio=jComboBoxMunicipio.getSelectedItem().toString();
+         //fin datos personales //
+
+        //datos formacion TIC //
             String institucion,titulo,horas,url;
             institucion = jTextInstitucion.getText();
             titulo = jTextCurso.getText();
             horas= jComboBoxHorasCurso.getSelectedItem().toString();
             url = jTextCursoUrl.getText();
-             //validacion de vacios
-            
-             if(objValidador.ValidaVacios(institucion)==1 &&
+        // fin datos formacion TIC
+                
+        // 1 sola formacion por el momento    
+        FormacionTic [] formacionesTic = new FormacionTic[1];
+        //
+        // test de formacion
+        // creacion de objetos
+        String licUn = "Universidad del Valle";
+        String licTit = "Ingeniero de Sistemas";
+       String licLev ="Licenciado";
+        String licPath = "/home/daniel/test";
+       
+        String docUn = "Universidad de los Andes";
+        String docTit = "Phd Computer Science on Networks";
+        String docLev ="Doctorado";
+        String docPath = "/home/daniel/doc";
+       
+       
+       
+        Formacion[] formArray = new Formacion[2];
+        
+        Formacion form1 = new Formacion(licUn,licTit,licLev,licPath);
+        Formacion form2 = new Formacion(docUn,docTit,docLev,docPath);
+       
+        formArray[0] = form1;
+        formArray[1] = form2;
+        //VALIDAMOS VACIOS//
+                if(objValidador.ValidaVacios(nombres)==1 &&
+                   objValidador.ValidaVacios(apellidos)==1 &&
+                   objValidador.ValidaVacios(fecha_nac)==1 &&
+                   objValidador.ValidaVacios(institucion)==1 &&
                    objValidador.ValidaVacios(titulo)==1 &&
                    objValidador.ValidaVacios(horas)==1 &&
                    objValidador.ValidaVacios(url)==1)
                     
-             {
-           
-                FormacionTic [] formacionesTic = new FormacionTic[1];
-                formacionesTic [0] = new FormacionTic (institucion,titulo,horas,url,true);
-                controlFormacionTic = new ControlFormacionTic (Conexion);
-                controlFormacionTic.insertarFormacion(formacionesTic, "1143");
-             }
-             else
-             {
-                 JOptionPane.showMessageDialog(null,"ingrese todos los campos");
-             }**/
-        controlFormacionTic = new ControlFormacionTic (Conexion);
-        System.out.println("prueba de lectura");
-        FormacionTic [] formacionesTic =  controlFormacionTic.consultarFomaciones("1143");
-        System.out.println("tamano " + formacionesTic.length + "\n");
-        for (int i =0 ; i<formacionesTic.length ; i++)
-        {
-            System.out.println("objeto "+i + "\n");
-            String nombre =  formacionesTic[i].getTitulo();
-            System.out.println("titulo "+nombre+ "\n");
-            
-        }
-        
-        
-            
-        
-       
-//        try{
-//        /*Obtenemos los DATOS PERSONALES*/
-//        nombres=jTextNombres.getText();
-//        apellidos=jTextApellidos.getText();
-//        cedula=jTextCedula.getText();
-//        genero=jComboBoxGenero.getSelectedItem().toString();
-//        dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-//        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
-//        anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
-//        fecha_nac=dia+"/"+mes+"/"+anno;
-//        jornada=jComboBoxJornada.getSelectedItem().toString();
-//        municipio=jComboBoxMunicipio.getSelectedItem().toString();
-//        
-//        /*VALIDAMOS VACIOS*/
-//                if(objValidador.ValidaVacios(nombres)==1 &&
-//                   objValidador.ValidaVacios(apellidos)==1 &&
-//                   objValidador.ValidaVacios(fecha_nac)==1 )
-//                    
-//                    {
-//                      objAspirantController=new ControlAspirante(Conexion);
-//                      objAspirantController.createAspirante(cedula, 
-//                                                 nombres, apellidos, 
-//                                                municipio,0,
-//                                                objConvocatoria,
-//                                                genero,
-//                                                jornada,
-//                                                fecha_nac);
-//                      //objAspirantController.readAspirante(cedula);
-//                              
-//
-//                    }
-//                else{
-//                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
-//                   jTabbedDigitador.requestFocus();
-//                }
+                    {
+                      objAspirantController=new ControlAspirante(Conexion);
+                      formacionesTic [0] = new FormacionTic (institucion,titulo,horas,url,true);
+                      
+                      objAspirantController.createAspirante(cedula, 
+                                                 nombres, apellidos, 
+                                                municipio,0,
+                                                objConvocatoria,
+                                                genero,
+                                                jornada,
+                                                fecha_nac,formArray,formacionesTic);
+          
+                    }
+                else{
+                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
+                   jTabbedDigitador.requestFocus();
+                }
+//                
 //            System.out.println("DATOS PERSONALES: \nNombres:"
 //                +nombres+
 //                "\nApellidos: "+apellidos+
@@ -1533,22 +1532,18 @@ public class PanelDigitador extends javax.swing.JFrame {
 //                "\njornada: "+jornada+
 //                "\nmunicipio: "+municipio
 //                );
-//        }
-//        /*catch(){
-//            System.out.println("Espacios blancos");
-//        }*/
-//        catch(NumberFormatException nel){
-//            System.out.println("Ingresaste una letra en Cedula");
-//        }
-//        catch(NullPointerException nel){
-//            System.out.println("Ingresaste la fecha de forma equivocada");
-//            jDateChooserFecha.setDate(null);
-//            jDateChooserFecha.setBackground(Color.red);
-//        } 
-       /**catch (ParseException ex) {
-            Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
         }
-**/
+        catch(NumberFormatException nel)
+        {
+            System.out.println("Ingresaste una letra en Cedula");
+        }
+        catch(NullPointerException nel)
+        {
+            System.out.println("Ingresaste la fecha de forma equivocada");
+            jDateChooserFecha.setDate(null);
+            jDateChooserFecha.setBackground(Color.red);   
+        } 
+      
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed

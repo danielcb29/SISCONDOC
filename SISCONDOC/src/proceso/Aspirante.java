@@ -25,10 +25,12 @@ package proceso;
     private String genero;
     private String jornada;
     private String fecha_nac;
+    private Formacion [] formaciones;
+    private FormacionTic [] formacionesTic;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes )
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -39,6 +41,8 @@ package proceso;
         genero = gen;
         jornada = jor;
         fecha_nac = nacimiento;
+        formaciones= formacionesAspirantes;
+        formacionesTic= formacionesTicAspirantes;
    
     }
 
@@ -167,6 +171,32 @@ package proceso;
     public void setFecha_nac(String fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
-    
-        
+
+    /**
+     * @return the formaciones
+     */
+    public Formacion[] getFormaciones() {
+        return formaciones;
+    }
+
+    /**
+     * @param formaciones the formaciones to set
+     */
+    public void setFormaciones(Formacion[] formaciones) {
+        this.formaciones = formaciones;
+    }
+
+    /**
+     * @return the formacionesTic
+     */
+    public FormacionTic[] getFormacionesTic() {
+        return formacionesTic;
+    }
+
+    /**
+     * @param formacionesTic the formacionesTic to set
+     */
+    public void setFormacionesTic(FormacionTic[] formacionesTic) {
+        this.formacionesTic = formacionesTic;
+    }
 }

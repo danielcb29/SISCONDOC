@@ -39,7 +39,17 @@ public class ControlFormacionTic
        return formaciones;
     }
     
-    
+        /**
+     * Metodo que permite eliminar una formacion en tic (poner en inactivo) 
+     * @param cedula: cedula del aspirante al cual pertenece la formacion
+     * @param titulo: titulo a eliminar. 
+     * @return numero de confirmacion
+     */
+    public int eliminarFormacion(String cedula , String titulo){
+        int result = daoTic.eliminarForm(cedula, titulo);
+        return result;
+    }
+
   
     
 

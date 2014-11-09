@@ -22,11 +22,16 @@ public class ControlAspirante
      * daoAspirante: DAO del aspirante  para realizar las consultas
      */
     private DAOAspirante daoAspirante;
+    private ControlFormacionTic controlFormacionTic;
+    private ControlFormacion controlFormacion;
     /**
      * Constructor de la clase
      */
     public ControlAspirante(Connection conn){
+        
         daoAspirante = new DAOAspirante(conn);
+        controlFormacionTic = new ControlFormacionTic(conn);
+        controlFormacion = new ControlFormacion(conn);
         
     }
     /**
@@ -34,9 +39,11 @@ public class ControlAspirante
      * @param aspirante: aspirante a crear
      * @return 
      */
-    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac ){
-        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac);
+    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac,Formacion [] formaciones, FormacionTic [] formacionesTic ){
+        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac,formaciones, formacionesTic);
         int result = daoAspirante.crateAspirante(aspirante);
+        int resultado2 = controlFormacionTic.insertarFormacion(formacionesTic,document);
+        int resultado3 = controlFormacion.createForm(formaciones, document);
         return result;
     }
     /**

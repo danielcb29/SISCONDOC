@@ -111,41 +111,33 @@ public class DAOFormacionTic
         return null;
     }
     
-    public void actualizarFormacion (String documento, Aspirante aspirante){
-        /**
-        String sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9;
-	sql1="UPDATE convocatoria SET nombre='"+aspirante.getName()+"' WHERE cedula='" + documento + "';";
-        sql2 = "UPDATE convocatoria SET apellido ='"+aspirante.getLastname()+"' WHERE cedula='" + documento + "';";
-        sql3 = "UPDATE convocatoria SET municipio ='"+aspirante.getCity()+"'WHERE cedula='" + documento + "';";
-        sql4 = "UPDATE convocatoria SET puntaje='"+aspirante.getPuntaje()+"' WHERE cedula='" + documento + "';";
-        sql5 = "UPDATE convocatoria SET codigo='"+aspirante.getConvocatoria().getCode()+"' WHERE cedula='" + documento + "';";
-        sql6 = "UPDATE convocatoria SET genero='"+aspirante.getGenero()+"' WHERE cedula='" + documento + "';";
-        sql7 = "UPDATE convocatoria SET jornada='"+aspirante.getJornada()+"' WHERE cedula='" + documento + "';";
-        sql8 = "UPDATE convocatoria SET fecha_nac='"+aspirante.getFecha_nac()+"' WHERE cedula='" + documento + "';";
-        sql9 = "UPDATE convocatoria SET cedula='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
-        
-        
+  public int eliminarForm(String cedula, String titulo){
+        String sql_save;
+	sql_save="UPDATE FormacionTic SET estado=false WHERE cedula='" + cedula + "' AND titulo = '"+titulo+"'";
+        System.out.println(sql_save);
         try{
-                Statement sentencia = conn.createStatement();
+            Statement sentencia = conn.createStatement();
 
-                sentencia.executeUpdate(sql1);
-                sentencia.executeUpdate(sql2);
-                sentencia.executeUpdate(sql3);
-                sentencia.executeUpdate(sql4);
-                sentencia.executeUpdate(sql5);
-                sentencia.executeUpdate(sql6);
-                sentencia.executeUpdate(sql7);
-                sentencia.executeUpdate(sql8);
-                sentencia.executeUpdate(sql9);
-
-
-            }
+            sentencia.executeUpdate(sql_save);            
+            
+            return 1;
+        }
         catch(SQLException e){
             System.out.println(e); 
-            }
+            return -2;
+        }
         catch(Exception e){ 
             System.out.println(e);
         }
-        * **/
+        return -1;
     }
+  
+  
+    /**
+     * Metodo que permite cerrar la conexion con la base de datos
+     */
+    public void closeConectionDB(){
+        db.closeConection(db.getConnetion());
+    }
+    
 }
