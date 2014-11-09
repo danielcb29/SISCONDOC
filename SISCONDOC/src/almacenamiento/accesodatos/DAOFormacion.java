@@ -100,7 +100,7 @@ public class DAOFormacion {
         return null;
     }
     /**
-     * Metodod que permite actualizar una formacion de acuerdo a la cedula del aspirante 
+     * Metodo que permite actualizar una formacion de acuerdo a la cedula del aspirante 
      * @param cedula : cedula del aspirante a actualizar la formacion
      * @param level : dado que un aspirante puede tener varias formaciones , se especifica que nivel de formacion es que se actualizara
      * @param form : datos de la formacion a actualizar 
@@ -186,7 +186,12 @@ public class DAOFormacion {
          catch(Exception e){ System.out.println(e); }
         return null;
     }
-    
+    /**
+     * Metodo que permite eliminar una formacion (ponerla en estado inactivo)
+     * @param cedula: identificacion del aspirante al cual pertenece la formacion
+     * @param level : nivel de la formacion a inactivar
+     * @return 
+     */
     public int deletForm(String cedula, String level){
         String sql_save;
 	sql_save="UPDATE formacion SET estado=false WHERE cedula='" + cedula + "' AND nivel = '"+level+"'";

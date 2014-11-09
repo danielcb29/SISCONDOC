@@ -27,10 +27,11 @@ package proceso;
     private String fecha_nac;
     private Formacion [] formaciones;
     private FormacionTic [] formacionesTic;
+    private FormadorTIC [] formadores;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes )
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -43,6 +44,7 @@ package proceso;
         fecha_nac = nacimiento;
         formaciones= formacionesAspirantes;
         formacionesTic= formacionesTicAspirantes;
+        formadores = formadoresTic;
    
     }
 
@@ -198,5 +200,19 @@ package proceso;
      */
     public void setFormacionesTic(FormacionTic[] formacionesTic) {
         this.formacionesTic = formacionesTic;
+    }
+
+    /**
+     * @return the formadores
+     */
+    public FormadorTIC[] getFormadores() {
+        return formadores;
+    }
+
+    /**
+     * @param formadores the formadores to set
+     */
+    public void setFormadores(FormadorTIC[] formadores) {
+        this.formadores = formadores;
     }
 }

@@ -12,7 +12,7 @@ package proceso;
 public class FormacionTic {
     private String institucion;
     private String titulo;
-    private String horas;
+    private int horas;
     private String  url_soporte;
     private boolean estado;
 
@@ -20,7 +20,7 @@ public class FormacionTic {
     public FormacionTic () 
     {
     }
-    public FormacionTic (String institucionAspirante,String  tituloAspirante, String  horasAspirante, String  url,boolean estado) 
+    public FormacionTic (String institucionAspirante,String  tituloAspirante, int  horasAspirante, String  url,boolean estado) 
     {
         institucion = institucionAspirante;
         titulo = tituloAspirante;
@@ -61,14 +61,14 @@ public class FormacionTic {
     /**
      * @return the horas
      */
-    public String getHoras() {
+    public int getHoras() {
         return horas;
     }
 
     /**
      * @param horas the horas to set
      */
-    public void setHoras(String horas) {
+    public void setHoras(int horas) {
         this.horas = horas;
     }
 

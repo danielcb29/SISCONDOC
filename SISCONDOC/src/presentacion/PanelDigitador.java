@@ -6,42 +6,74 @@
 package presentacion;
 
 import almacenamiento.controlador.*;
-import proceso.*;
 import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
 import java.sql.Connection;
+import proceso.*;
 import almacenamiento.controlador.UserController;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JFileChooser;
+import java.nio.channels.FileChannel;
+import java.nio.file.CopyOption;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.util.Vector;
 
 /**
  *
  * @author USUARIO
  */
 public class PanelDigitador extends javax.swing.JFrame {
-
-    /**
-     * Creates new form PanelDigitador
-     */
+    /*Parametros Con respecto al digitador y la convocatoria*/
     String name="User Default";
     String nom_convocatoria="Convacatoria Default";
     int id_convocatoria;
+    String VaciosEn="";
+    
+    /*Parametros para Datos personales*/
     String nombres,apellidos,cedula,genero,jornada,municipio,dia,mes,anno,fecha_nac;
+    
+    /*Parametros para Formacion*/
+    String DestinoTemp="null";
+    String lictit,licuni,licurl,espetit,espeuni,espeurl,espetictit,espeticuni,espeticurl;
+    String maestit,maesuni,maesurl,maestictit,maesticuni,maesticurl,doctit,docuni,docurl;
+    String doctictit,docticuni,docticurl;
+    boolean licid=false,espeid=false,espeticid=false,maesid=false,maesticid=false,docid=false,docticid=false;
+    
+    /*Parametros para Formacion en TIC*/
+    String curso,institucion,formacionTicUrl;
+    boolean forTicChooser=false;
+    int horasFormacionTic;
+    
+    /*Parametros para conocimientos especificos*/
+    
+    /*Parametros para Idiomas*/
+    
+    /*Parametros para Experiencia*/
+    
+    /*OBJETOS DE OTRAS CLASES*/
     public Validador objValidador;
     public ControlAspirante objAspirantController;
-    public ControlFormacionTic controlFormacionTic;
     public Convocatoria objConvocatoria;
     public Connection Conexion;
+    
+    /*Constructor*/
     public PanelDigitador() {
-        
     }
+    
     public PanelDigitador(String username,Convocatoria convoca, UserController conn){
         initComponents();
         name=username;
@@ -84,6 +116,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         buttonGroup17 = new javax.swing.ButtonGroup();
         buttonGroup18 = new javax.swing.ButtonGroup();
         buttonGroup19 = new javax.swing.ButtonGroup();
+        buttonGroup20 = new javax.swing.ButtonGroup();
         jTabbedDigitador = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -108,13 +141,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextLicUrl = new javax.swing.JTextField();
-        jTextEspeUrl = new javax.swing.JTextField();
-        jTextEspeTicUrl = new javax.swing.JTextField();
-        jTextMaesUrl = new javax.swing.JTextField();
-        jTextMaesTicUrl = new javax.swing.JTextField();
-        jTextDocUrl = new javax.swing.JTextField();
-        jTextDocTicUrl = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jRadioButtonLic1 = new javax.swing.JRadioButton();
@@ -139,15 +165,43 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextMaesTic = new javax.swing.JTextField();
         jTextDoc = new javax.swing.JTextField();
         jTextDocTic = new javax.swing.JTextField();
+        btAbrirLic = new javax.swing.JButton();
+        btAbrirEspe = new javax.swing.JButton();
+        btAbrirEspeTic = new javax.swing.JButton();
+        btAbrirMaes = new javax.swing.JButton();
+        btAbrirMaesTic = new javax.swing.JButton();
+        btAbrirDoc = new javax.swing.JButton();
+        btAbrirDocTic = new javax.swing.JButton();
+        jLabelLicUrl = new javax.swing.JLabel();
+        jTextLicUrl = new javax.swing.JLabel();
+        jTextEspeUrl = new javax.swing.JLabel();
+        jTextEspeTicUrl = new javax.swing.JLabel();
+        jTextMaesUrl = new javax.swing.JLabel();
+        jTextMaesTicUrl = new javax.swing.JLabel();
+        jTextDocUrl = new javax.swing.JLabel();
+        jTextDocTicUrl = new javax.swing.JLabel();
+        jTextLicUni = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextEspeUni = new javax.swing.JTextField();
+        jTextEspeTicUni = new javax.swing.JTextField();
+        jTextMaesUni = new javax.swing.JTextField();
+        jTextMaesTicUni = new javax.swing.JTextField();
+        jTextDocUni = new javax.swing.JTextField();
+        jTextDocTicUni = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jTextCurso = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextCursoUrl = new javax.swing.JTextField();
         jComboBoxHorasCurso = new javax.swing.JComboBox();
-        institucion = new javax.swing.JLabel();
+        jTextCursoUrl = new javax.swing.JLabel();
+        btAbrirFormacionTic = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jTextInstitucion = new javax.swing.JTextField();
+        btMasCursos = new javax.swing.JButton();
+        jLabel46 = new javax.swing.JLabel();
+        jRadioButtonFor_Tic1 = new javax.swing.JRadioButton();
+        jRadioButtonFor_Tic2 = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -309,7 +363,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
                             .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE))))
-                .addContainerGap(645, Short.MAX_VALUE))
+                .addContainerGap(866, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,7 +396,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Datos Personales", jPanel1);
@@ -367,30 +421,6 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel18.setText("Doctorado en áreas afines a TIC:");
-
-        jTextLicUrl.setEnabled(false);
-        jTextLicUrl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextLicUrlActionPerformed(evt);
-            }
-        });
-
-        jTextEspeUrl.setEnabled(false);
-
-        jTextEspeTicUrl.setEnabled(false);
-
-        jTextMaesUrl.setEnabled(false);
-
-        jTextMaesTicUrl.setEnabled(false);
-
-        jTextDocUrl.setEnabled(false);
-
-        jTextDocTicUrl.setEnabled(false);
-        jTextDocTicUrl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextDocTicUrlActionPerformed(evt);
-            }
-        });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel19.setText("NIVEL");
@@ -521,6 +551,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel21.setText("TITULO");
 
         jTextLic.setEnabled(false);
+        jTextLic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextLicActionPerformed(evt);
+            }
+        });
 
         jTextEspe.setEnabled(false);
 
@@ -533,6 +568,121 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextDoc.setEnabled(false);
 
         jTextDocTic.setEnabled(false);
+
+        btAbrirLic.setText("Adjuntar Archivo Soporte");
+        btAbrirLic.setEnabled(false);
+        btAbrirLic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirLicActionPerformed(evt);
+            }
+        });
+
+        btAbrirEspe.setText("Adjuntar Archivo Soporte");
+        btAbrirEspe.setEnabled(false);
+        btAbrirEspe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirEspeActionPerformed(evt);
+            }
+        });
+
+        btAbrirEspeTic.setText("Adjuntar Archivo Soporte");
+        btAbrirEspeTic.setEnabled(false);
+        btAbrirEspeTic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirEspeTicActionPerformed(evt);
+            }
+        });
+
+        btAbrirMaes.setText("Adjuntar Archivo Soporte");
+        btAbrirMaes.setEnabled(false);
+        btAbrirMaes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirMaesActionPerformed(evt);
+            }
+        });
+
+        btAbrirMaesTic.setText("Adjuntar Archivo Soporte");
+        btAbrirMaesTic.setEnabled(false);
+        btAbrirMaesTic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirMaesTicActionPerformed(evt);
+            }
+        });
+
+        btAbrirDoc.setText("Adjuntar Archivo Soporte");
+        btAbrirDoc.setEnabled(false);
+        btAbrirDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirDocActionPerformed(evt);
+            }
+        });
+
+        btAbrirDocTic.setText("Adjuntar Archivo Soporte");
+        btAbrirDocTic.setEnabled(false);
+        btAbrirDocTic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirDocTicActionPerformed(evt);
+            }
+        });
+
+        jTextLicUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextLicUrl.setText("No hay soporte");
+        jTextLicUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextLicUrl.setEnabled(false);
+        jTextLicUrl.setFocusable(false);
+
+        jTextEspeUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextEspeUrl.setText("No hay soporte");
+        jTextEspeUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextEspeUrl.setEnabled(false);
+        jTextEspeUrl.setFocusable(false);
+
+        jTextEspeTicUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextEspeTicUrl.setText("No hay soporte");
+        jTextEspeTicUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextEspeTicUrl.setEnabled(false);
+        jTextEspeTicUrl.setFocusable(false);
+
+        jTextMaesUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextMaesUrl.setText("No hay soporte");
+        jTextMaesUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextMaesUrl.setEnabled(false);
+        jTextMaesUrl.setFocusable(false);
+
+        jTextMaesTicUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextMaesTicUrl.setText("No hay soporte");
+        jTextMaesTicUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextMaesTicUrl.setEnabled(false);
+        jTextMaesTicUrl.setFocusable(false);
+
+        jTextDocUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextDocUrl.setText("No hay soporte");
+        jTextDocUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextDocUrl.setEnabled(false);
+        jTextDocUrl.setFocusable(false);
+
+        jTextDocTicUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextDocTicUrl.setText("No hay soporte");
+        jTextDocTicUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextDocTicUrl.setEnabled(false);
+        jTextDocTicUrl.setFocusable(false);
+
+        jTextLicUni.setEnabled(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel1.setText("Universidad");
+
+        jTextEspeUni.setEnabled(false);
+
+        jTextEspeTicUni.setEnabled(false);
+
+        jTextMaesUni.setEnabled(false);
+
+        jTextMaesTicUni.setEnabled(false);
+
+        jTextDocUni.setEnabled(false);
+
+        jTextDocTicUni.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -553,45 +703,6 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonMaes1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonMaes2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextMaes, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonMaesTic1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonMaesTic2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextMaesTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonDoc1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonDoc2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonDocTic1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonDocTic2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextDocTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonEspeTic1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonEspeTic2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextDocUrl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                            .addComponent(jTextMaesTicUrl, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextMaesUrl, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextEspeTicUrl)
-                            .addComponent(jTextDocTicUrl)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jRadioButtonEspe1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButtonEspe2)
@@ -605,22 +716,99 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jTextLic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextLicUrl)
-                            .addComponent(jTextEspeUrl))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextEspeUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btAbrirEspe))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(357, 357, 357)
+                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jTextLicUni)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextLicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))
+                                .addComponent(btAbrirLic))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonDocTic1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonDocTic2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDocTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDocTicUni)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDocTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonEspeTic1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonEspeTic2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextEspeTicUni)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextEspeTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonMaes1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonMaes2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaes, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaesUni)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaesUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonMaesTic1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonMaesTic2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaesTic, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaesTicUni)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextMaesTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jRadioButtonDoc1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonDoc2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDocUni)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextDocUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btAbrirEspeTic, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAbrirMaes, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAbrirMaesTic, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAbrirDoc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAbrirDocTic, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
+                .addGap(152, 152, 152)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(238, 238, 238))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonEspeTic1)
@@ -629,60 +817,79 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(jLabel20)
-                            .addComponent(jLabel21))
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel1))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(jTextLicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonLic1)
-                            .addComponent(jRadioButtonLic2)
-                            .addComponent(jTextLic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel12)
+                                .addComponent(jRadioButtonLic1)
+                                .addComponent(jRadioButtonLic2)
+                                .addComponent(jTextLic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelLicUrl)
+                                .addComponent(jTextLicUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btAbrirLic, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jTextEspeUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButtonEspe1)
-                            .addComponent(jRadioButtonEspe2)
-                            .addComponent(jTextEspe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(jRadioButtonEspe1)
+                                .addComponent(jRadioButtonEspe2)
+                                .addComponent(jTextEspe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btAbrirEspe, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jTextEspeUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextEspeTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btAbrirEspeTic, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextEspeTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextEspeTicUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel15)
-                    .addComponent(jTextMaesUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonMaes1)
                         .addComponent(jRadioButtonMaes2)
-                        .addComponent(jTextMaes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextMaes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAbrirMaes, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextMaesUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextMaesUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel16)
-                    .addComponent(jTextMaesTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonMaesTic1)
                         .addComponent(jRadioButtonMaesTic2)
-                        .addComponent(jTextMaesTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextMaesTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAbrirMaesTic, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextMaesTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextMaesTicUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17)
-                    .addComponent(jTextDocUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButtonDoc1)
                         .addComponent(jRadioButtonDoc2)
-                        .addComponent(jTextDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAbrirDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDocUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDocUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonDocTic1)
-                            .addComponent(jRadioButtonDocTic2)
-                            .addComponent(jTextDocTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextDocTicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel18)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButtonDocTic1)
+                        .addComponent(jRadioButtonDocTic2)
+                        .addComponent(jTextDocTic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAbrirDocTic, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDocTicUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDocTicUrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -691,11 +898,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel22.setText("Curso:");
 
-        jTextCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCursoActionPerformed(evt);
-            }
-        });
+        jTextCurso.setEnabled(false);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Horas:");
@@ -703,14 +906,51 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel24.setText("URL Soporte:");
 
-        jComboBoxHorasCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curso TIC minimo 40 horas", "Curso TIC hasta 90 horas", "Curso TIC hasta 140 horas", "Curso TIC mas de 40 horas" }));
+        jComboBoxHorasCurso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curso TIC minimo 40 horas", "Curso TIC hasta 90 horas", "Curso TIC hasta 140 horas", "Curso TIC mas de 140 horas" }));
+        jComboBoxHorasCurso.setEnabled(false);
 
-        institucion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        institucion.setText("Institucion:");
+        jTextCursoUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextCursoUrl.setText("No hay soporte");
+        jTextCursoUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextCursoUrl.setEnabled(false);
+        jTextCursoUrl.setFocusable(false);
+        jTextCursoUrl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jTextCursoUrl.setInheritsPopupMenu(false);
 
-        jTextInstitucion.addActionListener(new java.awt.event.ActionListener() {
+        btAbrirFormacionTic.setText("Adjuntar Archivo Soporte");
+        btAbrirFormacionTic.setEnabled(false);
+        btAbrirFormacionTic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextInstitucionActionPerformed(evt);
+                btAbrirFormacionTicActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Institucion");
+
+        jTextInstitucion.setEnabled(false);
+
+        btMasCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
+        btMasCursos.setText("Agregar Otro Curso");
+        btMasCursos.setEnabled(false);
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel46.setText("Formacion en Tic:");
+
+        buttonGroup20.add(jRadioButtonFor_Tic1);
+        jRadioButtonFor_Tic1.setText("Si");
+        jRadioButtonFor_Tic1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFor_Tic1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup20.add(jRadioButtonFor_Tic2);
+        jRadioButtonFor_Tic2.setSelected(true);
+        jRadioButtonFor_Tic2.setText("No");
+        jRadioButtonFor_Tic2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonFor_Tic2ActionPerformed(evt);
             }
         });
 
@@ -722,43 +962,64 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(institucion, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jTextInstitucion))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
-                            .addComponent(jLabel23))
-                        .addGap(60, 60, 60)
+                            .addComponent(jLabel2))
+                        .addGap(38, 38, 38)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextCurso)
-                            .addComponent(jComboBoxHorasCurso, 0, 200, Short.MAX_VALUE)))
+                            .addComponent(jTextCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(jTextInstitucion)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addGap(60, 60, 60)
+                                .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(623, 623, 623))
+                        .addComponent(btAbrirFormacionTic)
+                        .addGap(18, 18, 18)
+                        .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel46)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonFor_Tic1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonFor_Tic2)))
+                .addContainerGap(479, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(institucion)
-                    .addComponent(jTextInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel46)
+                    .addComponent(jRadioButtonFor_Tic1)
+                    .addComponent(jRadioButtonFor_Tic2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(jTextCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jTextInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btAbrirFormacionTic)
+                        .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextCursoUrl))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel24)))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -955,14 +1216,13 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButton8_2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton8_3)))
-                        .addContainerGap(237, Short.MAX_VALUE))
+                                .addComponent(jRadioButton8_3))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel34)
-                        .addGap(129, 129, 129))))
+                        .addGap(338, 338, 338)
+                        .addComponent(jLabel34)))
+                .addContainerGap(458, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1032,7 +1292,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButton8_1)
                         .addComponent(jRadioButton8_2)
                         .addComponent(jRadioButton8_3)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Conocimientos Especificos", jPanel4);
@@ -1176,7 +1436,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jTextIdioma))))
                     .addComponent(jLabel40)
                     .addComponent(jLabel35))
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addContainerGap(804, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1209,7 +1469,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jRadioButtonHabla2)
                     .addComponent(jRadioButtonHabla3)
                     .addComponent(jLabel39))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Idiomas", jPanel5);
@@ -1259,7 +1519,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormForm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(560, Short.MAX_VALUE))
+                .addContainerGap(781, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1280,7 +1540,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Experiencia", jPanel6);
@@ -1302,6 +1562,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Back-Asp-icon.png"))); // NOI18N
         jButtonCancelar.setText("REGISTRAR OTRO ASPIRANTE");
         jButtonCancelar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -1314,7 +1579,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(565, Short.MAX_VALUE))
+                .addContainerGap(786, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1325,7 +1590,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addComponent(jButtonRegistrar)
                 .addGap(30, 30, 30)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("REGISTRAR", jPanel7);
@@ -1354,10 +1619,9 @@ public class PanelDigitador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedDigitador)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1369,7 +1633,10 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(WelcomeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel11)))
+                        .addComponent(jLabel11))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jTabbedDigitador)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1385,9 +1652,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addComponent(jLabel11)
                     .addComponent(jButtonLogout, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedDigitador)
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(jTabbedDigitador))
         );
 
         pack();
@@ -1398,152 +1664,301 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextApellidosActionPerformed
 
     private void jRadioButtonLic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLic1ActionPerformed
-      
+        licid=jRadioButtonLic1.isSelected();
         jTextLic.setEnabled(true);
         jTextLicUrl.setEnabled(true);
+        jTextLicUni.setEnabled(true);
+        btAbrirLic.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonLic1ActionPerformed
 
     private void jRadioButtonEspe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEspe1ActionPerformed
+        espeid=jRadioButtonEspe1.isSelected();;
         jTextEspe.setEnabled(true);
         jTextEspeUrl.setEnabled(true);
+        jTextEspeUni.setEnabled(true);
+        btAbrirEspe.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonEspe1ActionPerformed
 
     private void jRadioButtonEspeTic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEspeTic1ActionPerformed
-        // TODO add your handling code here:
+        espeticid=jRadioButtonEspeTic1.isSelected();
         jTextEspeTic.setEnabled(true);
         jTextEspeTicUrl.setEnabled(true);
+        jTextEspeTicUni.setEnabled(true);
+        btAbrirEspeTic.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonEspeTic1ActionPerformed
 
     private void jRadioButtonMaes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaes1ActionPerformed
-        // TODO add your handling code here:
+        maesid=jRadioButtonMaes1.isSelected();
         jTextMaes.setEnabled(true);
         jTextMaesUrl.setEnabled(true);
+        jTextMaesUni.setEnabled(true);
+        btAbrirMaes.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonMaes1ActionPerformed
 
     private void jRadioButtonMaesTic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaesTic1ActionPerformed
-        // TODO add your handling code here:
+        maesticid=jRadioButtonMaesTic1.isSelected();
         jTextMaesTic.setEnabled(true);
         jTextMaesTicUrl.setEnabled(true);
+        jTextMaesTicUni.setEnabled(true);
+        btAbrirMaesTic.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonMaesTic1ActionPerformed
 
     private void jRadioButtonDoc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDoc1ActionPerformed
-        // TODO add your handling code here:
+        docid=jRadioButtonDoc1.isSelected();
         jTextDoc.setEnabled(true);
         jTextDocUrl.setEnabled(true);
+        jTextDocUni.setEnabled(true);
+        btAbrirDoc.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonDoc1ActionPerformed
 
     private void jRadioButtonDocTic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDocTic1ActionPerformed
-        // TODO add your handling code here:
+        docticid=jRadioButtonDocTic1.isSelected();
         jTextDocTic.setEnabled(true);
         jTextDocTicUrl.setEnabled(true);
+        jTextDocTicUni.setEnabled(true);
+        btAbrirDocTic.setEnabled(true);
     }//GEN-LAST:event_jRadioButtonDocTic1ActionPerformed
 
-    private void jTextLicUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextLicUrlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextLicUrlActionPerformed
-
-    private void jTextDocTicUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDocTicUrlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextDocTicUrlActionPerformed
-
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-        
-       
-          try{
-        //Obtenemos los DATOS PERSONALES//
-            
+       try{
+    /*Obtenemos los DATOS PERSONALES*/
         nombres=jTextNombres.getText();
         apellidos=jTextApellidos.getText();
         cedula=jTextCedula.getText();
         genero=jComboBoxGenero.getSelectedItem().toString();
         dia=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH));
+        mes=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.MONTH)+1);
         anno=Integer.toString(jDateChooserFecha.getCalendar().get(Calendar.YEAR));
         fecha_nac=dia+"/"+mes+"/"+anno;
         jornada=jComboBoxJornada.getSelectedItem().toString();
         municipio=jComboBoxMunicipio.getSelectedItem().toString();
-         //fin datos personales //
-
-        //datos formacion TIC //
-            String institucion,titulo,horas,url;
-            institucion = jTextInstitucion.getText();
-            titulo = jTextCurso.getText();
-            horas= jComboBoxHorasCurso.getSelectedItem().toString();
-            url = jTextCursoUrl.getText();
-        // fin datos formacion TIC
-                
-        // 1 sola formacion por el momento    
-        FormacionTic [] formacionesTic = new FormacionTic[1];
-        //
-        // test de formacion
-        // creacion de objetos
-        String licUn = "Universidad del Valle";
-        String licTit = "Ingeniero de Sistemas";
-       String licLev ="Licenciado";
-        String licPath = "/home/daniel/test";
-       
-        String docUn = "Universidad de los Andes";
-        String docTit = "Phd Computer Science on Networks";
-        String docLev ="Doctorado";
-        String docPath = "/home/daniel/doc";
-       
-       
-       
-        Formacion[] formArray = new Formacion[2];
+    /********************************************************************************/
+        /*Obtenemos los Datos de Formacion*/
+        lictit=jTextLic.getText();
+        licuni=jTextLicUni.getText();
+        licid=jRadioButtonLic1.isSelected();
         
-        Formacion form1 = new Formacion(licUn,licTit,licLev,licPath);
-        Formacion form2 = new Formacion(docUn,docTit,docLev,docPath);
-       
-        formArray[0] = form1;
-        formArray[1] = form2;
-        //VALIDAMOS VACIOS//
-                if(objValidador.ValidaVacios(nombres)==1 &&
-                   objValidador.ValidaVacios(apellidos)==1 &&
-                   objValidador.ValidaVacios(fecha_nac)==1 &&
-                   objValidador.ValidaVacios(institucion)==1 &&
-                   objValidador.ValidaVacios(titulo)==1 &&
-                   objValidador.ValidaVacios(horas)==1 &&
-                   objValidador.ValidaVacios(url)==1)
-                    
+        espetit=jTextEspe.getText();
+        espeuni=jTextEspeUni.getText();
+        espeid=jRadioButtonEspe1.isSelected();        
+        espetictit=jTextEspeTic.getText();
+        espeticuni=jTextEspeTicUni.getText();
+        espeticid=jRadioButtonEspeTic1.isSelected();
+        
+        maestit=jTextMaes.getText();
+        maesuni=jTextMaesUni.getText();
+        maesid=jRadioButtonMaes1.isSelected();        
+        maestictit=jTextMaesTic.getText();
+        maesticuni=jTextMaesTicUni.getText();
+        maesticid=jRadioButtonMaesTic1.isSelected();
+        
+        doctit=jTextDoc.getText();
+        docuni=jTextDocUni.getText();
+        docid=jRadioButtonDoc1.isSelected();
+        doctictit=jTextDocTic.getText();
+        docticuni=jTextDocTicUni.getText();
+        docticid=jRadioButtonDocTic1.isSelected();
+        
+    /**************************************************************/
+        /*Obtenemos los datos de FORMACION_TIC*/
+        curso=jTextCurso.getText();
+        institucion=jTextInstitucion.getText();
+        int horastemp=jComboBoxHorasCurso.getSelectedIndex();
+        switch  (horastemp){
+            case 0: {horasFormacionTic=30; break;}
+            case 1: {horasFormacionTic=60; break;}
+            case 2: {horasFormacionTic=120; break;}
+            case 3: {horasFormacionTic=150; break;}
+        }
+        formacionTicUrl=jTextCursoUrl.getText();
+    /**************************************************************/
+        VaciosEn="";
+        /*VARIABLES BOOLEANAS PARA VALIDAR*/
+        boolean nohayvaciosDP=true;
+        boolean nohayvaciosFOR=true;
+            boolean nohayvaciosForLic=true;
+            boolean nohayvaciosForEspe=true;
+            boolean nohayvaciosForEspeTic=true;
+            boolean nohayvaciosForMaes=true;
+            boolean nohayvaciosForMaesTic=true;
+            boolean nohayvaciosForDoc=true;
+            boolean nohayvaciosForDocTic=true;
+        boolean nohayvaciosFOR_TIC=true;
+        /*boolean nohayvaciosCON_ESPE=true;
+        boolean nohayvaciosIDIOMAS=true;
+        boolean nohayvaciosEXPE=true;*/
+        
+        
+        /*VALIDAMOS VACIOS En Datos Personales*/
+        if(objValidador.ValidaVacios(nombres)==1 &&
+           objValidador.ValidaVacios(apellidos)==1 &&
+           objValidador.ValidaVacios(cedula)==1 &&
+           jDateChooserFecha.getCalendar() != null){
+            nohayvaciosDP=true;
+        }
+        else{
+            nohayvaciosDP=false;
+            VaciosEn="DATOS PERSONALES\n";
+        }
+           
+        /*PRIMERO SE VERIFICA SI SELECCIONO -SI- EN LA FORMACION*/
+        int cantidadFormaciones =0;
+        if(licid){
+            if(objValidador.ValidaVacios(lictit)==1 &&
+               objValidador.ValidaVacios(licuni)==1)
+                {
+                nohayvaciosForLic=true;
+                
+            }
+            else{
+                nohayvaciosForLic=false;
+                VaciosEn+="FORMACION LICENCIATURA \n";
+            }}
+        if(espeid){
+            if(objValidador.ValidaVacios(espetit)==1 &&
+               objValidador.ValidaVacios(espeuni)==1)
+                {
+                nohayvaciosForEspe=true;
+                
+            }
+            else{
+                nohayvaciosForEspe=false;
+                VaciosEn+="FORMACION ESPECIALIZACION \n";
+            }}
+        if(espeticid){
+            if(objValidador.ValidaVacios(espetictit)==1 &&
+               objValidador.ValidaVacios(espeticuni)==1)
+                {
+                nohayvaciosForEspeTic=true;
+            }
+            else{
+                nohayvaciosForEspeTic=false;
+                VaciosEn+="FORMACION ESPECIALIZACION TIC \n";
+            }}
+        if(maesid){
+            if(objValidador.ValidaVacios(maestit)==1 &&
+               objValidador.ValidaVacios(maesuni)==1)
+                {
+                nohayvaciosForMaes=true;
+            }
+            else{
+                nohayvaciosForMaes=false;
+                VaciosEn+="FORMACION MAESTRIA \n";
+            }}
+        if(maesticid){
+            if(objValidador.ValidaVacios(maestictit)==1 &&
+               objValidador.ValidaVacios(maesticuni)==1)
+                {
+                nohayvaciosForMaesTic=true;
+            }
+            else{
+                nohayvaciosForMaesTic=false;
+                VaciosEn+="FORMACION MAESTRIA TIC \n";
+            }}
+        if(docid){
+            if(objValidador.ValidaVacios(doctit)==1 &&
+               objValidador.ValidaVacios(docuni)==1)
+                {
+                nohayvaciosForDoc=true;
+            }
+            else{
+                nohayvaciosForDoc=false;
+                VaciosEn+="FORMACION DOCTORADO \n";
+            }}
+        if(docticid){
+            if(objValidador.ValidaVacios(doctictit)==1 &&
+               objValidador.ValidaVacios(docticuni)==1)
+                {
+                nohayvaciosForDocTic=true;
+            }
+            else{
+                nohayvaciosForDocTic=false;
+                VaciosEn+="FORMACION DOCTORADO TIC \n";
+            }}
+        
+        nohayvaciosFOR= nohayvaciosForLic && 
+                        nohayvaciosForEspe &&
+                        nohayvaciosForEspeTic &&
+                        nohayvaciosForMaes &&
+                        nohayvaciosForMaesTic &&
+                        nohayvaciosForDoc &&
+                        nohayvaciosForDocTic;
+        
+        /*--VALIDAMOS FORMACION TIC--*/
+        if(forTicChooser){
+            if(objValidador.ValidaVacios(curso)==1 &&
+               objValidador.ValidaVacios(institucion)==1){
+                nohayvaciosFOR_TIC=true;
+            }
+            else{
+                nohayvaciosFOR_TIC=false;
+                VaciosEn+="FORMACION EN TIC \n";
+            }
+        }
+            else{
+            nohayvaciosFOR_TIC=true;
+        }
+        
+        /*REGISTRAMOS ASPIRANTE*/
+                if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
-                      objAspirantController=new ControlAspirante(Conexion);
-                      formacionesTic [0] = new FormacionTic (institucion,titulo,horas,url,true);
-                      
+                        //por el momento una sola formacion TIC y formadores //
+                        FormacionTic [] formacionesTic =  new FormacionTic[1];
+                        formacionesTic [0] = new FormacionTic (institucion, curso, horasFormacionTic,formacionTicUrl,true );
+                        //FormadorTIC [] formadoresTic =  new FormadoresTIC[1];
+                        //formadoresTic [0] = new FormadorTIC ();
+                     /* objAspirantController=new ControlAspirante(Conexion);
                       objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
                                                 municipio,0,
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac,formArray,formacionesTic);
-          
+                                                fecha_nac);*/
+                        
+                        System.out.println("CORRECTO!!!");
                     }
                 else{
-                   JOptionPane.showMessageDialog(null, "No has completado los datos personales");
-                   jTabbedDigitador.requestFocus();
+                   JOptionPane.showMessageDialog(null, "No has completado los datos necesarios, Hay vacios en:\n"+VaciosEn);
                 }
-//                
-//            System.out.println("DATOS PERSONALES: \nNombres:"
-//                +nombres+
-//                "\nApellidos: "+apellidos+
-//                "\nCedula: "+cedula+
-//                "\nGenero :"+genero+
-//                "\nfecha: "+fecha_nac+
-//                "\njornada: "+jornada+
-//                "\nmunicipio: "+municipio
-//                );
+            System.out.println("--->DATOS PERSONALES<---: \nNombres:"
+                +nombres+
+                "\nApellidos: "+apellidos+
+                "\nCedula: "+cedula+
+                "\nGenero :"+genero+
+                "\nfecha: "+fecha_nac+
+                "\njornada: "+jornada+
+                "\nmunicipio: "+municipio+
+                "\n--->FORMACION<----:\nLic"+lictit+"-"+licuni+"-"+licurl+
+                "\nEspe:"+espetit+"-"+espeuni+"-"+espeurl+
+                "\nEspetic:"+espetictit+"-"+espeticuni+"-"+espeticurl+
+                "\nMaes:"+maestit+"-"+maesuni+"-"+maesurl+
+                "\nMaestic:"+maestictit+"-"+maesticuni+"-"+maesticurl+
+                "\nDoc:"+doctit+"-"+docuni+"-"+docurl+
+                "\nDoctic:"+doctictit+"-"+docticuni+"-"+docticurl+
+                "\n--->FORMACION TIC<----:\ncurso: "+curso+
+                "\nInstitucion: "+institucion+
+                "\nhoras: "+horasFormacionTic+
+                "\nURL_soporte-curso: "+formacionTicUrl
+            );
+        
+       }//endTRY
+        /*catch(){
+            System.out.println("Espacios blancos");
+        }*/
+        catch(NumberFormatException nel){
+            System.out.println("Error: "+nel);
         }
-        catch(NumberFormatException nel)
-        {
-            System.out.println("Ingresaste una letra en Cedula");
-        }
-        catch(NullPointerException nel)
-        {
-            System.out.println("Ingresaste la fecha de forma equivocada");
-            jDateChooserFecha.setDate(null);
-            jDateChooserFecha.setBackground(Color.red);   
+        catch(NullPointerException nel){
+            System.out.println("Error "+nel);
+            if(jDateChooserFecha.getCalendar() == null){
+                JOptionPane.showMessageDialog(null, "Ingresa una fecha correcta!");
+            }
         } 
-      
+       /**catch (ParseException ex) {
+            Logger.getLogger(PanelDigitador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+**/
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -1580,45 +1995,80 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextIdiomaActionPerformed
 
     private void jRadioButtonLic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLic2ActionPerformed
-        // TODO add your handling code here:
+        jTextLic.setText("");
+        jTextLicUrl.setText("No hay soporte");
+        jTextLicUni.setText("");
+        licid=false;
         jTextLic.setEnabled(false);
         jTextLicUrl.setEnabled(false);
+        jTextLicUni.setEnabled(false);
+        btAbrirLic.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonLic2ActionPerformed
 
     private void jRadioButtonEspe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEspe2ActionPerformed
-        // TODO add your handling code here:
+        jTextEspe.setText("");
+        jTextEspeUrl.setText("No hay soporte");
+        jTextEspeUni.setText("");
+        espeid=false;
         jTextEspe.setEnabled(false);
         jTextEspeUrl.setEnabled(false);
+        jTextEspeUni.setEnabled(false);
+        btAbrirEspe.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonEspe2ActionPerformed
 
     private void jRadioButtonEspeTic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEspeTic2ActionPerformed
-        // TODO add your handling code here:
+        jTextEspeTic.setText("");
+        jTextEspeTicUrl.setText("No hay soporte");
+        jTextEspeTicUni.setText("");
+        espeticid=false;
         jTextEspeTic.setEnabled(false);
         jTextEspeTicUrl.setEnabled(false);
+        jTextEspeTicUni.setEnabled(false);
+        btAbrirEspeTic.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonEspeTic2ActionPerformed
 
     private void jRadioButtonMaes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaes2ActionPerformed
-        // TODO add your handling code here:
+        jTextMaes.setText("");
+        jTextMaesUrl.setText("No hay soporte");
+        jTextMaesUni.setText("");
+        maesid=false;
         jTextMaes.setEnabled(false);
         jTextMaesUrl.setEnabled(false);
+        jTextMaesUni.setEnabled(false);
+        btAbrirMaes.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonMaes2ActionPerformed
 
     private void jRadioButtonMaesTic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaesTic2ActionPerformed
-        // TODO add your handling code here:
+        jTextMaesTic.setText("");
+        jTextMaesTicUrl.setText("No hay soporte");
+        jTextMaesTicUni.setText("");
+        maesticid=false;
         jTextMaesTic.setEnabled(false);
         jTextMaesTicUrl.setEnabled(false);
+        jTextMaesTicUni.setEnabled(false);
+        btAbrirMaesTic.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonMaesTic2ActionPerformed
 
     private void jRadioButtonDoc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDoc2ActionPerformed
-        // TODO add your handling code here:
+        jTextDoc.setText("");
+        jTextDocUrl.setText("No hay soporte");
+        jTextDocUni.setText("");
+        docid=false;
         jTextDoc.setEnabled(false);
         jTextDocUrl.setEnabled(false);
+        jTextDocUni.setEnabled(false);
+        btAbrirDoc.setEnabled(false);
     }//GEN-LAST:event_jRadioButtonDoc2ActionPerformed
 
     private void jRadioButtonDocTic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDocTic2ActionPerformed
-        // TODO add your handling code here:
+        jTextDocTic.setText("");
+        jTextDocTicUrl.setText("No hay soporte");
+        jTextDocTicUni.setText("");
+        docticid=false;
         jTextDocTic.setEnabled(false);
         jTextDocTicUrl.setEnabled(false);
+        jTextDocTicUni.setEnabled(false);
+        btAbrirDocTic.setEnabled(false);        
     }//GEN-LAST:event_jRadioButtonDocTic2ActionPerformed
 
     private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
@@ -1684,18 +2134,146 @@ public class PanelDigitador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombresActionPerformed
 
-    private void jTextCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCursoActionPerformed
+    private void btAbrirLicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirLicActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCursoActionPerformed
+        String mensaje=obtenerurl(btAbrirLic, "Licenciatura");
+        jTextLicUrl.setText(mensaje);
+        jTextLicUrl.setToolTipText(mensaje);
+        licurl=mensaje;        
+    }//GEN-LAST:event_btAbrirLicActionPerformed
 
-    private void jTextInstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextInstitucionActionPerformed
+    private void jTextLicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextLicActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextInstitucionActionPerformed
+    }//GEN-LAST:event_jTextLicActionPerformed
 
+    private void btAbrirEspeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirEspeActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirEspe, "Especialidad");
+        jTextEspeUrl.setText(mensaje);
+        jTextEspeUrl.setToolTipText(mensaje);
+        espeurl=mensaje;
+    }//GEN-LAST:event_btAbrirEspeActionPerformed
+
+    private void btAbrirEspeTicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirEspeTicActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirEspeTic, "Especialidad_TIC");
+        jTextEspeTicUrl.setText(mensaje);
+        jTextEspeTicUrl.setToolTipText(mensaje);
+        espeticurl=mensaje;
+    }//GEN-LAST:event_btAbrirEspeTicActionPerformed
+
+    private void btAbrirMaesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirMaesActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirMaes, "Maestria");
+        jTextMaesUrl.setText(mensaje);
+        jTextMaesUrl.setToolTipText(mensaje);
+        maesurl=mensaje;
+    }//GEN-LAST:event_btAbrirMaesActionPerformed
+
+    private void btAbrirMaesTicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirMaesTicActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirMaesTic, "Maestria_TIC");
+        jTextMaesTicUrl.setText(mensaje);
+        jTextMaesTicUrl.setToolTipText(mensaje);
+        maesticurl=mensaje;
+    }//GEN-LAST:event_btAbrirMaesTicActionPerformed
+
+    private void btAbrirDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirDocActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirDoc, "Doctorado");
+        jTextDocUrl.setText(mensaje);
+        jTextDocUrl.setToolTipText(mensaje);
+        docurl=mensaje;
+    }//GEN-LAST:event_btAbrirDocActionPerformed
+
+    private void btAbrirDocTicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirDocTicActionPerformed
+        // TODO add your handling code here:
+        String mensaje=obtenerurl(btAbrirDocTic, "Doctorado_TIC");
+        jTextDocTicUrl.setText(mensaje);
+        jTextDocTicUrl.setToolTipText(mensaje);
+        docticurl=mensaje;
+    }//GEN-LAST:event_btAbrirDocTicActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        //System.out.println(jRadioButtonLic1.isSelected());
+           System.out.print(jDateChooserFecha.getCalendar()+"\n");
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jRadioButtonFor_Tic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFor_Tic2ActionPerformed
+        jTextCurso.setText("");
+        jTextInstitucion.setText("");
+        jTextCursoUrl.setText("");
+        jTextCurso.setEnabled(false);
+        jTextInstitucion.setEnabled(false);
+        jTextCursoUrl.setEnabled(false);
+        jComboBoxHorasCurso.setEnabled(false);
+        btAbrirFormacionTic.setEnabled(false);
+    }//GEN-LAST:event_jRadioButtonFor_Tic2ActionPerformed
+
+    private void jRadioButtonFor_Tic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFor_Tic1ActionPerformed
+        forTicChooser=jRadioButtonFor_Tic1.isSelected();
+        jTextCurso.setEnabled(true);
+        jTextInstitucion.setEnabled(true);
+        jTextCursoUrl.setEnabled(true);
+        jComboBoxHorasCurso.setEnabled(true);
+        btAbrirFormacionTic.setEnabled(true);
+    }//GEN-LAST:event_jRadioButtonFor_Tic1ActionPerformed
+
+    private void btAbrirFormacionTicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirFormacionTicActionPerformed
+        String mensaje=obtenerurl(btAbrirFormacionTic, "Formacion_TIC");
+        jTextCursoUrl.setText(mensaje);
+        jTextCursoUrl.setToolTipText(mensaje);
+        formacionTicUrl=mensaje;
+    }//GEN-LAST:event_btAbrirFormacionTicActionPerformed
+    
+    /*METODO PARA OBTENER LA DIRECCION DEL ARCHIVO SOPORTE
+    *Crea el directorio para el soporte del respectivo aspirante
+    *Copia los archivos seleccionados a la URL de soportes
+    */
+    private String obtenerurl(JButton boton, String foldername){
+                //Clase para seleccionar archivos
+                JFileChooser elegir = new JFileChooser();
+                //Entero que contiene el resultado al selecionar archivo 1->aprovado, 2->cancelado
+                int opcion = elegir.showOpenDialog(boton);
+                /*Clase File para crear el directorio de soportes*/
+/*WINDOWS->*/       File folder = new File("C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name);
+/*PARA SISTEMAS LINUX COMENTAR WINDOWS Y DESCOMENTAR LINUX*/
+/*Linux->*/       //File folder = new File("/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name);
+               
+            try{ //Si presionamos el boton ABRIR en pathArchivo obtenemos el path del archivo
+                   if (opcion == JFileChooser.APPROVE_OPTION) {
+                        //Obtiene path del archivo
+                        String pathArchivo = elegir.getSelectedFile().getPath(); 
+                        //obtiene nombre del archivo
+                        String nombreArchivo = elegir.getSelectedFile().getName();
+                        //Para Copiar el archivo necesitamos Origen y Destino
+                        Path Origen = Paths.get(pathArchivo);
+                        //Creamos directorio especificado
+                        folder.mkdirs();
+/*WINDOWS->*/           DestinoTemp="C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name+"\\"+nombreArchivo;
+/*Linux->*/           //DestinoTemp="/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name+"/"+nombreArchivo;
+                        Path Destino = Paths.get(DestinoTemp);
+                        System.out.println("El nombre del archivo es: "+ nombreArchivo);
+                        System.out.println("El path del archivo es: "+ pathArchivo);
+                        //sobreescribir el fichero de destino, si existe, y copiar
+                        // los atributos, incluyendo los permisos rwx
+                        CopyOption[] options = new CopyOption[]{
+                          StandardCopyOption.REPLACE_EXISTING,
+                          StandardCopyOption.COPY_ATTRIBUTES
+                        }; 
+                        //Se copia desde origen a destino con las condiciones especificadas en options
+                        Files.copy(Origen, Destino , options);    
+                   }
+                  }
+                  catch(IOException nel){
+                      System.out.println("ERROR EN ObtenerUrl "+nel);
+                  }                  
+        return (DestinoTemp);
+    }
     /**
      * @param args the command line arguments
      */
-   // public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1720,17 +2298,29 @@ public class PanelDigitador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       /* java.awt.EventQueue.invokeLater(new Runnable() {
+       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PanelDigitador("Nelson", "ConvocatoriaDocente").setVisible(true);
+                Convocatoria objconvo = new Convocatoria();
+                UserController objControl = new UserController();
+                new PanelDigitador("Nelson", objconvo, objControl).setVisible(true);
             }
         });
-    }*/
+    }//END MAIN
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelConfirmacion;
     private javax.swing.JLabel LabelConvocatoria;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JButton btAbrirDoc;
+    private javax.swing.JButton btAbrirDocTic;
+    private javax.swing.JButton btAbrirEspe;
+    private javax.swing.JButton btAbrirEspeTic;
+    private javax.swing.JButton btAbrirFormacionTic;
+    private javax.swing.JButton btAbrirLic;
+    private javax.swing.JButton btAbrirMaes;
+    private javax.swing.JButton btAbrirMaesTic;
+    private javax.swing.JButton btMasCursos;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup10;
     private javax.swing.ButtonGroup buttonGroup11;
@@ -1743,6 +2333,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup18;
     private javax.swing.ButtonGroup buttonGroup19;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup20;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
@@ -1750,7 +2341,6 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.ButtonGroup buttonGroup9;
-    private javax.swing.JLabel institucion;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonRegistrar;
@@ -1762,6 +2352,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxJornada;
     private javax.swing.JComboBox jComboBoxMunicipio;
     private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1772,6 +2363,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1800,11 +2392,13 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelLicUrl;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1849,6 +2443,8 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonEspe2;
     private javax.swing.JRadioButton jRadioButtonEspeTic1;
     private javax.swing.JRadioButton jRadioButtonEspeTic2;
+    private javax.swing.JRadioButton jRadioButtonFor_Tic1;
+    private javax.swing.JRadioButton jRadioButtonFor_Tic2;
     private javax.swing.JRadioButton jRadioButtonHabla1;
     private javax.swing.JRadioButton jRadioButtonHabla2;
     private javax.swing.JRadioButton jRadioButtonHabla3;
@@ -1865,23 +2461,31 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextApellidos;
     private javax.swing.JTextField jTextCedula;
     private javax.swing.JTextField jTextCurso;
-    private javax.swing.JTextField jTextCursoUrl;
+    private javax.swing.JLabel jTextCursoUrl;
     private javax.swing.JTextField jTextDoc;
     private javax.swing.JTextField jTextDocTic;
-    private javax.swing.JTextField jTextDocTicUrl;
-    private javax.swing.JTextField jTextDocUrl;
+    private javax.swing.JTextField jTextDocTicUni;
+    private javax.swing.JLabel jTextDocTicUrl;
+    private javax.swing.JTextField jTextDocUni;
+    private javax.swing.JLabel jTextDocUrl;
     private javax.swing.JTextField jTextEspe;
     private javax.swing.JTextField jTextEspeTic;
-    private javax.swing.JTextField jTextEspeTicUrl;
-    private javax.swing.JTextField jTextEspeUrl;
+    private javax.swing.JTextField jTextEspeTicUni;
+    private javax.swing.JLabel jTextEspeTicUrl;
+    private javax.swing.JTextField jTextEspeUni;
+    private javax.swing.JLabel jTextEspeUrl;
     private javax.swing.JTextField jTextIdioma;
     private javax.swing.JTextField jTextInstitucion;
     private javax.swing.JTextField jTextLic;
-    private javax.swing.JTextField jTextLicUrl;
+    private javax.swing.JTextField jTextLicUni;
+    private javax.swing.JLabel jTextLicUrl;
     private javax.swing.JTextField jTextMaes;
     private javax.swing.JTextField jTextMaesTic;
-    private javax.swing.JTextField jTextMaesTicUrl;
-    private javax.swing.JTextField jTextMaesUrl;
+    private javax.swing.JTextField jTextMaesTicUni;
+    private javax.swing.JLabel jTextMaesTicUrl;
+    private javax.swing.JTextField jTextMaesUni;
+    private javax.swing.JLabel jTextMaesUrl;
     private javax.swing.JTextField jTextNombres;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -98,7 +98,7 @@ public class DAOFormacionTic
                 formaciones[indice].setInstitucion(table.getString(1));
                 formaciones[indice].setTitulo(table.getString(2));
                 System.out.println("titulo" + table.getString(2) );
-                formaciones[indice].setHoras(table.getString(3));
+                formaciones[indice].setHoras(table.getInt(3));
                 formaciones[indice].setUrl_soporte(table.getString(4));
                 formaciones[indice].setEstado(table.getBoolean(5));
                 indice ++;
