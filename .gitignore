@@ -1,0 +1,20 @@
+<<<<<<< HEAD
+/Desktop/Prueba/Proyecto/nbproject/private/
+=======
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+/SISCONDOC/nbproject/private/
+/SISCONDOC/build/
+/SISCONDOC/src/almacenamiento/controlador/.fr-A7Zu2g
+/SISCONDOC/src/presentacion/.fr-pjznXr/
+>>>>>>> 9db85f3aeb197c4e5bae37ede5335e0834eae1da
