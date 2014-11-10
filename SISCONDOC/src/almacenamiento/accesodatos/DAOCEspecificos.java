@@ -46,7 +46,7 @@ public class DAOCEspecificos {
     }
         /**
         * crear o agregar un conocimiento específico a la tabla.
-        * @param ce la cedula del aspirante al que se le agrega el CEspecifico
+        * @param ce el CEspecifico a agregar del aspirante
         * @param cedula la cedula del aspirante
         * @return 1 en caso que se cumpla todo en su flujo normal, -3 en caso de que el perfil del usuario este malo, -2 en caso de un error de integridad referencial o de entidad, y -1 en cualquier otro caso.
         */
