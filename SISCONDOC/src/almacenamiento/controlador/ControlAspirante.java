@@ -36,6 +36,7 @@ public class ControlAspirante
         controlFormacionTic = new ControlFormacionTic(conn);
         controlFormacion = new ControlFormacion(conn);
         controlFormador = new ControlFormadorTIC (conn);
+        controlConocimientos = new CEspecificoController( conn);
         controlIdioma = new ControlIdioma (conn);
         
     }
