@@ -1,4 +1,4 @@
-package almacenamiento.accesodatos;
+package almacenamiento;
 import java.sql.*;
 /*
  * To change this template, choose Tools | Templates
@@ -8,11 +8,7 @@ import java.sql.*;
 /**
  *
  * @author daniel
-<<<<<<< HEAD
- * Nombre de la base de datos : SISCONDOC
-=======
  * Nombre de la base de datos : clinicaDB
->>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
  */
 public class BaseDatos {
      private String url, usuario, password;
@@ -20,30 +16,17 @@ public class BaseDatos {
      private Statement instruccion;
      private ResultSet tabla; 
      BaseDatos(){
-<<<<<<< HEAD
-      url = "jdbc:postgresql://localhost/SISCONDOC";
-=======
       url = "jdbc:postgresql://localhost:5432/SISCONDOC";
->>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
       usuario="danielcb";
       password="1144067772";
       
     }
     public Connection conectar(){
-<<<<<<< HEAD
-            //System.out.println("Entro metodo");
-            try {
-            // Se carga el driver
-              //Class.forName("PostgreSQL");
-            Class.forName("org.postgresql.Driver");
-            //Class.forName("/home/daniel/Documents/Work/GitProjects/SISCONDOC/postgresql-9.0-801.jdbc3.jar");
-=======
             System.out.println("Entro metodo");
             try {
             // Se carga el driver
             //Class.forName("org.postgresql.Driver");postgresql-9.0-801.jdbc3.jar
             Class.forName("/home/daniel/Documents/Work/GitProjects/SISCONDOC/postgresql-9.0-801.jdbc3.jar");
->>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
             System.out.println( "Driver Cargado" );
             } catch( Exception e ) {
                 System.out.println( "No se pudo cargar el driver." );

@@ -5,6 +5,7 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+<<<<<<< HEAD
 import almacenamiento.controlador.*;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -19,6 +20,9 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;*/
+=======
+
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
 /**
  *
  * @author daniel
@@ -28,6 +32,7 @@ public class VistaLogin extends javax.swing.JFrame {
     /**
      * Creates new form VistaLogin
      */
+<<<<<<< HEAD
     private UserController controlerU;
     private VistaAdmin vAdmin;
     private PanelDigitador digPanel;
@@ -41,6 +46,12 @@ public class VistaLogin extends javax.swing.JFrame {
         controlerU.connectDB();
         
         //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
+=======
+    public VistaLogin() {
+        
+        initComponents();
+        this.setResizable(false);
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
     }
 
     /**
@@ -66,7 +77,11 @@ public class VistaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+<<<<<<< HEAD
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
+=======
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Logo.png"))); // NOI18N
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
 
         jLabel1.setText("Nombre de Usuario:");
 
@@ -85,7 +100,11 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         lbForget.setFont(new java.awt.Font("Cantarell", 3, 15)); // NOI18N
+=======
+        lbForget.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
         lbForget.setForeground(new java.awt.Color(0, 13, 255));
         lbForget.setText("Olvido la contraseña?");
         lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,8 +129,17 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+<<<<<<< HEAD
                             .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+=======
+                            .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
@@ -119,12 +147,16 @@ public class VistaLogin extends javax.swing.JFrame {
                                 .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
+<<<<<<< HEAD
                                 .addComponent(pfPassword))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Logo)
                                     .addComponent(jLabel1)))))
+=======
+                                .addComponent(pfPassword))))
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(lbForget))
@@ -136,6 +168,7 @@ public class VistaLogin extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -144,6 +177,16 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+=======
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(279, 279, 279))))
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +213,11 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
+<<<<<<< HEAD
                 .addContainerGap(52, Short.MAX_VALUE))
+=======
+                .addContainerGap(15, Short.MAX_VALUE))
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
         );
 
         pack();
@@ -188,6 +235,7 @@ public class VistaLogin extends javax.swing.JFrame {
         System.out.println("CLick password "+userNameForget);
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
+<<<<<<< HEAD
         }else{
             Usuario user = controlerU.consultUser(userNameForget, 1);
             if (user==null){
@@ -236,11 +284,15 @@ public class VistaLogin extends javax.swing.JFrame {
         
         
         
+=======
+        }
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
     }//GEN-LAST:event_lbForgetMouseClicked
 
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
         // TODO add your handling code here:
         //Aqui va lo de ingresar
+<<<<<<< HEAD
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
@@ -306,6 +358,9 @@ public class VistaLogin extends javax.swing.JFrame {
                 }
             }
         }
+=======
+        System.out.println("CLick aqui");
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
     }//GEN-LAST:event_btSignInActionPerformed
 
     /**

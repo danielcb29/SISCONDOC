@@ -5,8 +5,12 @@
  */
 package almacenamiento.controlador;
 import proceso.*;
+<<<<<<< HEAD
 import almacenamiento.accesodatos.*;
 import java.sql.Connection;
+=======
+import almacenamiento.*;
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
 
 /**
  *
@@ -16,14 +20,19 @@ import java.sql.Connection;
 public class UserController {
     
 
+<<<<<<< HEAD
     DAOUser daoUser;
     ConvocatoriaController convocatoriaController;
+=======
+    //DaoUser daoUser;
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
 
     
     /**
      * constructor
      * **/
     public UserController(){
+<<<<<<< HEAD
         daoUser=new DAOUser();
         convocatoriaController = new ConvocatoriaController(daoUser.getConn());
     }
@@ -68,10 +77,40 @@ public class UserController {
         Usuario U = new Usuario ();
         System.out.println("entramos al control");
         U= daoUser.readUser(username, tipoCon);
+=======
+        //daoUser=new DaoUser();
+    }
+    
+    /**
+     *  @param id: cedula del empleado
+     * @param name: nombre del empleado
+     * @param username: nombre de usuario del empleado 
+     * @param password: contraseña de usuario del empleado
+     * @param email: email del empleado
+     * @param perfil: perfil que se le va a otorgar al empleado 
+     * @return result: 0 si no fue posible crear el usuario.
+     * @return result: 1 si se creo satisfactoriamente el usario.
+     * **/
+    public int   createUser (String id, String  name ,String username, String password, String email, String perfil ){
+        Usuario U = new Usuario(id,name,username,password,email,perfil);        
+        
+        //Se llama al dao para guardar
+        //int result =daoUser.guardarUser(U);
+        int result = 0;
+        return result;
+
+    }
+
+    public Usuario   consultUser (String username, String password ){
+        Usuario U = new Usuario ();
+        
+        //U= daoUser.consultUser(username, password);
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
         
         return U;
 
     }
+<<<<<<< HEAD
     
  
      
@@ -105,6 +144,9 @@ public class UserController {
     public int deleteUser(String text) {
         return daoUser.deleteUser(text);
     }
+=======
+   
+>>>>>>> 56c654460aee9dc025726851cecd05750f2bb6ca
 
 }//fin clase
 
