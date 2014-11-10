@@ -14,6 +14,8 @@ public class Formacion {
     /**
      * Las opciones de niveles son :
      * "Licenciado"
+     * "Especializacion"
+     * "EspecializacionTIC"
      * "Maestria"
      * "MaestriaTIC"
      * "Doctorado"
