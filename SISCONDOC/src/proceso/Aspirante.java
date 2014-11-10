@@ -29,10 +29,11 @@ package proceso;
     private FormacionTic [] formacionesTic;
     private FormadorTIC [] formadores;
     private CEspecifico conocimientos;
+    private Idioma [] idiomas; 
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -47,7 +48,7 @@ package proceso;
         formacionesTic= formacionesTicAspirantes;
         formadores = formadoresTic;
         conocimientos = conocimientosAspirante;
-        
+        idiomas = idiomasAspirante;
     }
 
     /**
@@ -230,5 +231,19 @@ package proceso;
      */
     public void setConocimientos(CEspecifico conocimientos) {
         this.conocimientos = conocimientos;
+    }
+
+    /**
+     * @return the idiomas
+     */
+    public Idioma[] getIdiomas() {
+        return idiomas;
+    }
+
+    /**
+     * @param idiomas the idiomas to set
+     */
+    public void setIdiomas(Idioma[] idiomas) {
+        this.idiomas = idiomas;
     }
 }
