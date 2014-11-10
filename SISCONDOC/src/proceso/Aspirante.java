@@ -28,10 +28,11 @@ package proceso;
     private Formacion [] formaciones;
     private FormacionTic [] formacionesTic;
     private FormadorTIC [] formadores;
+    private CEspecifico conocimientos;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -45,7 +46,8 @@ package proceso;
         formaciones= formacionesAspirantes;
         formacionesTic= formacionesTicAspirantes;
         formadores = formadoresTic;
-   
+        conocimientos = conocimientosAspirante;
+        
     }
 
     /**
@@ -214,5 +216,19 @@ package proceso;
      */
     public void setFormadores(FormadorTIC[] formadores) {
         this.formadores = formadores;
+    }
+
+    /**
+     * @return the conocimientos
+     */
+    public CEspecifico getConocimientos() {
+        return conocimientos;
+    }
+
+    /**
+     * @param conocimientos the conocimientos to set
+     */
+    public void setConocimientos(CEspecifico conocimientos) {
+        this.conocimientos = conocimientos;
     }
 }

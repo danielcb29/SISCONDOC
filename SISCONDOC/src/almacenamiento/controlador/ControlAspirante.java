@@ -25,6 +25,7 @@ public class ControlAspirante
     private ControlFormacionTic controlFormacionTic;
     private ControlFormacion controlFormacion;
     private ControlFormadorTIC controlFormador;
+    private CEspecificoController controlConocimientos;
     /**
      * Constructor de la clase
      */
@@ -41,12 +42,13 @@ public class ControlAspirante
      * @param aspirante: aspirante a crear
      * @return 
      */
-    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac,Formacion [] formaciones, FormacionTic [] formacionesTic,FormadorTIC [] formadores ){
-        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac,formaciones, formacionesTic,formadores);
+    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac,Formacion [] formaciones, FormacionTic [] formacionesTic,FormadorTIC [] formadores,CEspecifico conocimientos ){
+        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac,formaciones, formacionesTic,formadores,conocimientos);
         int result = daoAspirante.crateAspirante(aspirante);
         int resultado2 = controlFormacionTic.insertarFormacion(formacionesTic,document);
         int resultado3 = controlFormacion.createForm(formaciones, document);
-        int resultado = controlFormador.createFormador(formadores, document);
+        int resultado4 = controlFormador.createFormador(formadores, document);
+        int resultado5 = controlConocimientos.createCEspecifico(conocimientos, document);
         return result;
     }
     /**
@@ -67,10 +69,12 @@ public class ControlAspirante
         Formacion [] formaciones = controlFormacion.listForm(document);
         FormacionTic [] formacionesTic = controlFormacionTic.consultarFomaciones(document);
         FormadorTIC [] formados = controlFormador.listFormador(document);
+        CEspecifico conocimientos = controlConocimientos.readCEspecifico(document);
         System.out.println("tamano" +aspirante.getLastname());
         aspirante.setFormaciones(formaciones);
         aspirante.setFormacionesTic(formacionesTic);
         aspirante.setFormadores(formados);
+        aspirante.setConocimientos(conocimientos);
         return aspirante;
     }
     
