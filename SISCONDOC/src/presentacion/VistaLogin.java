@@ -5,7 +5,20 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
-
+import almacenamiento.controlador.*;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import proceso.*;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/*import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;*/
 /**
  *
  * @author daniel
@@ -15,10 +28,19 @@ public class VistaLogin extends javax.swing.JFrame {
     /**
      * Creates new form VistaLogin
      */
+    private UserController controlerU;
+    private VistaAdmin vAdmin;
+    private PanelDigitador digPanel;
+    private String userName;
+    private String password;
     public VistaLogin() {
-        
         initComponents();
+        controlerU = new UserController();
+        this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
+        controlerU.connectDB();
+        
+        //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
     /**
@@ -44,7 +66,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Logo.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/LogoSinFondo2.png"))); // NOI18N
 
         jLabel1.setText("Nombre de Usuario:");
 
@@ -63,7 +85,7 @@ public class VistaLogin extends javax.swing.JFrame {
             }
         });
 
-        lbForget.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        lbForget.setFont(new java.awt.Font("Cantarell", 3, 15)); // NOI18N
         lbForget.setForeground(new java.awt.Color(0, 13, 255));
         lbForget.setText("Olvido la contraseña?");
         lbForget.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,11 +110,7 @@ public class VistaLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel2))
@@ -101,7 +119,12 @@ public class VistaLogin extends javax.swing.JFrame {
                                 .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(pfPassword))))
+                                .addComponent(pfPassword))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Logo)
+                                    .addComponent(jLabel1)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(lbForget))
@@ -113,14 +136,14 @@ public class VistaLogin extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(279, 279, 279))))
+                        .addGap(279, 279, 279))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +170,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,13 +188,124 @@ public class VistaLogin extends javax.swing.JFrame {
         System.out.println("CLick password "+userNameForget);
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
+        }else{
+            Usuario user = controlerU.consultUser(userNameForget, 1);
+            if (user==null){
+                JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                if(user.getPassword() == null){
+                   JOptionPane.showMessageDialog(this, "Nombre de usuario no existe, vuelve a intentarlo", "Error!", JOptionPane.ERROR_MESSAGE); 
+                }else{
+                    //Enviar correo electronico
+                    System.out.println("Llegamos al envio de correo");
+                    /*String host = "correounivalle.edu.co";
+                    Properties props =  new Properties();
+                    //props.setProperty("mail.smtp.correounivalle.edu.co", "correounivalle.edu.co");
+                    props.setProperty("mail.smtp.gmail.com", "gmail.com");
+                    Session session = Session.getDefaultInstance(props);
+
+                    String msgBody = "Datos de recuperacion de cuenta SISCONDOC \nNombre Completo: "+user.getName()+" "+user.getLastName()+" \nNombre de Usuario: "+user.getUserName()+" \nContraseña: "+user.getPassword()+" \nPerfil: "+user.getProfile()  ;
+
+                    try {
+                        //System.out.println("Antes del msg");
+                        Message msg = new MimeMessage(session);
+                        
+                        msg.setFrom(new InternetAddress("daniel.correa@correounivalle.edu.co", "Correounivalle.edu.co Daniel Correa"));
+                        
+                        msg.addRecipient(Message.RecipientType.TO,
+                                        new InternetAddress(user.getMail(), user.getName()));
+                        msg.setSubject("Datos de recuperacion cuenta SISCONDOC");
+                        msg.setText(msgBody);
+                        
+                        Transport.send(msg);
+                        System.out.println("despues del msg");
+
+                    } catch (UnsupportedEncodingException ex) {
+                        Logger.getLogger(VistaLogin.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (AddressException e) {
+                        // ...
+                        System.out.println("Error con su correo electronico , contacte al admin");
+                    } catch (MessagingException e) {
+                        // ...
+                        System.out.println("Error enviando el mensaje , fallas de conexion a internet? x(");
+                        e.printStackTrace();
+                    }*/  
+                }
+            }
         }
+        
+        
+        
     }//GEN-LAST:event_lbForgetMouseClicked
 
     private void btSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSignInActionPerformed
         // TODO add your handling code here:
         //Aqui va lo de ingresar
-        System.out.println("CLick aqui");
+        
+        userName = tfUserName.getText();
+        password = pfPassword.getText();
+        Usuario user = controlerU.consultUser(userName, 1);
+        
+        if (user==null){ 
+            JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
+        }else {
+            //System.out.println("local:"+password);
+            if(user.getPassword()==null || !(user.getPassword() .equals(password))){
+                JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña invalida", "Error!", JOptionPane.ERROR_MESSAGE);
+            }else{
+                boolean state = user.getState();
+                System.out.println("estado: "+state);
+                //Validacion de estado de usuario , activo o eliminado
+                if(state){
+                    String profile = user.getProfile();
+                    if (profile.equals("Digitador")){
+                        //System.out.println("No se ha implementado aun :)");
+                        Convocatoria conv = user.getConvocatoria();
+                        //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
+                        if(conv.getState()){
+                            Date finConv = conv.getDateEnd();
+                            Date now = new Date();
+                            //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
+                            if(finConv.before(now)){
+                                JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
+                                digPanel.setVisible(true);
+                                this.dispose();
+                            }
+
+                         //CASO ELIMINADA   
+                        }else{
+                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                    }else{
+                        if(profile.equals("Coordinador")){
+                            System.out.println("No se ha implementado aun :)");
+                            System.exit(0);
+                        }else{
+                            if(profile.equals("Administrador")){
+                                //Clase nelsini
+                                System.out.println("Iniciamo sesion : "+ user.getName());
+                                this.dispose();
+                                //COMENTADO PARA PRUEBA
+                                vAdmin = new VistaAdmin(userName,controlerU);
+                                vAdmin.setVisible(true);
+                                //PRUEBA BORRAR
+                                //Convocatoria conv = user.getConvocatoria();
+                                //digPanel = new PanelDigitador(userName,conv,controlerU);
+                                //digPanel.setVisible(true);
+                            }
+
+                            
+                        }
+                    }
+                 //Caso usuario eliminado   
+                }else{
+                    JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btSignInActionPerformed
 
     /**
