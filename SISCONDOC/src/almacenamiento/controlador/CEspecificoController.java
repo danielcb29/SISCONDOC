@@ -24,7 +24,7 @@ public class CEspecificoController {
         * @param cedula la cedula del aspirante
         * @return 1 en caso que se cumpla todo en su flujo normal, -3 en caso de que el perfil del usuario este malo, -2 en caso de un error de integridad referencial o de entidad, y -1 en cualquier otro caso.
     */
-    public int createCEspecifico(CEspecifico[] ce, String cedula){
+    public int createCEspecifico(CEspecifico ce, String cedula){
         
         int result = 0;
 
