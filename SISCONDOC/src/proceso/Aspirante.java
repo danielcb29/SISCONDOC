@@ -5,7 +5,6 @@
  */
 package proceso;
 
-import java.util.Date;
 
 /**
  *
@@ -15,7 +14,7 @@ import java.util.Date;
 
 
 
-public class Aspirante {
+    public class Aspirante {
     
     private String document;
     private String name;
@@ -26,10 +25,13 @@ public class Aspirante {
     private String genero;
     private String jornada;
     private String fecha_nac;
+    private Formacion [] formaciones;
+    private FormacionTic [] formacionesTic;
+    private FormadorTIC [] formadores;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -40,6 +42,9 @@ public class Aspirante {
         genero = gen;
         jornada = jor;
         fecha_nac = nacimiento;
+        formaciones= formacionesAspirantes;
+        formacionesTic= formacionesTicAspirantes;
+        formadores = formadoresTic;
    
     }
 
@@ -168,6 +173,46 @@ public class Aspirante {
     public void setFecha_nac(String fecha_nac) {
         this.fecha_nac = fecha_nac;
     }
-    
-        
+
+    /**
+     * @return the formaciones
+     */
+    public Formacion[] getFormaciones() {
+        return formaciones;
+    }
+
+    /**
+     * @param formaciones the formaciones to set
+     */
+    public void setFormaciones(Formacion[] formaciones) {
+        this.formaciones = formaciones;
+    }
+
+    /**
+     * @return the formacionesTic
+     */
+    public FormacionTic[] getFormacionesTic() {
+        return formacionesTic;
+    }
+
+    /**
+     * @param formacionesTic the formacionesTic to set
+     */
+    public void setFormacionesTic(FormacionTic[] formacionesTic) {
+        this.formacionesTic = formacionesTic;
+    }
+
+    /**
+     * @return the formadores
+     */
+    public FormadorTIC[] getFormadores() {
+        return formadores;
+    }
+
+    /**
+     * @param formadores the formadores to set
+     */
+    public void setFormadores(FormadorTIC[] formadores) {
+        this.formadores = formadores;
+    }
 }
