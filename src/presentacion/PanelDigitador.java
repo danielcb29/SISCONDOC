@@ -10,7 +10,9 @@ import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
 import java.sql.Connection;
 import almacenamiento.controlador.UserController;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.Color;
+import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.File;
@@ -29,6 +31,8 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
+import javax.swing.ButtonModel;
+import java.util.Vector;
 
 /**
  *
@@ -57,10 +61,17 @@ public class PanelDigitador extends javax.swing.JFrame {
     int horasFormacionTic;
     
     /*Parametros para conocimientos especificos*/
+    String ofimaticas="Regular",web2="Regular", multimedia="Regular", edicaDig="Regular", 
+            libroDig="Regular", elearning="Regular", proyeTic="Regular", EvaluaCompe="Regular";
     
     /*Parametros para Idiomas*/
+    String leetemp="regular", escribetemp="regular", hablatemp="regular";
+    Vector <String> idioma, idiomaurl, lee, escribe, habla;
+    boolean idiomaid=false;
+    int countidioma=0;
     
     /*Parametros para Experiencia*/
+    String ExpEstudiantes, ExpProfesores, ExpFormadores, ExpEstudiantesUrl, ExpProfesoresUrl, ExpFormadoresUrl;
     
     /*OBJETOS DE OTRAS CLASES*/
     public Validador objValidador;
@@ -78,6 +89,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         
         //this.nom_convocatoria=convoca.getName();
         //id_convocatoria=convoca.getCode();
+        jLabelidiomamsj.setVisible(false);
         
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
         LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
@@ -254,6 +266,12 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel47 = new javax.swing.JLabel();
+        jTextIdiomaUrl = new javax.swing.JLabel();
+        btSubirIdioma = new javax.swing.JButton();
+        btAgregarIdioma = new javax.swing.JButton();
+        btAgregarActualIdioma = new javax.swing.JButton();
+        jLabelidiomamsj = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
@@ -263,6 +281,13 @@ public class PanelDigitador extends javax.swing.JFrame {
         jComboBoxFormEst = new javax.swing.JComboBox();
         jComboBoxFormProf = new javax.swing.JComboBox();
         jComboBoxFormForm = new javax.swing.JComboBox();
+        jLabel48 = new javax.swing.JLabel();
+        jTextEstudiantesUrl = new javax.swing.JLabel();
+        jTextProfesoresUrl = new javax.swing.JLabel();
+        jTextformadoresUrl = new javax.swing.JLabel();
+        btAbrirEstudiantes = new javax.swing.JButton();
+        btAbrirProfes = new javax.swing.JButton();
+        btAbrirFormadores = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         LabelConfirmacion = new javax.swing.JLabel();
         jButtonRegistrar = new javax.swing.JButton();
@@ -394,7 +419,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Datos Personales", jPanel1);
@@ -1025,7 +1050,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel24)))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -1062,99 +1087,227 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         buttonGroup15.add(jRadioButton8_1);
         jRadioButton8_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton8_1.setSelected(true);
         jRadioButton8_1.setText("Regular");
+        jRadioButton8_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup15.add(jRadioButton8_2);
         jRadioButton8_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton8_2.setText("Bueno");
+        jRadioButton8_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup15.add(jRadioButton8_3);
         jRadioButton8_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton8_3.setText("Muy Bueno");
+        jRadioButton8_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup8.add(jRadioButton1_3);
         jRadioButton1_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton1_3.setText("Muy Bueno");
+        jRadioButton1_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup8.add(jRadioButton1_2);
         jRadioButton1_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton1_2.setText("Bueno");
+        jRadioButton1_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup8.add(jRadioButton1_1);
         jRadioButton1_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton1_1.setSelected(true);
         jRadioButton1_1.setText("Regular");
+        jRadioButton1_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup9.add(jRadioButton2_2);
         jRadioButton2_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton2_2.setText("Bueno");
+        jRadioButton2_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup9.add(jRadioButton2_3);
         jRadioButton2_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton2_3.setText("Muy Bueno");
+        jRadioButton2_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup9.add(jRadioButton2_1);
         jRadioButton2_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton2_1.setSelected(true);
         jRadioButton2_1.setText("Regular");
+        jRadioButton2_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup10.add(jRadioButton3_2);
         jRadioButton3_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton3_2.setText("Bueno");
+        jRadioButton3_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup10.add(jRadioButton3_3);
         jRadioButton3_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton3_3.setText("Muy Bueno");
+        jRadioButton3_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup10.add(jRadioButton3_1);
         jRadioButton3_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton3_1.setSelected(true);
         jRadioButton3_1.setText("Regular");
+        jRadioButton3_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup11.add(jRadioButton4_2);
         jRadioButton4_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton4_2.setText("Bueno");
+        jRadioButton4_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup11.add(jRadioButton4_3);
         jRadioButton4_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton4_3.setText("Muy Bueno");
+        jRadioButton4_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup11.add(jRadioButton4_1);
         jRadioButton4_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton4_1.setSelected(true);
         jRadioButton4_1.setText("Regular");
+        jRadioButton4_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup12.add(jRadioButton5_2);
         jRadioButton5_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton5_2.setText("Bueno");
+        jRadioButton5_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup12.add(jRadioButton5_3);
         jRadioButton5_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton5_3.setText("Muy Bueno");
+        jRadioButton5_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup12.add(jRadioButton5_1);
         jRadioButton5_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton5_1.setSelected(true);
         jRadioButton5_1.setText("Regular");
+        jRadioButton5_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup13.add(jRadioButton6_2);
         jRadioButton6_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton6_2.setText("Bueno");
+        jRadioButton6_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup13.add(jRadioButton6_3);
         jRadioButton6_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton6_3.setText("Muy Bueno");
+        jRadioButton6_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup13.add(jRadioButton6_1);
         jRadioButton6_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton6_1.setSelected(true);
         jRadioButton6_1.setText("Regular");
+        jRadioButton6_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6_1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup14.add(jRadioButton7_2);
         jRadioButton7_2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton7_2.setText("Bueno");
+        jRadioButton7_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7_2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup14.add(jRadioButton7_3);
         jRadioButton7_3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButton7_3.setText("Muy Bueno");
+        jRadioButton7_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7_3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup14.add(jRadioButton7_1);
         jRadioButton7_1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButton7_1.setSelected(true);
         jRadioButton7_1.setText("Regular");
+        jRadioButton7_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7_1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1298,7 +1451,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButton8_1)
                         .addComponent(jRadioButton8_2)
                         .addComponent(jRadioButton8_3)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Conocimientos Especificos", jPanel4);
@@ -1312,27 +1465,48 @@ public class PanelDigitador extends javax.swing.JFrame {
                 jTextIdiomaActionPerformed(evt);
             }
         });
+        jTextIdioma.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextIdiomaKeyTyped(evt);
+            }
+        });
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel36.setText("NIVEL");
 
         buttonGroup16.add(jRadioButtonLee1);
         jRadioButtonLee1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonLee1.setSelected(true);
         jRadioButtonLee1.setText("Regular");
         jRadioButtonLee1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonLee1.setEnabled(false);
+        jRadioButtonLee1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLee1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup16.add(jRadioButtonLee2);
         jRadioButtonLee2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonLee2.setText("Bueno");
         jRadioButtonLee2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonLee2.setEnabled(false);
+        jRadioButtonLee2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLee2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup16.add(jRadioButtonLee3);
         jRadioButtonLee3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonLee3.setText("Muy Bueno");
         jRadioButtonLee3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonLee3.setEnabled(false);
+        jRadioButtonLee3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonLee3ActionPerformed(evt);
+            }
+        });
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel37.setText("Lee:");
@@ -1345,39 +1519,71 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         buttonGroup17.add(jRadioButtonEscribe1);
         jRadioButtonEscribe1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonEscribe1.setSelected(true);
         jRadioButtonEscribe1.setText("Regular");
         jRadioButtonEscribe1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonEscribe1.setEnabled(false);
+        jRadioButtonEscribe1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEscribe1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup17.add(jRadioButtonEscribe2);
         jRadioButtonEscribe2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonEscribe2.setText("Bueno");
         jRadioButtonEscribe2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonEscribe2.setEnabled(false);
+        jRadioButtonEscribe2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEscribe2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup17.add(jRadioButtonEscribe3);
         jRadioButtonEscribe3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonEscribe3.setText("Muy Bueno");
         jRadioButtonEscribe3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonEscribe3.setEnabled(false);
+        jRadioButtonEscribe3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonEscribe3ActionPerformed(evt);
+            }
+        });
 
         buttonGroup18.add(jRadioButtonHabla1);
         jRadioButtonHabla1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jRadioButtonHabla1.setSelected(true);
         jRadioButtonHabla1.setText("Regular");
         jRadioButtonHabla1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonHabla1.setEnabled(false);
+        jRadioButtonHabla1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHabla1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup18.add(jRadioButtonHabla2);
         jRadioButtonHabla2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonHabla2.setText("Bueno");
         jRadioButtonHabla2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonHabla2.setEnabled(false);
+        jRadioButtonHabla2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHabla2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup18.add(jRadioButtonHabla3);
         jRadioButtonHabla3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jRadioButtonHabla3.setText("Muy Bueno");
         jRadioButtonHabla3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jRadioButtonHabla3.setEnabled(false);
+        jRadioButtonHabla3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonHabla3ActionPerformed(evt);
+            }
+        });
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         jLabel40.setText("CATEGORIA");
@@ -1399,6 +1605,47 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        jLabel47.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel47.setText("SOPORTE:");
+
+        jTextIdiomaUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextIdiomaUrl.setText("No hay Soporte");
+        jTextIdiomaUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextIdiomaUrl.setEnabled(false);
+
+        btSubirIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
+        btSubirIdioma.setText("Adjuntar Soporte");
+        btSubirIdioma.setEnabled(false);
+        btSubirIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSubirIdiomaActionPerformed(evt);
+            }
+        });
+
+        btAgregarIdioma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
+        btAgregarIdioma.setText("Agregar Otro Idioma");
+        btAgregarIdioma.setEnabled(false);
+        btAgregarIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgregarIdiomaActionPerformed(evt);
+            }
+        });
+
+        btAgregarActualIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
+        btAgregarActualIdioma.setText("Agregar Idioma");
+        btAgregarActualIdioma.setEnabled(false);
+        btAgregarActualIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgregarActualIdiomaActionPerformed(evt);
+            }
+        });
+
+        jLabelidiomamsj.setForeground(java.awt.Color.red);
+        jLabelidiomamsj.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelidiomamsj.setText("Agregado Correcatamente! Idioma N°");
+        jLabelidiomamsj.setFocusable(false);
+        jLabelidiomamsj.setInheritsPopupMenu(false);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1407,42 +1654,58 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(276, 276, 276))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel37)
-                            .addComponent(jLabel39)
-                            .addComponent(jLabel38))
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonEscribe1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonEscribe2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonEscribe3))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jRadioButtonHabla1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonHabla2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonHabla3))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btAgregarIdioma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btAgregarActualIdioma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jRadioButtonLee1)
+                                        .addComponent(jRadioButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButtonLee2)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonLee3))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextIdioma))))
-                    .addComponent(jLabel40)
-                    .addComponent(jLabel35))
-                .addContainerGap(804, Short.MAX_VALUE))
+                                        .addComponent(jRadioButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextIdiomaUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btSubirIdioma)
+                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel35)
+                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel37)
+                                        .addComponent(jLabel39)
+                                        .addComponent(jLabel38))
+                                    .addGap(54, 54, 54)
+                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                            .addComponent(jRadioButtonEscribe1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRadioButtonEscribe2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRadioButtonEscribe3))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(jPanel5Layout.createSequentialGroup()
+                                                    .addComponent(jRadioButtonLee1)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(jRadioButtonLee2)))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jRadioButtonLee3))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                            .addComponent(jRadioButtonHabla1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRadioButtonHabla2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jRadioButtonHabla3))))))
+                        .addContainerGap(576, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1453,7 +1716,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jTextIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
                     .addComponent(jLabel36))
@@ -1475,7 +1738,19 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jRadioButtonHabla2)
                     .addComponent(jRadioButtonHabla3)
                     .addComponent(jLabel39))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextIdiomaUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel47)
+                        .addComponent(btSubirIdioma)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAgregarActualIdioma)
+                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btAgregarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Idiomas", jPanel5);
@@ -1497,12 +1772,69 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jComboBoxFormEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxFormEst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No tiene Experiencia", "De 1 a 2 años", "De 2 a 3 años", "De 3 a 5 años", "Mas de 5 años" }));
+        jComboBoxFormEst.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFormEstItemStateChanged(evt);
+            }
+        });
 
         jComboBoxFormProf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxFormProf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No tiene Experiencia", "De 80 a 200 horas", "De 200 a 300 horas", "De 300 a 450 horas", "Mas de 450 horas" }));
+        jComboBoxFormProf.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFormProfItemStateChanged(evt);
+            }
+        });
 
         jComboBoxFormForm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jComboBoxFormForm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No tiene Experiencia", "De 80 a 120 horas", "Mas de 120 horas" }));
+        jComboBoxFormForm.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxFormFormItemStateChanged(evt);
+            }
+        });
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
+        jLabel48.setText("URL");
+
+        jTextEstudiantesUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextEstudiantesUrl.setText("No Hay Soporte");
+        jTextEstudiantesUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextEstudiantesUrl.setEnabled(false);
+
+        jTextProfesoresUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextProfesoresUrl.setText("No Hay Soporte");
+        jTextProfesoresUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextProfesoresUrl.setEnabled(false);
+
+        jTextformadoresUrl.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jTextformadoresUrl.setText("No Hay Soporte");
+        jTextformadoresUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTextformadoresUrl.setEnabled(false);
+
+        btAbrirEstudiantes.setText("Adjuntar Soporte");
+        btAbrirEstudiantes.setEnabled(false);
+        btAbrirEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirEstudiantesActionPerformed(evt);
+            }
+        });
+
+        btAbrirProfes.setText("Adjuntar Soporte");
+        btAbrirProfes.setEnabled(false);
+        btAbrirProfes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirProfesActionPerformed(evt);
+            }
+        });
+
+        btAbrirFormadores.setText("Adjuntar Soporte");
+        btAbrirFormadores.setEnabled(false);
+        btAbrirFormadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAbrirFormadoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1525,7 +1857,22 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxFormForm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btAbrirEstudiantes)
+                            .addComponent(btAbrirProfes)
+                            .addComponent(btAbrirFormadores)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1533,20 +1880,27 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
-                    .addComponent(jLabel42))
+                    .addComponent(jLabel42)
+                    .addComponent(jLabel48))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(btAbrirEstudiantes))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
-                    .addComponent(jComboBoxFormProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxFormProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(btAbrirProfes))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                    .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextformadoresUrl)
+                    .addComponent(btAbrirFormadores))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Experiencia", jPanel6);
@@ -1596,7 +1950,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addComponent(jButtonRegistrar)
                 .addGap(30, 30, 30)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("REGISTRAR", jPanel7);
@@ -1778,6 +2132,32 @@ public class PanelDigitador extends javax.swing.JFrame {
         }
         formacionTicUrl=jTextCursoUrl.getText();
     /**************************************************************/
+        /*Obtenemos los datos de CONOCIMIENTOS ESPECIFICOS*/
+        //datos guardados al seleccionar el nivel correspondiente 
+        /*VARIABLES:
+            ofimaticas
+            web2
+            multimedia 
+            edicaDig 
+            libroDig 
+            elearning
+            proyeTic
+            EvaluaCompe
+        */
+    /**************************************************************/
+        /*Obtenemos los datos de IDIOMAS*/
+        //datos guardados al presionar boton "agregar idioma actual
+        /*VARIABLES:
+            Vector <String> idioma, idiomaurl, lee, escribe, habla;
+            countidioma <-- CANTIDAD DE IDIOMAS PARA EL ASPIRANTE
+        */
+    /**************************************************************/
+        /*Obtenemos los datos de EXPERIENCIA*/
+        ExpEstudiantes=jComboBoxFormEst.getSelectedItem().toString();
+        ExpProfesores=jComboBoxFormProf.getSelectedItem().toString();
+        ExpFormadores=jComboBoxFormForm.getSelectedItem().toString();
+        
+    /**************************************************************/
         VaciosEn="";
         /*VARIABLES BOOLEANAS PARA VALIDAR*/
         boolean nohayvaciosDP=true;
@@ -1790,9 +2170,9 @@ public class PanelDigitador extends javax.swing.JFrame {
             boolean nohayvaciosForDoc=true;
             boolean nohayvaciosForDocTic=true;
         boolean nohayvaciosFOR_TIC=true;
-        /*boolean nohayvaciosCON_ESPE=true;
+        /*boolean nohayvaciosCON_ESPE=true;*/
         boolean nohayvaciosIDIOMAS=true;
-        boolean nohayvaciosEXPE=true;*/
+        /*boolean nohayvaciosEXPE=true;*/
         
         
         /*VALIDAMOS VACIOS En Datos Personales*/
@@ -1806,7 +2186,7 @@ public class PanelDigitador extends javax.swing.JFrame {
             nohayvaciosDP=false;
             VaciosEn="DATOS PERSONALES\n";
         }
-        /*PRIMERO SE VERIFICA SI SELECCIONO -SI- EN LA FORMACION*/
+        /*PRIMERO SE VERIFICA SI SELECCIONO -SI- EN LA FORMACION Luego ValidaVacios*/
         if(licid){
             if(objValidador.ValidaVacios(lictit)==1 &&
                objValidador.ValidaVacios(licuni)==1)
@@ -1901,6 +2281,18 @@ public class PanelDigitador extends javax.swing.JFrame {
             nohayvaciosFOR_TIC=true;
         }
         
+        /*--VALIDACION CONOCIMIENTOS ESPECIFICOS*/
+        //No necesitan validacion puesto que obligatoriamente se selecciona un nivel
+        
+        /*--VALIDACION IDIOMA--*/
+        if(btAgregarActualIdioma.isEnabled()){
+           nohayvaciosIDIOMAS=true; 
+        }
+        else{
+           nohayvaciosIDIOMAS=false;
+           VaciosEn+="IDIOMAS";
+       }
+        
         /*REGISTRAMOS ASPIRANTE*/
                 if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
@@ -1935,7 +2327,16 @@ public class PanelDigitador extends javax.swing.JFrame {
                 "\n--->FORMACION TIC<----:\ncurso: "+curso+
                 "\nInstitucion: "+institucion+
                 "\nhoras: "+horasFormacionTic+
-                "\nURL_soporte-curso: "+formacionTicUrl
+                "\nURL_soporte-curso: "+formacionTicUrl+
+                "\n-->CONOCIMIENTOS ESPECIFICOS<---\n"+
+                "\nofimaticas: "+ofimaticas+
+                "\nweb2: "+web2+
+                "\nmultimedia: "+multimedia+
+                "\nedicaDig: "+edicaDig +
+                "\nlibroDig: "+libroDig +
+               "\nelearning: "+ elearning+
+                "\nproyeTic: "+proyeTic+
+                "\nEvaluaCompe: "+EvaluaCompe
             );
         
        }//endTRY
@@ -1959,6 +2360,12 @@ public class PanelDigitador extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+        countidioma=1;
+        idioma=new Vector<String>();
+        idiomaurl=new Vector<String>();
+        lee=new Vector<String>();
+        escribe=new Vector<String>();
+        habla=new Vector<String>();
         jTextIdioma.setEnabled(true);
         jRadioButtonLee1.setEnabled(true);
         jRadioButtonLee2.setEnabled(true);
@@ -1969,11 +2376,19 @@ public class PanelDigitador extends javax.swing.JFrame {
         jRadioButtonHabla1.setEnabled(true);
         jRadioButtonHabla2.setEnabled(true);
         jRadioButtonHabla3.setEnabled(true);
-        
+        jTextIdiomaUrl.setEnabled(true);
+        btSubirIdioma.setEnabled(true);
+        btAgregarActualIdioma.setEnabled(true);
+        jTextIdioma.setText("");
+        jRadioButton2.setEnabled(false);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
+        //countidioma=0;
+        jTextIdioma.setText("");
+        jTextIdiomaUrl.setText("No hay soporte");
+        
         jTextIdioma.setEnabled(false);
         jRadioButtonLee1.setEnabled(false);
         jRadioButtonLee2.setEnabled(false);
@@ -1983,7 +2398,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         jRadioButtonEscribe3.setEnabled(false);
         jRadioButtonHabla1.setEnabled(false);
         jRadioButtonHabla2.setEnabled(false);
-        jRadioButtonHabla3.setEnabled(false);   
+        jRadioButtonHabla3.setEnabled(false);
+        jTextIdiomaUrl.setEnabled(false);
+        btSubirIdioma.setEnabled(false);
+        btAgregarIdioma.setEnabled(false);
+        btAgregarActualIdioma.setEnabled(false);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jTextIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdiomaActionPerformed
@@ -2086,7 +2505,9 @@ public class PanelDigitador extends javax.swing.JFrame {
                     && car !='É'            
                     && car !='Í'            
                     && car !='Ó'           
-                    && car !='Ú'             
+                    && car !='Ú'
+                    && car !='Ñ'
+                    && car !='ñ'
                     && (car!=(char)KeyEvent.VK_SPACE)) { 
               getToolkit().beep(); 
               evt.consume(); 
@@ -2118,7 +2539,9 @@ public class PanelDigitador extends javax.swing.JFrame {
                     && car !='É'            
                     && car !='Í'            
                     && car !='Ó'           
-                    && car !='Ú'             
+                    && car !='Ú'
+                    && car !='Ñ'
+                    && car !='ñ'
                     && (car!=(char)KeyEvent.VK_SPACE)) { 
               getToolkit().beep(); 
               evt.consume(); 
@@ -2191,8 +2614,19 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_btAbrirDocTicActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        //System.out.println(jRadioButtonLic1.isSelected());
-           System.out.print(jDateChooserFecha.getCalendar()+"\n");
+       try{ System.out.println("NUMERO DE IDIOMAS: "+countidioma);
+        if(btAgregarActualIdioma.isEnabled()){
+          System.out.println("FALTA IDIOMA: ");
+        }
+        else{
+        for( int i=0; i<countidioma; i++){
+            System.out.println("IDIOMA:"+idioma.get(i)+
+                    " Lee: "+lee.get(i)+" Esribe: "+escribe.get(i)+" Habla: "+habla.get(i)+" Url: "+idiomaurl.get(i));
+        }
+       }}
+       catch(java.lang.ArrayIndexOutOfBoundsException e){
+           System.err.println("Se registro un numero de idiomas mayor al tamanno vector idiomas "+e);
+       }
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jRadioButtonFor_Tic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFor_Tic2ActionPerformed
@@ -2221,6 +2655,259 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextCursoUrl.setToolTipText(mensaje);
         formacionTicUrl=mensaje;
     }//GEN-LAST:event_btAbrirFormacionTicActionPerformed
+
+    private void jRadioButton1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1_1ActionPerformed
+        ofimaticas="Regular";
+    }//GEN-LAST:event_jRadioButton1_1ActionPerformed
+
+    private void jRadioButton1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1_2ActionPerformed
+        ofimaticas="Bueno";
+    }//GEN-LAST:event_jRadioButton1_2ActionPerformed
+
+    private void jRadioButton1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1_3ActionPerformed
+        ofimaticas="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton1_3ActionPerformed
+
+    private void jRadioButton2_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2_1ActionPerformed
+        web2="Regular";
+    }//GEN-LAST:event_jRadioButton2_1ActionPerformed
+
+    private void jRadioButton3_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3_1ActionPerformed
+        multimedia="Regular";
+    }//GEN-LAST:event_jRadioButton3_1ActionPerformed
+
+    private void jRadioButton4_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4_1ActionPerformed
+        edicaDig="Regular";
+    }//GEN-LAST:event_jRadioButton4_1ActionPerformed
+
+    private void jRadioButton5_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5_1ActionPerformed
+        libroDig="Regular";
+    }//GEN-LAST:event_jRadioButton5_1ActionPerformed
+
+    private void jRadioButton6_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6_1ActionPerformed
+         elearning="Regular";
+    }//GEN-LAST:event_jRadioButton6_1ActionPerformed
+
+    private void jRadioButton7_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7_1ActionPerformed
+        proyeTic="Regular";
+    }//GEN-LAST:event_jRadioButton7_1ActionPerformed
+
+    private void jRadioButton8_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8_1ActionPerformed
+        EvaluaCompe="Regular";
+    }//GEN-LAST:event_jRadioButton8_1ActionPerformed
+
+    private void jRadioButton2_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2_2ActionPerformed
+        web2="Bueno";
+    }//GEN-LAST:event_jRadioButton2_2ActionPerformed
+
+    private void jRadioButton3_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3_2ActionPerformed
+        multimedia ="Bueno";
+    }//GEN-LAST:event_jRadioButton3_2ActionPerformed
+
+    private void jRadioButton4_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4_2ActionPerformed
+        edicaDig="Bueno";
+    }//GEN-LAST:event_jRadioButton4_2ActionPerformed
+
+    private void jRadioButton5_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5_2ActionPerformed
+        libroDig="Bueno";
+    }//GEN-LAST:event_jRadioButton5_2ActionPerformed
+
+    private void jRadioButton6_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6_2ActionPerformed
+        elearning="Bueno";
+    }//GEN-LAST:event_jRadioButton6_2ActionPerformed
+
+    private void jRadioButton7_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7_2ActionPerformed
+       proyeTic="Bueno";
+    }//GEN-LAST:event_jRadioButton7_2ActionPerformed
+
+    private void jRadioButton8_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8_2ActionPerformed
+        EvaluaCompe="Bueno";
+    }//GEN-LAST:event_jRadioButton8_2ActionPerformed
+
+    private void jRadioButton2_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2_3ActionPerformed
+        web2="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton2_3ActionPerformed
+
+    private void jRadioButton3_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3_3ActionPerformed
+        multimedia ="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton3_3ActionPerformed
+
+    private void jRadioButton4_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4_3ActionPerformed
+        edicaDig ="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton4_3ActionPerformed
+
+    private void jRadioButton5_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5_3ActionPerformed
+        libroDig ="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton5_3ActionPerformed
+
+    private void jRadioButton6_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6_3ActionPerformed
+        elearning="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton6_3ActionPerformed
+
+    private void jRadioButton7_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7_3ActionPerformed
+        proyeTic="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton7_3ActionPerformed
+
+    private void jRadioButton8_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8_3ActionPerformed
+        EvaluaCompe="Muy Bueno";
+    }//GEN-LAST:event_jRadioButton8_3ActionPerformed
+
+    private void btSubirIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSubirIdiomaActionPerformed
+        String mensaje=obtenerurl(btSubirIdioma, "Idioma");
+        jTextIdiomaUrl.setText(mensaje);
+        jTextIdiomaUrl.setToolTipText(mensaje);
+        //idiomaurl.add(mensaje);
+    }//GEN-LAST:event_btSubirIdiomaActionPerformed
+
+    private void btAgregarIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarIdiomaActionPerformed
+        countidioma++;
+        jTextIdioma.setText("");
+        jTextIdiomaUrl.setText("No hay soporte");
+        btAgregarActualIdioma.setForeground(Color.red);
+        jLabelidiomamsj.setVisible(false);
+        btAgregarActualIdioma.setEnabled(true);
+        btAgregarIdioma.setEnabled(false);
+    }//GEN-LAST:event_btAgregarIdiomaActionPerformed
+
+    private void jRadioButtonLee1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLee1ActionPerformed
+        leetemp="Regular";
+    }//GEN-LAST:event_jRadioButtonLee1ActionPerformed
+
+    private void jRadioButtonEscribe1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEscribe1ActionPerformed
+        escribetemp="Regular";
+    }//GEN-LAST:event_jRadioButtonEscribe1ActionPerformed
+
+    private void jRadioButtonLee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLee2ActionPerformed
+        leetemp="Bueno";
+    }//GEN-LAST:event_jRadioButtonLee2ActionPerformed
+
+    private void jRadioButtonLee3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonLee3ActionPerformed
+        leetemp="Muy Bueno";
+    }//GEN-LAST:event_jRadioButtonLee3ActionPerformed
+
+    private void jRadioButtonEscribe2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEscribe2ActionPerformed
+        escribetemp="Bueno";
+    }//GEN-LAST:event_jRadioButtonEscribe2ActionPerformed
+
+    private void jRadioButtonEscribe3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonEscribe3ActionPerformed
+        escribetemp="Muy Bueno";
+    }//GEN-LAST:event_jRadioButtonEscribe3ActionPerformed
+
+    private void jRadioButtonHabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHabla1ActionPerformed
+        hablatemp="Regular";
+    }//GEN-LAST:event_jRadioButtonHabla1ActionPerformed
+
+    private void jRadioButtonHabla2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHabla2ActionPerformed
+        hablatemp="Bueno";
+    }//GEN-LAST:event_jRadioButtonHabla2ActionPerformed
+
+    private void jRadioButtonHabla3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHabla3ActionPerformed
+        hablatemp="Muy Bueno";
+    }//GEN-LAST:event_jRadioButtonHabla3ActionPerformed
+
+    private void btAgregarActualIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActualIdiomaActionPerformed
+        
+        if((jTextIdioma.getText().isEmpty())){
+        jLabelidiomamsj.setText("ERROR! Digita un idioma para agregar");
+        jLabelidiomamsj.setVisible(true);
+        btAgregarIdioma.setEnabled(false);
+        }
+        else{
+        idioma.add(jTextIdioma.getText());
+        idiomaurl.add(jTextIdiomaUrl.getText());
+        lee.add(leetemp);
+        escribe.add(escribetemp);
+        habla.add(hablatemp);
+         btAgregarIdioma.setEnabled(true);
+         btAgregarActualIdioma.setEnabled(false);
+         jRadioButton1.setEnabled(false);
+        btAgregarActualIdioma.setForeground(Color.black);
+        jLabelidiomamsj.setText("Idioma Agregado Correctamente! Idioma N° "+countidioma);
+        jLabelidiomamsj.setVisible(true);
+        }
+    }//GEN-LAST:event_btAgregarActualIdiomaActionPerformed
+
+    private void jTextIdiomaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdiomaKeyTyped
+        char car=evt.getKeyChar(); 
+         
+          if((car<'a' || car>'z') && (car<'A' || car>'Z')             
+                    && car !='á' //Minúsculas             
+                    && car !='é'            
+                    && car !='í'            
+                    && car !='ó'           
+                    && car !='ú'   
+                    && car !='Á' //Mayúsculas             
+                    && car !='É'            
+                    && car !='Í'            
+                    && car !='Ó'           
+                    && car !='Ú'
+                    && car !='Ñ'
+                    && car !='ñ'
+                    && (car!=(char)KeyEvent.VK_SPACE)) { 
+              getToolkit().beep(); 
+              evt.consume(); 
+              jTextNombres.setToolTipText("Ingresa solo letras!");
+          } 
+    }//GEN-LAST:event_jTextIdiomaKeyTyped
+
+    private void jComboBoxFormEstItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFormEstItemStateChanged
+        //System.out.print("EN COMBO: "+evt.getItem().toString());
+        String vartemp=evt.getItem().toString();
+        if(vartemp != "No Tiene Experiencia"){
+            btAbrirEstudiantes.setEnabled(true);
+            jTextEstudiantesUrl.setEnabled(true);
+        }
+        else{
+            btAbrirEstudiantes.setEnabled(false);
+            jTextEstudiantesUrl.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxFormEstItemStateChanged
+
+    private void jComboBoxFormProfItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFormProfItemStateChanged
+        String vartemp=evt.getItem().toString();
+        if(vartemp != "No Tiene Experiencia"){
+            btAbrirProfes.setEnabled(true);
+            jTextProfesoresUrl.setEnabled(true);
+        }
+        else{
+            btAbrirProfes.setEnabled(false);
+            jTextProfesoresUrl.setEnabled(false);
+        }              
+    }//GEN-LAST:event_jComboBoxFormProfItemStateChanged
+
+    private void jComboBoxFormFormItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxFormFormItemStateChanged
+        String vartemp=evt.getItem().toString();
+        if(vartemp != "No Tiene Experiencia"){
+            btAbrirFormadores.setEnabled(true);
+            jTextformadoresUrl.setEnabled(true);
+        }
+        else{
+            btAbrirFormadores.setEnabled(false);
+            jTextformadoresUrl.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jComboBoxFormFormItemStateChanged
+
+    private void btAbrirEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirEstudiantesActionPerformed
+        String mensaje=obtenerurl(btAbrirEstudiantes, "EXP_Estudiantes");
+        jTextEstudiantesUrl.setText(mensaje);
+        jTextEstudiantesUrl.setToolTipText(mensaje);
+        ExpEstudiantesUrl=mensaje;
+    }//GEN-LAST:event_btAbrirEstudiantesActionPerformed
+
+    private void btAbrirProfesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirProfesActionPerformed
+        String mensaje=obtenerurl(btAbrirProfes, "EXP_Profesores");
+        jTextProfesoresUrl.setText(mensaje);
+        jTextProfesoresUrl.setToolTipText(mensaje);
+        ExpProfesoresUrl=mensaje;
+    }//GEN-LAST:event_btAbrirProfesActionPerformed
+
+    private void btAbrirFormadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirFormadoresActionPerformed
+        String mensaje=obtenerurl(btAbrirFormadores, "EXP_Formadores");
+        jTextformadoresUrl.setText(mensaje);
+        jTextformadoresUrl.setToolTipText(mensaje);
+        ExpFormadoresUrl=mensaje;
+    }//GEN-LAST:event_btAbrirFormadoresActionPerformed
     
     /*METODO PARA OBTENER LA DIRECCION DEL ARCHIVO SOPORTE
     *Crea el directorio para el soporte del respectivo aspirante
@@ -2312,11 +2999,17 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JButton btAbrirDocTic;
     private javax.swing.JButton btAbrirEspe;
     private javax.swing.JButton btAbrirEspeTic;
+    private javax.swing.JButton btAbrirEstudiantes;
     private javax.swing.JButton btAbrirFormacionTic;
+    private javax.swing.JButton btAbrirFormadores;
     private javax.swing.JButton btAbrirLic;
     private javax.swing.JButton btAbrirMaes;
     private javax.swing.JButton btAbrirMaesTic;
+    private javax.swing.JButton btAbrirProfes;
+    private javax.swing.JButton btAgregarActualIdioma;
+    private javax.swing.JButton btAgregarIdioma;
     private javax.swing.JButton btMasCursos;
+    private javax.swing.JButton btSubirIdioma;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup10;
     private javax.swing.ButtonGroup buttonGroup11;
@@ -2389,12 +3082,15 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLicUrl;
+    private javax.swing.JLabel jLabelidiomamsj;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2470,7 +3166,9 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JLabel jTextEspeTicUrl;
     private javax.swing.JTextField jTextEspeUni;
     private javax.swing.JLabel jTextEspeUrl;
+    private javax.swing.JLabel jTextEstudiantesUrl;
     private javax.swing.JTextField jTextIdioma;
+    private javax.swing.JLabel jTextIdiomaUrl;
     private javax.swing.JTextField jTextInstitucion;
     private javax.swing.JTextField jTextLic;
     private javax.swing.JTextField jTextLicUni;
@@ -2482,6 +3180,8 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextMaesUni;
     private javax.swing.JLabel jTextMaesUrl;
     private javax.swing.JTextField jTextNombres;
+    private javax.swing.JLabel jTextProfesoresUrl;
+    private javax.swing.JLabel jTextformadoresUrl;
     // End of variables declaration//GEN-END:variables
 
 }
