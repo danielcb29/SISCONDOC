@@ -166,17 +166,17 @@ public class DAOIdioma {
          
             while(table2.next()){
                
-                form[j].setLenguaje(table.getString(1));               
+                form[j].setLenguaje(table2.getString(1));               
                 
-                form[j].setNivellee(table.getString(2));               
+                form[j].setNivellee(table2.getString(2));               
 
-                form[j].setNivelescribe(table.getString(3));
+                form[j].setNivelescribe(table2.getString(3));
 
-                form[j].setNivelhabla(table.getString(4));
+                form[j].setNivelhabla(table2.getString(4));
                 
-                form[j].setPatharchivo(table.getString(5));
+                form[j].setPatharchivo(table2.getString(5));
                 
-                form[j].setState(table.getBoolean(6));
+                form[j].setState(table2.getBoolean(6));
 
                 j++;
               System.out.println("ok");
