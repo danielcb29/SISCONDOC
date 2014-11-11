@@ -211,6 +211,8 @@ public class DAOFormacion {
         }
         return -1;
     }
+    
+    
     /**
      * Metodo que permite cerrar la conexion con la base de datos
      */

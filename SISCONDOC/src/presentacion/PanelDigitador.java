@@ -6,6 +6,7 @@
 package presentacion;
 
 import almacenamiento.controlador.*;
+import proceso.*;
 import almacenamiento.controlador.ConvocatoriaController;
 import proceso.Convocatoria;
 import java.sql.Connection;
@@ -386,7 +387,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
                             .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE))))
-                .addContainerGap(866, Short.MAX_VALUE))
+                .addContainerGap(912, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -747,7 +748,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextEspeUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -756,7 +757,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(357, 357, 357)
-                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jTextLicUni)
@@ -947,7 +948,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextCursoUrl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jTextCursoUrl.setInheritsPopupMenu(false);
 
-        btAbrirFormacionTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormacionTic.setText("Adjuntar Archivo Soporte");
         btAbrirFormacionTic.setEnabled(false);
         btAbrirFormacionTic.addActionListener(new java.awt.event.ActionListener() {
@@ -1020,7 +1020,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButtonFor_Tic1)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonFor_Tic2)))
-                .addContainerGap(479, Short.MAX_VALUE))
+                .addContainerGap(545, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1613,7 +1613,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextIdiomaUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextIdiomaUrl.setEnabled(false);
 
-        btSubirIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btSubirIdioma.setText("Adjuntar Soporte");
         btSubirIdioma.setEnabled(false);
         btSubirIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1983,21 +1982,17 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(LabelConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonLogout)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(WelcomeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel11))
+                            .addComponent(jLabel3)
+                            .addComponent(LabelConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLogout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jTabbedDigitador)))
+                        .addComponent(WelcomeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jLabel11)
                 .addContainerGap())
+            .addComponent(jTabbedDigitador, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2144,6 +2139,11 @@ public class PanelDigitador extends javax.swing.JFrame {
             proyeTic
             EvaluaCompe
         */
+        
+        
+        CEspecifico conocimientos = new CEspecifico(ofimaticas, web2, edicaDig, multimedia, elearning, proyeTic, EvaluaCompe, "bueno", true);
+        
+                
     /**************************************************************/
         /*Obtenemos los datos de IDIOMAS*/
         //datos guardados al presionar boton "agregar idioma actual
@@ -2151,12 +2151,18 @@ public class PanelDigitador extends javax.swing.JFrame {
             Vector <String> idioma, idiomaurl, lee, escribe, habla;
             countidioma <-- CANTIDAD DE IDIOMAS PARA EL ASPIRANTE
         */
+        //1 por el momento 
+        Idioma [] idiomas  = new Idioma [1];
+        idiomas [0] = new Idioma("ingles", "muy bueno", "bueno", "muy bueno", "path", true);
+        
     /**************************************************************/
         /*Obtenemos los datos de EXPERIENCIA*/
         ExpEstudiantes=jComboBoxFormEst.getSelectedItem().toString();
         ExpProfesores=jComboBoxFormProf.getSelectedItem().toString();
         ExpFormadores=jComboBoxFormForm.getSelectedItem().toString();
-        
+        //1 por el momento
+        FormadorTIC [] formador = new FormadorTIC [1];
+        formador [0] = new FormadorTIC("50", 100, "url");
     /**************************************************************/
         VaciosEn="";
         /*VARIABLES BOOLEANAS PARA VALIDAR*/
@@ -2187,11 +2193,15 @@ public class PanelDigitador extends javax.swing.JFrame {
             VaciosEn="DATOS PERSONALES\n";
         }
         /*PRIMERO SE VERIFICA SI SELECCIONO -SI- EN LA FORMACION Luego ValidaVacios*/
+        Vector <Formacion> formaciones = new Vector<Formacion>(5);
+        
         if(licid){
             if(objValidador.ValidaVacios(lictit)==1 &&
                objValidador.ValidaVacios(licuni)==1)
                 {
                 nohayvaciosForLic=true;
+                Formacion form = new Formacion(licuni, lictit, "licensiado",licurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForLic=false;
@@ -2212,6 +2222,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(espeticuni)==1)
                 {
                 nohayvaciosForEspeTic=true;
+                Formacion form = new Formacion(espeticuni, espetictit, "especializacion TIC",espeticurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForEspeTic=false;
@@ -2222,6 +2234,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(maesuni)==1)
                 {
                 nohayvaciosForMaes=true;
+                Formacion form = new Formacion(maesuni, maestit, "maestria",maesurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForMaes=false;
@@ -2232,6 +2246,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(maesticuni)==1)
                 {
                 nohayvaciosForMaesTic=true;
+                Formacion form = new Formacion(maesticuni, maestictit, "maestria TIC",maesticurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForMaesTic=false;
@@ -2242,6 +2258,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(docuni)==1)
                 {
                 nohayvaciosForDoc=true;
+                Formacion form = new Formacion(docuni, doctit, "doctorado",docurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForDoc=false;
@@ -2252,6 +2270,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(docticuni)==1)
                 {
                 nohayvaciosForDocTic=true;
+                Formacion form = new Formacion(docticuni, doctictit, "doctorado",docticurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForDocTic=false;
@@ -2296,14 +2316,15 @@ public class PanelDigitador extends javax.swing.JFrame {
         /*REGISTRAMOS ASPIRANTE*/
                 if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
-                     /* objAspirantController=new ControlAspirante(Conexion);
+                        Formacion [] forms = new Formacion [formaciones.size()];
+                      objAspirantController=new ControlAspirante(Conexion);
                       objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
                                                 municipio,0,
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac);*/
+                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idiomas);
                         System.out.println("CORRECTO!!!");
                     }
                 else{
