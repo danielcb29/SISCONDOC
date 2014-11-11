@@ -146,6 +146,7 @@ public class DAOIdioma {
     public Idioma[] listIdioma(String cedula){
         String sql_select;
         sql_select="SELECT lenguaje, nivelLee, nivelEscribe, nivelHabla, pathArchivo, estado FROM Idioma WHERE  cedula = '"+cedula+"';";
+        System.out.println("Idioma select : " + sql_select);
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
@@ -155,8 +156,7 @@ public class DAOIdioma {
                numRows++;
             }
             ResultSet table2= sentence.executeQuery(sql_select);
-            
-            System.out.println(numRows);
+            System.out.println("num : "+numRows);
             Idioma form[]= new Idioma[numRows];
             for(int i=0; i<numRows; i++){
                 form[i]=new Idioma();
@@ -165,19 +165,15 @@ public class DAOIdioma {
             int j=0;
          
             while(table2.next()){
+                
+                System.out.println("ini");
                
-                form[j].setLenguaje(table.getString(1));               
-                
-                form[j].setNivellee(table.getString(2));               
-
-                form[j].setNivelescribe(table.getString(3));
-
-                form[j].setNivelhabla(table.getString(4));
-                
-                form[j].setPatharchivo(table.getString(5));
-                
-                form[j].setState(table.getBoolean(6));
-
+                form[j].setLenguaje(table2.getString(1));               
+                form[j].setNivellee(table2.getString(2));               
+                form[j].setNivelescribe(table2.getString(3));
+                form[j].setNivelhabla(table2.getString(4));
+                form[j].setPatharchivo(table2.getString(5));
+                form[j].setState(table2.getBoolean(6));
                 j++;
               System.out.println("ok");
             }

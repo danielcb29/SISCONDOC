@@ -2066,7 +2066,19 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonDocTic1ActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-       try{
+         /**   test consulatar aspirante
+              objAspirantController=new ControlAspirante(Conexion);
+              Aspirante asp = objAspirantController.readAspirante("2250");
+              System.out.println("nombre " + asp.getName());
+              System.out.println("formacion " + asp.getFormaciones()[0].getTitle());
+              System.out.println("formacionTic  " + asp.getFormacionesTic()[0].getTitulo());
+              System.out.println("conocimientos  ofimatica " + asp.getConocimientos().getOfimaticas());
+              System.out.println("idioma " + asp.getIdiomas()[0].getLenguaje());
+              System.out.println("formador num personas " + asp.getFormadores()[0].getPeople())
+              * **/
+        
+        try{
+           
     /*Obtenemos los DATOS PERSONALES*/
         nombres=jTextNombres.getText();
         apellidos=jTextApellidos.getText();
