@@ -2075,7 +2075,19 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonDocTic1ActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-       try{
+         /**   test consulatar aspirante
+              objAspirantController=new ControlAspirante(Conexion);
+              Aspirante asp = objAspirantController.readAspirante("2250");
+              System.out.println("nombre " + asp.getName());
+              System.out.println("formacion " + asp.getFormaciones()[0].getTitle());
+              System.out.println("formacionTic  " + asp.getFormacionesTic()[0].getTitulo());
+              System.out.println("conocimientos  ofimatica " + asp.getConocimientos().getOfimaticas());
+              System.out.println("idioma " + asp.getIdiomas()[0].getLenguaje());
+              System.out.println("formador num personas " + asp.getFormadores()[0].getPeople())
+              * **/
+        
+        try{
+           
     /*Obtenemos los DATOS PERSONALES*/
         nombres=jTextNombres.getText();
         apellidos=jTextApellidos.getText();
@@ -2126,6 +2138,9 @@ public class PanelDigitador extends javax.swing.JFrame {
             case 3: {horasFormacionTic=150; break;}
         }
         formacionTicUrl=jTextCursoUrl.getText();
+        //creacion del objeto por ahora uno solo objeto
+        FormacionTic [] formacionesTic  = new FormacionTic [1];
+        formacionesTic [0] = new FormacionTic(institucion, curso , horasFormacionTic, formacionTicUrl,true);
     /**************************************************************/
         /*Obtenemos los datos de CONOCIMIENTOS ESPECIFICOS*/
         //datos guardados al seleccionar el nivel correspondiente 
@@ -2317,6 +2332,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
                         Formacion [] forms = new Formacion [formaciones.size()];
+                        Idioma [] idiomas1 = new Idioma [idioma.size()];
                       objAspirantController=new ControlAspirante(Conexion);
                       objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
@@ -2324,7 +2340,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idiomas);
+                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idioma.toArray(idiomas1));
                         System.out.println("CORRECTO!!!");
                     }
                 else{
@@ -2940,9 +2956,9 @@ public class PanelDigitador extends javax.swing.JFrame {
                 //Entero que contiene el resultado al selecionar archivo 1->aprovado, 2->cancelado
                 int opcion = elegir.showOpenDialog(boton);
                 /*Clase File para crear el directorio de soportes*/
-/*WINDOWS->*/       File folder = new File("C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name);
+/*WINDOWS->*/       //File folder = new File("C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name);
 /*PARA SISTEMAS LINUX COMENTAR WINDOWS Y DESCOMENTAR LINUX*/
-/*Linux->*/       //File folder = new File("/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name);
+/*Linux->*/       File folder = new File("/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name);
                
             try{ //Si presionamos el boton ABRIR en pathArchivo obtenemos el path del archivo
                    if (opcion == JFileChooser.APPROVE_OPTION) {
@@ -2954,8 +2970,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                         Path Origen = Paths.get(pathArchivo);
                         //Creamos directorio especificado
                         folder.mkdirs();
-/*WINDOWS->*/           DestinoTemp="C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name+"\\"+nombreArchivo;
-/*Linux->*/           //DestinoTemp="/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name+"/"+nombreArchivo;
+/*WINDOWS->*/           //DestinoTemp="C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name+"\\"+nombreArchivo;
+/*Linux->*/           DestinoTemp="/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name+"/"+nombreArchivo;
                         Path Destino = Paths.get(DestinoTemp);
                         System.out.println("El nombre del archivo es: "+ nombreArchivo);
                         System.out.println("El path del archivo es: "+ pathArchivo);

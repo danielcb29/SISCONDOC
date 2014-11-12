@@ -23,7 +23,6 @@ public class FormadorTIC {
     public FormadorTIC(){
         
     }
-    
     public FormadorTIC(String paramPeople,int paramTime, String paramPath){
         people = paramPeople;
         time = paramTime;
