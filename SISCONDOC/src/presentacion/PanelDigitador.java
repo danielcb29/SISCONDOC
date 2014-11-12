@@ -68,7 +68,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     /*Parametros para Idiomas*/
     String leetemp="regular", escribetemp="regular", hablatemp="regular";
     //Vector <String> idioma, idiomaurl, lee, escribe, habla;
-    Vector <Idioma> idiomas;
+    Vector <Idioma> idiomas = new Vector <Idioma> ();
     boolean idiomaid=false;
     int countidioma=0;
     
@@ -2131,6 +2131,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         }
         formacionTicUrl=jTextCursoUrl.getText();
         //creacion del objeto por ahora uno solo objeto
+        
         FormacionTic [] formacionesTic  = new FormacionTic [1];
         formacionesTic [0] = new FormacionTic(institucion, curso , horasFormacionTic, formacionTicUrl,true);
         
@@ -2167,8 +2168,23 @@ public class PanelDigitador extends javax.swing.JFrame {
         ExpProfesores=jComboBoxFormProf.getSelectedItem().toString();
         ExpFormadores=jComboBoxFormForm.getSelectedItem().toString();
         //1 por el momento
-        FormadorTIC [] formador = new FormadorTIC [1];
-        formador [0] = new FormadorTIC("50", 100, "url");
+        Vector <FormadorTIC> formador = new Vector <FormadorTIC> ();
+        if (ExpEstudiantes != "No tiene Experiencia")
+        {
+            FormadorTIC form = new FormadorTIC("Estudiantes", 80,  ExpEstudiantesUrl);
+            formador.add(form);
+        }
+        if (ExpProfesores != "No tiene Experiencia")
+        {
+            FormadorTIC form = new FormadorTIC ("Profesores", 80, ExpProfesoresUrl);
+            formador.add(form);
+        }
+        if (ExpProfesores != "No tiene Experiencia")
+        {
+            FormadorTIC form = new FormadorTIC ("Profesores", 80, ExpProfesoresUrl);
+            formador.add(form);
+        }
+        
     /**************************************************************/
         VaciosEn="";
         /*VARIABLES BOOLEANAS PARA VALIDAR*/
@@ -2324,6 +2340,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         /*REGISTRAMOS ASPIRANTE*/
                 if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
+                        FormadorTIC [] formadorTic = new FormadorTIC[formador.size()];
                         Formacion [] forms = new Formacion [formaciones.size()];
                         Idioma [] arregloIdiomas = new Idioma[idiomas.size()];
                       objAspirantController=new ControlAspirante(Conexion);
@@ -2333,7 +2350,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idiomas.toArray(arregloIdiomas));
+                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador.toArray(formadorTic),
+                                                conocimientos,idiomas.toArray(arregloIdiomas));
                         System.out.println("CORRECTO!!!");
                     }
                 else{
