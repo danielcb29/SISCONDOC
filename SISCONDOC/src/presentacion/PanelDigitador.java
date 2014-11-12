@@ -67,7 +67,8 @@ public class PanelDigitador extends javax.swing.JFrame {
     
     /*Parametros para Idiomas*/
     String leetemp="regular", escribetemp="regular", hablatemp="regular";
-    Vector <String> idioma, idiomaurl, lee, escribe, habla;
+    //Vector <String> idioma, idiomaurl, lee, escribe, habla;
+    Vector <Idioma> idiomas;
     boolean idiomaid=false;
     int countidioma=0;
     
@@ -2159,8 +2160,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             countidioma <-- CANTIDAD DE IDIOMAS PARA EL ASPIRANTE
         */
         //1 por el momento 
-        Idioma [] idiomas  = new Idioma [1];
-        idiomas [0] = new Idioma("ingles", "muy bueno", "bueno", "muy bueno", "path", true);
         
     /**************************************************************/
         /*Obtenemos los datos de EXPERIENCIA*/
@@ -2326,6 +2325,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
                     {
                         Formacion [] forms = new Formacion [formaciones.size()];
+                        Idioma [] arregloIdiomas = new Idioma[idiomas.size()];
                       objAspirantController=new ControlAspirante(Conexion);
                       objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
@@ -2333,7 +2333,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idiomas);
+                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idiomas.toArray(arregloIdiomas));
                         System.out.println("CORRECTO!!!");
                     }
                 else{
@@ -2391,11 +2391,14 @@ public class PanelDigitador extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
         countidioma=1;
+        /**
         idioma=new Vector<String>();
         idiomaurl=new Vector<String>();
         lee=new Vector<String>();
         escribe=new Vector<String>();
         habla=new Vector<String>();
+        * **/
+        idiomas = new Vector<Idioma>();
         jTextIdioma.setEnabled(true);
         jRadioButtonLee1.setEnabled(true);
         jRadioButtonLee2.setEnabled(true);
@@ -2650,8 +2653,9 @@ public class PanelDigitador extends javax.swing.JFrame {
         }
         else{
         for( int i=0; i<countidioma; i++){
-            System.out.println("IDIOMA:"+idioma.get(i)+
-                    " Lee: "+lee.get(i)+" Esribe: "+escribe.get(i)+" Habla: "+habla.get(i)+" Url: "+idiomaurl.get(i));
+            System.out.println("mensaje");
+            //System.out.println("IDIOMA:"+idiomas.get(i)+
+                    //" Lee: "+lee.get(i)+" Esribe: "+escribe.get(i)+" Habla: "+habla.get(i)+" Url: "+idiomaurl.get(i));
         }
        }}
        catch(java.lang.ArrayIndexOutOfBoundsException e){
@@ -2843,11 +2847,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         btAgregarIdioma.setEnabled(false);
         }
         else{
-        idioma.add(jTextIdioma.getText());
-        idiomaurl.add(jTextIdiomaUrl.getText());
-        lee.add(leetemp);
-        escribe.add(escribetemp);
-        habla.add(hablatemp);
+        String lenguaje,urlIdioma,lee,escribe,habla;
+        lenguaje = (jTextIdioma.getText());
+        urlIdioma = (jTextIdiomaUrl.getText());
+        Idioma idiom = new Idioma(lenguaje, leetemp, escribetemp, hablatemp, urlIdioma, true);
+        idiomas.add(idiom);
          btAgregarIdioma.setEnabled(true);
          btAgregarActualIdioma.setEnabled(false);
          jRadioButton1.setEnabled(false);
@@ -2856,7 +2860,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabelidiomamsj.setVisible(true);
         }
     }//GEN-LAST:event_btAgregarActualIdiomaActionPerformed
-
+    
     private void jTextIdiomaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdiomaKeyTyped
         char car=evt.getKeyChar(); 
          
