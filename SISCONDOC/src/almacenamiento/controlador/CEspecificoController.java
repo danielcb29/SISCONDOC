@@ -29,7 +29,7 @@ public class CEspecificoController {
         int result = 0;
 
        
-        result = daoCe.createCEspecifico(ce[i],cedula);
+        result = daoCe.createCEspecifico(ce,cedula);
             
        
         

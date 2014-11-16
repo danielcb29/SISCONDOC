@@ -33,6 +33,7 @@ CREATE TABLE Usuario(
 );
 
 --Creacion de la tabla convocatoria 
+DROP SEQUENCE IF EXISTS convo_seq;
 CREATE SEQUENCE convo_seq;
 
 
@@ -65,7 +66,7 @@ CREATE TABLE Formacion(
 	Universidad VARCHAR(40) NOT NULL,
 	Titulo VARCHAR(40) NOT NULL,
 	nivel VARCHAR(30) NOT NULL,
-	pathArchivo VARCHAR(100) NOT NULL,
+	pathArchivo TEXT NOT NULL,
 	cedula VARCHAR(30) NOT NULL,
 	estado BOOL NOT NULL,
 	CONSTRAINT Pk_formacion PRIMARY KEY(cedula, Universidad, Titulo),
@@ -78,7 +79,7 @@ CREATE TABLE FormacionTic(
 	Institucion VARCHAR(40) NOT NULL,
 	Titulo VARCHAR(40) NOT NULL,
 	horas VARCHAR(30) NOT NULL,
-	pathArchivo VARCHAR(100) NOT NULL,
+	pathArchivo TEXT NOT NULL,
 	cedula VARCHAR(30) NOT NULL,
 	estado BOOL NOT NULL,
 	CONSTRAINT Pk_formacionTIC PRIMARY KEY(cedula, Institucion, Titulo),
@@ -92,7 +93,7 @@ CREATE TABLE Idioma(
 	nivelLee VARCHAR(20) NOT NULL,
 	nivelEscribe VARCHAR(20) NOT NULL,
 	nivelHabla VARCHAR(20) NOT NULL,
-	pathArchivo VARCHAR(100) NOT NULL,
+	pathArchivo TEXT NOT NULL,
 	cedula VARCHAR(30) NOT NULL,
 	estado BOOL NOT NULL,
 	CONSTRAINT Pk_Idioma PRIMARY KEY(cedula,  lenguaje),
@@ -123,7 +124,7 @@ CREATE TABLE formadorTic(
 	formados VARCHAR(30) NOT NULL,
 	experiencia INT NOT NULL,
 	cedula VARCHAR(30) NOT NULL,
-	pathArchivo VARCHAR(100) NOT NULL,
+	pathArchivo TEXT NOT NULL,
 	estado BOOL NOT NULL,
 	CONSTRAINT Pk_formadorTic PRIMARY KEY(cedula,  formados),
 	CONSTRAINT Fk_cedula FOREIGN KEY(cedula) REFERENCES Aspirante(cedula) ON UPDATE CASCADE ON DELETE NO ACTION

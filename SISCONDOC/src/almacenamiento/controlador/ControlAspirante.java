@@ -22,11 +22,22 @@ public class ControlAspirante
      * daoAspirante: DAO del aspirante  para realizar las consultas
      */
     private DAOAspirante daoAspirante;
+    private ControlFormacionTic controlFormacionTic;
+    private ControlFormacion controlFormacion;
+    private ControlFormadorTIC controlFormador;
+    private CEspecificoController controlConocimientos;
+    private ControlIdioma controlIdioma;
     /**
      * Constructor de la clase
      */
     public ControlAspirante(Connection conn){
+        
         daoAspirante = new DAOAspirante(conn);
+        controlFormacionTic = new ControlFormacionTic(conn);
+        controlFormacion = new ControlFormacion(conn);
+        controlFormador = new ControlFormadorTIC (conn);
+        controlConocimientos = new CEspecificoController( conn);
+        controlIdioma = new ControlIdioma (conn);
         
     }
     /**
@@ -34,9 +45,14 @@ public class ControlAspirante
      * @param aspirante: aspirante a crear
      * @return 
      */
-    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac ){
-        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac);
+    public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac,Formacion [] formaciones, FormacionTic [] formacionesTic,FormadorTIC [] formadores,CEspecifico conocimientos,Idioma [] idiomas ){
+        Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac,formaciones, formacionesTic,formadores,conocimientos,idiomas);
         int result = daoAspirante.crateAspirante(aspirante);
+        int resultado2 = controlFormacionTic.insertarFormacion(formacionesTic,document);
+        int resultado3 = controlFormacion.createForm(formaciones, document);
+        int resultado4 = controlFormador.createFormador(formadores, document);
+        int resultado5 = controlConocimientos.createCEspecifico(conocimientos, document);
+        int resultado6 = controlIdioma.createForm(idiomas, document);
         return result;
     }
     /**
@@ -54,6 +70,16 @@ public class ControlAspirante
      */
     public Aspirante readAspirante(String document){
         Aspirante aspirante = daoAspirante.readAspirante(document);
+        Formacion [] formaciones = controlFormacion.listForm(document);
+        FormacionTic [] formacionesTic = controlFormacionTic.consultarFomaciones(document);
+        FormadorTIC [] formados = controlFormador.listFormador(document);
+        CEspecifico conocimientos = controlConocimientos.readCEspecifico(document);
+        Idioma [] idiomas = controlIdioma.listForm(document);
+        aspirante.setFormaciones(formaciones);
+        aspirante.setFormacionesTic(formacionesTic);
+        aspirante.setFormadores(formados);
+        aspirante.setConocimientos(conocimientos);
+        aspirante.setIdiomas(idiomas);
         return aspirante;
     }
     

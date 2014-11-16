@@ -70,9 +70,10 @@ public class DAOAspirante
         Aspirante aspirante = new Aspirante();
         Convocatoria convocatoria = new Convocatoria ();
         String sql_select;
-        sql_select="SELECT A.cedula,A.nombre,A.apellido,A.municipio,A.puntaje,A.codigo" + 
-                   "C.fecha_ini, C.fecha_fin, C.nombre,C.estado, C.descripcion,A.genero,A.jornada,A.fecha FROM" +
-                   "FROM Aspirante as A NATURAL JOIN Convocatoria as C WHERE cedula = '"+document+"';";
+        sql_select="SELECT A.cedula, A.nombre, A.apellido, A.municipio, A.puntuacion, A.codigo, " + 
+                   "C.fecha_ini, C.fecha_fin, C.nombre, C.estado, C.descripcion , A.genero, A.jornada, A.fecha_nac " +
+                   "FROM Aspirante as A, Convocatoria as C WHERE A.codigo = C.codigo and cedula = '"+document+"';";
+        System.out.println("consulta aspirante " + sql_select);
          try{
             System.out.println("consultando en la bd");
             Statement sentence = conn.createStatement();
