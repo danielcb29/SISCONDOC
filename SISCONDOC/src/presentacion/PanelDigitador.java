@@ -58,8 +58,9 @@ public class PanelDigitador extends javax.swing.JFrame {
     
     /*Parametros para Formacion en TIC*/
     String curso,institucion,formacionTicUrl;
+    Vector <FormacionTic> formaTics = new Vector <FormacionTic> ();
     boolean forTicChooser=false;
-    int horasFormacionTic;
+    int horasFormacionTic, countcursos=0;
     
     /*Parametros para conocimientos especificos*/
     String ofimaticas="Regular",web2="Regular", multimedia="Regular", edicaDig="Regular", 
@@ -67,12 +68,14 @@ public class PanelDigitador extends javax.swing.JFrame {
     
     /*Parametros para Idiomas*/
     String leetemp="regular", escribetemp="regular", hablatemp="regular";
-    Vector <String> idioma, idiomaurl, lee, escribe, habla;
+    //Vector <String> idioma, idiomaurl, lee, escribe, habla;
+    Vector <Idioma> idiomas = new Vector <Idioma> ();
     boolean idiomaid=false;
     int countidioma=0;
     
     /*Parametros para Experiencia*/
-    String ExpEstudiantes, ExpProfesores, ExpFormadores, ExpEstudiantesUrl, ExpProfesoresUrl, ExpFormadoresUrl;
+    String  ExpEstudiantesUrl, ExpProfesoresUrl, ExpFormadoresUrl;
+    int ExpEstudiantes, ExpProfesores, ExpFormadores, horasExpEstudiantes, horasExpProfesores, horasExpFormadores;
     
     /*OBJETOS DE OTRAS CLASES*/
     public Validador objValidador;
@@ -87,13 +90,14 @@ public class PanelDigitador extends javax.swing.JFrame {
     public PanelDigitador(String username,Convocatoria convoca, UserController conn){
         initComponents();
         name=username;
-        
+        nom_convocatoria=convoca.getName();
         //this.nom_convocatoria=convoca.getName();
         //id_convocatoria=convoca.getCode();
         jLabelidiomamsj.setVisible(false);
         
         WelcomeLabel.setText("¡Bienvenido "+name+"!");
         LabelConvocatoria.setText("Usted ha sido asignado a la convocatoria "+nom_convocatoria);
+        LabelConfirmacion.setText("Desea Registrar este Aspirante a la Convocatoria"+nom_convocatoria+" ?");
         objValidador=new Validador();
         objConvocatoria=convoca;
         Conexion=conn.getConn();
@@ -213,6 +217,8 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jRadioButtonFor_Tic1 = new javax.swing.JRadioButton();
         jRadioButtonFor_Tic2 = new javax.swing.JRadioButton();
+        btAgregarForTicActual = new javax.swing.JButton();
+        labelForTicmsj = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -304,6 +310,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         setResizable(false);
 
         jTabbedDigitador.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jTabbedDigitador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTabbedDigitadorMousePressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Nombres:");
@@ -387,7 +398,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
                             .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE))))
-                .addContainerGap(912, Short.MAX_VALUE))
+                .addContainerGap(913, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -748,7 +759,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                                .addComponent(jTextEspeUni, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextEspeUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -757,7 +768,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(357, 357, 357)
-                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jTextLicUni)
@@ -859,7 +870,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addComponent(jTextLic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabelLicUrl)
                                 .addComponent(jTextLicUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextLicUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btAbrirLic, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -948,6 +959,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextCursoUrl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jTextCursoUrl.setInheritsPopupMenu(false);
 
+        btAbrirFormacionTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormacionTic.setText("Adjuntar Archivo Soporte");
         btAbrirFormacionTic.setEnabled(false);
         btAbrirFormacionTic.addActionListener(new java.awt.event.ActionListener() {
@@ -962,8 +974,13 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextInstitucion.setEnabled(false);
 
         btMasCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
-        btMasCursos.setText("Agregar Otro Curso");
+        btMasCursos.setText("Agregar Otra Formacion Tic");
         btMasCursos.setEnabled(false);
+        btMasCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMasCursosActionPerformed(evt);
+            }
+        });
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel46.setText("Formacion en Tic:");
@@ -985,6 +1002,18 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        btAgregarForTicActual.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
+        btAgregarForTicActual.setText("Agregar Formacion Tic Actual");
+        btAgregarForTicActual.setEnabled(false);
+        btAgregarForTicActual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAgregarForTicActualActionPerformed(evt);
+            }
+        });
+
+        labelForTicmsj.setForeground(java.awt.Color.red);
+        labelForTicmsj.setText("Agregado Exitosamente! Formacion Tic N°");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1001,7 +1030,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addComponent(jTextCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(jTextInstitucion)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addGap(60, 60, 60)
@@ -1009,18 +1038,22 @@ public class PanelDigitador extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel24)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btAgregarForTicActual, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextCursoUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
-                        .addComponent(btAbrirFormacionTic)
-                        .addGap(18, 18, 18)
-                        .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btAbrirFormacionTic)
+                            .addComponent(labelForTicmsj, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel46)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonFor_Tic1)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonFor_Tic2)))
-                .addContainerGap(545, Short.MAX_VALUE))
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1039,18 +1072,21 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btAbrirFormacionTic)
-                        .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextCursoUrl))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel23)
-                            .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel24)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jComboBoxHorasCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jTextCursoUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAbrirFormacionTic))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAgregarForTicActual, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelForTicmsj))
+                .addGap(18, 18, 18)
+                .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -1381,7 +1417,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(338, 338, 338)
                         .addComponent(jLabel34)))
-                .addContainerGap(458, Short.MAX_VALUE))
+                .addContainerGap(505, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1613,6 +1649,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextIdiomaUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextIdiomaUrl.setEnabled(false);
 
+        btSubirIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btSubirIdioma.setText("Adjuntar Soporte");
         btSubirIdioma.setEnabled(false);
         btSubirIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1673,38 +1710,37 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btSubirIdioma)
-                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel35)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel37)
-                                        .addComponent(jLabel39)
-                                        .addComponent(jLabel38))
-                                    .addGap(54, 54, 54)
-                                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                            .addComponent(jRadioButtonEscribe1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jRadioButtonEscribe2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jRadioButtonEscribe3))
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                                    .addComponent(jRadioButtonLee1)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(jRadioButtonLee2)))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jRadioButtonLee3))
-                                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                            .addComponent(jRadioButtonHabla1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jRadioButtonHabla2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jRadioButtonHabla3))))))
-                        .addContainerGap(576, Short.MAX_VALUE))))
+                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                            .addComponent(jLabel35)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel37)
+                                    .addComponent(jLabel39)
+                                    .addComponent(jLabel38))
+                                .addGap(54, 54, 54)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jRadioButtonEscribe1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonEscribe2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonEscribe3))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addComponent(jRadioButtonLee1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jRadioButtonLee2)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButtonLee3))
+                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                        .addComponent(jRadioButtonHabla1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonHabla2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jRadioButtonHabla3)))))
+                        .addContainerGap(599, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1811,6 +1847,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextformadoresUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextformadoresUrl.setEnabled(false);
 
+        btAbrirEstudiantes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEstudiantes.setText("Adjuntar Soporte");
         btAbrirEstudiantes.setEnabled(false);
         btAbrirEstudiantes.addActionListener(new java.awt.event.ActionListener() {
@@ -1819,6 +1856,7 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        btAbrirProfes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirProfes.setText("Adjuntar Soporte");
         btAbrirProfes.setEnabled(false);
         btAbrirProfes.addActionListener(new java.awt.event.ActionListener() {
@@ -1827,6 +1865,7 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        btAbrirFormadores.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormadores.setText("Adjuntar Soporte");
         btAbrirFormadores.setEnabled(false);
         btAbrirFormadores.addActionListener(new java.awt.event.ActionListener() {
@@ -1859,10 +1898,10 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                            .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btAbrirEstudiantes)
@@ -1871,7 +1910,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1891,21 +1930,21 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(jComboBoxFormProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAbrirProfes))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextformadoresUrl)
-                    .addComponent(btAbrirFormadores))
-                .addContainerGap(238, Short.MAX_VALUE))
+                    .addComponent(btAbrirFormadores)
+                    .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(235, 235, 235))
         );
 
         jTabbedDigitador.addTab("Experiencia", jPanel6);
 
         LabelConfirmacion.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
-        LabelConfirmacion.setText("Desea Registrar al Aspirante XXX a la Convocatoria XXX ?");
+        LabelConfirmacion.setText("Desea Registrar este Aspirante a la Convocatoria ?");
 
         jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButtonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Add-Asp-icon.png"))); // NOI18N
@@ -1938,7 +1977,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(786, Short.MAX_VALUE))
+                .addContainerGap(833, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1978,13 +2017,16 @@ public class PanelDigitador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(LabelConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(LabelConvocatoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jButtonLogout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
@@ -2128,7 +2170,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         
     /**************************************************************/
         /*Obtenemos los datos de FORMACION_TIC*/
-        curso=jTextCurso.getText();
+        /*curso=jTextCurso.getText();
         institucion=jTextInstitucion.getText();
         int horastemp=jComboBoxHorasCurso.getSelectedIndex();
         switch  (horastemp){
@@ -2138,9 +2180,11 @@ public class PanelDigitador extends javax.swing.JFrame {
             case 3: {horasFormacionTic=150; break;}
         }
         formacionTicUrl=jTextCursoUrl.getText();
+       
         //creacion del objeto por ahora uno solo objeto
         FormacionTic [] formacionesTic  = new FormacionTic [1];
-        formacionesTic [0] = new FormacionTic(institucion, curso , horasFormacionTic, formacionTicUrl,true);
+        formacionesTic [0] = new FormacionTic(institucion, curso , horasFormacionTic, formacionTicUrl,true);*/
+        
     /**************************************************************/
         /*Obtenemos los datos de CONOCIMIENTOS ESPECIFICOS*/
         //datos guardados al seleccionar el nivel correspondiente 
@@ -2167,17 +2211,34 @@ public class PanelDigitador extends javax.swing.JFrame {
             countidioma <-- CANTIDAD DE IDIOMAS PARA EL ASPIRANTE
         */
         //1 por el momento 
-        Idioma [] idiomas  = new Idioma [1];
-        idiomas [0] = new Idioma("ingles", "muy bueno", "bueno", "muy bueno", "path", true);
         
     /**************************************************************/
         /*Obtenemos los datos de EXPERIENCIA*/
-        ExpEstudiantes=jComboBoxFormEst.getSelectedItem().toString();
-        ExpProfesores=jComboBoxFormProf.getSelectedItem().toString();
-        ExpFormadores=jComboBoxFormForm.getSelectedItem().toString();
-        //1 por el momento
-        FormadorTIC [] formador = new FormadorTIC [1];
-        formador [0] = new FormadorTIC("50", 100, "url");
+        ExpEstudiantes=jComboBoxFormEst.getSelectedIndex();
+            switch  (ExpEstudiantes){
+            case 0: {horasExpEstudiantes=0; break;}
+            case 1: {horasExpEstudiantes=1; break;}
+            case 2: {horasExpEstudiantes=3; break;}
+            case 3: {horasExpEstudiantes=5; break;}
+            case 4: {horasExpEstudiantes=6; break;}
+            }
+        ExpProfesores=jComboBoxFormProf.getSelectedIndex();
+            switch  (ExpProfesores){
+            case 0: {horasExpProfesores=0; break;}
+            case 1: {horasExpProfesores=100; break;}
+            case 2: {horasExpProfesores=250; break;}
+            case 3: {horasExpProfesores=400; break;}
+            case 4: {horasExpProfesores=500; break;}
+            }
+        ExpFormadores=jComboBoxFormForm.getSelectedIndex();
+            switch  (ExpFormadores){
+            case 0: {horasExpFormadores=0; break;}
+            case 1: {horasExpFormadores=100; break;}
+            case 2: {horasExpFormadores=200; break;}         
+            }
+        
+        
+        
     /**************************************************************/
         VaciosEn="";
         /*VARIABLES BOOLEANAS PARA VALIDAR*/
@@ -2215,82 +2276,84 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(licuni)==1)
                 {
                 nohayvaciosForLic=true;
-                Formacion form = new Formacion(licuni, lictit, "licensiado",licurl);
+                Formacion form = new Formacion(licuni, lictit, "Licenciado",licurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForLic=false;
-                VaciosEn+="FORMACION LICENCIATURA \n";
+                VaciosEn+="FORMACION -> LICENCIATURA \n";
             }}
         if(espeid){
             if(objValidador.ValidaVacios(espetit)==1 &&
                objValidador.ValidaVacios(espeuni)==1)
                 {
                 nohayvaciosForEspe=true;
+                Formacion form = new Formacion(espeuni, espetit, "Especializacion",espeurl);
+                formaciones.add(form);
             }
             else{
                 nohayvaciosForEspe=false;
-                VaciosEn+="FORMACION ESPECIALIZACION \n";
+                VaciosEn+="FORMACION -> ESPECIALIZACION \n";
             }}
         if(espeticid){
             if(objValidador.ValidaVacios(espetictit)==1 &&
                objValidador.ValidaVacios(espeticuni)==1)
                 {
                 nohayvaciosForEspeTic=true;
-                Formacion form = new Formacion(espeticuni, espetictit, "especializacion TIC",espeticurl);
+                Formacion form = new Formacion(espeticuni, espetictit, "EspecializacionTIC",espeticurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForEspeTic=false;
-                VaciosEn+="FORMACION ESPECIALIZACION TIC \n";
+                VaciosEn+="FORMACION -> ESPECIALIZACION TIC \n";
             }}
         if(maesid){
             if(objValidador.ValidaVacios(maestit)==1 &&
                objValidador.ValidaVacios(maesuni)==1)
                 {
                 nohayvaciosForMaes=true;
-                Formacion form = new Formacion(maesuni, maestit, "maestria",maesurl);
+                Formacion form = new Formacion(maesuni, maestit, "Maestria",maesurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForMaes=false;
-                VaciosEn+="FORMACION MAESTRIA \n";
+                VaciosEn+="FORMACION -> MAESTRIA \n";
             }}
         if(maesticid){
             if(objValidador.ValidaVacios(maestictit)==1 &&
                objValidador.ValidaVacios(maesticuni)==1)
                 {
                 nohayvaciosForMaesTic=true;
-                Formacion form = new Formacion(maesticuni, maestictit, "maestria TIC",maesticurl);
+                Formacion form = new Formacion(maesticuni, maestictit, "MaestriaTIC",maesticurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForMaesTic=false;
-                VaciosEn+="FORMACION MAESTRIA TIC \n";
+                VaciosEn+="FORMACION -> MAESTRIA TIC \n";
             }}
         if(docid){
             if(objValidador.ValidaVacios(doctit)==1 &&
                objValidador.ValidaVacios(docuni)==1)
                 {
                 nohayvaciosForDoc=true;
-                Formacion form = new Formacion(docuni, doctit, "doctorado",docurl);
+                Formacion form = new Formacion(docuni, doctit, "Doctorado",docurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForDoc=false;
-                VaciosEn+="FORMACION DOCTORADO \n";
+                VaciosEn+="FORMACION -> DOCTORADO \n";
             }}
         if(docticid){
             if(objValidador.ValidaVacios(doctictit)==1 &&
                objValidador.ValidaVacios(docticuni)==1)
                 {
                 nohayvaciosForDocTic=true;
-                Formacion form = new Formacion(docticuni, doctictit, "doctorado",docticurl);
+                Formacion form = new Formacion(docticuni, doctictit, "DoctoradoTIC",docticurl);
                 formaciones.add(form);
             }
             else{
                 nohayvaciosForDocTic=false;
-                VaciosEn+="FORMACION DOCTORADO TIC \n";
+                VaciosEn+="FORMACION -> DOCTORADO TIC \n";
             }}
         
         nohayvaciosFOR= nohayvaciosForLic && 
@@ -2302,37 +2365,51 @@ public class PanelDigitador extends javax.swing.JFrame {
                         nohayvaciosForDocTic;
         
         /*--VALIDAMOS FORMACION TIC--*/
-        if(forTicChooser){
-            if(objValidador.ValidaVacios(curso)==1 &&
-               objValidador.ValidaVacios(institucion)==1){
-                nohayvaciosFOR_TIC=true;
-            }
-            else{
-                nohayvaciosFOR_TIC=false;
-                VaciosEn+="FORMACION EN TIC \n";
-            }
+        if(btAgregarForTicActual.isEnabled()){
+           nohayvaciosFOR_TIC=false; 
+           VaciosEn+="FORMACION EN TIC\n";
         }
-            else{
-            nohayvaciosFOR_TIC=true;
-        }
+        else{
+           nohayvaciosFOR_TIC=true;
+       }
         
         /*--VALIDACION CONOCIMIENTOS ESPECIFICOS*/
         //No necesitan validacion puesto que obligatoriamente se selecciona un nivel
         
         /*--VALIDACION IDIOMA--*/
         if(btAgregarActualIdioma.isEnabled()){
-           nohayvaciosIDIOMAS=true; 
+           nohayvaciosIDIOMAS=false; 
+           VaciosEn+="IDIOMAS";
         }
         else{
-           nohayvaciosIDIOMAS=false;
-           VaciosEn+="IDIOMAS";
+           nohayvaciosIDIOMAS=true;
        }
         
         /*REGISTRAMOS ASPIRANTE*/
-                if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC)                    
+                if(nohayvaciosDP && nohayvaciosFOR && nohayvaciosFOR_TIC && nohayvaciosIDIOMAS)                    
                     {
+                       Vector <FormadorTIC> formador = new Vector <FormadorTIC> ();
+                            if (ExpEstudiantes != 0)
+                            {
+                                FormadorTIC form = new FormadorTIC("Estudiantes", horasExpEstudiantes,  ExpEstudiantesUrl);
+                                formador.add(form);
+                            }
+                            if (ExpProfesores != 0)
+                            {
+                                FormadorTIC form = new FormadorTIC ("Profesores", horasExpProfesores, ExpProfesoresUrl);
+                                formador.add(form);
+                            }
+                            if (ExpFormadores!= 0)
+                            {
+                                FormadorTIC form = new FormadorTIC ("Formadores", horasExpFormadores, ExpFormadoresUrl);
+                                formador.add(form);
+                            }
+                        
+                        
+                        FormadorTIC [] formadorTic = new FormadorTIC[formador.size()];
                         Formacion [] forms = new Formacion [formaciones.size()];
-                        Idioma [] idiomas1 = new Idioma [idioma.size()];
+                        Idioma [] arregloIdiomas = new Idioma[idiomas.size()];
+                        FormacionTic [] arregloForTic = new FormacionTic[formaTics.size()];
                       objAspirantController=new ControlAspirante(Conexion);
                       objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
@@ -2340,8 +2417,9 @@ public class PanelDigitador extends javax.swing.JFrame {
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
-                                                fecha_nac,formaciones.toArray(forms),formacionesTic,formador,conocimientos,idioma.toArray(idiomas1));
-                        System.out.println("CORRECTO!!!");
+                                                fecha_nac,formaciones.toArray(forms),formaTics.toArray(arregloForTic),formador.toArray(formadorTic),
+                                                conocimientos,idiomas.toArray(arregloIdiomas));
+                        JOptionPane.showMessageDialog(null,"Se registro el aspirante exitosamente");
                     }
                 else{
                    JOptionPane.showMessageDialog(null, "No has completado los datos necesarios, Hay vacios en:\n"+VaciosEn);
@@ -2398,11 +2476,14 @@ public class PanelDigitador extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
         countidioma=1;
+        /**
         idioma=new Vector<String>();
         idiomaurl=new Vector<String>();
         lee=new Vector<String>();
         escribe=new Vector<String>();
         habla=new Vector<String>();
+        * **/
+        idiomas = new Vector<Idioma>();
         jTextIdioma.setEnabled(true);
         jRadioButtonLee1.setEnabled(true);
         jRadioButtonLee2.setEnabled(true);
@@ -2548,7 +2629,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     && (car!=(char)KeyEvent.VK_SPACE)) { 
               getToolkit().beep(); 
               evt.consume(); 
-              jTextNombres.setToolTipText("Ingresa solo letras!");
+              //jTextNombres.setToolTipText("Ingresa solo letras!");
           } 
     }//GEN-LAST:event_jTextNombresKeyTyped
 
@@ -2558,7 +2639,7 @@ public class PanelDigitador extends javax.swing.JFrame {
           if(c<'0' || c>'9') { 
               getToolkit().beep(); 
               evt.consume(); 
-              jTextCedula.setToolTipText("Ingresa Solo Numeros!");
+              //jTextCedula.setToolTipText("Ingresa Solo Numeros!");
           }
     }//GEN-LAST:event_jTextCedulaKeyTyped
 
@@ -2582,7 +2663,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     && (car!=(char)KeyEvent.VK_SPACE)) { 
               getToolkit().beep(); 
               evt.consume(); 
-              jTextNombres.setToolTipText("Ingresa solo letras!");
+            //  jTextNombres.setToolTipText("Ingresa solo letras!");
           } 
     }//GEN-LAST:event_jTextApellidosKeyTyped
 
@@ -2651,25 +2732,14 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_btAbrirDocTicActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-       try{ System.out.println("NUMERO DE IDIOMAS: "+countidioma);
-        if(btAgregarActualIdioma.isEnabled()){
-          System.out.println("FALTA IDIOMA: ");
-        }
-        else{
-        for( int i=0; i<countidioma; i++){
-            System.out.println("IDIOMA:"+idioma.get(i)+
-                    " Lee: "+lee.get(i)+" Esribe: "+escribe.get(i)+" Habla: "+habla.get(i)+" Url: "+idiomaurl.get(i));
-        }
-       }}
-       catch(java.lang.ArrayIndexOutOfBoundsException e){
-           System.err.println("Se registro un numero de idiomas mayor al tamanno vector idiomas "+e);
-       }
+       
+       
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jRadioButtonFor_Tic2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFor_Tic2ActionPerformed
-        jTextCurso.setText("");
-        jTextInstitucion.setText("");
-        jTextCursoUrl.setText("");
+        jTextCurso.setText(null);
+        jTextInstitucion.setText(null);
+        jTextCursoUrl.setText("No hay Soporte");
         jTextCurso.setEnabled(false);
         jTextInstitucion.setEnabled(false);
         jTextCursoUrl.setEnabled(false);
@@ -2679,11 +2749,19 @@ public class PanelDigitador extends javax.swing.JFrame {
 
     private void jRadioButtonFor_Tic1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonFor_Tic1ActionPerformed
         forTicChooser=jRadioButtonFor_Tic1.isSelected();
+        countcursos=1;
+        formaTics=new Vector<FormacionTic>();
         jTextCurso.setEnabled(true);
         jTextInstitucion.setEnabled(true);
         jTextCursoUrl.setEnabled(true);
+        labelForTicmsj.setVisible(false);
         jComboBoxHorasCurso.setEnabled(true);
         btAbrirFormacionTic.setEnabled(true);
+        btAgregarForTicActual.setEnabled(true);
+        jTextCurso.setText("");
+        jTextInstitucion.setText("");
+        jRadioButtonFor_Tic2.setEnabled(false);
+        
     }//GEN-LAST:event_jRadioButtonFor_Tic1ActionPerformed
 
     private void btAbrirFormacionTicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbrirFormacionTicActionPerformed
@@ -2850,11 +2928,11 @@ public class PanelDigitador extends javax.swing.JFrame {
         btAgregarIdioma.setEnabled(false);
         }
         else{
-        idioma.add(jTextIdioma.getText());
-        idiomaurl.add(jTextIdiomaUrl.getText());
-        lee.add(leetemp);
-        escribe.add(escribetemp);
-        habla.add(hablatemp);
+        String lenguaje,urlIdioma;
+        lenguaje = (jTextIdioma.getText());
+        urlIdioma = (jTextIdiomaUrl.getText());
+        Idioma idiom = new Idioma(lenguaje, leetemp, escribetemp, hablatemp, urlIdioma, true);
+        idiomas.add(idiom);
          btAgregarIdioma.setEnabled(true);
          btAgregarActualIdioma.setEnabled(false);
          jRadioButton1.setEnabled(false);
@@ -2863,7 +2941,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jLabelidiomamsj.setVisible(true);
         }
     }//GEN-LAST:event_btAgregarActualIdiomaActionPerformed
-
+    
     private void jTextIdiomaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdiomaKeyTyped
         char car=evt.getKeyChar(); 
          
@@ -2945,20 +3023,67 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextformadoresUrl.setToolTipText(mensaje);
         ExpFormadoresUrl=mensaje;
     }//GEN-LAST:event_btAbrirFormadoresActionPerformed
+
+    private void btAgregarForTicActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarForTicActualActionPerformed
+        if((jTextCurso.getText().isEmpty()) || jTextInstitucion.getText().isEmpty()){
+        labelForTicmsj.setText("ERROR! Digita un Curso o Institucion para agregar");
+        labelForTicmsj.setVisible(true);
+        btMasCursos.setEnabled(false);
+        }
+        else{
+        /*Obtenemos los datos de FORMACION_TIC*/
+        curso=jTextCurso.getText();
+        institucion=jTextInstitucion.getText();
+        int horastemp=jComboBoxHorasCurso.getSelectedIndex();
+        switch  (horastemp){
+            case 0: {horasFormacionTic=30; break;}
+            case 1: {horasFormacionTic=60; break;}
+            case 2: {horasFormacionTic=120; break;}
+            case 3: {horasFormacionTic=150; break;}
+        }
+        formacionTicUrl=jTextCursoUrl.getText();
+        FormacionTic objFTICtemp = new FormacionTic(institucion, curso, horasFormacionTic, formacionTicUrl, true);
+        formaTics.add(objFTICtemp);
+         btMasCursos.setEnabled(true);
+         btAgregarForTicActual.setEnabled(false);
+         jRadioButtonFor_Tic1.setEnabled(false);
+        labelForTicmsj.setText("Idioma Agregado Correctamente! Idioma N° "+countcursos);
+        labelForTicmsj.setVisible(true);
+        }
+    }//GEN-LAST:event_btAgregarForTicActualActionPerformed
+
+    private void btMasCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMasCursosActionPerformed
+        countcursos++;
+        jTextCurso.setText("");
+        jTextInstitucion.setText("");
+        jTextCursoUrl.setText("No hay soporte");
+        labelForTicmsj.setVisible(false);
+        btAgregarForTicActual.setEnabled(true);
+        btMasCursos.setEnabled(false);
+    }//GEN-LAST:event_btMasCursosActionPerformed
+
+    private void jTabbedDigitadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedDigitadorMousePressed
+        
+    }//GEN-LAST:event_jTabbedDigitadorMousePressed
     
     /*METODO PARA OBTENER LA DIRECCION DEL ARCHIVO SOPORTE
     *Crea el directorio para el soporte del respectivo aspirante
     *Copia los archivos seleccionados a la URL de soportes
     */
     private String obtenerurl(JButton boton, String foldername){
-                //Clase para seleccionar archivos
+               //Clase para seleccionar archivos
+                if(jTextNombres.getText()==null){
+                    JOptionPane.showMessageDialog(null, "Ingrese un Nombre de Aspirante");
+                    DestinoTemp="SinNombre";
+                }
+                else{
                 JFileChooser elegir = new JFileChooser();
                 //Entero que contiene el resultado al selecionar archivo 1->aprovado, 2->cancelado
                 int opcion = elegir.showOpenDialog(boton);
                 /*Clase File para crear el directorio de soportes*/
-/*WINDOWS->*/       //File folder = new File("C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name);
+/*WINDOWS->*/       File folder = new File("C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+jTextNombres.getText());
 /*PARA SISTEMAS LINUX COMENTAR WINDOWS Y DESCOMENTAR LINUX*/
-/*Linux->*/       File folder = new File("/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name);
+/*Linux->*/       //File folder = new File("/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+jTextNombres.getText());
                
             try{ //Si presionamos el boton ABRIR en pathArchivo obtenemos el path del archivo
                    if (opcion == JFileChooser.APPROVE_OPTION) {
@@ -2970,8 +3095,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                         Path Origen = Paths.get(pathArchivo);
                         //Creamos directorio especificado
                         folder.mkdirs();
-/*WINDOWS->*/           //DestinoTemp="C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+name+"\\"+nombreArchivo;
-/*Linux->*/           DestinoTemp="/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+name+"/"+nombreArchivo;
+/*WINDOWS->*/           DestinoTemp="C:\\Users\\USUARIO\\Downloads\\SOPORTES\\"+foldername+"\\"+jTextNombres.getText()+"\\"+nombreArchivo;
+/*Linux->*/           //DestinoTemp="/home/daniel/Documents/Work/GitProjects/SISCONDOC/SISCONDOC/support"+foldername+"/"+jTextNombres.getText()+"/"+nombreArchivo;
                         Path Destino = Paths.get(DestinoTemp);
                         System.out.println("El nombre del archivo es: "+ nombreArchivo);
                         System.out.println("El path del archivo es: "+ pathArchivo);
@@ -2987,13 +3112,13 @@ public class PanelDigitador extends javax.swing.JFrame {
                   }
                   catch(IOException nel){
                       System.out.println("ERROR EN ObtenerUrl "+nel);
-                  }                  
+                  }          }        
         return (DestinoTemp);
     }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    //public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -3018,14 +3143,14 @@ public class PanelDigitador extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       java.awt.EventQueue.invokeLater(new Runnable() {
+      /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Convocatoria objconvo = new Convocatoria();
                 UserController objControl = new UserController();
                 new PanelDigitador("Nelson", objconvo, objControl).setVisible(true);
             }
         });
-    }//END MAIN
+    }*///END MAIN
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -3044,6 +3169,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JButton btAbrirMaesTic;
     private javax.swing.JButton btAbrirProfes;
     private javax.swing.JButton btAgregarActualIdioma;
+    private javax.swing.JButton btAgregarForTicActual;
     private javax.swing.JButton btAgregarIdioma;
     private javax.swing.JButton btMasCursos;
     private javax.swing.JButton btSubirIdioma;
@@ -3219,6 +3345,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextNombres;
     private javax.swing.JLabel jTextProfesoresUrl;
     private javax.swing.JLabel jTextformadoresUrl;
+    private javax.swing.JLabel labelForTicmsj;
     // End of variables declaration//GEN-END:variables
 
 }

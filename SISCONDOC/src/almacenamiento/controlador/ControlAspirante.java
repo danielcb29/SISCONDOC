@@ -8,6 +8,7 @@ package almacenamiento.controlador;
 import almacenamiento.accesodatos.*;
 import java.sql.Connection;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import proceso.*;
 
 
@@ -47,6 +48,16 @@ public class ControlAspirante
      */
     public int createAspirante(String document, String name, String lastName, String city,int puntaje,Convocatoria convocatoria,String genero,String jornada,String fecha_nac,Formacion [] formaciones, FormacionTic [] formacionesTic,FormadorTIC [] formadores,CEspecifico conocimientos,Idioma [] idiomas ){
         Aspirante aspirante = new Aspirante (document, name, lastName, city, puntaje,convocatoria,genero,jornada,fecha_nac,formaciones, formacionesTic,formadores,conocimientos,idiomas);
+        
+        //Prueba DANIEL 
+        
+        Puntuacion pun = new Puntuacion(aspirante);
+        
+        Aspirante aspPunted = pun.qualify();
+        
+        JOptionPane.showMessageDialog(null, "La puntuacion fue: "+aspPunted.getPuntaje());
+        
+        
         int result = daoAspirante.crateAspirante(aspirante);
         int resultado2 = controlFormacionTic.insertarFormacion(formacionesTic,document);
         int resultado3 = controlFormacion.createForm(formaciones, document);
