@@ -11,6 +11,7 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -51,22 +52,18 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblEstado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblNomUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblMail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblContrasena" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtNombres" pref="204" max="32767" attributes="0"/>
-                                          <Component id="txtMail" max="32767" attributes="0"/>
-                                          <Component id="txtNomUsuario" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="txtContrasena" alignment="0" pref="204" max="32767" attributes="0"/>
-                                          <Component id="cbEstado" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <Component id="lblNomUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMail" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblContrasena" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblNombres1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtNombres" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <Component id="txtMail" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <Component id="txtNomUsuario" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <Component id="txtContrasena" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
+                                  <Component id="cbEstado" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -74,34 +71,34 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="lblApellidos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtApellidos" min="-2" pref="204" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="bModificar" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btCancelar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblConvocatoria" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPerfil" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="comboPerfil" min="-2" pref="204" max="-2" attributes="0"/>
+                                          <Component id="comboConvo" min="-2" pref="204" max="-2" attributes="0"/>
+                                          <Component id="txtApellidos" alignment="0" min="-2" pref="204" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="56" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblConvocatoria" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btSearch" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="comboConvo" alignment="1" min="-2" pref="341" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="bModificar" min="-2" pref="92" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="btCancelar" min="-2" pref="94" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblPerfil" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="comboPerfil" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btSearch" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="lblApellidos" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="24" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -112,24 +109,21 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Component id="lbTitle" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lbInfo" min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbSearch" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfSearchCedula" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfSearchCedula" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="btSearch" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="107" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -137,30 +131,28 @@
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="lblMail" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="lblNomUsuario" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNomUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNombres" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtApellidos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNombres1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNombres" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtMail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPerfil" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="comboPerfil" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="txtNomUsuario" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="lblConvocatoria" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblConvocatoria" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboConvo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -168,7 +160,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtContrasena" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="comboConvo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -181,8 +172,8 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="bModificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="bModificar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="btCancelar" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -227,6 +218,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btSearch">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\Search-icon.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
@@ -307,6 +301,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btCancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\Back-Asp-icon.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
@@ -315,6 +312,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="bModificar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\edit-user-icon.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Modificar"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[74, 29]"/>

@@ -292,9 +292,7 @@ public class VistaLogin extends javax.swing.JFrame {
                                 vAdmin = new VistaAdmin(userName,controlerU);
                                 vAdmin.setVisible(true);
                                 //PRUEBA BORRAR
-                                //Convocatoria conv = user.getConvocatoria();
-                                //digPanel = new PanelDigitador(userName,conv,controlerU);
-                                //digPanel.setVisible(true);
+                                
                             }
 
                             

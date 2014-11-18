@@ -20,7 +20,7 @@ package proceso;
     private String name;
     private String lastname;
     private String city;
-    private int puntaje;
+    private double puntaje;
     private Convocatoria call;
     private String genero;
     private String jornada;
@@ -33,7 +33,7 @@ package proceso;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,double puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
     {
         document = aspiranteDocument;
         name = aspiranteName;
@@ -110,14 +110,14 @@ package proceso;
     /**
      * @return the puntaje
      */
-    public int getPuntaje() {
+    public double getPuntaje() {
         return puntaje;
     }
 
     /**
      * @param puntaje puntaje set
      */
-    public void setPuntaje(int puntaje) {
+    public void setPuntaje(double puntaje) {
         this.puntaje= puntaje;
     }
 
