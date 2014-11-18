@@ -10,14 +10,23 @@ package proceso;
  */
 public class Puntuacion {
     Aspirante appliant;
-    
+    /**
+     * Constructor vacio , sin funcion por ahora
+     */
     public Puntuacion(){
         
     }
+    /**
+     * Constructor , requiere de un aspirante para funcionar
+     * @param toRate : aspirante a calificar
+     */
     public Puntuacion(Aspirante toRate){
         appliant = toRate; 
     }
-    
+    /**
+     * Metodo que califica al aspirante ingresado por constructor
+     * @return Aspirante con su calificacion asignada 
+     */
     public Aspirante qualify(){
         double score = 0;
         Aspirante appliantPointed = appliant;
@@ -36,7 +45,11 @@ public class Puntuacion {
         return appliantPointed;
         
     }
-
+    /**
+    * Metodo que permite calificar la formacion del aspirante
+    * @param form: arreglo de formaciones del aspirante 
+    * @return puntuacion asignada de acuerdo a la formacion mas alta que tenga el aspirante
+    */
     private int qualifyFormacion(Formacion[] form) {
         int len = form.length;
         System.out.println("tamano de formacion !!!  "+len);
@@ -73,7 +86,11 @@ public class Puntuacion {
         return point;
         
     }
-    
+    /**
+     * Metodo que permite calificar la experiencia de un aspirante , la experiencia significa las horas que ha ensenado cursos sobre TIC
+     * @param exp : arreglo de FormadorTIC que contiene los parametros de su experiencia como formador de TIC
+     * @return Puntuacion asignada de acuerdo a las horas ensenadas y las personas ensenadas 
+     */
     private int qualifyExperience(FormadorTIC[] exp) {
         int len = exp.length;
         System.out.println("tamano de experiencia !!!  "+len);
@@ -86,7 +103,11 @@ public class Puntuacion {
                 
         return point;
     }
-    
+    /**
+     * Metodo auxiliar que permite mirar la condicion de las personas formadas de un objeto FormadorTIC
+     * @param form: objeto FormadorTIC que contiene la informacion de un grupo de personas formadas y el rango de horas
+     * @return punto asignado a ese objeto en particular
+     */
     private int qualifyExperienceCondition(FormadorTIC form){
         int subPoint = 0;
         int time = form.getTime();
@@ -106,7 +127,11 @@ public class Puntuacion {
         return subPoint;       
     }
  
-    //revisar inclusion en los rangos
+    /**
+     * Metodo auxiliar que permite calificar los rangos de horas ensenadas a un grupo de estudiantes
+     * @param time : tiempo de ensenanza : experiencia
+     * @return puntaje asignado de acuerdo a las horas dedicadas a la formacion de estudiantes
+     */
     private int qualifyExperienceEstud(int time) {
         System.out.println("Entramos a estu");
         int subPoint = 0;
@@ -132,7 +157,11 @@ public class Puntuacion {
         System.out.println("punto del estu-- "+subPoint);
         return subPoint;
     }
-
+    /**
+     * Metodo auxiliar que permite calificar los rangos de horas ensenadas a un grupo de profesores
+     * @param time : tiempo de ensenanza : experiencia
+     * @return puntaje asignado de acuerdo a las horas dedicadas a la formacion de profesores
+     */
     private int qualifyExperienceProf(int time) {
         System.out.println("Entramos a prof");
         int subPoint =0;
@@ -156,7 +185,11 @@ public class Puntuacion {
         System.out.println("Punto del profe -- "+subPoint);
         return subPoint;
     }
-
+    /**
+     * Metodo auxiliar que permite calificar los rangos de horas ensenadas a un grupo de formadores de tic
+     * @param time : tiempo de ensenanza : experiencia
+     * @return puntaje asignado de acuerdo a las horas dedicadas a la formacion de formadores de tic
+     */
     private int qualifyExperienceForm(int time) {
         System.out.println("Entramos a form");
         int subPoint =0;
