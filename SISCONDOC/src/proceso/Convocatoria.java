@@ -17,13 +17,12 @@ public class Convocatoria {
     private boolean state;
     private Date dateInitial;
     private Date dateEnd;
-    public Convocatoria(String paramName , String paramDescrip, Date paramDateIn, Date paramDateEnd, int paramCode){
+    public Convocatoria(String paramName , String paramDescrip, Date paramDateIn, Date paramDateEnd){
         name = paramName;
         description = paramDescrip; 
         state = true;
         dateInitial = paramDateIn;
         dateEnd = paramDateEnd;
-        code = paramCode;
     }
     public Convocatoria(){
         
@@ -58,7 +57,6 @@ public class Convocatoria {
     public void setDateEnd(Date newDateEnd){
         dateEnd = newDateEnd;
     }
-
     /**
      * @return the code
      */

@@ -25,7 +25,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
      */
     private ConvocatoriaController controller;
     private int type;
-    
+    //Atributo necesario para conocer el estado de una convocatoria al momento de editar , se obtiene en buscar y se usa en editar
+    private boolean convEditState = true;
     public VistaConvocatoria(ConvocatoriaController controllerParam, int type) {
         initComponents();
         controller = controllerParam;
@@ -37,15 +38,18 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             lbSearch.setVisible(false);
             tfSearch.setVisible(false);
             btSearch.setVisible(false);
+            lbState.setVisible(false);
+            cbState.setVisible(false);
             //lbAdd.setText("Recuerde que cada convocatoria debe tener un nombre diferente");
         }else{
             if(type == 2){
                 //Editar conv
-                //lbAdd.setVisible(false);
                 lbTitle.setText("Editar Convocatoria");
                 lbInfo.setText("Busque la convocatoria que desea editar, cambie los parametros necesarios y guarde");
                 btAction.setText("Guardar");
                 this.setTitle("Panel Administrador: Editar Convoatoria");
+                lbState.setVisible(false);
+                cbState.setVisible(false);
             }else{
                 //ELiminar conv
                 //lbAdd.setVisible(false);
@@ -58,6 +62,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                 tfTimeIn.setEditable(false);
                 tfDateEnd.setEditable(false);
                 tfTimeEnd.setEditable(false);
+                lbState.setVisible(false);
+                cbState.setVisible(false);
                 this.setTitle("Panel Administrador: Eliminar Convocatoria");
             }
         }
@@ -108,6 +114,8 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         btSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lbState = new javax.swing.JLabel();
+        cbState = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Panel Administrador: Crear Convocatoria");
@@ -151,6 +159,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         taDescription.setRows(5);
         jScrollPane1.setViewportView(taDescription);
 
+        btAction.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Add-convo-icon.png")); // NOI18N
         btAction.setText("Crear");
         btAction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +168,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         });
         jSplitPane1.setLeftComponent(btAction);
 
+        btCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Back-Asp-icon.png")); // NOI18N
         btCancelar.setText("Cancelar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +192,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
 
         lbSearch.setText("Buscar:");
 
+        btSearch.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Search-icon.png")); // NOI18N
         btSearch.setText("Buscar");
         btSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,38 +201,30 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 2, 15)); // NOI18N
-        jLabel1.setText("aaa/mm/dd");
+        jLabel1.setText("aaaa/mm/dd");
 
         jLabel13.setText("ej: 13:00");
+
+        lbState.setText("Estado:");
+
+        cbState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbTitle)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbInfo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(tfSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(btSearch)
-                                .addGap(29, 29, 29))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(36, 36, 36)
+                                        .addGap(5, 5, 5)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,61 +260,73 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel13)
-                                                .addGap(67, 67, 67))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(25, 25, 25)
-                                        .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(77, 77, 77))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGap(188, 188, 188)
                                         .addComponent(jLabel4))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGap(173, 173, 173)
                                         .addComponent(lbSearch)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 56, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNombre)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfSearch)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btSearch)))
+                                .addGap(29, 29, 29)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel12)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbState)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbState, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(69, 69, 69))
+                            .addComponent(jScrollPane1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbTitle)
+                    .addComponent(lbInfo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addComponent(lbTitle)
                         .addGap(18, 18, 18)
                         .addComponent(lbInfo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addComponent(jLabel12)
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(lbSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btSearch))
+                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -328,16 +343,22 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(tfDateIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
-                            .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel9)
+                            .addComponent(tfTimeIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(lbState)
+                            .addComponent(cbState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(tfDateEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(tfTimeEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)))
+                        .addGap(19, 19, 19))
+                    .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -392,7 +413,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
             if(d1.after(d2)){
                     JOptionPane.showMessageDialog(this,"La fecha de iniciacion no puede ser despues que la fecha de finalizacion","Error en las fechas",JOptionPane.ERROR_MESSAGE);
             }else{
-                 Convocatoria newConv = new Convocatoria(name,description,d1,d2,0);   
+                 Convocatoria newConv = new Convocatoria(name,description,d1,d2);   
                  if(type==1){
                      //crear convocatoria
                      int result = controller.createConv(newConv);
@@ -401,11 +422,25 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(this,"Convocatoria creada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
                          this.dispose();
                      }else{
-                         JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe","Ups!",JOptionPane.ERROR_MESSAGE);
+                         JOptionPane.showMessageDialog(this,"Ha ocurrido un error en la base de datos, posiblemente estas intentando crear una convocatoria que ya existe\nNota: si la convocatoria ha sido eliminada puede reactivarla en el panel de edicion de convocatorias ","Ups!",JOptionPane.ERROR_MESSAGE);
                      }
                 }else{
                     if(type==2){
                         //editar
+                        //validar si el usuario estaba eliminado
+                        if(!convEditState){
+                            Object item = cbState.getSelectedItem();
+                            String value = item.toString();
+                            
+                            if(value.equals("Inactivo")){
+                                newConv.setState(false);
+                                
+                            }else{
+                                newConv.setState(true);
+                            }
+                        }else{
+                            newConv.setState(true);
+                        }
                         controller.updateConv(tfSearch.getText(), newConv);
                         JOptionPane.showMessageDialog(this,"Convocatoria actualizada exitosamente!","Enhorabuena",JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
@@ -442,9 +477,10 @@ public class VistaConvocatoria extends javax.swing.JFrame {
         if(name.length() != 0){
             Convocatoria convEdit = controller.readConv(name);
             System.out.println("primera fase");
+            //Error
             if(convEdit==null){
                 JOptionPane.showMessageDialog(this,"Lo sentimos, a ocurrido en error en la base de datos, vuelve a intentarlo","Lo sentimos :(",JOptionPane.ERROR_MESSAGE);
-            }else{
+            }else{  //Caso que la convo lo existe
                 if(convEdit.getName() == null){
                     tfNombre.setText("null");
                     tfDateIn.setText("null");
@@ -453,7 +489,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     tfTimeEnd.setText("null");
                     taDescription.setText("null");
                     JOptionPane.showMessageDialog(this,"La convocatoria con nombre "+tfSearch.getText()+" no existe","Error",JOptionPane.ERROR_MESSAGE);
-                }else{
+                }else{//Caso que si exista
                     System.out.println("segunda fase");
                     SimpleDateFormat format = new SimpleDateFormat("yyy/MM/dd HH:mm");
                     String datIn[] = format.format(convEdit.getDateIn()).split(" ");
@@ -464,12 +500,24 @@ public class VistaConvocatoria extends javax.swing.JFrame {
                     tfDateEnd.setText(datEnd[0]);
                     tfTimeEnd.setText(datEnd[1]);
                     taDescription.setText(convEdit.getDescription());
+                    //CASO QUE HAYA SIDO ELIMINADA Y SE QUIERA RE ACTIVAR
+                    convEditState = convEdit.getState(); 
+                    if(!convEditState){
+                        lbState.setVisible(true);
+                        cbState.setVisible(true);
+                        cbState.addItem("Inactivo");
+                        cbState.addItem("Activo");
+                    }
                 }
             }
         }else{
             JOptionPane.showMessageDialog(this,"No puedes buscar una convocatoria con nombre vacio","Error en la busqueda",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btSearchActionPerformed
+
+    private void cbStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbStateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -516,6 +564,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private javax.swing.JButton btAction;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btSearch;
+    private javax.swing.JComboBox cbState;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -533,6 +582,7 @@ public class VistaConvocatoria extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lbInfo;
     private javax.swing.JLabel lbSearch;
+    private javax.swing.JLabel lbState;
     private javax.swing.JLabel lbTitle;
     private javax.swing.JTextArea taDescription;
     private javax.swing.JTextField tfDateEnd;

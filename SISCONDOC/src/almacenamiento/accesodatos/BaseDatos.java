@@ -15,15 +15,12 @@ public class BaseDatos {
      private Connection conexion =null;
      private Statement instruccion;
      private ResultSet tabla; 
-
-    public BaseDatos()
-    {
-      url = "jdbc:postgresql://localhost:5432/juand";
-      usuario="juand";
-      password="juand";
-    }
+     BaseDatos(){
+      url = "jdbc:postgresql://localhost:5432/SISCONDOC";
+      usuario="danielcb";
+      password="1144067772";
       
-    
+    }
     public Connection conectar(){
             //System.out.println("Entro metodo");
             try {
@@ -43,8 +40,7 @@ public class BaseDatos {
                      return conexion;
                   //Crear objeto Statement para realizar queries a la base de datos
              } catch( Exception e ) {
-                //System.out.println( "No se pudo abrir la bd." );
-                 System.out.println( e.getMessage() );
+                System.out.println( "No se pudo abrir la bd." );
                 return null;
              }
 

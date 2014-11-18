@@ -5,6 +5,7 @@
  */
 package proceso;
 
+
 /**
  *
  * @author fernando
@@ -13,26 +14,41 @@ package proceso;
 
 
 
-public class Aspirante {
+    public class Aspirante {
     
     private String document;
     private String name;
     private String lastname;
     private String city;
-    private int puntaje;
+    private double puntaje;
     private Convocatoria call;
+    private String genero;
+    private String jornada;
+    private String fecha_nac;
+    private Formacion [] formaciones;
+    private FormacionTic [] formacionesTic;
+    private FormadorTIC [] formadores;
+    private CEspecifico conocimientos;
+    private Idioma [] idiomas; 
     
     
     public Aspirante () {} 
-    public Aspirante (String aspirantDocument , String aspirantName , String aspirantLastname, String aspirantCity ,int puntajeAspirante, Convocatoria call)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,double puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
     {
-        aspirantDocument = document;
-        aspirantName = name;
-        aspirantLastname = lastname;
-        aspirantCity = city;
-        puntajeAspirante = puntaje;
+        document = aspiranteDocument;
+        name = aspiranteName;
+        lastname = aspiranteLastname;
+        city = aspiranteCity;
+        puntaje = puntajeAspirante;
         this.call =call;
-                
+        genero = gen;
+        jornada = jor;
+        fecha_nac = nacimiento;
+        formaciones= formacionesAspirantes;
+        formacionesTic= formacionesTicAspirantes;
+        formadores = formadoresTic;
+        conocimientos = conocimientosAspirante;
+        idiomas = idiomasAspirante;
     }
 
     /**
@@ -94,14 +110,14 @@ public class Aspirante {
     /**
      * @return the puntaje
      */
-    public int getPuntaje() {
+    public double getPuntaje() {
         return puntaje;
     }
 
     /**
      * @param puntaje puntaje set
      */
-    public void setPuntaje(int puntaje) {
+    public void setPuntaje(double puntaje) {
         this.puntaje= puntaje;
     }
 
@@ -118,6 +134,116 @@ public class Aspirante {
     public void setConvocatoria(Convocatoria call) {
         this.call = call;
     }
-    
-        
+
+    /**
+     * @return the genero
+     */
+    public String getGenero() {
+        return genero;
+    }
+
+    /**
+     * @param genero the genero to set
+     */
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    /**
+     * @return the jornada
+     */
+    public String getJornada() {
+        return jornada;
+    }
+
+    /**
+     * @param jornada the jornada to set
+     */
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
+    }
+
+    /**
+     * @return the fecha_nac
+     */
+    public String getFecha_nac() {
+        return fecha_nac;
+    }
+
+    /**
+     * @param fecha_nac the fecha_nac to set
+     */
+    public void setFecha_nac(String fecha_nac) {
+        this.fecha_nac = fecha_nac;
+    }
+
+    /**
+     * @return the formaciones
+     */
+    public Formacion[] getFormaciones() {
+        return formaciones;
+    }
+
+    /**
+     * @param formaciones the formaciones to set
+     */
+    public void setFormaciones(Formacion[] formaciones) {
+        this.formaciones = formaciones;
+    }
+
+    /**
+     * @return the formacionesTic
+     */
+    public FormacionTic[] getFormacionesTic() {
+        return formacionesTic;
+    }
+
+    /**
+     * @param formacionesTic the formacionesTic to set
+     */
+    public void setFormacionesTic(FormacionTic[] formacionesTic) {
+        this.formacionesTic = formacionesTic;
+    }
+
+    /**
+     * @return the formadores
+     */
+    public FormadorTIC[] getFormadores() {
+        return formadores;
+    }
+
+    /**
+     * @param formadores the formadores to set
+     */
+    public void setFormadores(FormadorTIC[] formadores) {
+        this.formadores = formadores;
+    }
+
+    /**
+     * @return the conocimientos
+     */
+    public CEspecifico getConocimientos() {
+        return conocimientos;
+    }
+
+    /**
+     * @param conocimientos the conocimientos to set
+     */
+    public void setConocimientos(CEspecifico conocimientos) {
+        this.conocimientos = conocimientos;
+    }
+
+    /**
+     * @return the idiomas
+     */
+    public Idioma[] getIdiomas() {
+        return idiomas;
+    }
+
+    /**
+     * @param idiomas the idiomas to set
+     */
+    public void setIdiomas(Idioma[] idiomas) {
+        this.idiomas = idiomas;
+    }
 }

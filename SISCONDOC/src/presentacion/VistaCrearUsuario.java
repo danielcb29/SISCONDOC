@@ -112,6 +112,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         });
 
         btnCrear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCrear.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\add-user-icon.png")); // NOI18N
         btnCrear.setText("Crear");
         btnCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +121,7 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Back-Asp-icon.png")); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,52 +144,49 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblContrasena)
-                                        .addGap(142, 142, 142)
-                                        .addComponent(txtContrasena))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblNomUsuario)
-                                        .addGap(89, 89, 89)
-                                        .addComponent(txtNomUsuario))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblMail)
-                                        .addGap(181, 181, 181)
-                                        .addComponent(txtMail))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblContrasena, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(lblNomUsuario)
+                                                    .addGap(89, 89, 89))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(lblNombres)
+                                                    .addGap(151, 151, 151)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(lblApellidos)
-                                                .addGap(160, 160, 160))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(lblNombres)
-                                                .addGap(159, 159, 159)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGap(155, 155, 155))
+                                            .addComponent(lblMail))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtMail, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(3, 3, 3))
-                                            .addComponent(txtApellidos))))
+                                                .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(11, 11, 11))
+                                            .addComponent(txtNomUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(263, 263, 263))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAdvertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCrear)
-                                .addGap(42, 42, 42)
-                                .addComponent(btnCancelar)
-                                .addGap(36, 36, 36))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCedula)
-                                    .addComponent(lblConvocatoria)
-                                    .addComponent(lblPerfil))
-                                .addGap(95, 95, 95)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(comboConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblAdvertencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCedula)
+                                            .addComponent(lblConvocatoria)
+                                            .addComponent(lblPerfil))
+                                        .addGap(95, 95, 95)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(comboConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(46, 46, 46)
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCancelar)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -248,10 +247,10 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
                     .addComponent(comboConvocatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCrear)
-                        .addComponent(lblAdvertencia)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblAdvertencia))
                 .addGap(20, 20, 20))
         );
 
@@ -266,69 +265,97 @@ public class VistaCrearUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
+    /**
+     * Metodod para validar campos vacios
+     * @param firstDa
+     * @param firstTime
+     * @param secondDa
+     * @param secondTime
+     * @param name
+     * @param description
+     * @return 
+     */
+    private boolean validateInformation(String firstDa, String firstTime, String secondDa, String secondTime, String name, String description) {
+        //if ((((((firstDa.length() == 0) || (firstTime.length() == 0)) || (secondDa.length() == 0)) || (secondTime.length() == 0)) || (name.length() == 0)) || (description.length()==0)){
+        if ((firstDa.length() == 0) || (firstTime.length() == 0) || (secondDa.length() == 0) || (secondTime.length() == 0) || (name.length() == 0) || (description.length()==0)){    
+            return false;
+        }else{
+            return true;
+        }
+    }
     /**
      * Metodo que se ejecuta si se presiona el boton crear
      * @param evt Evento que dispara el metodo
      */
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         //Se declara objeto de la clase usuario
-        Usuario objUsuario;
-        
-        //Se guarda el nombre de usuario ingresado en una cadena de texto
-        String username=txtNomUsuario.getText();
-        
-        //Se instancia la clase controlador para hacer uso de ella
-       
-        
-        //Se consulta si el nombre de usuario ya existe en la base de datos
-        objUsuario=objControl.consultUser(username, 1);
-        
-        
-        //Si no existe, se capturan los demas datos de la interfaz,
-        //se envian al controlador para guardarlos y se informa al
-        //usuario
-        if(objUsuario.getPassword()==null){
-            String nombres=txtNombres.getText();
-            String apellidos=txtApellidos.getText();
-            String contrasena=txtContrasena.getText();
-            String email=txtMail.getText();
-            String cedula=txtCedula.getText();
-            int numPerfil=comboPerfil.getSelectedIndex()+1;
-            int numConvocatoria=comboConvocatoria.getSelectedIndex();
-            String perfil=Integer.toString(numPerfil);
-            String convo;
-            if(numPerfil==3){
-                convo="null";
+        String nombres=txtNombres.getText();
+        String apellidos=txtApellidos.getText();
+        String contrasena=txtContrasena.getText();
+        String email=txtMail.getText();
+        String cedula=txtCedula.getText();
+        String perfil=comboPerfil.getSelectedItem().toString();
+        boolean empty = validateInformation(nombres, apellidos, contrasena, email, cedula, perfil);
+        if (empty){
+            Usuario objUsuario;
+
+            //Se guarda el nombre de usuario ingresado en una cadena de texto
+            String username=txtNomUsuario.getText();
+
+            //Se instancia la clase controlador para hacer uso de ella
+
+
+            //Se consulta si el nombre de usuario ya existe en la base de datos
+            System.out.println("llegamos antes de la consulta");
+            objUsuario=objControl.consultUser(username, 1);
+
+
+            //Si no existe, se capturan los demas datos de la interfaz,
+            //se envian al controlador para guardarlos y se informa al
+            //usuario
+            if(objUsuario.getPassword()==null){
+
+                int numConvocatoria=comboConvocatoria.getSelectedIndex();
+
+
+                Convocatoria convo;
+                if(perfil.equals("Administrador")){
+                    convo=null;
+
+                }else{
+                    convo= objConvocatoria.readConv(nomConvocatorias[numConvocatoria]);
+                    System.out.println("nombre de la convo:"+convo);
+                }
+                int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convo);
+
+                if(result == -1 || result == -2){
+                    JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    //Se imprime el mensaje para informar el exito de la operacion
+                    JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
+                    //Cerramos la ventana
+                    this.dispose();
+                }
+
+
+
+
             }else{
-                convo= nomConvocatorias[numConvocatoria];
+                if(objUsuario.getState()==false){
+                    //Si ya existe el nombre de usuario en la base de datos se informa al
+                    //usuario del error
+                    JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" se encuentra\ninactivo, para reactivarlo visite la seccion\neditar usuario del panel administrador");
+                }else{
+                    //Si ya existe el nombre de usuario en la base de datos se informa al
+                    //usuario del error
+                    JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" ya existe");
+                }
+
             }
-            int result = objControl.createUser(cedula, nombres, apellidos, username, contrasena, email, perfil,convo);
-            
-            if(result == -1 || result == -2){
-                JOptionPane.showMessageDialog(this, "Posiblemente estas ingresando a una persona que ya existe \nIntenta ingresar a una persona diferente (cedula diferente)\nSi el problema persiste ha ocurrido un error en la base de datos,consulta al personal encargado","Error!",JOptionPane.ERROR_MESSAGE);
-            }else{
-                //Se imprime el mensaje para informar el exito de la operacion
-                JOptionPane.showMessageDialog(this, "El usuario "+ username+" se ha creado con exito", "Mensaje de exito",JOptionPane.INFORMATION_MESSAGE);
-                //Cerramos la ventana
-                this.dispose();
-            }
-                    
-            
-            
-            
         }else{
-            if(objUsuario.getState()==false){
-                //Si ya existe el nombre de usuario en la base de datos se informa al
-                //usuario del error
-                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" se encuentra\ninactivo, para reactivarlo visite la seccion\neditar usuario del panel administrador");
-            }else{
-                //Si ya existe el nombre de usuario en la base de datos se informa al
-                //usuario del error
-                JOptionPane.showMessageDialog(this, "El nombre de usuario "+username+" ya existe");
-            }
-            
+            JOptionPane.showMessageDialog(this,"No puedes realizar acciones con campos vacios","Termina de llenar los campos",JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void comboPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPerfilActionPerformed
