@@ -40,6 +40,20 @@ public class ControlFormacionTic
     }
     
         /**
+     * Metodo que permite actualizar una formacion en la base de datos 
+     * @param cedula: cedula del aspirante al cual se actulizara el registro
+     * @param titulo  : titulo que va a ser actualizado
+     * @param form : objeto Formacion con toda la informacion actualizada
+     * @return 
+     */
+    public int updateForm(String cedula,String titulo ,FormacionTic formsTic){
+        int result = daoTic.updateForm(cedula, titulo, formsTic);
+        return result;
+    }
+
+      
+    
+        /**
      * Metodo que permite eliminar una formacion en tic (poner en inactivo) 
      * @param cedula: cedula del aspirante al cual pertenece la formacion
      * @param titulo: titulo a eliminar. 

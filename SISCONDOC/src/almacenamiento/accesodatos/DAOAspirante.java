@@ -113,23 +113,32 @@ public class DAOAspirante
         return null;
     }
     
-    public void updateAspirante(String documento, Aspirante aspirante){
+    /**
+     * 
+     * @param documento cedula del aspirante
+     * @param aspirante los nuevos datos personales del aspirante.
+     */
+    
+    public int updateAspirante(String documento, Aspirante aspirante){
         String sql1,sql2,sql3,sql4,sql5,sql6,sql7,sql8,sql9;
-	sql1="UPDATE convocatoria SET nombre='"+aspirante.getName()+"' WHERE cedula='" + documento + "';";
-        sql2 = "UPDATE convocatoria SET apellido ='"+aspirante.getLastname()+"' WHERE cedula='" + documento + "';";
-        sql3 = "UPDATE convocatoria SET municipio ='"+aspirante.getCity()+"'WHERE cedula='" + documento + "';";
-        sql4 = "UPDATE convocatoria SET puntaje='"+aspirante.getPuntaje()+"' WHERE cedula='" + documento + "';";
-        sql5 = "UPDATE convocatoria SET codigo='"+aspirante.getConvocatoria().getCode()+"' WHERE cedula='" + documento + "';";
-        sql6 = "UPDATE convocatoria SET genero='"+aspirante.getGenero()+"' WHERE cedula='" + documento + "';";
-        sql7 = "UPDATE convocatoria SET jornada='"+aspirante.getJornada()+"' WHERE cedula='" + documento + "';";
-        sql8 = "UPDATE convocatoria SET fecha_nac='"+aspirante.getFecha_nac()+"' WHERE cedula='" + documento + "';";
-        sql9 = "UPDATE convocatoria SET cedula='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
+	sql1="UPDATE Aspirante SET nombre='"+aspirante.getName()+"' WHERE cedula='" + documento + "';";
+        sql2 = "UPDATE Aspirante SET apellido ='"+aspirante.getLastname()+"' WHERE cedula='" + documento + "';";
+        sql3 = "UPDATE Aspirante SET municipio ='"+aspirante.getCity()+"'WHERE cedula='" + documento + "';";
+        sql4 = "UPDATE Aspirante SET puntuacion ='"+aspirante.getPuntaje()+"' WHERE cedula='" + documento + "';";
+        sql5 = "UPDATE Aspirante SET codigo ='"+aspirante.getConvocatoria().getCode()+"' WHERE cedula='" + documento + "';";
+        sql6 = "UPDATE Aspirante SET genero ='"+aspirante.getGenero()+"' WHERE cedula='" + documento + "';";
+        sql7 = "UPDATE Aspirante SET jornada ='"+aspirante.getJornada()+"' WHERE cedula='" + documento + "';";
+        sql8 = "UPDATE Aspirante SET fecha_nac ='"+aspirante.getFecha_nac()+"' WHERE cedula='" + documento + "';";
+        sql9 = "UPDATE Aspirante SET cedula ='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
+        
+        
         
         
         try{
                 Statement sentencia = conn.createStatement();
 
                 sentencia.executeUpdate(sql1);
+                System.err.println("first");
                 sentencia.executeUpdate(sql2);
                 sentencia.executeUpdate(sql3);
                 sentencia.executeUpdate(sql4);
@@ -138,14 +147,15 @@ public class DAOAspirante
                 sentencia.executeUpdate(sql7);
                 sentencia.executeUpdate(sql8);
                 sentencia.executeUpdate(sql9);
-
-
+                return 1;
             }
         catch(SQLException e){
             System.out.println(e); 
+            return -2;
             }
         catch(Exception e){ 
             System.out.println(e);
+            return -1;
         }
     }
     /**

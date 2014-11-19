@@ -111,6 +111,49 @@ public class DAOFormacionTic
         return null;
     }
     
+  
+    /**
+     * Metodo que permite actualizar una formacion de acuerdo a la cedula del aspirante 
+     * @param cedula : cedula del aspirante a actualizar la formacion
+     * @param titulo : dado que un aspirante puede tener varias formacionesTic , se especifica cual titulo se va a actualizar.
+     * @param form : datos de la formacionTic a actualizar 
+     * @return 
+     */
+    public int updateForm(String cedula,String titulo, FormacionTic form){
+        String sql1,sql2,sql3,sql4,sql5;
+        String institucion = form.getInstitucion();
+        String tit = form.getTitulo();
+        int horas = form.getHoras();
+        //String level = form.getLevel();
+        String path = form.getUrl_soporte();
+        boolean estado = form.getEstado();
+	sql1="UPDATE FormacionTic SET Institucion ='"+institucion+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo +"';";
+        sql2 = "UPDATE FormacionTic SET horas ='"+horas+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
+        sql3 = "UPDATE FormacionTic SET pathArchivo ='"+path+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
+        sql4 = "UPDATE FormacionTic SET estado='"+estado+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
+        sql5 = "UPDATE FormacionTic SET Titulo='"+titulo+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
+        try{
+            Statement sentencia = conn.createStatement();
+
+            sentencia.executeUpdate(sql1);
+            sentencia.executeUpdate(sql2);
+            sentencia.executeUpdate(sql3);
+            sentencia.executeUpdate(sql4);
+            sentencia.executeUpdate(sql5);
+       
+            return 1;
+        }
+        catch(SQLException e){
+            System.out.println(e); 
+            return -2;
+        }
+        catch(Exception e){ 
+            System.out.println(e);
+        }
+        return -1;
+    }
+  
+    
   public int eliminarForm(String cedula, String titulo){
         String sql_save;
 	sql_save="UPDATE FormacionTic SET estado=false WHERE cedula='" + cedula + "' AND titulo = '"+titulo+"'";
