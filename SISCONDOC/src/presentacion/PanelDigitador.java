@@ -145,7 +145,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextApellidos = new javax.swing.JTextField();
         jTextCedula = new javax.swing.JTextField();
         jComboBoxGenero = new javax.swing.JComboBox();
-        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
+        jDateChooserFecha = new org.netbeans.modules.form.InvalidComponent();
         jComboBoxJornada = new javax.swing.JComboBox();
         jComboBoxMunicipio = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
@@ -604,7 +604,6 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jTextDocTic.setEnabled(false);
 
-        btAbrirLic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirLic.setText("Adjuntar Archivo Soporte");
         btAbrirLic.setEnabled(false);
         btAbrirLic.addActionListener(new java.awt.event.ActionListener() {
@@ -613,7 +612,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirEspe.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEspe.setText("Adjuntar Archivo Soporte");
         btAbrirEspe.setEnabled(false);
         btAbrirEspe.addActionListener(new java.awt.event.ActionListener() {
@@ -622,7 +620,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirEspeTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEspeTic.setText("Adjuntar Archivo Soporte");
         btAbrirEspeTic.setEnabled(false);
         btAbrirEspeTic.addActionListener(new java.awt.event.ActionListener() {
@@ -631,7 +628,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirMaes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirMaes.setText("Adjuntar Archivo Soporte");
         btAbrirMaes.setEnabled(false);
         btAbrirMaes.addActionListener(new java.awt.event.ActionListener() {
@@ -640,7 +636,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirMaesTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirMaesTic.setText("Adjuntar Archivo Soporte");
         btAbrirMaesTic.setEnabled(false);
         btAbrirMaesTic.addActionListener(new java.awt.event.ActionListener() {
@@ -649,7 +644,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirDoc.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirDoc.setText("Adjuntar Archivo Soporte");
         btAbrirDoc.setEnabled(false);
         btAbrirDoc.addActionListener(new java.awt.event.ActionListener() {
@@ -658,7 +652,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirDocTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirDocTic.setText("Adjuntar Archivo Soporte");
         btAbrirDocTic.setEnabled(false);
         btAbrirDocTic.addActionListener(new java.awt.event.ActionListener() {
@@ -959,7 +952,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextCursoUrl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jTextCursoUrl.setInheritsPopupMenu(false);
 
-        btAbrirFormacionTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormacionTic.setText("Adjuntar Archivo Soporte");
         btAbrirFormacionTic.setEnabled(false);
         btAbrirFormacionTic.addActionListener(new java.awt.event.ActionListener() {
@@ -1002,7 +994,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAgregarForTicActual.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
         btAgregarForTicActual.setText("Agregar Formacion Tic Actual");
         btAgregarForTicActual.setEnabled(false);
         btAgregarForTicActual.addActionListener(new java.awt.event.ActionListener() {
@@ -1649,7 +1640,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextIdiomaUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextIdiomaUrl.setEnabled(false);
 
-        btSubirIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btSubirIdioma.setText("Adjuntar Soporte");
         btSubirIdioma.setEnabled(false);
         btSubirIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1667,7 +1657,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAgregarActualIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
         btAgregarActualIdioma.setText("Agregar Idioma");
         btAgregarActualIdioma.setEnabled(false);
         btAgregarActualIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1710,7 +1699,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btSubirIdioma)
-                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)))
+                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.PREFERRED_SIZE, 234, Short.MAX_VALUE)))
                             .addComponent(jLabel35)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1847,7 +1836,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextformadoresUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextformadoresUrl.setEnabled(false);
 
-        btAbrirEstudiantes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEstudiantes.setText("Adjuntar Soporte");
         btAbrirEstudiantes.setEnabled(false);
         btAbrirEstudiantes.addActionListener(new java.awt.event.ActionListener() {
@@ -1856,7 +1844,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirProfes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirProfes.setText("Adjuntar Soporte");
         btAbrirProfes.setEnabled(false);
         btAbrirProfes.addActionListener(new java.awt.event.ActionListener() {
@@ -1865,7 +1852,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirFormadores.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormadores.setText("Adjuntar Soporte");
         btAbrirFormadores.setEnabled(false);
         btAbrirFormadores.addActionListener(new java.awt.event.ActionListener() {
@@ -1924,7 +1910,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
                     .addComponent(jComboBoxFormEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(jTextEstudiantesUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btAbrirEstudiantes))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1933,11 +1919,12 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jTextProfesoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAbrirProfes))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel45)
-                    .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAbrirFormadores)
-                    .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextformadoresUrl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel45)
+                        .addComponent(jComboBoxFormForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAbrirFormadores)))
                 .addGap(235, 235, 235))
         );
 
@@ -3203,7 +3190,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBoxHorasCurso;
     private javax.swing.JComboBox jComboBoxJornada;
     private javax.swing.JComboBox jComboBoxMunicipio;
-    private com.toedter.calendar.JDateChooser jDateChooserFecha;
+    private org.netbeans.modules.form.InvalidComponent jDateChooserFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

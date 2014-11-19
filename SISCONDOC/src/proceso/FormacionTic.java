@@ -28,7 +28,7 @@ public class FormacionTic {
         url_soporte = url;
         this.estado = estado;           
     }
-    
+//    
     
     /**
      * @return the institucion

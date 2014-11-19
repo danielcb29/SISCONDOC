@@ -31,11 +31,13 @@ public class Puntuacion {
         double score = 0;
         Aspirante appliantPointed = appliant;
         Formacion[] form = appliant.getFormaciones();
+        FormacionTic[] formTic = appliant.getFormacionesTic();
         FormadorTIC[] exp = appliant.getFormadores();
         CEspecifico cEsp= appliant.getConocimientos();
         Idioma [] idiom = appliant.getIdiomas();
         
         int formPoint = qualifyFormacion(form);
+        int formTicPoint = qualifyFormacionTic(formTic);
         int expPoint = qualifyExperience(exp);
         double cEspPoint= qualifyCEspecifico(cEsp);
         double idiomPoint = qualifyIdiomas(idiom);
@@ -86,6 +88,39 @@ public class Puntuacion {
         return point;
         
     }
+    
+    
+    private int qualifyFormacionTic(FormacionTic[] fTic){
+        int len = fTic.length;
+        System.out.println("TamaNo de Formacion Tic:"+len);
+        int point=0;
+        int finalPoint=0;
+        for(int i=0; i<len; i++){
+            int horas=fTic[i].getHoras();
+            switch(horas){
+                case 30:
+                    point+=4;
+                    break;
+                case 60:
+                    point+=6;
+                    break;
+                case 120:
+                    point+=8;
+                    break;
+                case 150:
+                    point+=10;
+                    break;
+            }
+        }
+        if(point>10){
+            finalPoint=10;
+        }else{
+            finalPoint=point;
+        }
+        System.out.println("Puntuacion FormTic total: "+point+"\nPuntuacion FormTic final: "+finalPoint);
+        return finalPoint;
+    }
+    
     /**
      * Metodo que permite calificar la experiencia de un aspirante , la experiencia significa las horas que ha ensenado cursos sobre TIC
      * @param exp : arreglo de FormadorTIC que contiene los parametros de su experiencia como formador de TIC
