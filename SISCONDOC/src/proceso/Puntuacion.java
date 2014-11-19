@@ -96,28 +96,27 @@ public class Puntuacion {
         int point=0;
         int finalPoint=0;
         for(int i=0; i<len; i++){
+            point=0;
             int horas=fTic[i].getHoras();
             switch(horas){
                 case 30:
-                    point+=4;
+                    point=4;
                     break;
                 case 60:
-                    point+=6;
+                    point=6;
                     break;
                 case 120:
-                    point+=8;
+                    point=8;
                     break;
                 case 150:
-                    point+=10;
+                    point=10;
                     break;
             }
+            if(point>finalPoint){
+                finalPoint=point;
+            }
         }
-        if(point>10){
-            finalPoint=10;
-        }else{
-            finalPoint=point;
-        }
-        System.out.println("Puntuacion FormTic total: "+point+"\nPuntuacion FormTic final: "+finalPoint);
+        System.out.println("Puntuacion FormTic final: "+finalPoint);
         return finalPoint;
     }
     
