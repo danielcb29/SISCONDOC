@@ -2196,7 +2196,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         */
         
         
-        CEspecifico conocimientos = new CEspecifico(ofimaticas, web2, edicaDig, multimedia, elearning, proyeTic, EvaluaCompe, "bueno", true);
+        CEspecifico conocimientos = new CEspecifico(ofimaticas, web2, edicaDig, multimedia, elearning, proyeTic, EvaluaCompe, libroDig, true);
         
                 
     /**************************************************************/

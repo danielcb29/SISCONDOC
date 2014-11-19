@@ -42,7 +42,7 @@ public class Puntuacion {
         double cEspPoint= qualifyCEspecifico(cEsp);
         double idiomPoint = qualifyIdiomas(idiom);
         
-        score = formPoint + expPoint+ cEspPoint+idiomPoint;
+        score = formPoint + expPoint+ cEspPoint+idiomPoint+formTicPoint;
         appliantPointed.setPuntaje(score);
         return appliantPointed;
         

@@ -50,7 +50,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -111,7 +110,7 @@
                   <Component id="jButtonLogout" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="jTabbedDigitador" max="32767" attributes="0"/>
+              <Component id="jTabbedDigitador" pref="471" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -166,7 +165,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="845" max="32767" attributes="0"/>
+                      <EmptySpace pref="956" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -282,9 +281,6 @@
             <Component class="javax.swing.JTextField" name="jTextCedula">
               <Properties>
                 <Property name="autoscrolls" type="boolean" value="false"/>
-                <Property name="focusTraversalPolicy" type="java.awt.FocusTraversalPolicy" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextCedulaActionPerformed"/>
@@ -436,8 +432,8 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="357" max="-2" attributes="0"/>
-                                              <Component id="jLabelLicUrl" max="32767" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="jLabelLicUrl" pref="20" max="32767" attributes="0"/>
+                                              <EmptySpace pref="32" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Component id="jTextLicUni" max="32767" attributes="0"/>
@@ -916,9 +912,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirLic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -928,9 +921,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirEspe">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -940,9 +930,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirEspeTic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -952,9 +939,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirMaes">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -964,9 +948,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirMaesTic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -976,9 +957,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirDoc">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -988,9 +966,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirDocTic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -1180,10 +1155,8 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="btMasCursos" pref="200" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="btAgregarForTicActual" pref="200" max="32767" attributes="0"/>
-                                              <Component id="jTextCursoUrl" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="btAgregarForTicActual" pref="200" max="32767" attributes="0"/>
+                                          <Component id="jTextCursoUrl" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1201,7 +1174,7 @@
                               <Component id="jRadioButtonFor_Tic2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="492" max="32767" attributes="0"/>
+                      <EmptySpace pref="595" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1242,7 +1215,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btMasCursos" min="-2" pref="23" max="-2" attributes="0"/>
-                      <EmptySpace pref="134" max="32767" attributes="0"/>
+                      <EmptySpace pref="140" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1307,9 +1280,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirFormacionTic">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Archivo Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -1375,9 +1345,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAgregarForTicActual">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\Accept-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Formacion Tic Actual"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -1582,7 +1549,7 @@
                               <Component id="jRadioButton8_3" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                      <EmptySpace pref="117" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2053,7 +2020,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btSubirIdioma" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelidiomamsj" pref="203" max="32767" attributes="0"/>
+                                          <Component id="jLabelidiomamsj" pref="244" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
@@ -2094,7 +2061,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="562" max="32767" attributes="0"/>
+                              <EmptySpace pref="604" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -2151,7 +2118,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btAgregarIdioma" min="-2" pref="24" max="-2" attributes="0"/>
-                      <EmptySpace pref="79" max="32767" attributes="0"/>
+                      <EmptySpace pref="100" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2193,7 +2160,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2211,7 +2178,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2229,7 +2196,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2272,7 +2239,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2290,7 +2257,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2308,7 +2275,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2327,7 +2294,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2345,7 +2312,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2363,7 +2330,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2424,9 +2391,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btSubirIdioma">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2448,9 +2412,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAgregarActualIdioma">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\Accept-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Idioma"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2525,7 +2486,7 @@
                               <Component id="jLabel48" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="277" max="32767" attributes="0"/>
+                      <EmptySpace pref="353" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2708,9 +2669,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirEstudiantes">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2720,9 +2678,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirProfes">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2732,9 +2687,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btAbrirFormadores">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\USUARIO\Documents\GitHub\SISCONDOC\src\presentacion\soporte-icon.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Adjuntar Soporte"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2765,7 +2717,7 @@
                               <Component id="jButtonCancelar" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="765" max="32767" attributes="0"/>
+                      <EmptySpace pref="876" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2778,7 +2730,7 @@
                       <Component id="jButtonRegistrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="243" max="32767" attributes="0"/>
+                      <EmptySpace pref="265" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
