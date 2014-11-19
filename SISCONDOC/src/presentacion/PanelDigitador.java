@@ -2344,15 +2344,17 @@ public class PanelDigitador extends javax.swing.JFrame {
                         Formacion [] forms = new Formacion [formaciones.size()];
                         Idioma [] arregloIdiomas = new Idioma[idiomas.size()];
                       objAspirantController=new ControlAspirante(Conexion);
-                      objAspirantController.createAspirante(cedula, 
+                      /**objAspirantController.createAspirante(cedula, 
                                                  nombres, apellidos, 
                                                 municipio,0,
                                                 objConvocatoria,
                                                 genero,
                                                 jornada,
                                                 fecha_nac,formaciones.toArray(forms),formacionesTic,formador.toArray(formadorTic),
-                                                conocimientos,idiomas.toArray(arregloIdiomas));
-                        System.out.println("CORRECTO!!!");
+                                                conocimientos,idiomas.toArray(arregloIdiomas));**/
+                      Aspirante a = new Aspirante (cedula,nombres,apellidos,municipio,0,objConvocatoria,genero,jornada,fecha_nac,formaciones.toArray(forms),
+                      formacionesTic,formador.toArray(formadorTic),conocimientos,idiomas.toArray(arregloIdiomas));
+                        int result =objAspirantController.updateAspirante("1158", a);
                     }
                 else{
                    JOptionPane.showMessageDialog(null, "No has completado los datos necesarios, Hay vacios en:\n"+VaciosEn);
@@ -2516,6 +2518,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMaesTic2ActionPerformed
 
     private void jRadioButtonDoc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonDoc2ActionPerformed
+        
         jTextDoc.setText("");
         jTextDocUrl.setText("No hay soporte");
         jTextDocUni.setText("");
