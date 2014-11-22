@@ -29,7 +29,7 @@ public class DAOReporte {
      * @return matriz con los datos de los 5 mejores seleccionados
      */
     public String[][] cincoMejores(int codigoConvocatoria){
-        String sql = "SELECT nombre,apellido,cedula,municipio FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND puntuacion >= 50 ORDER BY puntuacion LIMIT 5";
+        String sql = "SELECT nombre,apellido,cedula,municipio FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND puntuacion >= 50 ORDER BY puntuacion DESC LIMIT 5";
         String[][] resultado = new String[5][4];
         try {
             System.out.println("consultando en la bd");
