@@ -5,6 +5,7 @@
 package presentacion;
 
 import almacenamiento.controlador.ControlReporte;
+import java.awt.Dimension;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -274,7 +275,10 @@ public class PanelCoordinador extends javax.swing.JFrame {
                 String[] nombresColumnas = {"NOMBRES","APELLIDOS","CEDULA","MUNICIPIO"};
                 JTable ventana = new JTable(resultado,nombresColumnas);
                 ventana.setEnabled(false);
+                Dimension d = ventana.getPreferredSize();
+                
                 JScrollPane panel = new JScrollPane(ventana);
+                panel.setPreferredSize(new Dimension(d.width+9,ventana.getRowHeight()*7+1));
                 JOptionPane.showMessageDialog(this, panel,"Cinco Mejores Puntajes",JOptionPane.INFORMATION_MESSAGE);
         }
         
@@ -289,7 +293,10 @@ public class PanelCoordinador extends javax.swing.JFrame {
                 String[] nombresColumnas = {"JORNADA","TOTAL DE INSCRITOS"};
                 JTable ventana = new JTable(resultado,nombresColumnas);
                 ventana.setEnabled(false);
+                Dimension d = ventana.getPreferredSize();
+                
                 JScrollPane panel = new JScrollPane(ventana);
+                panel.setPreferredSize(new Dimension(d.width+50,ventana.getRowHeight()*5+1));
                 JOptionPane.showMessageDialog(this, panel,"Total de Inscritos por Jornada",JOptionPane.INFORMATION_MESSAGE);
         }
         
