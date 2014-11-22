@@ -144,19 +144,15 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jTextNombres" min="-2" pref="190" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jLabel5" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel8" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -166,10 +162,11 @@
                                   <Component id="jTextCedula" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextApellidos" max="32767" attributes="0"/>
                                   <Component id="jComboBoxMunicipio" pref="190" max="32767" attributes="0"/>
+                                  <Component id="jTextNombres" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="913" max="32767" attributes="0"/>
+                      <EmptySpace pref="845" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,11 +174,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextNombres" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextNombres" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextApellidos" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -273,20 +270,21 @@
                 <Property name="text" type="java.lang.String" value="Municipio:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextNombres">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextNombresActionPerformed"/>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNombresKeyTyped"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JTextField" name="jTextApellidos">
+              <Properties>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextApellidosActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextApellidosKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCedula">
+              <Properties>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+              </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextCedulaActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextCedulaKeyTyped"/>
               </Events>
             </Component>
@@ -301,6 +299,11 @@
               </Properties>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFecha">
+              <Properties>
+                <Property name="doubleBuffered" type="boolean" value="false"/>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxJornada">
               <Properties>
@@ -365,6 +368,14 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="jTextNombres">
+              <Properties>
+                <Property name="autoscrolls" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNombresKeyTyped"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -393,7 +404,7 @@
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jRadioButtonEspe1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -406,13 +417,13 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLic2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextLic" min="-2" pref="211" max="-2" attributes="0"/>
+                                      <Component id="jTextLic" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextEspeUni" pref="193" max="32767" attributes="0"/>
+                                      <Component id="jTextEspeUni" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="jTextEspeUrl" min="-2" pref="200" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -422,7 +433,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="357" max="-2" attributes="0"/>
-                                              <Component id="jLabelLicUrl" pref="67" max="32767" attributes="0"/>
+                                              <Component id="jLabelLicUrl" max="32767" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
@@ -511,9 +522,9 @@
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel21" min="-2" pref="50" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="76" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                       <Component id="jLabel20" min="-2" pref="125" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="238" max="-2" attributes="0"/>
                   </Group>
@@ -541,9 +552,9 @@
                                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLic1" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRadioButtonLic2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextLic" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelLicUrl" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jTextLicUni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextLic" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jTextLicUrl" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                                   <Component id="btAbrirLic" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -870,14 +881,6 @@
                 <Property name="text" type="java.lang.String" value="TITULO"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextLic">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextLicActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JTextField" name="jTextEspe">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -1128,6 +1131,12 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="jTextLic">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -1167,18 +1176,16 @@
                                       <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btMasCursos" min="-2" pref="200" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="btAgregarForTicActual" min="-2" pref="200" max="-2" attributes="0"/>
-                                              <Component id="jTextCursoUrl" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="btMasCursos" pref="200" max="32767" attributes="0"/>
+                                          <Component id="btAgregarForTicActual" pref="200" max="32767" attributes="0"/>
+                                          <Component id="jTextCursoUrl" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btAbrirFormacionTic" min="-2" max="-2" attributes="0"/>
-                                  <Component id="labelForTicmsj" min="-2" pref="279" max="-2" attributes="0"/>
+                                  <Component id="labelForTicmsj" min="-2" pref="313" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -1189,7 +1196,7 @@
                               <Component id="jRadioButtonFor_Tic2" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="594" max="32767" attributes="0"/>
+                      <EmptySpace pref="492" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1476,7 +1483,7 @@
                               <Component id="jLabel34" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="505" max="32767" attributes="0"/>
+                      <EmptySpace pref="437" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2041,7 +2048,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="btSubirIdioma" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelidiomamsj" pref="234" max="32767" attributes="0"/>
+                                          <Component id="jLabelidiomamsj" pref="203" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabel35" min="-2" max="-2" attributes="0"/>
@@ -2082,7 +2089,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="599" max="32767" attributes="0"/>
+                              <EmptySpace pref="562" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -2513,7 +2520,7 @@
                               <Component id="jLabel48" min="-2" pref="31" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="345" max="32767" attributes="0"/>
+                      <EmptySpace pref="277" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2541,11 +2548,13 @@
                           <Component id="btAbrirProfes" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxFormForm" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btAbrirFormadores" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTextformadoresUrl" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBoxFormForm" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btAbrirFormadores" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
                   </Group>
@@ -2751,7 +2760,7 @@
                               <Component id="jButtonCancelar" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="833" max="32767" attributes="0"/>
+                      <EmptySpace pref="765" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
