@@ -251,6 +251,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMejorPuntoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -271,6 +274,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btJornadaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btSexo">
       <Properties>

@@ -41,8 +41,18 @@ public class Puntuacion {
         int formTicPoint = qualifyFormacionTic(formTic);
         double cEspPoint= qualifyCEspecifico(cEsp);
         double idiomPoint = qualifyIdiomas(idiom);
-        
+                 
         score = formPoint + expPoint+ cEspPoint+idiomPoint+formTicPoint;
+        //Puntos extra para los aspirantes de dichos municipios 
+        if(appliant.getCity().equalsIgnoreCase("Zarzal") || appliant.getCity().equalsIgnoreCase("Yumbo") || appliant.getCity().equalsIgnoreCase("Toro") || appliant.getCity().equalsIgnoreCase("Palmira")){
+            System.out.println("Entramos a dar puntos de mas");
+            if (score <= 90){
+                score += 10;
+            }else{
+                score = 100;
+            }
+            
+        }
         appliantPointed.setPuntaje(score);
         return appliantPointed;
         
@@ -79,7 +89,7 @@ public class Puntuacion {
                     point = 28;
                     break;
                 case "DoctoradoTIC":
-                    point = 30;
+                    finalPoint = 30;
                     break loop;
                     
             }

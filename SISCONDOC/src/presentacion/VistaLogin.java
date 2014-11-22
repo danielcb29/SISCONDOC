@@ -277,7 +277,7 @@ public class VistaLogin extends javax.swing.JFrame {
 
                          //CASO ELIMINADA   
                         }else{
-                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
                         
                     }else{
@@ -286,9 +286,16 @@ public class VistaLogin extends javax.swing.JFrame {
                             Convocatoria conv = user.getConvocatoria();
                             //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
                             if(conv.getState()){
-                                coorPanel = new PanelCoordinador(user.getUserName(),conv.getCode(),controlerU.getConn());
-                                coorPanel.setVisible(true);
-                                this.dispose();
+                                Date finConv = conv.getDateEnd();
+                                Date now = new Date();
+                                //VALIDACION DE CONVOCATORIA CERRADA
+                                 if(finConv.after(now)){
+                                    JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado no ha cerrado aun\nEspere a la fecha de cierre para observar reportes y validar aspirantes", "Convocatoria Activa", JOptionPane.ERROR_MESSAGE);
+                                 }else{
+                                    coorPanel = new PanelCoordinador(user.getUserName(),conv.getCode(),controlerU.getConn());
+                                    coorPanel.setVisible(true);
+                                    this.dispose();
+                                 }
                             }else{
                                 JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                             }

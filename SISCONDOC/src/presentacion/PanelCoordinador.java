@@ -6,6 +6,9 @@ package presentacion;
 
 import almacenamiento.controlador.ControlReporte;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -102,6 +105,11 @@ public class PanelCoordinador extends javax.swing.JFrame {
         jLabel8.setText("Cinco mejores puntajes: ");
 
         btMejorPunto.setText("Ir");
+        btMejorPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btMejorPuntoActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Porcentaje de inscritos por ciudad:");
 
@@ -110,6 +118,11 @@ public class PanelCoordinador extends javax.swing.JFrame {
         jLabel11.setText("Total de maestros por jornada:");
 
         btJornada.setText("Ir");
+        btJornada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btJornadaActionPerformed(evt);
+            }
+        });
 
         btSexo.setText("Ir");
 
@@ -251,6 +264,36 @@ public class PanelCoordinador extends javax.swing.JFrame {
         controlador.cerrarConexionBD();
         System.exit(0);
     }//GEN-LAST:event_btCerrarActionPerformed
+
+    private void btMejorPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMejorPuntoActionPerformed
+        //Metodo para obtener los 5 mejores puntajes
+        String[][] resultado = controlador.cincoMejores();
+        if(resultado==null){
+            JOptionPane.showMessageDialog(this, "No hay aspirantes inscritos en esta convocatoria","Error!",JOptionPane.ERROR_MESSAGE);
+        }else{
+                String[] nombresColumnas = {"NOMBRES","APELLIDOS","CEDULA","MUNICIPIO"};
+                JTable ventana = new JTable(resultado,nombresColumnas);
+                ventana.setEnabled(false);
+                JScrollPane panel = new JScrollPane(ventana);
+                JOptionPane.showMessageDialog(this, panel,"Cinco Mejores Puntajes",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btMejorPuntoActionPerformed
+
+    private void btJornadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJornadaActionPerformed
+        //Metodo para consultar el total de inscritos por jornada
+        String[][] resultado = controlador.totalPorJornada();
+        if(resultado==null){
+            JOptionPane.showMessageDialog(this, "No hay aspirantes inscritos en esta convocatoria","Error!",JOptionPane.ERROR_MESSAGE);
+        }else{
+                String[] nombresColumnas = {"JORNADA","TOTAL DE INSCRITOS"};
+                JTable ventana = new JTable(resultado,nombresColumnas);
+                ventana.setEnabled(false);
+                JScrollPane panel = new JScrollPane(ventana);
+                JOptionPane.showMessageDialog(this, panel,"Total de Inscritos por Jornada",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btJornadaActionPerformed
 
     /**
      * @param args the command line arguments
