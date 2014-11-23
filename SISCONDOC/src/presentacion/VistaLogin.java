@@ -33,6 +33,7 @@ public class VistaLogin extends javax.swing.JFrame {
     private PanelDigitador digPanel;
     private String userName;
     private String password;
+    private PanelCoordinador coorPanel;
     public VistaLogin() {
         initComponents();
         controlerU = new UserController();
@@ -276,13 +277,28 @@ public class VistaLogin extends javax.swing.JFrame {
 
                          //CASO ELIMINADA   
                         }else{
-                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
                         }
                         
                     }else{
                         if(profile.equals("Coordinador")){
-                            System.out.println("No se ha implementado aun :)");
-                            System.exit(0);
+                            //Ingresa un coordindaor
+                            Convocatoria conv = user.getConvocatoria();
+                            //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
+                            if(conv.getState()){
+                                Date finConv = conv.getDateEnd();
+                                Date now = new Date();
+                                //VALIDACION DE CONVOCATORIA CERRADA
+                                 if(finConv.after(now)){
+                                    JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado no ha cerrado aun\nEspere a la fecha de cierre para observar reportes y validar aspirantes", "Convocatoria Activa", JOptionPane.ERROR_MESSAGE);
+                                 }else{
+                                    coorPanel = new PanelCoordinador(user.getUserName(),conv.getCode(),controlerU.getConn());
+                                    coorPanel.setVisible(true);
+                                    this.dispose();
+                                 }
+                            }else{
+                                JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            }
                         }else{
                             if(profile.equals("Administrador")){
                                 //Clase nelsini
@@ -292,9 +308,7 @@ public class VistaLogin extends javax.swing.JFrame {
                                 vAdmin = new VistaAdmin(userName,controlerU);
                                 vAdmin.setVisible(true);
                                 //PRUEBA BORRAR
-                                //Convocatoria conv = user.getConvocatoria();
-                                //digPanel = new PanelDigitador(userName,conv,controlerU);
-                                //digPanel.setVisible(true);
+                                
                             }
 
                             

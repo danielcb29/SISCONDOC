@@ -33,7 +33,7 @@ package proceso;
     
     
     public Aspirante () {} 
-    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,int puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
+    public Aspirante (String aspiranteDocument , String aspiranteName , String aspiranteLastname, String aspiranteCity ,double puntajeAspirante, Convocatoria call,String gen, String jor, String nacimiento, Formacion [] formacionesAspirantes, FormacionTic [] formacionesTicAspirantes,FormadorTIC [] formadoresTic,CEspecifico conocimientosAspirante, Idioma []  idiomasAspirante)
     {
         document = aspiranteDocument;
         name = aspiranteName;

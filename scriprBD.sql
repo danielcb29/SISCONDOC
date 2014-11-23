@@ -52,7 +52,7 @@ CREATE TABLE Aspirante(
 	nombre VARCHAR(30) NOT NULL,
 	apellido VARCHAR(30) NOT NULL,
 	municipio VARCHAR(30) NOT NULL,
-	puntuacion INT,
+	puntuacion REAL,
 	codigo INT NOT NULL,
 	genero VARCHAR(12) NOT NULL,
 	jornada VARCHAR(20) NOT NULL,
