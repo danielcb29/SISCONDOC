@@ -50,7 +50,6 @@
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -111,7 +110,7 @@
                   <Component id="jButtonLogout" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="jTabbedDigitador" max="32767" attributes="0"/>
+              <Component id="jTabbedDigitador" pref="471" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -157,12 +156,12 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="jComboBoxJornada" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jDateChooserFecha" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jComboBoxGenero" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextCedula" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextApellidos" max="32767" attributes="0"/>
                                   <Component id="jComboBoxMunicipio" pref="190" max="32767" attributes="0"/>
                                   <Component id="jTextNombres" max="32767" attributes="0"/>
-                                  <Component id="jDateChooserFecha" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -194,9 +193,9 @@
                           <Component id="jComboBoxGenero" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="jDateChooserFecha" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jDateChooserFecha" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -208,7 +207,7 @@
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="148" max="32767" attributes="0"/>
+                      <EmptySpace pref="114" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -298,6 +297,13 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFecha">
+              <Properties>
+                <Property name="doubleBuffered" type="boolean" value="false"/>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
+                <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
+            </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxJornada">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -368,8 +374,6 @@
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextNombresKeyTyped"/>
               </Events>
-            </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserFecha">
             </Component>
           </SubComponents>
         </Container>
@@ -2156,7 +2160,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2174,7 +2178,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2192,7 +2196,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2235,7 +2239,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2253,7 +2257,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2271,7 +2275,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2290,7 +2294,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Regular"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2308,7 +2312,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -2326,7 +2330,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Muy Bueno"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

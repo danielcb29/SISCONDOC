@@ -56,12 +56,16 @@ public class ControlAspirante
         aspirante = aspPunted;
         JOptionPane.showMessageDialog(null, "La puntuacion fue: "+aspPunted.getPuntaje());
         /*int result = daoAspirante.crateAspirante(aspirante);
+
+        int result = daoAspirante.crateAspirante(aspirante);
         int resultado2 = controlFormacionTic.insertarFormacion(formacionesTic,document);
         int resultado3 = controlFormacion.createForm(formaciones, document);
         int resultado4 = controlFormador.createFormador(formadores, document);
         int resultado5 = controlConocimientos.createCEspecifico(conocimientos, document);
         int resultado6 = controlIdioma.createForm(idiomas, document);*/
         int result=1;
+        int resultado6 = controlIdioma.createForm(idiomas, document);
+        //int result=1;
         return  result;
     }
     /**

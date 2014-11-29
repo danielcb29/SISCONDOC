@@ -20,6 +20,25 @@ public class ControlReporte {
         codigoConvo = codigoConvocatoria;
     }
     
+
+    /**
+     * Metodo que permite consultar los 5 mejores seleccionados
+     * @return Resultado
+     */
+    public String[][] cincoMejores(){
+        String[][] consulta = daoRepor.cincoMejores(codigoConvo);
+        if(consulta[0][0] == null){
+            return null;
+        }
+        return consulta;
+    }
+    public String[][] totalPorJornada(){
+        String[][] consulta = daoRepor.totalPorJornada(codigoConvo);
+        if(consulta[0][0] == null){
+            return null;
+        }
+        return consulta;
+    }
     /*
      * Cerrar conexion base de datos
      */
