@@ -147,10 +147,10 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextApellidos = new javax.swing.JTextField();
         jTextCedula = new javax.swing.JTextField();
         jComboBoxGenero = new javax.swing.JComboBox();
-        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jComboBoxJornada = new javax.swing.JComboBox();
         jComboBoxMunicipio = new javax.swing.JComboBox();
         jTextNombres = new javax.swing.JTextField();
+        jDateChooserFecha = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -353,7 +353,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         });
 
         jTextCedula.setAutoscrolls(false);
-        jTextCedula.setFocusTraversalPolicy(null);
         jTextCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCedulaActionPerformed(evt);
@@ -366,10 +365,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         });
 
         jComboBoxGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
-
-        jDateChooserFecha.setDoubleBuffered(false);
-        jDateChooserFecha.setRequestFocusEnabled(false);
-        jDateChooserFecha.setVerifyInputWhenFocusTarget(false);
 
         jComboBoxJornada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diurna", "Nocturna", "Ambas" }));
 
@@ -401,13 +396,13 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBoxJornada, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBoxGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextCedula, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextApellidos)
                             .addComponent(jComboBoxMunicipio, 0, 190, Short.MAX_VALUE)
-                            .addComponent(jTextNombres))))
-                .addContainerGap(845, Short.MAX_VALUE))
+                            .addComponent(jTextNombres)
+                            .addComponent(jDateChooserFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(956, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,9 +424,9 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jComboBoxGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxJornada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,7 +435,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jComboBoxMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Datos Personales", jPanel1);
@@ -606,7 +601,6 @@ public class PanelDigitador extends javax.swing.JFrame {
 
         jTextDocTic.setEnabled(false);
 
-        btAbrirLic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirLic.setText("Adjuntar Archivo Soporte");
         btAbrirLic.setEnabled(false);
         btAbrirLic.addActionListener(new java.awt.event.ActionListener() {
@@ -615,7 +609,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirEspe.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEspe.setText("Adjuntar Archivo Soporte");
         btAbrirEspe.setEnabled(false);
         btAbrirEspe.addActionListener(new java.awt.event.ActionListener() {
@@ -624,7 +617,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirEspeTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEspeTic.setText("Adjuntar Archivo Soporte");
         btAbrirEspeTic.setEnabled(false);
         btAbrirEspeTic.addActionListener(new java.awt.event.ActionListener() {
@@ -633,7 +625,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirMaes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirMaes.setText("Adjuntar Archivo Soporte");
         btAbrirMaes.setEnabled(false);
         btAbrirMaes.addActionListener(new java.awt.event.ActionListener() {
@@ -642,7 +633,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirMaesTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirMaesTic.setText("Adjuntar Archivo Soporte");
         btAbrirMaesTic.setEnabled(false);
         btAbrirMaesTic.addActionListener(new java.awt.event.ActionListener() {
@@ -651,7 +641,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirDoc.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirDoc.setText("Adjuntar Archivo Soporte");
         btAbrirDoc.setEnabled(false);
         btAbrirDoc.addActionListener(new java.awt.event.ActionListener() {
@@ -660,7 +649,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirDocTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirDocTic.setText("Adjuntar Archivo Soporte");
         btAbrirDocTic.setEnabled(false);
         btAbrirDocTic.addActionListener(new java.awt.event.ActionListener() {
@@ -773,8 +761,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(357, 357, 357)
-                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jLabelLicUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jTextLicUni)
                                         .addGap(18, 18, 18)
@@ -964,7 +952,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextCursoUrl.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jTextCursoUrl.setInheritsPopupMenu(false);
 
-        btAbrirFormacionTic.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormacionTic.setText("Adjuntar Archivo Soporte");
         btAbrirFormacionTic.setEnabled(false);
         btAbrirFormacionTic.addActionListener(new java.awt.event.ActionListener() {
@@ -1007,7 +994,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAgregarForTicActual.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
         btAgregarForTicActual.setText("Agregar Formacion Tic Actual");
         btAgregarForTicActual.setEnabled(false);
         btAgregarForTicActual.addActionListener(new java.awt.event.ActionListener() {
@@ -1045,9 +1031,8 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btMasCursos, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btAgregarForTicActual, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                        .addComponent(jTextCursoUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(btAgregarForTicActual, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextCursoUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btAbrirFormacionTic)
@@ -1058,7 +1043,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButtonFor_Tic1)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonFor_Tic2)))
-                .addContainerGap(492, Short.MAX_VALUE))
+                .addContainerGap(595, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1091,7 +1076,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(labelForTicmsj))
                 .addGap(18, 18, 18)
                 .addComponent(btMasCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Formacion en TIC", jPanel3);
@@ -1492,7 +1477,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                         .addComponent(jRadioButton8_1)
                         .addComponent(jRadioButton8_2)
                         .addComponent(jRadioButton8_3)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Conocimientos Especificos", jPanel4);
@@ -1654,7 +1639,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextIdiomaUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextIdiomaUrl.setEnabled(false);
 
-        btSubirIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btSubirIdioma.setText("Adjuntar Soporte");
         btSubirIdioma.setEnabled(false);
         btSubirIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1672,7 +1656,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAgregarActualIdioma.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\Accept-icon.png")); // NOI18N
         btAgregarActualIdioma.setText("Agregar Idioma");
         btAgregarActualIdioma.setEnabled(false);
         btAgregarActualIdioma.addActionListener(new java.awt.event.ActionListener() {
@@ -1715,7 +1698,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btSubirIdioma)
-                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                                    .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)))
                             .addComponent(jLabel35)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1745,7 +1728,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                                         .addComponent(jRadioButtonHabla2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jRadioButtonHabla3)))))
-                        .addContainerGap(562, Short.MAX_VALUE))))
+                        .addContainerGap(604, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1790,7 +1773,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(jLabelidiomamsj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btAgregarIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("Idiomas", jPanel5);
@@ -1852,7 +1835,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextformadoresUrl.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTextformadoresUrl.setEnabled(false);
 
-        btAbrirEstudiantes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirEstudiantes.setText("Adjuntar Soporte");
         btAbrirEstudiantes.setEnabled(false);
         btAbrirEstudiantes.addActionListener(new java.awt.event.ActionListener() {
@@ -1861,7 +1843,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirProfes.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirProfes.setText("Adjuntar Soporte");
         btAbrirProfes.setEnabled(false);
         btAbrirProfes.addActionListener(new java.awt.event.ActionListener() {
@@ -1870,7 +1851,6 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
-        btAbrirFormadores.setIcon(new javax.swing.ImageIcon("C:\\Users\\USUARIO\\Documents\\GitHub\\SISCONDOC\\src\\presentacion\\soporte-icon.png")); // NOI18N
         btAbrirFormadores.setText("Adjuntar Soporte");
         btAbrirFormadores.setEnabled(false);
         btAbrirFormadores.addActionListener(new java.awt.event.ActionListener() {
@@ -1915,7 +1895,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1983,7 +1963,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(765, Short.MAX_VALUE))
+                .addContainerGap(876, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1994,7 +1974,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addComponent(jButtonRegistrar)
                 .addGap(30, 30, 30)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("REGISTRAR", jPanel7);
@@ -2198,7 +2178,6 @@ public class PanelDigitador extends javax.swing.JFrame {
         
         CEspecifico conocimientos = new CEspecifico(ofimaticas, web2, edicaDig, multimedia, elearning, proyeTic, EvaluaCompe, libroDig, true);
         
-        
                 
     /**************************************************************/
         /*Obtenemos los datos de IDIOMAS*/
@@ -2273,7 +2252,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(licuni)==1)
                 {
                 nohayvaciosForLic=true;
-                Formacion form = new Formacion(licuni, lictit, "licensiado",licurl);
+                Formacion form = new Formacion(licuni, lictit, "Licenciado",licurl);
                 formaciones.add(form);
             }
             else{
@@ -2285,7 +2264,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(espeuni)==1)
                 {
                 nohayvaciosForEspe=true;
-                Formacion form = new Formacion(espeuni, espetit, "especializacion",espeurl);
+                Formacion form = new Formacion(espeuni, espetit, "Especializacion",espeurl);
                 formaciones.add(form);
             }
             else{
@@ -2297,7 +2276,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(espeticuni)==1)
                 {
                 nohayvaciosForEspeTic=true;
-                Formacion form = new Formacion(espeticuni, espetictit, "especializacion TIC",espeticurl);
+                Formacion form = new Formacion(espeticuni, espetictit, "EspecializacionTIC",espeticurl);
                 formaciones.add(form);
             }
             else{
@@ -2309,7 +2288,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(maesuni)==1)
                 {
                 nohayvaciosForMaes=true;
-                Formacion form = new Formacion(maesuni, maestit, "maestria",maesurl);
+                Formacion form = new Formacion(maesuni, maestit, "Maestria",maesurl);
                 formaciones.add(form);
             }
             else{
@@ -2321,7 +2300,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(maesticuni)==1)
                 {
                 nohayvaciosForMaesTic=true;
-                Formacion form = new Formacion(maesticuni, maestictit, "maestria TIC",maesticurl);
+                Formacion form = new Formacion(maesticuni, maestictit, "MaestriaTIC",maesticurl);
                 formaciones.add(form);
             }
             else{
@@ -2333,7 +2312,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(docuni)==1)
                 {
                 nohayvaciosForDoc=true;
-                Formacion form = new Formacion(docuni, doctit, "doctorado",docurl);
+                Formacion form = new Formacion(docuni, doctit, "Doctorado",docurl);
                 formaciones.add(form);
             }
             else{
@@ -2345,7 +2324,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                objValidador.ValidaVacios(docticuni)==1)
                 {
                 nohayvaciosForDocTic=true;
-                Formacion form = new Formacion(docticuni, doctictit, "doctorado",docticurl);
+                Formacion form = new Formacion(docticuni, doctictit, "DoctoradoTIC",docticurl);
                 formaciones.add(form);
             }
             else{
@@ -2398,7 +2377,7 @@ public class PanelDigitador extends javax.swing.JFrame {
                             }
                             if (ExpProfesores != 0)
                             {
-                                FormadorTIC form = new FormadorTIC ("Formadores", horasExpFormadores, ExpProfesoresUrl);
+                                FormadorTIC form = new FormadorTIC ("Formadores", horasExpFormadores, ExpFormadoresUrl);
                                 formador.add(form);
                             }
                         

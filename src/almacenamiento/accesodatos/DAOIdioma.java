@@ -113,19 +113,27 @@ public class DAOIdioma {
         String path = form.getPatharchivo();
         Boolean state = form.getState();
         
-        sql1="UPDATE Idioma SET experiencia="+nivelLee+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
-        sql2="UPDATE Idioma SET experiencia="+nivelEscribe+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
-        sql3="UPDATE Idioma SET experiencia="+nivelHabla+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
-        sql4="UPDATE Idioma SET experiencia="+path+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
-        sql5="UPDATE Idioma SET experiencia="+state+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql1="UPDATE Idioma SET nivelLee= '"+nivelLee+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql2="UPDATE Idioma SET nivelEscribe='"+nivelEscribe+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql3="UPDATE Idioma SET nivelHabla='"+nivelHabla+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql4="UPDATE Idioma SET pathArchivo='"+path+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql5="UPDATE Idioma SET estado='"+state+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        
+        System.err.println(sql1);
+        System.err.println(sql2);
         try{
             Statement sentencia = conn.createStatement();
-
+            System.err.println("try");
             sentencia.executeUpdate(sql1);
+            System.err.println("try1");
             sentencia.executeUpdate(sql2);
+            System.err.println("try2");
             sentencia.executeUpdate(sql3);
+            System.err.println("try3");
             sentencia.executeUpdate(sql4);
+            System.err.println("try4");
             sentencia.executeUpdate(sql5);
+            System.err.println("fin try5");
             
             return 1;
         }

@@ -19,7 +19,6 @@ public class BaseDatos {
       url = "jdbc:postgresql://localhost:5433/SISCONDOC";
       usuario="postgres";
       password="nelsonalejo";
-      
     }
     public Connection conectar(){
             //System.out.println("Entro metodo");
