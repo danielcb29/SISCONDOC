@@ -130,7 +130,7 @@ public class DAOFormacionTic
 	sql1="UPDATE FormacionTic SET Institucion ='"+institucion+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo +"';";
         sql2 = "UPDATE FormacionTic SET horas ='"+horas+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
         sql3 = "UPDATE FormacionTic SET pathArchivo ='"+path+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
-        sql4 = "UPDATE FormacionTic SET estado='"+estado+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
+        sql4 = "UPDATE FormacionTic SET estado= "+estado+" WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
         sql5 = "UPDATE FormacionTic SET Titulo='"+titulo+"' WHERE cedula='" + cedula + "' AND Titulo = '"+ titulo + "';";
         try{
             Statement sentencia = conn.createStatement();

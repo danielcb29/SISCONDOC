@@ -87,6 +87,7 @@ public class PanelDigitador extends javax.swing.JFrame {
     
     public PanelDigitador(String username,Convocatoria convoca, UserController conn){
         initComponents();
+        
         name=username;
         
         //this.nom_convocatoria=convoca.getName();
@@ -98,6 +99,7 @@ public class PanelDigitador extends javax.swing.JFrame {
         objValidador=new Validador();
         objConvocatoria=convoca;
         Conexion=conn.getConn();
+        objAspirantController=new ControlAspirante(Conexion);
     }
 
     /**
@@ -294,6 +296,8 @@ public class PanelDigitador extends javax.swing.JFrame {
         LabelConfirmacion = new javax.swing.JLabel();
         jButtonRegistrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        cedula_buscar = new javax.swing.JTextField();
         WelcomeLabel = new javax.swing.JLabel();
         LabelConvocatoria = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -1919,6 +1923,15 @@ public class PanelDigitador extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("CONSULTAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        cedula_buscar.setText("cedula del aspirante");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1929,8 +1942,12 @@ public class PanelDigitador extends javax.swing.JFrame {
                     .addComponent(LabelConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(832, Short.MAX_VALUE))
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(cedula_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(jButton1)))
+                .addContainerGap(731, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1941,7 +1958,11 @@ public class PanelDigitador extends javax.swing.JFrame {
                 .addComponent(jButtonRegistrar)
                 .addGap(30, 30, 30)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(cedula_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jTabbedDigitador.addTab("REGISTRAR", jPanel7);
@@ -2963,6 +2984,21 @@ public class PanelDigitador extends javax.swing.JFrame {
         jTextformadoresUrl.setToolTipText(mensaje);
         ExpFormadoresUrl=mensaje;
     }//GEN-LAST:event_btAbrirFormadoresActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String cedula = cedula_buscar.getText();
+        Aspirante aspirante = objAspirantController.readAspirante(cedula);
+        jTextNombres.setText(aspirante.getName());
+        jTextApellidos.setText(aspirante.getLastname());
+        jTextCedula.setText(aspirante.getDocument());
+        jComboBoxGenero.setSelectedItem(aspirante.getGenero());
+        jComboBoxMunicipio.setSelectedItem(aspirante.getCity());
+        jComboBoxJornada.setSelectedItem(aspirante.getJornada());
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /*METODO PARA OBTENER LA DIRECCION DEL ARCHIVO SOPORTE
     *Crea el directorio para el soporte del respectivo aspirante
@@ -3085,6 +3121,8 @@ public class PanelDigitador extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.ButtonGroup buttonGroup8;
     private javax.swing.ButtonGroup buttonGroup9;
+    private javax.swing.JTextField cedula_buscar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLogout;
     private javax.swing.JButton jButtonRegistrar;

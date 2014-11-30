@@ -117,7 +117,7 @@ public class DAOIdioma {
         sql2="UPDATE Idioma SET nivelEscribe='"+nivelEscribe+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
         sql3="UPDATE Idioma SET nivelHabla='"+nivelHabla+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
         sql4="UPDATE Idioma SET pathArchivo='"+path+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
-        sql5="UPDATE Idioma SET estado='"+state+"' WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
+        sql5="UPDATE Idioma SET estado="+state+" WHERE cedula='" + cedula + "' AND lenguaje = '"+lenguaje+"';";
         
         System.err.println(sql1);
         System.err.println(sql2);
