@@ -33,10 +33,7 @@ CREATE TABLE Usuario(
 );
 
 --Creacion de la tabla convocatoria 
-<<<<<<< HEAD
-=======
 DROP SEQUENCE IF EXISTS convo_seq;
->>>>>>> 7b675657f64503567213fb6495c45c4bfc57f9a6
 CREATE SEQUENCE convo_seq;
 
 
@@ -153,3 +150,4 @@ INSERT INTO perfiles VALUES(3, 'Administrador');
 --Insert first admin
 
 INSERT INTO Usuario VALUES('Daniel','Correa','danielcb','1144067772','1144067772DC','danielc.web@gmail.com',3,true);
+

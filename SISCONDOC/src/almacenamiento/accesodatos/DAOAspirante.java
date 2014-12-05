@@ -85,7 +85,7 @@ public class DAOAspirante
                 aspirante.setName(table.getString(2));
                 aspirante.setLastname(table.getString(3));
                 aspirante.setCity(table.getString(4));
-                aspirante.setPuntaje(table.getInt(5));
+                aspirante.setPuntaje(table.getDouble(5));
                 
                 //asignacion de atributos al objeto convocatoria.
                 convocatoria.setCode(table.getInt(6));
@@ -124,12 +124,12 @@ public class DAOAspirante
 	sql1="UPDATE Aspirante SET nombre='"+aspirante.getName()+"' WHERE cedula='" + documento + "';";
         sql2 = "UPDATE Aspirante SET apellido ='"+aspirante.getLastname()+"' WHERE cedula='" + documento + "';";
         sql3 = "UPDATE Aspirante SET municipio ='"+aspirante.getCity()+"'WHERE cedula='" + documento + "';";
-        sql4 = "UPDATE Aspirante SET puntuacion ='"+aspirante.getPuntaje()+"' WHERE cedula='" + documento + "';";
+        sql4 = "UPDATE Aspirante SET puntuacion ="+aspirante.getPuntaje()+" WHERE cedula='" + documento + "';";
         sql5 = "UPDATE Aspirante SET codigo ='"+aspirante.getConvocatoria().getCode()+"' WHERE cedula='" + documento + "';";
         sql6 = "UPDATE Aspirante SET genero ='"+aspirante.getGenero()+"' WHERE cedula='" + documento + "';";
         sql7 = "UPDATE Aspirante SET jornada ='"+aspirante.getJornada()+"' WHERE cedula='" + documento + "';";
         sql8 = "UPDATE Aspirante SET fecha_nac ='"+aspirante.getFecha_nac()+"' WHERE cedula='" + documento + "';";
-        sql9 = "UPDATE Aspirante SET cedula ='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
+        //sql9 = "UPDATE Aspirante SET cedula ='"+aspirante.getDocument()+"' WHERE cedula='" + documento + "';";
         
         
         
@@ -138,7 +138,7 @@ public class DAOAspirante
                 Statement sentencia = conn.createStatement();
 
                 sentencia.executeUpdate(sql1);
-                System.err.println("first");
+                //System.err.println("first");
                 sentencia.executeUpdate(sql2);
                 sentencia.executeUpdate(sql3);
                 sentencia.executeUpdate(sql4);
@@ -146,7 +146,7 @@ public class DAOAspirante
                 sentencia.executeUpdate(sql6);
                 sentencia.executeUpdate(sql7);
                 sentencia.executeUpdate(sql8);
-                sentencia.executeUpdate(sql9);
+                //sentencia.executeUpdate(sql9);
                 return 1;
             }
         catch(SQLException e){

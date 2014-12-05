@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/almacenamiento/controlador/ControlFormacionTic.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/almacenamiento/accesodatos/BaseDatos.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/presentacion/PanelDigitador.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/almacenamiento/accesodatos/DAOUser.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/presentacion/VistaLogin.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/presentacion/VistaCrearUsuario.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/proceso/Usuario.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/almacenamiento/accesodatos/DAOFormacionTic.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/presentacion/PanelValidaAspirante.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/almacenamiento/controlador/ControlAspirante.java</file>
-            <file>file:/home/family/Proyectos/SISCONDOC/SISCONDOC/src/presentacion/VistaAdmin.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

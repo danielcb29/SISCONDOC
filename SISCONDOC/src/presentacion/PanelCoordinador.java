@@ -7,9 +7,14 @@ package presentacion;
 import almacenamiento.controlador.ControlReporte;
 import java.awt.Dimension;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import org.jfree.chart.*;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -19,6 +24,7 @@ public class PanelCoordinador extends javax.swing.JFrame {
 
     private ControlReporte controlador;
     private int codigoConvo;
+    private String name;
     private Connection conn;
     /**
      * Creates new form PanelCoordinador
@@ -37,6 +43,7 @@ public class PanelCoordinador extends javax.swing.JFrame {
         this.conn=conn;
         controlador = new ControlReporte(this.conn,codigoConvo);
         lbTitulo.setText("Bienvenido "+nombre+"!");
+        name = nombre;
         System.out.println("codigo convo:"+codigoConvo);
     }
 
@@ -96,12 +103,22 @@ public class PanelCoordinador extends javax.swing.JFrame {
         jLabel6.setText("Reportes");
 
         btInscritos.setText("Ir");
+        btInscritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInscritosActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Total de Aspirantes inscritos:");
 
         jLabel7.setText("Total de Aspirantes Seleccionados:");
 
         btSeleccionados.setText("Ir");
+        btSeleccionados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSeleccionadosActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Cinco mejores puntajes: ");
 
@@ -128,6 +145,11 @@ public class PanelCoordinador extends javax.swing.JFrame {
         btSexo.setText("Ir");
 
         btReporteCiudad.setText("Ir");
+        btReporteCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReporteCiudadActionPerformed(evt);
+            }
+        });
 
         btCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/presentacion/Login-out-icon.png"))); // NOI18N
         btCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +171,7 @@ public class PanelCoordinador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(373, 373, 373)
                 .addComponent(jLabel6)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +203,7 @@ public class PanelCoordinador extends javax.swing.JFrame {
                                 .addComponent(jLabel9)
                                 .addGap(103, 103, 103)
                                 .addComponent(btReporteCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
@@ -258,6 +280,10 @@ public class PanelCoordinador extends javax.swing.JFrame {
 
     private void btValidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidacionActionPerformed
         // TODO add your handling code here:
+        VistaElejirAspirante vista  = new VistaElejirAspirante(name, codigoConvo, conn);
+        vista.setVisible(true);
+        System.out.println("vista iniciada");
+        
     }//GEN-LAST:event_btValidacionActionPerformed
 
     private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
@@ -301,6 +327,69 @@ public class PanelCoordinador extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btJornadaActionPerformed
+    
+	private void btSexoActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        int hombres=0;
+        int mujeres=0;
+        hombres=controlador.hombresInscritos();
+        mujeres=controlador.mujeresInscritas();
+        JOptionPane.showMessageDialog(this, "Total de inscritos:\nMujeres: "+mujeres+"\nHombres: "+hombres);
+    }     
+    
+    private void btSeleccionadosActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        ReporteSeleccionados selecc = new ReporteSeleccionados(controlador.numSeleccionados(), controlador.seleccionados());
+        selecc.setVisible(true);
+    } 
+
+    private void btInscritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInscritosActionPerformed
+
+        String[][] resultado = controlador.listadoAsp();
+        if(resultado==null){
+            JOptionPane.showMessageDialog(this, "No hay aspirantes inscritos en esta convocatoria","Error!",JOptionPane.ERROR_MESSAGE);
+        }else{
+                String[] nombresColumnas = {"NOMBRES","APELLIDOS","CEDULA","MUNICIPIO"};
+                JTable ventana = new JTable(resultado,nombresColumnas);
+                ventana.setEnabled(false);
+                Dimension d = ventana.getPreferredSize();
+                
+                JScrollPane panel = new JScrollPane(ventana);
+                panel.setPreferredSize(new Dimension(d.width+9,ventana.getRowHeight()*7+1));
+                JOptionPane.showMessageDialog(this, panel,"Aspirantes",JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btInscritosActionPerformed
+
+    private void btReporteCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReporteCiudadActionPerformed
+        ChartPanel panel;
+        JFreeChart chart;
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        String[][] resultado = controlador.conteoMunic();
+        String municipio = "municipios";
+        String numeroAsp = "numero de Aspirantes";
+        
+        if(resultado==null){
+            JOptionPane.showMessageDialog(this, "No hay aspirantes inscritos en esta convocatoria","Error!",JOptionPane.ERROR_MESSAGE);
+        }else{
+                for(int i=0; i<resultado.length; i++){
+                    datos.addValue(Integer.parseInt(resultado[i][1]), resultado[i][0], resultado[i][0]);
+                }
+                chart = ChartFactory.createBarChart("Conteo de municipios", "Municipios", 
+                                                        "Cantidad", datos,
+                                                        PlotOrientation.VERTICAL,
+                                                        true,
+                                                        true,
+                                                        true);
+                CategoryPlot plot = (CategoryPlot) chart.getPlot();
+                plot.setDomainGridlinesVisible(true);
+                panel = new ChartPanel(chart);
+                panel.setBounds(5, 10, 410, 350);   
+                Dimension d = panel.getPreferredSize();
+                JScrollPane panelScroll = new JScrollPane(panel);
+                panelScroll.setPreferredSize(new Dimension(d.width+9,panel.getMaximumDrawHeight()));
+                JOptionPane.showMessageDialog(this, panel,"Conteo de municipios",JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btReporteCiudadActionPerformed
+
 
     /**
      * @param args the command line arguments

@@ -100,40 +100,41 @@ public class ControlAspirante
      */
     public int updateAspirante(String documento, Aspirante aspirante)
     {
-        int result = daoAspirante.updateAspirante(documento, aspirante);
+        Puntuacion pun = new Puntuacion(aspirante);
+        
+        Aspirante aspPunted = pun.qualify();
+        aspirante = aspPunted;
+         int result = daoAspirante.updateAspirante(documento, aspirante);
         
         int result2 = controlConocimientos.updateForm(documento, aspirante.getConocimientos());
-        /**
-        Aspirante a = readAspirante(documento);
-        Idioma [] idiom = a.getIdiomas();
-        System.err.println("idiomas tamano : " + idiom.length );
         
-        
-        for (int i =0; i<idiom.length;i++)
+        Formacion [] formaciones = aspirante.getFormaciones();
+        for (int i =0; i<formaciones.length;i++)
         {
-            System.err.println("lenguaje : " + idiom[i].getLenguaje() );
-            controlIdioma.updateForm(documento,idiom[i].getLenguaje() , aspirante.getIdiomas()[i]);
+            controlFormacion.updateForm(documento, formaciones[i].getLevel(),formaciones[i]);
         }
         
-        Formacion [] form = a.getFormaciones();
-        for (int i =0; i<form.length;i++)
+        FormacionTic [] formacionesTic = aspirante.getFormacionesTic();
+        for (int i =0; i<formacionesTic.length;i++)
         {
-            controlFormacion.updateForm(documento,form[i].getLevel(), aspirante.getFormaciones()[i]);
+            controlFormacionTic.updateForm(documento, formacionesTic[i].getTitulo(),formacionesTic[i]);
         }
         
-        FormacionTic [] formTic = a.getFormacionesTic();
-        for (int i =0; i<formTic.length;i++)
+        Idioma [] idiomas = aspirante.getIdiomas();
+        for (int i =0; i<idiomas.length;i++)
         {
-            controlFormacionTic.updateForm(documento,formTic[i].getTitulo(), aspirante.getFormacionesTic()[i]);
+            controlIdioma.updateForm(documento, idiomas[i].getLenguaje(),idiomas[i]);
         }
-        FormadorTIC [] formaTic = a.getFormadores();
-        for (int i =0; i<formaTic.length;i++)
+        
+        FormadorTIC [] formadoresTic = aspirante.getFormadores();
+        for (int i =0; i<formadoresTic.length;i++)
         {
-                controlFormador.updateFormador(documento,formaTic[i].getPeople(), aspirante.getFormadores()[i]);
-        }**/
+            controlFormador.updateFormador(documento, formadoresTic[i].getPeople(),formadoresTic[i]);
+        }
+        
         return result;
-        
     }
 }
+
 
     

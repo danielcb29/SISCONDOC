@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,10 +80,160 @@ public class DAOReporte {
         return resultado;
     }
     
+    public int numSeleccionados(int codigoConvocatoria){
+        int resultado=0;
+        Statement sentencia;
+        ResultSet table;
+        String sql= "SELECT COUNT(*) FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND puntuacion >= 50";
+        try{
+            sentencia = conn.createStatement();
+            table = sentencia.executeQuery(sql);
+            if(table.next()){
+                resultado=table.getInt(1);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+    
+    public String[][] seleccionados(int codigoConvocatoria){
+        String[][] resultado;
+        int longitud;
+        longitud=numSeleccionados(codigoConvocatoria);
+        Statement sentencia;
+        ResultSet table;
+        resultado= new String[longitud][4];
+        try{
+            String sql = "SELECT nombre, apellido, cedula, municipio FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND puntuacion >= 50 ORDER BY puntuacion DESC";
+            sentencia = conn.createStatement();
+            table = sentencia.executeQuery(sql);
+            int i = 0;
+            while(table.next()){
+                resultado[i][0] = table.getString(1);
+                System.out.println("Nombre:"+resultado[i][0]+"\n");
+                resultado[i][1] = table.getString(2);
+                System.out.println("Apellido:"+resultado[i][1]+"\n");
+                resultado[i][2] = table.getString(3);
+                System.out.println("Cedula:"+resultado[i][2]+"\n");
+                resultado[i][3] = table.getString(4);
+                System.out.println("Municipio:"+resultado[i][3]+"\n");
+                i++;
+            }
+            
+        }catch(SQLException ex){
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+    
+    public int hombresInscritos(int codigoConvocatoria){
+        int resultado=0;
+        Statement sentencia;
+        ResultSet table;
+        String sql= "SELECT COUNT(*) FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND genero='Masculino'";
+        try{
+            sentencia = conn.createStatement();
+            table = sentencia.executeQuery(sql);
+            if(table.next()){
+                resultado=table.getInt(1);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+    
+    public int mujeresInscritas(int codigoConvocatoria){
+        int resultado=0;
+        Statement sentencia;
+        ResultSet table;
+        String sql= "SELECT COUNT(*) FROM Aspirante WHERE codigo = "+codigoConvocatoria+" AND genero='Femenino'";
+        try{
+            sentencia = conn.createStatement();
+            table = sentencia.executeQuery(sql);
+            if(table.next()){
+                resultado=table.getInt(1);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultado;
+    }
+    
+    
     /**
      * cerrar la conexion con la base de datos.
      */
     public void closeConectionDB(){
         db.closeConection(db.getConnetion());
+    }
+    
+    /**
+     * Metodo para consultar los seleccionados por orden de puntaje
+     * @param codigoConvocatoria: convocatoria a consultar seleccionador
+     * @return matriz con los datos de los aspirantes ordenados por puntuacion 
+     */
+    public ArrayList<ArrayList<String>> listadoAspi(int codigoConvocatoria){
+        String sql = "SELECT nombre,apellido,cedula,municipio FROM Aspirante WHERE codigo = "+codigoConvocatoria+" ORDER BY puntuacion DESC";
+        ArrayList<ArrayList<String>> resultado = new ArrayList<>();
+        try {
+            System.out.println("consultando en la bd");
+            Statement sentencia = conn.createStatement();
+            ResultSet table = sentencia.executeQuery(sql);
+            int i = 0;
+            
+            while(table.next()){
+                resultado.add(new ArrayList<String>()); 
+                resultado.get(i).add(table.getString(1));
+                System.out.println("Nombre:"+resultado.get(i).get(0)+"\n");
+                resultado.get(i).add(table.getString(2));
+                System.out.println("Apellido:"+resultado.get(i).get(1)+"\n");
+                resultado.get(i).add(table.getString(3));
+                System.out.println("Cedula:"+resultado.get(i).get(2)+"\n");
+                resultado.get(i).add(table.getString(4));
+                System.out.println("Municipio:"+resultado.get(i).get(3)+"\n");
+                i++;
+                                       
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
+        
+    }
+    
+    
+    /**
+     * Metodo para consultar el numero de aspirantes inscritos por municipio
+     * @param codigoConvocatoria convocatoria a consultar seleccionador
+     * @return  matriz con los aspirantes contador por municipio  
+     */
+    public ArrayList<ArrayList<String>> conteoMunicipio(int codigoConvocatoria){
+        
+        String sql = "SELECT municipio, count(*) from aspirante WHERE codigo = "+codigoConvocatoria+"GROUP BY municipio";
+        ArrayList<ArrayList<String>> resultado = new ArrayList<>();
+         try {
+            System.out.println("consultando en la bd");
+            Statement sentencia = conn.createStatement();
+            ResultSet table = sentencia.executeQuery(sql);
+            int i = 0;
+            
+            while(table.next()){ 
+                resultado.add(new ArrayList<String>());
+                resultado.get(i).add(table.getString(1));
+                System.out.println("Municipio:"+resultado.get(i).get(0) +"\n");
+                resultado.get(i).add(table.getString(2));
+                System.out.println("Conteo:"+resultado.get(i).get(1) +"\n");
+                i++;                       
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOReporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return resultado;
     }
 }
