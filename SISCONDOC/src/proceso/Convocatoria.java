@@ -11,6 +11,7 @@ import java.util.Date;
  * @author daniel
  */
 public class Convocatoria {
+    private int code;
     private String name;
     private String description;
     private boolean state;
@@ -55,5 +56,18 @@ public class Convocatoria {
     }
     public void setDateEnd(Date newDateEnd){
         dateEnd = newDateEnd;
+    }
+    /**
+     * @return the code
+     */
+    public int getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(int code) {
+        this.code = code;
     }
 }

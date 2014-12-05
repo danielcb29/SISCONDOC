@@ -22,7 +22,6 @@ public class ConvocatoriaController {
     public ConvocatoriaController(Connection conn){
         daoConv = new DAOConvocatoria(conn);
     }
-
     /**
      * Metodo que permite crear una convocatoria
      * @param conv: convocatoria a crear
@@ -66,6 +65,3 @@ public class ConvocatoriaController {
         daoConv.updateConv(exConv, conv);
     }
 }
-
-
-

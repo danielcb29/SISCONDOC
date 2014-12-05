@@ -7,6 +7,7 @@ package presentacion;
 import javax.swing.JOptionPane;
 import almacenamiento.controlador.*;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import proceso.*;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -29,14 +30,17 @@ public class VistaLogin extends javax.swing.JFrame {
      */
     private UserController controlerU;
     private VistaAdmin vAdmin;
+    private PanelDigitador digPanel;
     private String userName;
     private String password;
+    private PanelCoordinador coorPanel;
     public VistaLogin() {
         initComponents();
         controlerU = new UserController();
         this.setTitle("SISCONDOC 2014 Universidad del Valle");
         this.setResizable(false);
         controlerU.connectDB();
+        
         //System.out.println(this.getSize().getHeight() + " " +this.getSize().getWidth());
     }
 
@@ -105,42 +109,41 @@ public class VistaLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(pfPassword))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Logo)
-                                    .addComponent(jLabel1)))))
+                        .addGap(305, 305, 305)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(btSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(281, 281, 281)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Logo)
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(lbForget))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(238, 238, 238)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
-                        .addComponent(jLabel4)))
-                .addContainerGap())
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(pfPassword))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(279, 279, 279))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(104, 104, 104)))
+                        .addGap(175, 175, 175))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +164,13 @@ public class VistaLogin extends javax.swing.JFrame {
                 .addComponent(lbForget)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel5)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -186,7 +189,7 @@ public class VistaLogin extends javax.swing.JFrame {
         if (userNameForget.equals("")){
             JOptionPane.showMessageDialog(this, "No ingresaste nada\nVuelve a intentarlo", "Ups!", JOptionPane.WARNING_MESSAGE);
         }else{
-            Usuario user = controlerU.consultUser(userNameForget);
+            Usuario user = controlerU.consultUser(userNameForget, 1);
             if (user==null){
                 JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
             }else{
@@ -241,7 +244,7 @@ public class VistaLogin extends javax.swing.JFrame {
         
         userName = tfUserName.getText();
         password = pfPassword.getText();
-        Usuario user = controlerU.consultUser(userName);
+        Usuario user = controlerU.consultUser(userName, 1);
         
         if (user==null){ 
             JOptionPane.showMessageDialog(this, "Lo sentimos ha ocurrido un error en la conexion con la base de datos", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -252,28 +255,65 @@ public class VistaLogin extends javax.swing.JFrame {
             }else{
                 boolean state = user.getState();
                 System.out.println("estado: "+state);
+                //Validacion de estado de usuario , activo o eliminado
                 if(state){
                     String profile = user.getProfile();
                     if (profile.equals("Digitador")){
-                        System.out.println("No se ha implementado aun :)");
-                        System.exit(0);
+                        //System.out.println("No se ha implementado aun :)");
+                        Convocatoria conv = user.getConvocatoria();
+                        //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
+                        if(conv.getState()){
+                            Date finConv = conv.getDateEnd();
+                            Date now = new Date();
+                            //VALIDACION CONVOCATORIA CERRADA , FECHA DE FINALIZACION PASADA DE LA FECHA ACTUAL
+                            if(finConv.before(now)){
+                                JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente ya cerro, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            }else{
+                                digPanel = new PanelDigitador(userName,conv,controlerU);
+                                digPanel.setVisible(true);
+                                this.dispose();
+                            }
+
+                         //CASO ELIMINADA   
+                        }else{
+                            JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
                     }else{
                         if(profile.equals("Coordinador")){
-                            System.out.println("No se ha implementado aun :)");
-                            System.exit(0);
+                            //Ingresa un coordindaor
+                            Convocatoria conv = user.getConvocatoria();
+                            //VALIDACION CONVOCATORIA ACTIVA O ELIMINADA
+                            if(conv.getState()){
+                                Date finConv = conv.getDateEnd();
+                                Date now = new Date();
+                                //VALIDACION DE CONVOCATORIA CERRADA
+                                 if(finConv.after(now)){
+                                    JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado no ha cerrado aun\nEspere a la fecha de cierre para observar reportes y validar aspirantes", "Convocatoria Activa", JOptionPane.ERROR_MESSAGE);
+                                 }else{
+                                    coorPanel = new PanelCoordinador(user.getUserName(),conv.getCode(),controlerU.getConn());
+                                    coorPanel.setVisible(true);
+                                    this.dispose();
+                                 }
+                            }else{
+                                JOptionPane.showMessageDialog(this, "La convocatoria a la cual esta asignado actualmente fue eliminada, contacte al administrador", "Convocatoria Cerrada", JOptionPane.ERROR_MESSAGE);
+                            }
                         }else{
                             if(profile.equals("Administrador")){
                                 //Clase nelsini
                                 System.out.println("Iniciamo sesion : "+ user.getName());
                                 this.dispose();
+                                //COMENTADO PARA PRUEBA
                                 vAdmin = new VistaAdmin(userName,controlerU);
                                 vAdmin.setVisible(true);
-                                //vAdmin.show();
+                                //PRUEBA BORRAR
+                                
                             }
 
                             
                         }
                     }
+                 //Caso usuario eliminado   
                 }else{
                     JOptionPane.showMessageDialog(this, "Lo sentimos, el usuario "+user.getUserName()+" fue eliminado por el administrador","Contacta al admin",JOptionPane.ERROR_MESSAGE);
                 }
